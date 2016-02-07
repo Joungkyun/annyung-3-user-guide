@@ -15,7 +15,6 @@ annyung-release 패키지는 안녕 리눅스 3의 릴리즈 정보를 가지고
  * /etc/os-release
  * /etc/grub2.cfg
 
-
 2. 안녕 리눅스 구성 유지를 위한 cronjob
  1. 파일 경로: /etc/cron.d/annyung-banner
  2. issue/issue.net의 안녕 리눅스 배너 유지
