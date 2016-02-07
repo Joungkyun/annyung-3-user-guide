@@ -16,4 +16,5 @@ RewriteRule   /.* /kr$0 [L]
 
 ### Reference:
 
+* 모듈 로딩 및 설정: /etc/httpd/conf.d/krisp.conf
 * http://svn.oops.org/wsvn/Apache.mod_krisp/trunk/apache2/README
