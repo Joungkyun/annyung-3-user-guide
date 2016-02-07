@@ -6,7 +6,7 @@
    * [[AN:core]](AnNyung3-Core-Packages.md)
        * [annyung-release](pkg-core-annyung-release.md)
        * [byspam](pkg-core-byspam.md)
-       * [check-utils](pkg-core-check-utils.md)
+       * [check-utils](pkg-core-check-utilsmd.md)
        * [httpd-conf](pkg-core-httpd-conf.md)
        * [httpd-krisp](pkg-core-httpd-krisp.md)
        * [httpd-nis](pkg-core-httpd-nis.md)
@@ -43,3 +43,4 @@
    * [[AN:xless]](AnNyung3-Xless-Packages.md)
    * [[AN:addon]](AnNyung3-Addon-Packages.md)
    * [[AN:plus]](AnNyung3-Plus-Packages.md)
+
