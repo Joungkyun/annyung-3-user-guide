@@ -2,9 +2,7 @@
 
 ### Description:
 
-<div style="padding-left: 40px">
 annyung-release 패키지는 안녕 리눅스 3의 릴리즈 정보를 가지고 있다
-</div>
 
 ### Features:
 
