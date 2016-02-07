@@ -8,4 +8,4 @@ BySPAM 은 smtp 데몬과 procmail 과 연동하여 스팸메일을 필터링 �
 터링을 한다.
 
 ### Leference:
-* http://devel.oops.org/viewforum.php?f=6
+* http://devel.oops.org/viewtopic.php?t=25
