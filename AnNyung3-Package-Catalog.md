@@ -2,21 +2,23 @@
 
 안녕 리눅스 저장소(Repository)는 총 5개의 저장소를 가지고 있습니다. 각 저장소에 대한 설명은 다음과 같습니다.
 
-## [AN:Base]
+### [AN:Base]
 
 * CentOS 7의 패키지를 수정
 
-## [AN:core]
+### [AN:core]
 
 * 안녕 리눅스 구성을 위한 패키지
 * 안녕 리눅스에서만 제공하는 패키지
 
-## [AN:xless]
+### [AN:xless]
 
 * CentOS 7의 패키지 중 X 의존성 제거한 패키지
 
-## [AN:addon]
+### [AN:addon]
 
-* 
+* CentOS / EPEL 에서 지원하지 않는 패키지
+* EPEL 패키지를 수정한 패키지
 
-## [AN:plus]
+### [AN:plus]
+
