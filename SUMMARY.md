@@ -9,7 +9,7 @@
        * [check-utils](pkg-core-check-utilsmd.md)
        * [httpd-conf](pkg-core-httpd-confmd.md)
        * [httpd-krisp](pkg-core-httpd-krispmd.md)
-       * [httpd-nis](pkg-core-httpd-nis.md)
+       * [httpd-nis](pkg-core-httpd-nismd.md)
        * [httpd-url](pkg-core-httpd-url.md)
        * [kmod-geoip](pkg-core-kmod-geoip.md)
        * [l4vip](pkg-core-l4vip.md)
