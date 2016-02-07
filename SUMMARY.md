@@ -38,7 +38,7 @@
        * [remount](pkg-core-remount.md)
        * [utf8-profile](pkg-core-utf8-profile.md)
        * [whois](pkg-core-whois.md)
-* [yum-annyung](pkg-core-yum-annyung)
+       * [yum-annyung](pkg-core-yum-annyung)
    * [[AN:base]](AnNyung3-Base-Packages.md)
    * [[AN:xless]](AnNyung3-Xless-Packages.md)
    * [[AN:addon]](AnNyung3-Addon-Packages.md)
