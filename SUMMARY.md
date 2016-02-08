@@ -14,7 +14,7 @@
        * [kmod-geoip](pkg-core-kmod-geoipmd.md)
        * [l4vip](pkg-core-l4vipmd.md)
        * [libchardet](pkg-core-libchardetmd.md)
-       * [libimginfo](pkg-core-libimginfo.md)
+       * [libimginfo](pkg-core-libimginfomd.md)
        * [libipcalc](pkg-core-libipcalc.md)
        * [libkrisp](pkg-core-libkrisp.md)
        * [olibc](pkg-core-olibc.md)
