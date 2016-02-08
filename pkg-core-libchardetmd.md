@@ -4,12 +4,12 @@
 
 Mozilla Universial charset detector를 이용하여 문자열의 문자셋을 탐지하는 라이브러리
 
-### Sub Packages
+### Sub Packages:
 
 * **libchardet-devel**  
   libchardet를 이용한 개발에 필요한 header 및 library file
 
-### Releated Packages
+### Releated Packages:
 
 * php-chardet
   * php libchardet binding
