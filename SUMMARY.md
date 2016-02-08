@@ -13,7 +13,7 @@
        * [httpd-url](pkg-core-httpd-urlmd.md)
        * [kmod-geoip](pkg-core-kmod-geoipmd.md)
        * [l4vip](pkg-core-l4vipmd.md)
-       * [libchardet](pkg-core-libchardet.md)
+       * [libchardet](pkg-core-libchardetmd.md)
        * [libimginfo](pkg-core-libimginfo.md)
        * [libipcalc](pkg-core-libipcalc.md)
        * [libkrisp](pkg-core-libkrisp.md)
