@@ -16,7 +16,7 @@
        * [libchardet](pkg-core-libchardetmd.md)
        * [libimginfo](pkg-core-libimginfomd.md)
        * [libipcalc](pkg-core-libipcalcmd.md)
-       * [libkrisp](pkg-core-libkrisp.md)
+       * [libkrisp](pkg-core-libkrispmd.md)
        * [olibc](pkg-core-olibc.md)
        * [oops-firewall](pkg-core-oops-firewall.md)
        * [perl-krisp](pkg-core-perl-krisp.md)
