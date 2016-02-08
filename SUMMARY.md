@@ -15,7 +15,7 @@
        * [l4vip](pkg-core-l4vipmd.md)
        * [libchardet](pkg-core-libchardetmd.md)
        * [libimginfo](pkg-core-libimginfomd.md)
-       * [libipcalc](pkg-core-libipcalc.md)
+       * [libipcalc](pkg-core-libipcalcmd.md)
        * [libkrisp](pkg-core-libkrisp.md)
        * [olibc](pkg-core-olibc.md)
        * [oops-firewall](pkg-core-oops-firewall.md)
