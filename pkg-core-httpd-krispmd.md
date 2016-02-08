@@ -21,3 +21,7 @@ RewriteRule   /.* /kr$0 [L]
 ### Reference:
 
 * http://svn.oops.org/wsvn/Apache.mod_krisp/trunk/apache2/README
+
+### Dependency:
+
+* [libkrisp](pkg-core-libkrisp.md)
