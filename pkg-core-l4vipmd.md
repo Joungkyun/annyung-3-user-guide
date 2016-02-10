@@ -1,6 +1,6 @@
 # l4vip
 
-### Descriptions:
+### Description:
 
 L4 DSR 설정을 위한 loopbakc IP 관리 init script
 
@@ -29,3 +29,14 @@ subnet[n++] = 1.1.1.112:tun0+1496
 shell> /sbin/service l4vip [start|stop|status]
 ```
 
+### Reference:
+* None
+
+### Dependencies:
+* None
+
+### Sub Packages:
+* None
+
+### Releated Packages:
+* None
