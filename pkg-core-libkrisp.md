@@ -20,10 +20,11 @@ Options:
 ```
 
 ### Reference:
-* None
+* http://svn.oops.org/wsvn/OOPS.libkrisp/trunk/README
 
 ### Dependencies:
-* None
+* [libipcalc](pkg-core-libipcalc.md)
+* sqlite
 
 ### Sub Packages:
 * **libkrisp-devel**  
