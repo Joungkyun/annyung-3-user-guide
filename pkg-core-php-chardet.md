@@ -20,8 +20,10 @@ $strings = array (
 
 $fp = chardet_open ();
 
-$moz = chardet_detect ($fp, $strings[0]);
-print_r ($moz)
+for ( $i=0; $i<count($strings); $i++ ) {
+    $moz = chardet_detect ($fp, $strings[$i]);
+    print_r ($moz);
+}
 
 chardet_close ($fp);
 ?>
