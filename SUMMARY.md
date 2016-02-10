@@ -11,7 +11,7 @@
        * [httpd-krisp](pkg-core-httpd-krisp.md)
        * [httpd-nis](pkg-core-httpd-nis.md)
        * [httpd-url](pkg-core-httpd-url.md)
-       * [kmod-geoip](pkg-core-kmod-geoip)
+       * [kmod-geoip](pkg-core-kmod-geoip.md)
        * [l4vip](pkg-core-l4vipmd)
        * [libchardet](pkg-core-libchardetmd)
        * [libimginfo](pkg-core-libimginfomd)
