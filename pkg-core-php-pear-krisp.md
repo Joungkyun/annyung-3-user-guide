@@ -14,4 +14,7 @@
 * None
 
 ### Releated Packages:
-* None
+* [httpd-krisp](pkg-core-httpd-krisp.md)
+* [perl-krisp](pkg-core-perl-krisp.md)
+* [php-krisp](pkg-core-php-krisp.md)
+* [python-krisp](pkg-core-python-krisp.md)
