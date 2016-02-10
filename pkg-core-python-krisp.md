@@ -15,7 +15,7 @@
 
 ### Releated Packages:
 * [httpd-krisp](pkg-core-httpd-krisp.md)
-* [perl-krisp](pkg-core-perl-krisp.md)
+* [perl-KRISP](pkg-core-perl-KRISP.md)
 * [php-krisp](pkg-core-php-krisp.md)
 * [php-pecl-krisp](pkg-core-php-pecl-krisp.md)
 
