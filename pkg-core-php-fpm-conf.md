@@ -13,10 +13,12 @@
  * _/usr/lib/systemd/system/php-fpm.service_
 
 ### Reference:
-* None
+* https://wiki.php.net/rfc/fpm
+* https://wiki.php.net/rfc/fpm/ini_syntax
 
 ### Dependencies:
-* None
+* [php-common](pkg-core-php-common.md)
+* [php-fpm](pkg-base-php-fpm)
 
 ### Sub Packages:
 * None
