@@ -18,7 +18,7 @@
        * [libipcalc](pkg-core-libipcalc.md)
        * [libkrisp](pkg-core-libkrisp.md)
        * [olibc](pkg-core-olibc.md)
-       * [oops-firewall](pkg-core-oops-firewall)
+       * [oops-firewall](pkg-core-oops-firewall.md)
        * [perl-krisp](pkg-core-perl-krisp)
        * [perl-ModuleList](pkg-core-perl-ModuleList)
        * [php-chardet](pkg-core-php-chardet)
