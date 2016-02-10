@@ -1,6 +1,6 @@
 # kmod-geoip
 
-### Descriptions:
+### Description:
 
 GeoIP netfilter kernel module
 
