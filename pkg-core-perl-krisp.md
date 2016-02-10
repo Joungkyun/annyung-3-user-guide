@@ -8,7 +8,7 @@
 * None
 
 ### Dependencies:
-* None
+* [libkrisp](pkg-core-libkrisp.md)
 
 ### Sub Packages:
 * None
