@@ -8,7 +8,7 @@
 * None
 
 ### Dependencies:
-* None
+* [php](pkg-base-php.md)
 
 ### Sub Packages:
 * None
