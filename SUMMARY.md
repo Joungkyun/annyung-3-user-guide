@@ -29,7 +29,7 @@
        * [php-krisp](pkg-core-php-krisp.md)
        * [php-nis](pkg-core-php-nis.md)
        * [php-pear-KSC5601](pkg-core-php-pear-ksc5601.md)
-       * [php-pear-ipcalc](pkg-core-php-pear-ipcalc)
+       * [php-pear-ipcalc](pkg-core-php-pear-ipcalc.md)
        * [php-pear-kris](pkg-core-php-pear-krisp)
        * [php-pear-oops-key](pkg-core-php-pear-oops-key)
        * [procdump](pkg-core-procdump)
