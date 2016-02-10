@@ -27,7 +27,7 @@
        * [php-geoip](pkg-core-php-geoip.md)
        * [php-korean](pkg-core-php-korean.md)
        * [php-krisp](pkg-core-php-krisp.md)
-       * [php-nis](pkg-core-php-nis)
+       * [php-nis](pkg-core-php-nis.md)
        * [php-pear-KSC5601](pkg-core-php-pear-KSC5601)
        * [php-pear-ipcalc](pkg-core-php-pear-ipcalc)
        * [php-pear-kris](pkg-core-php-pear-krisp)
