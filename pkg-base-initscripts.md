@@ -1,0 +1,2 @@
+# initscrtips
+
