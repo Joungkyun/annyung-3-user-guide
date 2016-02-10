@@ -36,7 +36,7 @@ chardet_close ($fp);
 * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/sample.php
 
 ### Dependencies:
-* [php56](pkg-addon-php.md)
+* [php56](pkg-addon-php56.md)
 * [libchardet](pkg-core-libchardet.md)
 
 ### Sub Packages:
