@@ -7,5 +7,7 @@ BySPAM 은 smtp 데몬과 procmail 과 연동하여 스팸메일을 필터링 �
 한 필터링을 제공한다. 또한, BASE64, QUOTED-PRINTABLE 인코딩을 디코딩하여 필
 터링을 한다.
 
-### Leference:
+### Features:
+
+### Reference:
 * http://devel.oops.org/viewtopic.php?t=25
