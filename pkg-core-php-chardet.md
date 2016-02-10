@@ -6,7 +6,7 @@
   ```php
 <?php
 if ( ! extension_loaded ('chardet') ) {
-    fprintf (STDERR, "%s module isn't init\n", 'chardet');
+    fprintf (STDERR, "%s API isn't init\n", 'chardet');
     exit;
 }
 
