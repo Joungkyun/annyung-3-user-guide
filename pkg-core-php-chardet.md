@@ -1,6 +1,7 @@
 # php-chardet
 
 ### Description:
+libchardet C binding php extension
 
 ### Features:
   ```php
