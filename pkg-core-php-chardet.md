@@ -20,11 +20,8 @@ $strings = array (
 
 $fp = chardet_open ();
 
-if ( CHARDET_MOZ != -1 )
-    $moz = chardet_detect ($fp, $strings[0]);
-
-if ( CHARDET_MOZ != -1 && $moz )
-    printf ('chardet moz is available');
+$moz = chardet_detect ($fp, $strings[0]);
+print_r ($moz)
 
 chardet_close ($fp);
 ?>
