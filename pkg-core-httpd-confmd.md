@@ -5,7 +5,6 @@
 이 패키지는 안녕 리눅스 아파치2의 바이너리를 제외한 설정파일들을
 포함하고 있다.
 
-[httpd](pkg-base-httpd.md) package의 sub package 이다.
 
 ### Dependency:
 * None
@@ -34,3 +33,12 @@
 
 ### Reference:
 * None
+
+### Dependencies:
+* None
+
+### Sub Packages:
+* None
+
+### Releated Packages:
+* [httpd](pkg-base-httpd.md) package의 sub package
