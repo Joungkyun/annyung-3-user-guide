@@ -12,14 +12,10 @@
   * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/sample.php
 
 ### Dependencies:
-* None
+* [php](pkg-base-php.md)
 
 ### Sub Packages:
 * None
 
 ### Releated Packages:
-* python-chardet
-  * python libchardet bindnig
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/README
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test.py
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
+* [python-chardet](pkg-core-python-chardet)
