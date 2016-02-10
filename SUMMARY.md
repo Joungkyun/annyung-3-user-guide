@@ -19,7 +19,7 @@
        * [libkrisp](pkg-core-libkrisp.md)
        * [olibc](pkg-core-olibc.md)
        * [oops-firewall](pkg-core-oops-firewall.md)
-       * [perl-krisp](pkg-core-perl-krisp)
+       * [perl-krisp](pkg-core-perl-krisp.md)
        * [perl-ModuleList](pkg-core-perl-ModuleList)
        * [php-chardet](pkg-core-php-chardet)
        * [php-common](pkg-core-php-common)
