@@ -13,6 +13,7 @@
 
 ### Dependencies:
 * [php](pkg-base-php.md)
+* [libchardet](pkg-core-libchardet.md)
 
 ### Sub Packages:
 * None
