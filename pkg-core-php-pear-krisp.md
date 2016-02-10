@@ -8,7 +8,9 @@
 * None
 
 ### Dependencies:
-* sqlite
+* [php](pkg-base-php.md)
+* php-extension
+* [php-paer](pkg-base-php-pear.md)
 
 ### Sub Packages:
 * None
