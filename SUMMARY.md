@@ -8,7 +8,7 @@
        * [byspam](pkg-core-byspam.md)
        * [check-utils](pkg-core-check-utils.md)
        * [httpd-conf](pkg-core-httpd-conf.md)
-       * [httpd-krisp](pkg-core-httpd-krisp)
+       * [httpd-krisp](pkg-core-httpd-krisp.md)
        * [httpd-nis](pkg-core-httpd-nis)
        * [httpd-url](pkg-core-httpd-url)
        * [kmod-geoip](pkg-core-kmod-geoip)
