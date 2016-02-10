@@ -36,7 +36,7 @@
        * [python-chardet](pkg-core-python-chardet.md)
        * [python-krisp](pkg-core-python-krisp.md)
        * [remount](pkg-core-remount.md)
-       * [utf8-profile](pkg-core-utf8-profile)
+       * [utf8-profile](pkg-core-utf8-profile.md)
        * [whois](pkg-core-whois)
        * [yum-annyung](pkg-core-yum-annyung)
    * [[AN:base]](AnNyung3-Base-Packages.md)
