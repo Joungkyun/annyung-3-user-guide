@@ -7,6 +7,15 @@ NETFILTER 기능을 이용하여 원격 공격으로 부터 시스템을 안전�
 oops-firewall 은 IP/포트 필터링, 매스커래이딩, 브릿지 네트워크를 쉽게 설정하도록 도와준다.
 
 ### Features:
+* 설정 파일
+ * _/etc/oops-firewall/application.conf_ - brute force 방어 및 iptables layer7 extension 설정
+ * _/etc/oops-firewall/bridege.conf_ - bridge device filter
+ * _/etc/oops-firewall/filter.conf_ - main filter
+ * _/etc/oops-firewall/forward.conf_ - forwarding filter
+ * _/etc/oops-firewall/interface.conf_ - interface configration
+ * _/etc/oops-firewall/masq.conf_ - masquerading filter
+ * _/etc/oops-firewall/tos.conf_ - TOS configration
+ * _/etc/oops-firewall/user.conf_ - User defined filter
 
 ### Reference:
 * http://svn.oops.org/wsvn/OOPS.oops-firewall/trunk/doc/ko/
