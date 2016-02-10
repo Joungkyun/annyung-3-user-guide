@@ -2,6 +2,8 @@
 
 ### Description:
 
+PEAR::KRISP database frontend
+
 ### Features:
 
 ### Reference:
