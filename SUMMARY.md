@@ -20,7 +20,7 @@
        * [olibc](pkg-core-olibc.md)
        * [oops-firewall](pkg-core-oops-firewall.md)
        * [perl-krisp](pkg-core-perl-krisp.md)
-       * [perl-ModuleList](pkg-core-perl-ModuleList)
+       * [perl-ModuleList](pkg-core-perl-modulelist.md)
        * [php-chardet](pkg-core-php-chardet)
        * [php-common](pkg-core-php-common)
        * [php-fpm-conf](pkg-core-php-fpm-conf)
