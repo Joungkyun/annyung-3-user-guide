@@ -16,10 +16,10 @@
 * None
 
 ### Dependencies:
-* [php65](pkg-base-php56.md)
+* None
 
 ### Sub Packages:
 * None
 
 ### Releated Packages:
-* None
+* [php65](pkg-base-php56.md)
