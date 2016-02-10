@@ -23,9 +23,10 @@ RewriteRule   /.* /kr$0 [L]
 ### Dependencies:
 
 * [libkrisp](pkg-core-libkrisp.md)
+* [httpd](pkg-base-httpd.md)
 
 ### Sub Packages:
 * None
 
 ### Releated Packages:
-* [httpd](pkg-base-httpd.md)의 sub package
+* None
