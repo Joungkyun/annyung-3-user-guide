@@ -44,4 +44,4 @@ chardet_close ($fp);
 
 ### Releated Packages:
 * [python-chardet](pkg-core-python-chardet.md)
-* php56-chardet - PHP 5.6용 chardet extension
+* [php56-chardet](pkg-core-php56-chardet.md)
