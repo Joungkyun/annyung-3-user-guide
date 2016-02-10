@@ -2,6 +2,8 @@
 
 ### Description:
 
+문자셋 감지 python 확장
+
 ### Features:
 
 ### Reference:
