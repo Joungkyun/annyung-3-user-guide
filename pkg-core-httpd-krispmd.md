@@ -16,12 +16,16 @@ RewriteCond   expr "%{KRISP_COUNTRY_CODE} -strmatch 'KR'"
 RewriteRule   /.* /kr$0 [L]
 ```
 
-[httpd](pkg-base-httpd.md)의 sub package이다.
-
 ### Reference:
 
 * http://svn.oops.org/wsvn/Apache.mod_krisp/trunk/apache2/README
 
-### Dependency:
+### Dependencies:
 
 * [libkrisp](pkg-core-libkrisp.md)
+
+### Sub Packages:
+* None
+
+### Releated Packages:
+* [httpd](pkg-base-httpd.md)의 sub package
