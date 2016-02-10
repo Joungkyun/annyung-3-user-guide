@@ -32,4 +32,4 @@ else
 * None
 
 ### Releated Packages:
-* [php56-nis](pkg-core-php56-nis)
+* [php56-nis](pkg-core-php56-nis.md)
