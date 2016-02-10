@@ -18,4 +18,4 @@
 * None
 
 ### Releated Packages:
-* [python-chardet](pkg-core-python-chardet)
+* [python-chardet](pkg-core-python-chardet.md)
