@@ -7,6 +7,9 @@
 
 [httpd](pkg-base-httpd.md) package의 sub package 이다.
 
+### Dependency:
+* None
+
 ### Features:
 
 * **/etc/httpd/conf**
@@ -28,3 +31,6 @@
 * **/etc/logrotate.d/httpd**  
   * /var/log/httpd의 로그 중, _*_log, *.log_ 파일을 rotate 시킴
   * rotate 완료 후에, httpd reload 명령이 구동 됨
+
+### Reference:
+* None
