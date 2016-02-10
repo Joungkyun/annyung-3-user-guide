@@ -2,6 +2,8 @@
 
 안녕 리눅스의 core package에 대한 일람이며, Alpabat 순으로 정렬 되었습니다.
 
+Core package는 안녕 리눅스를 구성하기 위해 필요한 필수 패키지와, 안녕 리눅스에서만 제공하는 패키지들(기본으로 설치 되지 않을 수도 있음)로 구성되어 있습니다.
+
 **주의:**  
 Core 저장소의 파일은 모두 기본 설치되어 있지 않습니다. Core 라는 이름 때문에 모두 기본 설치될 것이라는 생각을 하지 마십시오.
 
@@ -23,12 +25,19 @@ Core 저장소의 파일은 모두 기본 설치되어 있지 않습니다. Core
 * [perl-KRISP](pkg-core-perl-KRISP.md)
 * [perl-ModuleList](pkg-core-perl-ModuleList.md)
 * [php-chardet](pkg-core-php-chardet.md)
+* [php56-chardet](pkg-core-php56-chardet.md)
 * [php-common](pkg-core-php-common.md)
+* [php56-common](pkg-core-php56-common.md)
 * [php-fpm-conf](pkg-core-php-fpm-conf.md)
+* [php56-fpm-conf](pkg-core-php56-fpm-conf.md)
 * [php-geoip](pkg-core-php-geoip)
+* [php56-geoip](pkg-core-php56-geoip)
 * [php-korean](pkg-core-php-korean.md)
+* [php56-korean](pkg-core-php56-korean.md)
 * [php-krisp](pkg-core-php-krisp.md)
+* [php56-krisp](pkg-core-php56-krisp.md)
 * [php-nis](pkg-core-php-nis.md)
+* [php56-nis](pkg-core-php56-nis.md)
 * [php-pear-KSC5601](pkg-core-php-pear-KSC5601.md)
 * [php-pear-ipcalc](pkg-core-php-pear-ipcalc.md)
 * [php-pear-kris](pkg-core-php-pear-krisp.md)
