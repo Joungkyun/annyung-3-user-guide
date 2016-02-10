@@ -22,4 +22,4 @@
 * None
 
 ### Releated Packages:
-* [php65](pkg-base-php56.md)
+* [php56](pkg-base-php56.md)
