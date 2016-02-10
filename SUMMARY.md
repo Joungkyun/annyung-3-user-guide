@@ -7,7 +7,7 @@
        * [annyung-release](pkg-core-annyung-release.md)
        * [byspam](pkg-core-byspam.md)
        * [check-utils](pkg-core-check-utils.md)
-       * [httpd-conf](pkg-core-httpd-conf)
+       * [httpd-conf](pkg-core-httpd-conf.md)
        * [httpd-krisp](pkg-core-httpd-krisp)
        * [httpd-nis](pkg-core-httpd-nis)
        * [httpd-url](pkg-core-httpd-url)
