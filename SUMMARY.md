@@ -22,7 +22,7 @@
        * [perl-krisp](pkg-core-perl-krisp.md)
        * [perl-ModuleList](pkg-core-perl-modulelist.md)
        * [php-chardet](pkg-core-php-chardet.md)
-       * [php-common](pkg-core-php-common)
+       * [php-common](pkg-core-php-common.md)
        * [php-fpm-conf](pkg-core-php-fpm-conf)
        * [php-geoip](pkg-core-php-geoip)
        * [php-korean](pkg-core-php-korean)
