@@ -1,4 +1,4 @@
-# perl-krisp
+# perl-KRISP
 
 ### Description:
 
