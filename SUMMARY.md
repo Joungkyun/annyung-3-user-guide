@@ -35,7 +35,7 @@
        * [procdump](pkg-core-procdump.md)
        * [python-chardet](pkg-core-python-chardet.md)
        * [python-krisp](pkg-core-python-krisp.md)
-       * [remount](pkg-core-remount)
+       * [remount](pkg-core-remount.md)
        * [utf8-profile](pkg-core-utf8-profile)
        * [whois](pkg-core-whois)
        * [yum-annyung](pkg-core-yum-annyung)
