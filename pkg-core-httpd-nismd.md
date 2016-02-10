@@ -28,8 +28,12 @@ Require valid-user
 
 * http://svn.oops.org/wsvn/Apache.mod_krisp/trunk/apache2/README
 
+### Dependencies:
+* [httpd](pkg-base-httpd.md)
 
+### Sub Packages:
+* None
 
 
 ### Releated Packages:
-* [httpd](pkg-base-httpd.md)의 sub package
+* None
