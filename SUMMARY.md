@@ -59,7 +59,7 @@
        * [GeoIP](pkg-base-GeoIP)
        * [gperftools](pkg-base-gperftools)
        * [httpd](pkg-base-httpd)
-       * [initscrtips](pkg-base-initscripts)
+       * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables)
        * [mariadb](pkg-base-mariadb)
    * [[AN:xless]](AnNyung3-Xless-Packages)
