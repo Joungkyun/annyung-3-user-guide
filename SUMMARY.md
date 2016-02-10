@@ -24,7 +24,7 @@
        * [php-chardet](pkg-core-php-chardet.md)
        * [php-common](pkg-core-php-common.md)
        * [php-fpm-conf](pkg-core-php-fpm-conf.md)
-       * [php-geoip](pkg-core-php-geoip)
+       * [php-geoip](pkg-core-php-geoip.md)
        * [php-korean](pkg-core-php-korean)
        * [php-krisp](pkg-core-php-krisp)
        * [php-nis](pkg-core-php-nis)
