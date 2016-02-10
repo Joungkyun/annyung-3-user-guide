@@ -8,6 +8,7 @@
 * None
 
 ### Dependencies:
+* [php](pkg-base-php.md)
 * [php-paer](pkg-base-php-pear.md)
 
 ### Sub Packages:
