@@ -8,7 +8,8 @@
 * None
 
 ### Dependencies:
-* None
+* [libkrisp](pkg-core-libkrisp.md)
+* sqlite
 
 ### Sub Packages:
 * None
