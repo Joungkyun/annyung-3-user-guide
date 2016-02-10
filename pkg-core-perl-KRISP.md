@@ -11,13 +11,13 @@ krisp perl C binding 모듈
 * http://svn.oops.org/wsvn/Perl.KRISP/trunk/example/
 
 ### Dependencies:
+* perl
 * [libkrisp](pkg-core-libkrisp.md)
 
 ### Sub Packages:
 * None
 
 ### Releated Packages:
-* perl의 sub package
 * [httpd-krisp](pkg-core-httpd-krisp.md)
 * [php-krisp](pkg-core-php-krisp.md)
 * [php-pecl-krisp](pkg-core-php-pecl-krisp.md)
