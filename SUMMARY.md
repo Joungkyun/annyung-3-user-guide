@@ -33,7 +33,7 @@
        * [php-pear-krisp](pkg-core-php-pear-krisp.md)
        * [php-pear-oops-key](pkg-core-php-pear-oops-key.md)
        * [procdump](pkg-core-procdump.md)
-       * [python-chardet](pkg-core-python-chardet)
+       * [python-chardet](pkg-core-python-chardet.md)
        * [python-krisp](pkg-core-python-krisp)
        * [remount](pkg-core-remount)
        * [utf8-profile](pkg-core-utf8-profile)
