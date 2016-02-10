@@ -8,7 +8,7 @@
 * None
 
 ### Dependencies:
-* None
+* perl
 
 ### Sub Packages:
 * None
