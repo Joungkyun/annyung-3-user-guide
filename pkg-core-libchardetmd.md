@@ -4,6 +4,14 @@
 
 Mozilla Universial charset detector를 이용하여 문자열의 문자셋을 탐지하는 라이브러리
 
+### Features:
+
+### Reference:
+* None
+
+### Dependencies:
+* None
+
 ### Sub Packages:
 
 * **libchardet-devel**  
