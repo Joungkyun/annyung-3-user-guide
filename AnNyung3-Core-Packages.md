@@ -20,7 +20,7 @@ Core 저장소의 파일은 모두 기본 설치되어 있지 않습니다. Core
 * [libkrisp](pkg-core-libkrisp.md)
 * [olibc](pkg-core-olibc.md)
 * [oops-firewall](pkg-core-oops-firewall.md)
-* [perl-krisp](pkg-core-perl-krisp.md)
+* [perl-KRISP](pkg-core-perl-KRISP.md)
 * [perl-ModuleList](pkg-core-perl-ModuleList.md)
 * [php-chardet](pkg-core-php-chardet.md)
 * [php-common](pkg-core-php-common.md)
