@@ -22,3 +22,12 @@ Client 요청 URI와 서버 파일간의 character set 문제가 있을 경우 �
 ### Reference:
 
 * https://github.com/Joungkyun/mod_url/blob/master/apache2/README
+
+### Dependencies:
+* [httpd](pkg-base-httpd.md)
+
+### Sub Packages:
+* None
+
+### Releated Packages:
+* None
