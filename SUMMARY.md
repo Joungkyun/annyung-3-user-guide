@@ -17,7 +17,7 @@
        * [libimginfo](pkg-core-libimginfomd.md)
        * [libipcalc](pkg-core-libipcalcmd.md)
        * [libkrisp](pkg-core-libkrispmd.md)
-       * [olibc](pkg-core-olibc.md)
+       * [olibc](pkg-core-olibcmd.md)
        * [oops-firewall](pkg-core-oops-firewall.md)
        * [perl-krisp](pkg-core-perl-krisp.md)
        * [perl-ModuleList](pkg-core-perl-ModuleList.md)
