@@ -16,10 +16,10 @@
 * None
 
 ### Dependencies:
-* [php](pkg-base-php.md)
+* None
 
 ### Sub Packages:
 * None
 
 ### Releated Packages:
-* None
+* [php](pkg-base-php.md)
