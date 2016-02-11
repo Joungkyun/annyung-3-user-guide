@@ -4,7 +4,7 @@
 
 
 ### Changes on AnNyung:
-
+1. _/etc/ntp.conf_를 _/etc/ntp/ntp.conf_ 로 이동
 
 ### Sub packages:
 * **ntp-doc** - NTP 문서
