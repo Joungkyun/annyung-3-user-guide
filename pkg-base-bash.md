@@ -4,7 +4,15 @@
 The GNU Bourne Again shell
 
 ### Changes on AnNyung:
-1. SU_USER 환경 변수가 있을 경우, history에 실행 유저로 SU_USER를 표기
+1. HISTTIMEFORMAT 기본 설정
+ ```bash
+[root@an3 x86_64]$ echo $HISTTIMEFORMAT
+%F %T
+```
+
+2. HISTTIMEFORMAT 환경 변수 셋팅 시, history에 SU_USER 환경변수가 있으면 기록
+ * thanks for 장현성 (hajang &commat; gmail.com)
+
 
  ```bash
 [root@an3 repos]$ history
