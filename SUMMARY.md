@@ -62,6 +62,7 @@
        * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables.md)
        * [javapacakges-tools](pkg-base-javapackages-tools.md)
+       * [linuxdoc-tools](pkg-base-linuxdoc-tools)
        * [mariadb](pkg-base-mariadb.md)
        * [memcached](pkg-base-memcached.md)
        * [net-tools](pkg-base-net-tools.md)
