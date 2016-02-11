@@ -9,7 +9,10 @@ whois/nicname 클라이언트 프로그램
 2. IDN 지원
 
 ### Reference:
-```bash
+
+* http://svn.oops.org/wsvn/OOPS.kwhois/trunk/
+
+ ```bash
 [root@an3 x86_64]$ whois -h
 사용법: whois [OPTIONS...] 질의[@서버[:포트]]
 유효한 옵션들:
