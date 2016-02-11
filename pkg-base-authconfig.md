@@ -1,6 +1,6 @@
 # authconfig
 
-### Descriptions:
+### Description:
 
 
 ### Changes on AnNyung:
