@@ -23,5 +23,17 @@ Traces the route taken by packets over an IPv4/IPv6 network
   [root@an3 srpms]$
   ```
 2. tcpping 추가
+  ```bash
+  [root@an3 srpms]$ tcptraceroute -h
+
+  tcptraceroute 1.5beta7
+  Copyright (c) 2001-2006 Michael C. Toren <mct@toren.net>
+  Updates are available from http://michael.toren.net/code/tcptraceroute/
+
+  Usage: tcptraceroute [-nNFSAE] [-i <interface>] [-f <first ttl>]
+       [-l <packet length>] [-q <number of queries>] [-t <tos>]
+       [-m <max ttl>] [-pP] <source port>] [-s <source address>]
+       [-w <wait time>] <host> [destination port] [packet length]
+  ```
 
 ### Sub packages:
