@@ -78,9 +78,43 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
 * **php-dblib** - PHP7 dba 확장
 * **php-devel** - php7 확장 개발을 위한 파일들
 * **php-extension** - php7 shared extension
+  * php, php-cli, php-fpm 공용으로 사용
+  * /etc/php.d/{apache,cli,fpm}/SHARED.ini 에서 module loading 설정을 해 주어야 함. 기본으로 loading 하지 않음
+  * bcmath
+  * calendar
+  * curl
+  * exif
+  * fileinfo
+  * ftp
+  * gd
+  * gettext
+  * gmp
+  * imap
+  * json
+  * ldap
+  * libevent
+  * mcrypt
+  * mysql
+  * mysqli
+  * opcache
+  * pdo_mysql
+  * pdo_sqlite
+  * shmop
+  * snmp
+  * soap
+  * sqlite3
+  * wddx
+  * xmlreader
+  * xmlwriter
+  * zip
 * **php-fpm** - php7 fpm engine
 * **php-oci** - PHP7 oci8/pdo_oci 확장
 * **php-odbc** - PHP7 odbc, pdo_odbc 확장
 * **php-pear** - PHP 확장및 응용 프로그램 저장소 프레임웍
 * **php-pgsql** - PHP7 pgsql, pdo_pgsql 확장
 * **php-recode** - PHP7 recode 확장
+* [**php-common**](pkg-core-php-common.md)
+* [**php-fpm-conf**](pkg-core-php-fpm-conf.md)
+* [**php-geoip**](pkg-core-php-geoip.md)
+* [**php-krisp**](pkg-core-php-krisp.md)
+* [**php-nis**](pkg-core-php-nis.md)
