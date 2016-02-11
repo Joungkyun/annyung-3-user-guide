@@ -1,7 +1,7 @@
 # procmail
 
 ### Description:
-
+메일 처리 프로그램
 
 ### Changes on AnNyung:
 1. SAFE_INLUCDERC 옵션 추가
