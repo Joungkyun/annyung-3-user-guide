@@ -11,3 +11,6 @@
 * **iptables-devel** - iptables 개발 패키지
 * **iptables-services** - iptables, ip6tables 서비스 파일
 * **iptables-utils** - iptables and ip6tables services for iptables
+
+### Releated packages:
+* [**kmod-geoip**](pkg-core-kmod-geoip.md)
