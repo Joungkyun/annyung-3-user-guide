@@ -121,7 +121,7 @@
        * [proftpd](pkg-addon-proftpd.md)
        * [python-Mako](pkg-addon-python-mako.md)
        * [python-MarkupSafe](pkg-addon-python-markupsafe.md)
-       * [python-mcrypt](pkg-addon-python-mcrypt)
+       * [python-mcrypt](pkg-addon-python-mcrypt.md)
        * [python-openpyxl](pkg-addon-python-openpyxl)
        * [python-xlrd](pkg-addon-python-xlrd)
    * [[AN:plus]](annyung3-plus-packages.md)
