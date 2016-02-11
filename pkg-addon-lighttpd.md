@@ -37,7 +37,7 @@
  * [mod_krisp](http://svn.oops.org/wsvn/Lighttpd.mod_krisp/trunk/README)
 
 ### Reference:
-* None
+* http://redmine.lighttpd.net/projects/lighttpd/wiki
 
 ### Dependencies:
 * [libimginfo](pkg-core-libimginfo.md)
