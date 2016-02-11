@@ -12,7 +12,7 @@
 * http://devel.oops.org/manual/korean/
 
 ### Dependencies:
-* [php56](pkg-base-php56.md)
+* [php56](pkg-addon-php56.md)
 
 ### Sub Packages:
 * None
