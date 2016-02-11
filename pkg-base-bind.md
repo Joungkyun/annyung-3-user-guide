@@ -13,6 +13,56 @@ Chroot가 적용된 버클리 인터넷 네임 서버 (BIND)
  * _/etc/sysconfig/named_에 GEOIP_DATA_COPY="yes" 설정
  * https://code.google.com/p/bind-geoip/wiki/UsageGuide 참조
 
+### Notice:
+DNSSEC와 database backend(bind-sdb)에 관련된 테스트는 안녕에서 보증하지 않습니다. 이 기능을 사용하기 위해서는 CentOS 7의 bind package를 사용하십시오.
+
+1. _/etc/yum.repos.d/AnNyung.repo_에서 [AN:base] 섹션에 **"exclude=bind*"** 추가
+ ```ini
+[AN:base]
+name=AnNyung $annyungver Base Repository
+mirrorlist=http://annyung.oops.org/mirror.php?release=$annyungver&arch=$basearch&repo=base
+exclude= bind*
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AnNyung-$annyungver
+```
+2. 설치되어 있는 bind package 확인
+ ```bash
+[root@an3 ~]$ rpm -qa | grep bind
+bind-license-9.9.4-29.an3.2.noarch
+bind-utils-9.9.4-29.an3.2.x86_64
+bind-libs-9.9.4-29.an3.2.x86_64
+bind-libs-lite-9.9.4-29.an3.2.x86_64
+[root@an3 ~]$
+```
+3. CentOS bind로 교체
+
+```bash
+[root@an3 ~]$ yum install -y yum-utils
+[root@an3 shm]$ yumdownloader bind-utils bind-libs bind-libs-lite bind-license
+Loaded plugins: fastestmirror
+AN:addon                                                                                                                                    | 2.9 kB  00:00:00
+AN:base                                                                                                                                     | 2.9 kB  00:00:00
+AN:core                                                                                                                                     | 2.9 kB  00:00:00
+AN:xless                                                                                                                                    | 2.9 kB  00:00:00
+Loading mirror speeds from cached hostfile
+ * AN:addon: mirror.oops.org
+ * AN:base: mirror.oops.org
+ * AN:core: mirror.oops.org
+ * AN:xless: mirror.oops.org
+ * base: ftp.kaist.ac.kr
+ * epel: ftp.kddilabs.jp
+ * extras: ftp.kaist.ac.kr
+ * updates: ftp.kaist.ac.kr
+(1/4): bind-license-9.9.4-29.el7_2.2.noarch.rpm                                                                                             |  82 kB  00:00:00
+(2/4): bind-libs-lite-9.9.4-29.el7_2.2.x86_64.rpm                                                                                           | 724 kB  00:00:00
+(3/4): bind-utils-9.9.4-29.el7_2.2.x86_64.rpm                                                                                               | 200 kB  00:00:00
+(4/4): bind-libs-9.9.4-29.el7_2.2.x86_64.rpm                                                                                                | 1.0 MB  00:00:00
+[root@an3 shm]$ ls
+bind-libs-9.9.4-29.el7_2.2.x86_64.rpm       bind-license-9.9.4-29.el7_2.2.noarch.rpm
+bind-libs-lite-9.9.4-29.el7_2.2.x86_64.rpm  bind-utils-9.9.4-29.el7_2.2.x86_64.rpm
+[root@an3 shm]$ rpm -Uhv bind-* --force
+```
+
 ### Dependencies:
  * [GeoIP](pkg-base-GeoIP.md)
 
