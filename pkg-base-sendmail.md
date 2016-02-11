@@ -1,7 +1,7 @@
 # sendmail
 
 ### Description:
-
+Sendmail 메일 전송 에이전트
 
 ### Changes on AnNyung:
 
