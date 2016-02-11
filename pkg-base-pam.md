@@ -5,6 +5,10 @@
 
 ### Changes on AnNyung:
 1. chroot module 수정
+ * group 설정 지원 (_%gruop_)
+ * reverse 설정 지원 (_!user_)
+ * 정규식 지원 (_/^user/_)
+ * 예외 지원 (_-user_)
 2. _/etc/login.def.exceptioin_
  * password expire를 하지 않을 예외 account 관리
 
