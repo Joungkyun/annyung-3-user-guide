@@ -7,6 +7,7 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
 1. php 7 업데이트
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
  * PHP의 shell injection을 **engine level에서 방어**하기 위한 기능
+     * 이 기능은 engine level에서 처리를 하기 때문에, php code 쪽에서는 아무런 영향이 없음.
  * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
  * PHP 5.4 이전의 safe_mode_exec_dir을 safe_mode가 아닌 경우에도 사용할 수 있도록 수정하고 command 치환 parser를 확장
  * 기본값 _/var/lib/php/bin_
