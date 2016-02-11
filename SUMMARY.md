@@ -76,7 +76,7 @@
        * [rootfiles](pkg-base-rootfiles.md)
        * [rsyslog](pkg-base-rsyslog.md)
        * [sendmail](pkg-base-sendmail.md)
-       * [setup](pkg-base-setup)
+       * [setup](pkg-base-setup.md)
        * [shadow-utils](pkg-base-shadow-utils)
        * [sudo](pkg-base-sudo)
        * [systemd](pkg-base-systemd)
