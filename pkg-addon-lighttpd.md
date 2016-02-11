@@ -18,7 +18,8 @@
  server.backlog = 1024
  ```
 5. mod_dirlisting 기능 향상
- * gallery 기능 지원
+ * dir-listing.gallery  
+   디렉토리 listing에 이미지 파일이 있을 경우, &lt;img&gt; tag
  * dir-listing.encoding 추가
  * dir-listing.html-lang 추가
 6. 추가 모듈
