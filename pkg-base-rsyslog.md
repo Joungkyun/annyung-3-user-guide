@@ -1,7 +1,7 @@
 # rsyslog
 
 ### Description:
-
+Enhanced system logging and kernel message trapping daemon
 
 ### Changes on AnNyung:
 1. kernel message를 _/dev/console_ 에서 _/var/log/kernel_ 로 변경
