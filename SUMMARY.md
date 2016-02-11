@@ -62,7 +62,7 @@
        * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables.md)
        * [javapacakges-tools](pkg-base-javapackages-tools.md)
-       * [mariadb](pkg-base-mariadb)
+       * [mariadb](pkg-base-mariadb.md)
        * [memcached](pkg-base-memcached)
        * [net-tools](pkg-base-net-tools)
        * [ntp](pkg-base-ntp)
