@@ -82,7 +82,7 @@
        * [systemd](pkg-base-systemd.md)
        * [sysvinit-tools](pkg-base-sysvinit-tools.md)
        * [tomcat](pkg-base-tomcat.md)
-       * [traceroute](pkg-base-traceroute)
+       * [traceroute](pkg-base-traceroute.md)
        * [unzip](pkg-base-unzip)
        * [util-linux](pkg-base-util-linux.md)
        * [vim](pkg-base-vim)
