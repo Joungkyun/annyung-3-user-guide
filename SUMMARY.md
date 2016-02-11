@@ -60,7 +60,7 @@
        * [gperftools](pkg-base-gperftools.md)
        * [httpd](pkg-base-httpd.md)
        * [initscrtips](pkg-base-initscripts.md)
-       * [iptables](pkg-base-iptables)
+       * [iptables](pkg-base-iptables.md)
        * [javapacakges-tools](pkg-base-javapackages-tools)
        * [mariadb](pkg-base-mariadb)
        * [memcached](pkg-base-memcached)
