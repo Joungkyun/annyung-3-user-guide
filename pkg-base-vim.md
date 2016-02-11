@@ -18,7 +18,13 @@ vim package는 존재하지 않으며, 기본 패키지는 **vim-enhanced** 이�
  let g:annyungfolding = 0
  ```
 6. phpDocument 스타일의 phpfolding 추가
-
+ * http://www.vim.org/scripts/script.php?script_id=1623 참조
+ * 단축키 설정: 다음 설정을 vimrc 또는 .vimrc 에 셋팅
+ ```ini
+ map <F5> <Esc>:EnableFastPHPFolds<Cr>
+ map <F6> <Esc>:EnablePHPFolds<Cr>
+ map <F7> <Esc>:DisablePHPFolds<Cr>
+ ```
 7. native PHP manual 추가 (_Shift + k_)
 8. checksyntax 플러그인 추가
  * 이 기능의 사용을 원치 않으면, vimrc 또는 .vimrc에 다음 설정 셋팅
