@@ -86,7 +86,7 @@
        * [unzip](pkg-base-unzip.md)
        * [util-linux](pkg-base-util-linux.md)
        * [vim](pkg-base-vim.md)
-       * [xinted](pkg-base-xinetd)
+       * [xinted](pkg-base-xinetd.md)
    * [[AN:xless]](annyung3-xless-packages.md)
        * [cairo](pkg-xless-cairo)
        * [gd](pkg-xless-gd)
