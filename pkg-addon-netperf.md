@@ -1,13 +1,13 @@
 # netperf
 
 ### Description:
-
+TCP/UDP를 위한 성능 테스트 도구
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://www.netperf.org/netperf/NetperfPage.html
 
 ### Dependencies:
 * None
