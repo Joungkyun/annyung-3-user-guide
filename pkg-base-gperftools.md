@@ -11,3 +11,4 @@ Very fast malloc and performance analysis tools
 * **gperftools-devel** - Development libraries and headers for gperftools
 * **gperftools-libs** - Libraries provided by gperftools
 * **tcmalloc** - Google perftools tcmalloc-minimal
+* **pprof** - CPU and Heap Profiler tool
