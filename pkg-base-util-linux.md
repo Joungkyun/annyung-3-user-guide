@@ -13,8 +13,7 @@
 ### Sub Packages:
 * libblkid
 * libblkid-devel
-* libgudev1
-* libgudev1-devel
+
 
 ### Releated Packages:
 * None
