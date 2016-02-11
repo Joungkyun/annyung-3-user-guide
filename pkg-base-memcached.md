@@ -7,3 +7,4 @@
 
 
 ### Sub packages:
+* **memcached-devel** - Files needed for development using memcached protocol
