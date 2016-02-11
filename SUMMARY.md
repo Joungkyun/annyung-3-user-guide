@@ -122,7 +122,7 @@
        * [python-Mako](pkg-addon-python-mako.md)
        * [python-MarkupSafe](pkg-addon-python-markupsafe.md)
        * [python-mcrypt](pkg-addon-python-mcrypt.md)
-       * [python-openpyxl](pkg-addon-python-openpyxl)
+       * [python-openpyxl](pkg-addon-python-openpyxl.md)
        * [python-xlrd](pkg-addon-python-xlrd)
    * [[AN:plus]](annyung3-plus-packages.md)
 
