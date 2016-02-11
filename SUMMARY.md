@@ -67,7 +67,7 @@
        * [net-tools](pkg-base-net-tools.md)
        * [ntp](pkg-base-ntp.md)
        * [openssh](pkg-base-openssh.md)
-       * [openssl](pkg-base-openssl)
+       * [openssl](pkg-base-openssl.md)
        * [pam](pkg-base-pam)
        * [php](pkg-base-php)
        * [procmail](pkg-base-procmail)
