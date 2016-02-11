@@ -112,7 +112,7 @@
        * [php-pecl-apcu](pkg-addon-php-pecl-apcu.md)
        * [php56-pecl-apcu](pkg-addon-php56-pecl-apcu.md)
        * [php-pecl-memcache](pkg-addon-php-pecl-memcache.md)
-       * [php56-pecl-memcache](pkg-addon-php56-pecl-memcache)
+       * [php56-pecl-memcache](pkg-addon-php56-pecl-memcache.md)
        * [php-pecl-oauth](pkg-addon-php-pecl-oauth)
        * [php56-pecl-oauth](pkg-addon-php56-pecl-oauth)
        * [php-pecl-xdebug](pkg-addon-php-pecl-xdebug)
