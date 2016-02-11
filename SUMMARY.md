@@ -118,7 +118,7 @@
        * [php-pecl-xdebug](pkg-addon-php-pecl-xdebug.md)
        * [php56-pecl-xdebug](pkg-addon-php56-pecl-xdebug.md)
        * [php56](pkg-addon-php56.md)
-       * [proftpd](pkg-addon-proftpd)
+       * [proftpd](pkg-addon-proftpd.md)
        * [python-Mako](pkg-addon-python-Mako)
        * [python-MarkupSafe](pkg-addon-python-MarkupSafe)
        * [python-mcrypt](pkg-addon-python-mcrypt)
