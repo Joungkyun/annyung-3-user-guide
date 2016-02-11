@@ -116,7 +116,7 @@
        * [php-pecl-oauth](pkg-addon-php-pecl-oauth.md)
        * [php56-pecl-oauth](pkg-addon-php56-pecl-oauth.md)
        * [php-pecl-xdebug](pkg-addon-php-pecl-xdebug.md)
-       * [php56-pecl-xdebug](pkg-addon-php56-pecl-xdebug)
+       * [php56-pecl-xdebug](pkg-addon-php56-pecl-xdebug.md)
        * [php56](pkg-addon-php56)
        * [proftpd](pkg-addon-proftpd)
        * [python-Mako](pkg-addon-python-Mako)
