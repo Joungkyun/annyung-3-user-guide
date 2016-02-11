@@ -80,33 +80,39 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
 * **php-extension** - php7 shared extension
   * php, php-cli, php-fpm 공용으로 사용
   * /etc/php.d/{apache,cli,fpm}/SHARED.ini 에서 module loading 설정을 해 주어야 함. 기본으로 loading 하지 않음
-  * bcmath
-  * calendar
-  * curl
-  * exif
-  * fileinfo
-  * ftp
-  * gd
-  * gettext
-  * gmp
-  * imap
-  * json
-  * ldap
-  * libevent
-  * mcrypt
-  * mysql
-  * mysqli
-  * opcache
-  * pdo_mysql
-  * pdo_sqlite
-  * shmop
-  * snmp
-  * soap
-  * sqlite3
-  * wddx
-  * xmlreader
-  * xmlwriter
-  * zip
+  ```bash
+[root@an3 ~]$ cat /etc/php.d/cli/SHARED.ini
+;
+; Follow extensions need php-extension package
+;
+;extension = bcmath.so
+;extension = calendar.so
+;extension = curl.so
+;extension = exif.so
+;extension = fileinfo.so
+;extension = ftp.so
+;extension = gd.so
+;extension = gettext.so
+;extension = imap.so
+;extension = json.so
+;extension = ldap.so
+extension = libevent.so
+;extension = mcrypt.so
+;extension = mysql.so
+extension = mysqli.so
+;extension = pdo_mysql.so
+;extension = pdo_sqlite.so
+;extension = snmop.so
+;extension = snmp.so
+;extension = soap.so
+;extension = sqlite3.so
+;extension = wddx.so
+;extension = xmlreader.so
+;extension = xmlwriter.so
+;extension = zip.so
+;zend_extension = /usr/lib64/php/extensions/opcache.so
+[root@an3 ~]
+```
 * **php-fpm** - php7 fpm engine
 * **php-oci** - PHP7 oci8/pdo_oci 확장
 * **php-odbc** - PHP7 odbc, pdo_odbc 확장
