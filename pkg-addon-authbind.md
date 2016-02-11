@@ -4,7 +4,16 @@
 non-root 권한으로 1024 하위의 포트 바인드를 허가하는 유틸리티
 
 ### Features:
-
+1. 사용법
+  ```bash
+  [root@an3 ~]$ authbind --deep command -option command_argument
+  ```
+2. tomcat을 authbind로 구동
+  ```bash
+  [root@an3 ~]$ cat /etc/sysconfig/tomcat
+  TC_AUTHBIND=yes
+  [root@an3 ~]$
+  ```
 
 ### Reference:
 * None
