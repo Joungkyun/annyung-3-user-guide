@@ -65,6 +65,7 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
          * 검사 결과 감지가 되면 **UPLOAD_ERR_SEC** 반환
      * **upload_image_check_whitelist** - 이미지 헤더 문자열 white list
 5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
+ * 기본값 OFF이며, php code에서 ini_set으로 변경 가능
 6. allow_include 기능 추가
 7. short_open_tag 기본값 Off
 
