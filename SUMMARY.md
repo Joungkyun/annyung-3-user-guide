@@ -100,7 +100,7 @@
        * [libevent14](pkg-addon-libevent14.md)
        * [libnet](pkg-addon-libnet.md)
        * [lighttpd](pkg-addon-lighttpd.md)
-       * [mhash](pkg-addon-mhash)
+       * [mhash](pkg-addon-mhash.md)
        * [mimetex](pkg-addon-mimetex)
        * [mm](pkg-addon-mm)
        * [netperf](pkg-addon-netperf)
