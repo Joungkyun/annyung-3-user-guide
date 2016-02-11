@@ -107,7 +107,7 @@
        * [nginx](pkg-addon-nginx.md)
        * [openvpn](pkg-addon-openvpn.md)
        * [oracle-jre](pkg-addon-oracle-jre.md)
-       * [pdnsd](pkg-addon-pdnsd)
+       * [pdnsd](pkg-addon-pdnsd.md)
        * [perl-CSS-DOM](pkg-addon-perl-CSS-DOM)
        * [php-pecl-apcu](pkg-addon-php-pecl-apcu)
        * [php56-pecl-apcu](pkg-addon-php56-pecl-apcu)
