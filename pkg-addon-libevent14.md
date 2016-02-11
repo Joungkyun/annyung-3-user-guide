@@ -7,7 +7,7 @@ Abstract asynchronous event notification library
 1. libevent 1.4 compat 패키지
 
 ### Reference:
-* None
+* http://www.wangafu.net/~nickm/libevent-1.4/doxygen/html/
 
 ### Dependencies:
 * None
