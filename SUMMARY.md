@@ -74,7 +74,7 @@
        * [procps-ng](pkg-base-procps-ng.md)
        * [redhat-rpm-config](pkg-base-redhat-rpm-config.md)
        * [rootfiles](pkg-base-rootfiles.md)
-       * [rsyslog](pkg-base-rsyslog)
+       * [rsyslog](pkg-base-rsyslog.md)
        * [sendmail](pkg-base-sendmail)
        * [setup](pkg-base-setup)
        * [shadow-utils](pkg-base-shadow-utils)
