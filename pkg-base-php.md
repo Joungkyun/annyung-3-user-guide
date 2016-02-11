@@ -96,10 +96,10 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
 ;extension = imap.so
 ;extension = json.so
 ;extension = ldap.so
-extension = libevent.so
+;extension = libevent.so
 ;extension = mcrypt.so
 ;extension = mysql.so
-extension = mysqli.so
+;extension = mysqli.so
 ;extension = pdo_mysql.so
 ;extension = pdo_sqlite.so
 ;extension = snmop.so
