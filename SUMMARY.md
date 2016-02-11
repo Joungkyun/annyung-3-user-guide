@@ -102,7 +102,7 @@
        * [lighttpd](pkg-addon-lighttpd.md)
        * [mhash](pkg-addon-mhash.md)
        * [mimetex](pkg-addon-mimetex.md)
-       * [mm](pkg-addon-mm)
+       * [mm](pkg-addon-mm.md)
        * [netperf](pkg-addon-netperf)
        * [nginx](pkg-addon-nginx)
        * [openvpn](pkg-addon-openvpn)
