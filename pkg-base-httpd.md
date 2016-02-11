@@ -12,3 +12,4 @@ Apache HTTP Server
 * **httpd-devel** - Development interfaces for the Apache HTTP server
 * **httpd-manual** - Documentation for the Apache HTTP server
 * **httpd-tools** - Tools for use with the Apache HTTP Server
+* [**httpd-conf**](pkg-core-httpd-conf.md) -
