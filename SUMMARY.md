@@ -71,7 +71,7 @@
        * [pam](pkg-base-pam.md)
        * [php](pkg-base-php.md)
        * [procmail](pkg-base-procmail.md)
-       * [procps-ng](pkg-base-procps-ng)
+       * [procps-ng](pkg-base-procps-ng.md)
        * [redhat-rpm-config](pkg-base-redhat-rpm-config)
        * [rootfiles](pkg-base-rootfiles)
        * [rsyslog](pkg-base-rsyslog)
