@@ -57,7 +57,7 @@
        * [cvs](pkg-base-cvs.md)
        * [filesystem](pkg-base-filesystem.md)
        * [GeoIP](pkg-base-geoip.md)
-       * [gperftools](pkg-base-gperftools)
+       * [gperftools](pkg-base-gperftools.md)
        * [httpd](pkg-base-httpd)
        * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables)
