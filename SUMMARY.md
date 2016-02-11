@@ -70,7 +70,7 @@
        * [openssl](pkg-base-openssl.md)
        * [pam](pkg-base-pam.md)
        * [php](pkg-base-php.md)
-       * [procmail](pkg-base-procmail)
+       * [procmail](pkg-base-procmail.md)
        * [procps-ng](pkg-base-procps-ng)
        * [redhat-rpm-config](pkg-base-redhat-rpm-config)
        * [rootfiles](pkg-base-rootfiles)
