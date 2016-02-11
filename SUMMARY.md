@@ -81,7 +81,7 @@
        * [sudo](pkg-base-sudo.md)
        * [systemd](pkg-base-systemd.md)
        * [sysvinit-tools](pkg-base-sysvinit-tools.md)
-       * [tomcat](pkg-base-tomcat)
+       * [tomcat](pkg-base-tomcat.md)
        * [traceroute](pkg-base-traceroute)
        * [unzip](pkg-base-unzip)
        * [util-linux](pkg-base-util-linux.md)
