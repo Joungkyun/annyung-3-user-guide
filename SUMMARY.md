@@ -99,7 +99,7 @@
        * [jlint](pkg-addon-jlint.md)
        * [libevent14](pkg-addon-libevent14.md)
        * [libnet](pkg-addon-libnet.md)
-       * [lighttpd](pkg-addon-lighttpd)
+       * [lighttpd](pkg-addon-lighttpd.md)
        * [mhash](pkg-addon-mhash)
        * [mimetex](pkg-addon-mimetex)
        * [mm](pkg-addon-mm)
