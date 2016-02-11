@@ -4,10 +4,10 @@
 IMAP 과 POP 프로토콜 서버 데몬
 
 ### Features:
-
+1. protocol 별 xinetd 구동 package 분리
 
 ### Reference:
-* None
+* http://www.washington.edu/imap/
 
 ### Dependencies:
 * None
