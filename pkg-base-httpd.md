@@ -12,4 +12,4 @@ Apache HTTP Server
 * **httpd-devel** - Development interfaces for the Apache HTTP server
 * **httpd-manual** - Documentation for the Apache HTTP server
 * **httpd-tools** - Tools for use with the Apache HTTP Server
-* [**httpd-conf**](pkg-core-httpd-conf.md) -
+* [**httpd-conf**](pkg-core-httpd-conf.md) - 안녕 리눅스 아파치2의 바이너리를 제외한 설정파일들을 포함
