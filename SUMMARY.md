@@ -66,7 +66,7 @@
        * [memcached](pkg-base-memcached.md)
        * [net-tools](pkg-base-net-tools.md)
        * [ntp](pkg-base-ntp.md)
-       * [openssh](pkg-base-openssh)
+       * [openssh](pkg-base-openssh.md)
        * [openssl](pkg-base-openssl)
        * [pam](pkg-base-pam)
        * [php](pkg-base-php)
