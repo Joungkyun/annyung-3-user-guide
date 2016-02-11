@@ -4,13 +4,13 @@
 Chroot가 적용된 버클리 인터넷 네임 서버 (BIND)
 
 ### Changes on AnNyung:
-1. bind-chroot 패키지 제거하고, 기본으로 chroot로 동작하도록 구성 (/var/named)
-2. __/etc/named/naemd.conf__는 __/var/named/etc/named.conf__의 solft link (호환성 유지)
-3. zone file과 __named.conf__에서 IDN을 직접 사용 가능
+1. bind-chroot 패키지 제거하고, 기본으로 chroot로 동작하도록 구성 (_/var/named_)
+2. _/etc/named/naemd.conf_는 _/var/named/etc/named.conf_의 solft link (호환성 유지)
+3. zone file과 _named.conf_에서 IDN을 직접 사용 가능
  * http://annyung.oops.org/?m=white&p=mdns
 4. multiple CNAME 지원
 5. geodns 기능 지원
- * __/etc/sysconfig/named__에 GEOIP_DATA_COPY="yes" 설정
+ * _/etc/sysconfig/named_에 GEOIP_DATA_COPY="yes" 설정
  * https://code.google.com/p/bind-geoip/wiki/UsageGuide 참조
 
 ### Dependencies:
