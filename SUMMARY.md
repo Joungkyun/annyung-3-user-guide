@@ -78,7 +78,7 @@
        * [sendmail](pkg-base-sendmail.md)
        * [setup](pkg-base-setup.md)
        * [shadow-utils](pkg-base-shadow-utils.md)
-       * [sudo](pkg-base-sudo)
+       * [sudo](pkg-base-sudo.md)
        * [systemd](pkg-base-systemd)
        * [sysvinit-tools](pkg-base-sysvinit-tools)
        * [tomcat](pkg-base-tomcat)
