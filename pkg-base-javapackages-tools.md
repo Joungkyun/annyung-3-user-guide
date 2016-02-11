@@ -9,3 +9,4 @@ Macros and scripts for Java packaging support
 3. X 의존성 제거
 
 ### Sub packages:
+**python-javapackages** - Module for handling various files for Java packaging
