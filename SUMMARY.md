@@ -124,5 +124,11 @@
        * [python-mcrypt](pkg-addon-python-mcrypt.md)
        * [python-openpyxl](pkg-addon-python-openpyxl.md)
        * [python-xlrd](pkg-addon-python-xlrd.md)
+       * [re2c](pkg-addon-re2c)
+       * [redis](pkg-addon-redis)
+       * [rudiments](pkg-addon-rudiments)
+       * [splint](pkg-addon-splint)
+       * [sqlite32](pkg-addon-sqlite32)
+       * [sqlrelay](pkg-addon-sqlrelay)
    * [[AN:plus]](annyung3-plus-packages.md)
 
