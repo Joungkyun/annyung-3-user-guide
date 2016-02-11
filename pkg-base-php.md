@@ -56,11 +56,13 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
  ```
 4. file upload시 image header의 injection code 여부 검사 기능 추가
  * php.ini 에 다음 옵션 추가
-     * **upload_image_check** - 업로드 이미지 헤더에 php code가 포함되었는지 검사
+     * **upload_image_check**
+         * 업로드 이미지 헤더에 php code가 포함되었는지 검사
+         * php code 발견 시에 E_WARNING 발생
      * **upload_image_check_log** - 업로드 이미지 헤더 검사 관련 로그 기록
      * **upload_image_check_test**
          * 검사만 하고, 에러 레벨만 리턴
-         * 검사 결과 감지가 되면 **UPLOAD_ERR_SECURITY** 반환
+         * 검사 결과 감지가 되면 **UPLOAD_ERR_SEC** 반환
      * **upload_image_check_whitelist** - 이미지 헤더 문자열 white list
 5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
 6. allow_include 기능 추가
