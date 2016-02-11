@@ -36,27 +36,27 @@ bind-libs-lite-9.9.4-29.an3.2.x86_64
 ```
 3. CentOS bind로 교체
 
-```bash
+ ```bash
 [root@an3 ~]$ yum install -y yum-utils
 [root@an3 shm]$ yumdownloader bind-utils bind-libs bind-libs-lite bind-license
 Loaded plugins: fastestmirror
-AN:addon                                                                                                                                    | 2.9 kB  00:00:00
-AN:base                                                                                                                                     | 2.9 kB  00:00:00
-AN:core                                                                                                                                     | 2.9 kB  00:00:00
-AN:xless                                                                                                                                    | 2.9 kB  00:00:00
+AN:addon                                          | 2.9 kB  00:00:00
+AN:base                                           | 2.9 kB  00:00:00
+AN:core                                           | 2.9 kB  00:00:00
+AN:xless                                          | 2.9 kB  00:00:00
 Loading mirror speeds from cached hostfile
- * AN:addon: mirror.oops.org
- * AN:base: mirror.oops.org
- * AN:core: mirror.oops.org
- * AN:xless: mirror.oops.org
- * base: ftp.kaist.ac.kr
- * epel: ftp.kddilabs.jp
- * extras: ftp.kaist.ac.kr
- * updates: ftp.kaist.ac.kr
-(1/4): bind-license-9.9.4-29.el7_2.2.noarch.rpm                                                                                             |  82 kB  00:00:00
-(2/4): bind-libs-lite-9.9.4-29.el7_2.2.x86_64.rpm                                                                                           | 724 kB  00:00:00
-(3/4): bind-utils-9.9.4-29.el7_2.2.x86_64.rpm                                                                                               | 200 kB  00:00:00
-(4/4): bind-libs-9.9.4-29.el7_2.2.x86_64.rpm                                                                                                | 1.0 MB  00:00:00
+  + AN:addon: mirror.oops.org
+  + AN:base: mirror.oops.org
+  + AN:core: mirror.oops.org
+  + AN:xless: mirror.oops.org
+  + base: ftp.kaist.ac.kr
+  + epel: ftp.kddilabs.jp
+  + extras: ftp.kaist.ac.kr
+  + updates: ftp.kaist.ac.kr
+(1/4): bind-license-9.9.4-29.el7_2.2.noarch.rpm   |  82 kB  00:00:00
+(2/4): bind-libs-lite-9.9.4-29.el7_2.2.x86_64.rpm | 724 kB  00:00:00
+(3/4): bind-utils-9.9.4-29.el7_2.2.x86_64.rpm     | 200 kB  00:00:00
+(4/4): bind-libs-9.9.4-29.el7_2.2.x86_64.rpm      | 1.0 MB  00:00:00
 [root@an3 shm]$ ls
 bind-libs-9.9.4-29.el7_2.2.x86_64.rpm       bind-license-9.9.4-29.el7_2.2.noarch.rpm
 bind-libs-lite-9.9.4-29.el7_2.2.x86_64.rpm  bind-utils-9.9.4-29.el7_2.2.x86_64.rpm
