@@ -7,3 +7,4 @@
 
 
 ### Sub packages:
+* **sudo-devel** - Development files for sudo
