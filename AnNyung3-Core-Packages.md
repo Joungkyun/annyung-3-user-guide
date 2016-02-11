@@ -1,6 +1,6 @@
 # [AN:core] 안녕 Core packages
 
-안녕 리눅스의 core package에 대한 일람이며, Alpabat 순으로 정렬 되었습니다.
+안녕 리눅스의 core repository에 대한 일람이며, Alpabat 순으로 정렬 되었습니다.
 
 Core package는 안녕 리눅스를 구성하기 위해 필요한 필수 패키지와, 안녕 리눅스에서만 제공하는 패키지들(기본으로 설치 되지 않을 수도 있음)로 구성되어 있습니다.
 
