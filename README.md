@@ -20,3 +20,4 @@
 4. 한글 환경을 위한 지원
 5. 보안성 강화
 6. EPEL repository 기본 지원
+7. 1일 1회 package 자동 업데이트(yum-cron 동작)
