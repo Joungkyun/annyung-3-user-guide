@@ -13,3 +13,4 @@ A collection of basic system utilities
 * **libmount-devel** - Device mounting library
 * **libuuid** - Universally unique ID library
 * **libuuid-devel** - Universally unique ID library
+* **uuidd** - Helper daemon to guarantee uniqueness of time-based UUIDs
