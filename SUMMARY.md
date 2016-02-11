@@ -80,7 +80,7 @@
        * [shadow-utils](pkg-base-shadow-utils.md)
        * [sudo](pkg-base-sudo.md)
        * [systemd](pkg-base-systemd.md)
-       * [sysvinit-tools](pkg-base-sysvinit-tools)
+       * [sysvinit-tools](pkg-base-sysvinit-tools.md)
        * [tomcat](pkg-base-tomcat)
        * [traceroute](pkg-base-traceroute)
        * [unzip](pkg-base-unzip)
