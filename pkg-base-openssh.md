@@ -28,6 +28,7 @@ debug1: Connecting to 청와대.com [211.234.63.232] port 22.
 [root@an3 ~]$
 ```
 6. host key check skip 옵션 추가 (_-H_)
+ * 아래 예제는 둘다 동일한 방법임.
   ```bash
 [oops@an3 ~]$ ssh -H test.com
 [oops@an3 ~]$ ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no test.com
