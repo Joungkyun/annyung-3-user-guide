@@ -101,7 +101,7 @@
        * [libnet](pkg-addon-libnet.md)
        * [lighttpd](pkg-addon-lighttpd.md)
        * [mhash](pkg-addon-mhash.md)
-       * [mimetex](pkg-addon-mimetex)
+       * [mimetex](pkg-addon-mimetex.md)
        * [mm](pkg-addon-mm)
        * [netperf](pkg-addon-netperf)
        * [nginx](pkg-addon-nginx)
