@@ -5,8 +5,17 @@ An open source implementation of SSH protocol versions 1 and 2
 
 ### Changes on AnNyung:
 1. X 의존성 제거
-2. 서버 기본 설정 변경
-3. 클라이언트 기본 설정 변경
+2. 서버 기본 설정 변경 (_/etc/ssh/sshd_config_)
+ * KeyRegenerationInterval 0
+ * UseDNS no
+ * GSSAPIAuthentication no
+ * X11Forwarding no
+ * Banner /etc/issue.net
+ * AcceptEnv 에 USER_LANG 환경 변수 추가
+3. 클라이언트 기본 설정 변경 (_/etc/ssh/ssh_config_)
+ * GSSAPIAuthentication no
+ * ForwardX11Trusted no
+ * SendEnv 에 USER_LANG 환경 변수 추가
 4. Banner 파일(_/etc/issue, /etc/issue.net_)에 Magic Cookie 지원
 5. ssh client에서 IDN 지원
 6. host key check skip 옵션 추가 (_-H_)
