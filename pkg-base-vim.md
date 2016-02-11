@@ -3,7 +3,7 @@
 ### Description:
 A version of the VIM editor which includes recent enhancements
 
-vim package는 존재하지 않으며, 기본 패키지는 vim-enhanced 이다.
+vim package는 존재하지 않으며, 기본 패키지는 **vim-enhanced** 이다.
 
 ### Changes on AnNyung:
 
