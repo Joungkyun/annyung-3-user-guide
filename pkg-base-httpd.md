@@ -6,6 +6,7 @@ Apache HTTP Server
 ### Changes on AnNyung:
 1. 2.4.18 업데이트
 2. 기본 MPM : **event**
+ * libphp7 을 사용하기 위해서는 prefork MPM으로 변경해야 함. libphp7보다는 php-fpm 사용을 권장.
 3. mod_http2 지원
 4. httpd-conf package 분리
  * fancy icon 변경
