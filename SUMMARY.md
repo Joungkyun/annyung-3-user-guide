@@ -51,7 +51,7 @@
        * [authconfig](pkg-base-authconfig.md)
        * [bash](pkg-base-bash.md)
        * [bind](pkg-base-bind.md)
-       * [chrony](pkg-base-chrony)
+       * [chrony](pkg-base-chrony.md)
        * [coreutils](pkg-base-coreutils)
        * [ctags](pkg-base-ctags)
        * [cvs](pkg-base-cvs)
