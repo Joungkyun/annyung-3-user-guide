@@ -34,7 +34,7 @@
  * [mod_url](http://svn.oops.org/wsvn/Lighttpd.mod_url/trunk/README)
  * [mod_net_access](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README)
  * [mod_auth_nis](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README)
- * [mod_krisp]()
+ * [mod_krisp](http://svn.oops.org/wsvn/Lighttpd.mod_krisp/trunk/README)
 
 ### Reference:
 * None
