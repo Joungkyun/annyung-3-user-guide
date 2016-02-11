@@ -19,15 +19,19 @@ An open source implementation of SSH protocol versions 1 and 2
 4. Banner 지시자에 지정된 파일(/etc/issue.net_)에 Magic Cookie 지원
 5. ssh client에서 IDN 지원
   ```bash
-[root@an3 srpms]$ ssh 청와대.com -v
+[root@an3 ~]$ ssh 청와대.com -v
 OpenSSH_6.6.1, OpenSSL 1.0.1e-fips 11 Feb 2013
 debug1: Reading configuration data /etc/ssh/ssh_config
 debug1: /etc/ssh/ssh_config line 49: Applying options for *
 debug1: Connecting to 청와대.com [211.234.63.232] port 22.
 ^C
-[root@an3 srpms]$
+[root@an3 ~]$
 ```
 6. host key check skip 옵션 추가 (_-H_)
+  ```bash
+[oops@an3 ~]$ ssh -H test.com
+[oops@an3 ~]$ ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no test.com
+```
 
 ### Sub packages:
 * **openssh-clients** - An open source SSH client applications
