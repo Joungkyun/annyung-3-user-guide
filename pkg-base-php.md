@@ -6,9 +6,9 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
 ### Changes on AnNyung:
 1. php 7 업데이트
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
- * PHP의 shell injection을 engine level에서 방어하기 위한 기능
+ * PHP의 shell injection을 **engine level에서 방어**하기 위한 기능
  * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
- * PHP 5.4 이전의 safe_mode_exec_dir을 safe_mode가 아닌 경우에도 사용할 수 있도록 수정하고 command 치환 parser를 확장한 기능
+ * PHP 5.4 이전의 safe_mode_exec_dir을 safe_mode가 아닌 경우에도 사용할 수 있도록 수정하고 command 치환 parser를 확장
  * 기본값 _/var/lib/php/bin_
     * 안녕의 PHP 에서 system 함수를 사용하려면 사용하려면 command가 /var/lib/php/bin 에 soft link나 복사 되어야 함.
  * system function에 의해서 실행된 command의 경로를 강제로 지정한 값으로 변환
@@ -20,13 +20,21 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
  * 치환 가능 범위
  ```bash
  command; command
+        => /path/bin/command; /path/bin/command
  command $(command)
+        => /path/bin/command $(/path/bin/command)
  command $(command $(command))
+        => /path/bin/command $(/path/bin/command $(/path/bin/command))
  command $(command `command`)
+        => /path/bin/command $(/path/bin/command `/path/bin/command`)
  command `command`
+        => /path/bin/command `/path/bin/command`
  command | command
+        => /path/bin/command | /path/bin/command
  command && command
+        => /path/bin/command && /path/bin/command
  command || command
+        => /path/bin/command || /path/bin/command
  ```
   * 참조: http://kldp.org/node/45576
  
