@@ -8,6 +8,8 @@
 
 1. 동작하고 있는 process의 실시간 symbol 덤프.
 2. 실행 binary가 debug mode로 빌드되었다면 더 자세한 정보가 나온다.
+3. php에서 java의 thread dump 하는 것 처럼 사용이 가능
+
 
 ### Reference:
   ```bash
