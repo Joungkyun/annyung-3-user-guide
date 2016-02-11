@@ -97,7 +97,7 @@
        * [imap](pkg-addon-imap.md)
        * [jfbterm](pkg-addon-jfbterm.md)
        * [jlint](pkg-addon-jlint.md)
-       * [libevent14](pkg-addon-libevent14)
+       * [libevent14](pkg-addon-libevent14.md)
        * [libnet](pkg-addon-libnet)
        * [lighttpd](pkg-addon-lighttpd)
        * [mhash](pkg-addon-mhash)
