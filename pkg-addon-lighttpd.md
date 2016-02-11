@@ -18,13 +18,21 @@
  server.backlog = 1024
  ```
 5. mod_dirlisting 기능 향상
+ * gallery 기능 지원
+ * dir-listing.encoding 추가
+ * dir-listing.html-lang 추가
 6. 추가 모듈
+ * mod_throttlestatus
+ * mod_url
+ * mod_net_access
+ * mod_auth_nis
+ * mod_krisp
 
 ### Reference:
 * None
 
 ### Dependencies:
-* None
+* [libimginfo](pkg-core-libimginfo.md)
 
 ### Sub Packages:
 * None
