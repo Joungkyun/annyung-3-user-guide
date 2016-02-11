@@ -7,7 +7,8 @@
 
 
 ### Reference:
-* None
+* http://jlint.sourceforge.net/
+* https://sourceforge.net/p/jlint/git/ci/master/tree/README
 
 ### Dependencies:
 * None
