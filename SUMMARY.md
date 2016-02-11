@@ -129,6 +129,6 @@
        * [rudiments](pkg-addon-rudiments)
        * [splint](pkg-addon-splint)
        * [sqlite32](pkg-addon-sqlite32)
-       * [sqlrelay](pkg-addon-sqlrelay)
+       * [sqlrelay](pkg-addon-sqlrelay.md)
    * [[AN:plus]](annyung3-plus-packages.md)
 
