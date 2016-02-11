@@ -17,5 +17,6 @@
   %F %T
   [root@an3 z]$
   ```
+4. interactive shell에서 /etc/profile.d/{color,mysql,yum}.sh 구동
 
 ### Sub packages:
