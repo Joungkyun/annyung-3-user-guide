@@ -5,13 +5,12 @@
 문자셋 감지 python 확장
 
 ### Features:
+1. [libchardet](pkg-core-libchardet.md)의 python front end.
 
 ### Reference:
-* python-chardet
-  * python libchardet bindnig
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/README
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test.py
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
+* http://svn.oops.org/wsvn/Python.chardet/trunk/README
+* http://svn.oops.org/wsvn/Python.chardet/trunk/test.py
+* http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
 
 ### Dependencies:
 * None
