@@ -120,7 +120,7 @@
        * [php56](pkg-addon-php56.md)
        * [proftpd](pkg-addon-proftpd.md)
        * [python-Mako](pkg-addon-python-mako.md)
-       * [python-MarkupSafe](pkg-addon-python-MarkupSafe)
+       * [python-MarkupSafe](pkg-addon-python-markupsafe.md)
        * [python-mcrypt](pkg-addon-python-mcrypt)
        * [python-openpyxl](pkg-addon-python-openpyxl)
        * [python-xlrd](pkg-addon-python-xlrd)
