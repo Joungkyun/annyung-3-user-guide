@@ -7,6 +7,12 @@ Apache HTTP Server
 1. 2.4.18 업데이트
 2. 기본 MPM : **event**
 3. mod_http2 지원
+4. httpd-conf package 분리
+ * fancy icon 변경
+ * 기본 error document 변경
+5. ssi 변수에서 한글 깨지는 문제 수정
+6. External404Iframe 지시자 추가 (기본값: On)
+ * 404 page를 외부 URL로 지정했을 경우, 서버 응답코드가 200으로 처리되는 문제를 방지하기 위하여 404 error page에 iframe으로 외부 URL을 보여주는 기능
 
 ### Sub packages:
 * **httpd-devel** - Development interfaces for the Apache HTTP server
