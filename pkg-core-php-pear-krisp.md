@@ -20,8 +20,10 @@
 * None
 
 ### Releated Packages:
+* [libipcalc](pkg-core-libipcalc.md)
 * [libkrisp](pkg-core-libkrisp.md)
 * [httpd-krisp](pkg-core-httpd-krisp.md)
 * [perl-KRISP](pkg-core-perl-KRISP.md)
 * [php-krisp](pkg-core-php-krisp.md)
 * [python-krisp](pkg-core-python-krisp.md)
+* [php-pear-ipcalc](pkg-core-php-pear-ipcalc.md)
