@@ -7,7 +7,6 @@ inittab 파일과 /etc/init.d 스크립트
  1. USER_LANG 환경 변수가 설정 되면, LANG 환경 변수를 USER_LANG 값으로 변경
   * _/etc/profile.d/lang.sh_
  2. changed sysctl value (/etc/sysctl.d/60-annyung.conf)
-
   ```bash
 [root@an3 ~]$ cat /etc/sysctl.d/60-annyung.conf
 kernel.sysrq                               = 0
