@@ -19,3 +19,4 @@ The GNU Bourne Again shell
 ```
 
 ### Sub packages:
+ * **bash-doc** - Documentation files for bash
