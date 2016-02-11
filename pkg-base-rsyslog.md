@@ -6,6 +6,7 @@
 ### Changes on AnNyung:
 1. kernel message를 _/dev/console_ 에서 _/var/log/kernel_ 로 변경
 2. mysql plugin에서 mysql unix socket을 사용할 수 있도록 수정
+ * host이름이 **"/"**로 시작할 경우 unix domain socket으로 간주
 
 ### Sub packages:
 * **rsyslog-crypto** - Encryption support
