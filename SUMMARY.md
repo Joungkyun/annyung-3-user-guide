@@ -69,7 +69,7 @@
        * [openssh](pkg-base-openssh.md)
        * [openssl](pkg-base-openssl.md)
        * [pam](pkg-base-pam.md)
-       * [php](pkg-base-php)
+       * [php](pkg-base-php.md)
        * [procmail](pkg-base-procmail)
        * [procps-ng](pkg-base-procps-ng)
        * [redhat-rpm-config](pkg-base-redhat-rpm-config)
