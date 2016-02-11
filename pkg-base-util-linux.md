@@ -7,13 +7,6 @@
 ### Reference:
 * None
 
-### Dependencies:
-* None
-
 ### Sub Packages:
-* libblkid
-* libblkid-devel
-
-
-### Releated Packages:
-* None
+* libblkid - Block device ID library
+* libblkid-devel - Block device ID library
