@@ -42,7 +42,7 @@ try {
 * http://svn.oops.org/wsvn/PHP.mod_krisp/trunk/sample-oop.php
 
 ### Dependencies:
-* [php56](pkg-base-php56.md)
+* [php56](pkg-addon-php56.md)
 * [libkrisp](pkg-core-libkrisp.md)
 
 ### Sub Packages:
