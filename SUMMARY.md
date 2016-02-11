@@ -53,7 +53,7 @@
        * [bind](pkg-base-bind.md)
        * [chrony](pkg-base-chrony.md)
        * [coreutils](pkg-base-coreutils.md)
-       * [ctags](pkg-base-ctags)
+       * [ctags](pkg-base-ctags.md)
        * [cvs](pkg-base-cvs)
        * [filesystem](pkg-base-filesystem)
        * [GeoIP](pkg-base-GeoIP)
