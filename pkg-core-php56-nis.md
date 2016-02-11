@@ -26,7 +26,7 @@ else
 * http://svn.oops.org/wsvn/PHP.mod_nis/trunk/README
 
 ### Dependencies:
-* [php56](pkg-base-php56.md)
+* [php56](pkg-addon-php56.md)
 
 ### Sub Packages:
 * None
