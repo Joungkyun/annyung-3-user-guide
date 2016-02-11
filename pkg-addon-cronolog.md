@@ -1,13 +1,13 @@
 # cronolog
 
 ### Description:
-
+웹서버 로그 로테이션 프로그램
 
 ### Features:
-
+* None
 
 ### Reference:
-* None
+* Search with google
 
 ### Dependencies:
 * None
