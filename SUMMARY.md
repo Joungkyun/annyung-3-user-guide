@@ -75,7 +75,7 @@
        * [redhat-rpm-config](pkg-base-redhat-rpm-config.md)
        * [rootfiles](pkg-base-rootfiles.md)
        * [rsyslog](pkg-base-rsyslog.md)
-       * [sendmail](pkg-base-sendmail)
+       * [sendmail](pkg-base-sendmail.md)
        * [setup](pkg-base-setup)
        * [shadow-utils](pkg-base-shadow-utils)
        * [sudo](pkg-base-sudo)
