@@ -95,7 +95,7 @@
        * [hping3](pkg-addon-hping3.md)
        * [httpd-fcgid](pkg-addon-httpd-fcgid.md)
        * [imap](pkg-addon-imap.md)
-       * [jfbterm](pkg-addon-jfbterm)
+       * [jfbterm](pkg-addon-jfbterm.md)
        * [jlint](pkg-addon-jlint)
        * [libevent14](pkg-addon-libevent14)
        * [libnet](pkg-addon-libnet)
