@@ -104,7 +104,7 @@
        * [mimetex](pkg-addon-mimetex.md)
        * [mm](pkg-addon-mm.md)
        * [netperf](pkg-addon-netperf.md)
-       * [nginx](pkg-addon-nginx)
+       * [nginx](pkg-addon-nginx.md)
        * [openvpn](pkg-addon-openvpn)
        * [oracle-jre](pkg-addon-oracle-jre)
        * [pdnsd](pkg-addon-pdnsd)
