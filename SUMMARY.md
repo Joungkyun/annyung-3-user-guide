@@ -58,7 +58,7 @@
        * [filesystem](pkg-base-filesystem.md)
        * [GeoIP](pkg-base-geoip.md)
        * [gperftools](pkg-base-gperftools.md)
-       * [httpd](pkg-base-httpd)
+       * [httpd](pkg-base-httpd.md)
        * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables)
        * [javapacakges-tools](pkg-base-javapackages-tools)
