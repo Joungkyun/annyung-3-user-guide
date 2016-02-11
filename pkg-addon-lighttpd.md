@@ -30,11 +30,11 @@
  * dir-listing.external-js
     * listing시 지정한 외부 javascript를 삽입
 6. 추가 모듈
- * mod_throttlestatus
- * mod_url
- * mod_net_access
- * mod_auth_nis
- * mod_krisp
+ * [mod_throttlestatus](http://svn.oops.org/wsvn/Lighttpd.mod_throttlestatus/trunk/throttlestatus.ko.txt)
+ * [mod_url](http://svn.oops.org/wsvn/Lighttpd.mod_url/trunk/README)
+ * [mod_net_access](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README)
+ * [mod_auth_nis](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README)
+ * [mod_krisp]()
 
 ### Reference:
 * None
