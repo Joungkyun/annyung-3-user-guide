@@ -98,7 +98,7 @@
        * [jfbterm](pkg-addon-jfbterm.md)
        * [jlint](pkg-addon-jlint.md)
        * [libevent14](pkg-addon-libevent14.md)
-       * [libnet](pkg-addon-libnet)
+       * [libnet](pkg-addon-libnet.md)
        * [lighttpd](pkg-addon-lighttpd)
        * [mhash](pkg-addon-mhash)
        * [mimetex](pkg-addon-mimetex)
