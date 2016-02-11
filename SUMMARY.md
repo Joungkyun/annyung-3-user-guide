@@ -110,7 +110,7 @@
        * [pdnsd](pkg-addon-pdnsd.md)
        * [perl-CSS-DOM](pkg-addon-perl-css-dom.md)
        * [php-pecl-apcu](pkg-addon-php-pecl-apcu.md)
-       * [php56-pecl-apcu](pkg-addon-php56-pecl-apcu)
+       * [php56-pecl-apcu](pkg-addon-php56-pecl-apcu.md)
        * [php-pecl-memcache](pkg-addon-php-pecl-memcache)
        * [php56-pecl-memcache](pkg-addon-php56-pecl-memcache)
        * [php-pecl-oauth](pkg-addon-php-pecl-oauth)
