@@ -17,6 +17,6 @@ root 홈디렉토리에 필요한 기본 파일
 [root@an3 ~]$ 
 ```
 2. serial console로 접속시 LANG 환경 변수를 en_US.UTF-8로 변경
-3. [ISMS](http://isms.kisa.or.kr/kor/intro/intro01.jsp) 관련 정책 적용
+3. [ISMS](http://isms.kisa.or.kr/kor/intro/intro01.jsp) 인증 관련 정책 적용
 
 ### Sub packages:
