@@ -61,7 +61,7 @@
        * [httpd](pkg-base-httpd.md)
        * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables.md)
-       * [javapacakges-tools](pkg-base-javapackages-tools)
+       * [javapacakges-tools](pkg-base-javapackages-tools.md)
        * [mariadb](pkg-base-mariadb)
        * [memcached](pkg-base-memcached)
        * [net-tools](pkg-base-net-tools)
