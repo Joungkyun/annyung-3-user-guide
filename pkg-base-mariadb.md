@@ -4,7 +4,8 @@
 MariaDB 클라이언트 프로그램과 공유 라이브러리
 
 ### Changes on AnNyung:
-
+1. udpate 10.1 branch
+2. 5.5 compat library를 포함하고 있어 기존의 패키지 의존성 유지
 
 ### Sub packages:
 * **mariadb-bench** - MariaDB 벤치마크 스크립트와 데이터
