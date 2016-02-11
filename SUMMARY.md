@@ -79,7 +79,7 @@
        * [setup](pkg-base-setup.md)
        * [shadow-utils](pkg-base-shadow-utils.md)
        * [sudo](pkg-base-sudo.md)
-       * [systemd](pkg-base-systemd)
+       * [systemd](pkg-base-systemd.md)
        * [sysvinit-tools](pkg-base-sysvinit-tools)
        * [tomcat](pkg-base-tomcat)
        * [traceroute](pkg-base-traceroute)
