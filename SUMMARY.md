@@ -48,7 +48,7 @@
        * [yum-annyung](pkg-core-yum-annyung.md)
    * [[AN:base]](annyung3-base-packages.md)
        * [apr](pkg-base-apr.md)
-       * [authconfig](pkg-base-authconfig)
+       * [authconfig](pkg-base-authconfig.md)
        * [bash](pkg-base-bash)
        * [bind](pkg-base-bind)
        * [chrony](pkg-base-chrony)
