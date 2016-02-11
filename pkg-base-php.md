@@ -29,6 +29,15 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
  command || command            => /path/bin/command || /path/bin/command
  ```
   * 참조: http://kldp.org/node/45576
+  * 적용 functions
+    * 내부적으로 php_exec API를 호출하는 function들
+    * [system](http://php.net/manual/kr/function.system.php)
+    * [exec](http://php.net/manual/kr/function.exec.php)
+    * [passthru](http://php.net/manual/kr/function.passthru.php)
+    * [popen](http://php.net/manual/kr/function.popen.php)
+    * [escapeshellcmd](http://php.net/manual/kr/function.escapeshellcmd.php)
+    * [pcntl_exec](http://php.net/manual/kr/function.pcntl-exec.php)
+    * [backtick operator](http://php.net/manual/kr/language.operators.execution.php)
  
  
 3. disable_functions 기본 적용
