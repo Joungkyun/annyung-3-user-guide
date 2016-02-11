@@ -7,9 +7,11 @@ KRISP python 확장
 ### Features:
 
 ### Reference:
-* None
+* http://svn.oops.org/wsvn/Python.krisp/trunk/README
+* http://svn.oops.org/wsvn/Python.krisp/trunk/test.py
 
 ### Dependencies:
+* Python
 * [libkrisp](pkg-core-libkrisp.md)
 
 ### Sub Packages:
