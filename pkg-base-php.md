@@ -64,13 +64,13 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
          * 검사만 하고, 에러 레벨만 리턴(E_WARNING 발생 안함)
          * 검사 결과 감지가 되면 **UPLOAD_ERR_SEC** 반환
      * **upload_image_check_whitelist** - 이미지 헤더 문자열 white list
-5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
+5. **allow_url_fopen**과 **allow_url_include**를 PHP_INI_ALL로 수정
  * 기본값 OFF이며, php code에서 ini_set으로 변경 가능
 6. **allow_include_extension** 옵션 추가 (기본값: **.php**)
  * 등록된 확장자만 php compiler에 의해 compile 됨.
  * include / require 모두 해당
  * 등록된 확장자 파일을 upload 할 경우, **UPLOAD_ERR_ILL** 에러를 반환하고 업로드 되지 않음.
-7. short_open_tag 기본값 Off
+7. **short_open_tag** 기본 값 Off
 
 ### Sub packages:
 * **php-cli** - php7 cli 인터페이스
