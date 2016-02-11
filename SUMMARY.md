@@ -106,7 +106,7 @@
        * [netperf](pkg-addon-netperf.md)
        * [nginx](pkg-addon-nginx.md)
        * [openvpn](pkg-addon-openvpn.md)
-       * [oracle-jre](pkg-addon-oracle-jre)
+       * [oracle-jre](pkg-addon-oracle-jre.md)
        * [pdnsd](pkg-addon-pdnsd)
        * [perl-CSS-DOM](pkg-addon-perl-CSS-DOM)
        * [php-pecl-apcu](pkg-addon-php-pecl-apcu)
