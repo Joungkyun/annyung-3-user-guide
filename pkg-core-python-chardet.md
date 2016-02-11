@@ -6,6 +6,7 @@
 
 ### Features:
 1. [libchardet](pkg-core-libchardet.md)의 python C binding API
+2. Pypi에서 제공하는 chardet 모듈을 C binding으로 구현
 
 ### Reference:
 * http://svn.oops.org/wsvn/Python.chardet/trunk/README
@@ -21,3 +22,4 @@
 
 ### Releated Packages:
 * [php-chardet](pkg-core-php-chardet.md)
+* https://pypi.python.org/pypi/chardet
