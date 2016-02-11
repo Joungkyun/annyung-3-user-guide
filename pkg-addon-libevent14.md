@@ -4,7 +4,7 @@
 Abstract asynchronous event notification library
 
 ### Features:
-1. 1.4 compat 패키지
+1. libevent 1.4 compat 패키지
 
 ### Reference:
 * None
