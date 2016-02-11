@@ -85,7 +85,7 @@
        * [traceroute](pkg-base-traceroute.md)
        * [unzip](pkg-base-unzip.md)
        * [util-linux](pkg-base-util-linux.md)
-       * [vim](pkg-base-vim)
+       * [vim](pkg-base-vim.md)
        * [xinted](pkg-base-xinetd)
    * [[AN:xless]](annyung3-xless-packages.md)
        * [cairo](pkg-xless-cairo)
