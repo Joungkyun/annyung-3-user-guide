@@ -7,3 +7,5 @@
 
 
 ### Sub packages:
+* libgudev1
+* libgudev1-devel
