@@ -1,7 +1,7 @@
 # procps-ng
 
 ### Description:
-
+System and process monitoring utilities
 
 ### Changes on AnNyung:
 
