@@ -16,7 +16,7 @@ An open source implementation of SSH protocol versions 1 and 2
  * GSSAPIAuthentication no
  * ForwardX11Trusted no
  * SendEnv 에 USER_LANG 환경 변수 추가
-4. Banner 파일(_/etc/issue, /etc/issue.net_)에 Magic Cookie 지원
+4. Banner 지시자에 지정된 파일(/etc/issue.net_)에 Magic Cookie 지원
 5. ssh client에서 IDN 지원
 6. host key check skip 옵션 추가 (_-H_)
 
