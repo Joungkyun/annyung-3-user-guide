@@ -91,7 +91,7 @@
    * [[AN:xless]](annyung3-xless-packages.md)
    * [[AN:addon]](annyung3-addon-packages.md)
        * [authbind](pkg-addon-authbind.md)
-       * [cronolog](pkg-addon-cronolog)
+       * [cronolog](pkg-addon-cronolog.md)
        * [hping3](pkg-addon-hping3)
        * [httpd-fcgid](pkg-addon-httpd-fcgid)
        * [imap](pkg-addon-imap)
