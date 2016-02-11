@@ -5,6 +5,11 @@
 
 ### Changes on AnNyung:
 1. [ISMS](http://isms.kisa.or.kr/kor/intro/intro01.jsp) 인증 정책 적용
+  ```bash
+  [root@an3 z]$ echo $TMOUT
+  600
+  [root@an3 z]$
+  ```
 2. HISTSIZE 를 2000으로 증가
 3. HISTTIMEFORAMT 지정
   ```bash
