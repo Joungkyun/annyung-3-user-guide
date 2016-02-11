@@ -19,22 +19,14 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
  ```
  * 치환 가능 범위
  ```bash
- command; command
-        => /path/bin/command; /path/bin/command
- command $(command)
-        => /path/bin/command $(/path/bin/command)
- command $(command $(command))
-        => /path/bin/command $(/path/bin/command $(/path/bin/command))
- command $(command `command`)
-        => /path/bin/command $(/path/bin/command `/path/bin/command`)
- command `command`
-        => /path/bin/command `/path/bin/command`
- command | command
-        => /path/bin/command | /path/bin/command
- command && command
-        => /path/bin/command && /path/bin/command
- command || command
-        => /path/bin/command || /path/bin/command
+ command; command              => /path/bin/command; /path/bin/command
+ command $(command)            => /path/bin/command $(/path/bin/command)
+ command $(command $(command)) => /path/bin/command $(/path/bin/command $(/path/bin/command))
+ command $(command `command`)  => /path/bin/command $(/path/bin/command `/path/bin/command`)
+ command `command`             => /path/bin/command `/path/bin/command`
+ command | command             => /path/bin/command | /path/bin/command
+ command && command            => /path/bin/command && /path/bin/command
+ command || command            => /path/bin/command || /path/bin/command
  ```
   * 참조: http://kldp.org/node/45576
  
