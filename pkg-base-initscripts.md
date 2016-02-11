@@ -17,7 +17,6 @@ kernel.shmmax                              = 68719476736
 kernel.shmall                              = 4294967296
 kernel.sem                                 = 250 32000 100 4096
 vm.zone_reclaim_mode                       = 0
-
 net.ipv4.ip_forward                        = 0
 net.ipv4.conf.default.accept_source_route  = 0
 net.ipv4.conf.all.rp_filter                = 1
@@ -37,7 +36,6 @@ net.core.rmem_default                      = 25165824
 net.core.rmem_max                          = 25165824
 net.core.wmem_default                      = 212992
 net.core.wmem_max                          = 25165824
-
 net.core.somaxconn                         = 20000
 fs.aio-max-nr                              = 1048576
 [root@an3 ~]$
