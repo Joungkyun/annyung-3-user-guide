@@ -6,7 +6,7 @@ Command line tool for setting up authentication from network services
 ### Changes on AnNyung:
  1. __/etc/pam.d/system-auth-sc__에 nodelay 옵션 추가
  2. desktop 파일 제거
- 3. ISMS 인증 patch 적용
+ 3. [ISMS](http://isms.kisa.or.kr/kor/intro/intro01.jsp) 인증 지원
   * 암호 설정 시, 8자 이상, 대문자/소문자/숫자/특수 문자 중 3개의 조건 필요
   * 이전 암호 4개를 기억
   * 5회 로그인 실패 시 120초 간 계정 잠금
