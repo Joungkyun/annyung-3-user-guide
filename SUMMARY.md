@@ -52,7 +52,7 @@
        * [bash](pkg-base-bash.md)
        * [bind](pkg-base-bind.md)
        * [chrony](pkg-base-chrony.md)
-       * [coreutils](pkg-base-coreutils)
+       * [coreutils](pkg-base-coreutils.md)
        * [ctags](pkg-base-ctags)
        * [cvs](pkg-base-cvs)
        * [filesystem](pkg-base-filesystem)
