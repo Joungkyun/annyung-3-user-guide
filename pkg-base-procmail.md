@@ -4,6 +4,7 @@
 
 
 ### Changes on AnNyung:
-
+1. SAFE_INLUCDERC 옵션 추가
+2. _procmailrc_ 경로를 _/etc/mail/procmailrc_로 변경
 
 ### Sub packages:
