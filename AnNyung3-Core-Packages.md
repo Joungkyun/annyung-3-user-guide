@@ -2,10 +2,10 @@
 
 안녕 리눅스의 core repository에 대한 일람이며, Alpabat 순으로 정렬 되었습니다.
 
-Core package는 안녕 리눅스를 구성하기 위해 필요한 필수 패키지와, 안녕 리눅스에서만 제공하는 패키지들(기본으로 설치 되지 않을 수도 있음)로 구성되어 있습니다.
+**[AN:core]** repository는 안녕 리눅스를 구성하기 위해 필요한 필수 패키지와, 안녕 리눅스에서만 제공하는 패키지들(기본으로 설치 되지 않을 수도 있음)로 구성되어 있습니다.
 
 **주의:**  
-Core 저장소의 파일은 모두 기본 설치되어 있지 않습니다. Core 라는 이름 때문에 모두 기본 설치될 것이라는 생각을 하지 마십시오.
+**[AN:core]** repository의 파일은 모두 기본 설치되어 있지 않습니다. Core 라는 이름 때문에 모두 기본 설치될 것이라는 생각을 하지 마십시오.
 
 * [annyung-release](pkg-core-annyung-release.md)
 * [byspam](pkg-core-byspam.md)
