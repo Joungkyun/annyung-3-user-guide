@@ -54,7 +54,7 @@
        * [chrony](pkg-base-chrony.md)
        * [coreutils](pkg-base-coreutils.md)
        * [ctags](pkg-base-ctags.md)
-       * [cvs](pkg-base-cvs)
+       * [cvs](pkg-base-cvs.md)
        * [filesystem](pkg-base-filesystem)
        * [GeoIP](pkg-base-GeoIP)
        * [gperftools](pkg-base-gperftools)
