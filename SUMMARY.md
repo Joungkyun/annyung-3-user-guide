@@ -64,7 +64,7 @@
        * [javapacakges-tools](pkg-base-javapackages-tools.md)
        * [mariadb](pkg-base-mariadb.md)
        * [memcached](pkg-base-memcached.md)
-       * [net-tools](pkg-base-net-tools)
+       * [net-tools](pkg-base-net-tools.md)
        * [ntp](pkg-base-ntp)
        * [openssh](pkg-base-openssh)
        * [openssl](pkg-base-openssl)
