@@ -77,7 +77,7 @@
        * [rsyslog](pkg-base-rsyslog.md)
        * [sendmail](pkg-base-sendmail.md)
        * [setup](pkg-base-setup.md)
-       * [shadow-utils](pkg-base-shadow-utils)
+       * [shadow-utils](pkg-base-shadow-utils.md)
        * [sudo](pkg-base-sudo)
        * [systemd](pkg-base-systemd)
        * [sysvinit-tools](pkg-base-sysvinit-tools)
