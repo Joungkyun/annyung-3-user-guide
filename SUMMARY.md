@@ -105,7 +105,7 @@
        * [mm](pkg-addon-mm.md)
        * [netperf](pkg-addon-netperf.md)
        * [nginx](pkg-addon-nginx.md)
-       * [openvpn](pkg-addon-openvpn)
+       * [openvpn](pkg-addon-openvpn.md)
        * [oracle-jre](pkg-addon-oracle-jre)
        * [pdnsd](pkg-addon-pdnsd)
        * [perl-CSS-DOM](pkg-addon-perl-CSS-DOM)
