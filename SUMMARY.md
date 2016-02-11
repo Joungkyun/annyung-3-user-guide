@@ -65,7 +65,7 @@
        * [mariadb](pkg-base-mariadb.md)
        * [memcached](pkg-base-memcached.md)
        * [net-tools](pkg-base-net-tools.md)
-       * [ntp](pkg-base-ntp)
+       * [ntp](pkg-base-ntp.md)
        * [openssh](pkg-base-openssh)
        * [openssl](pkg-base-openssl)
        * [pam](pkg-base-pam)
