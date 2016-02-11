@@ -114,7 +114,7 @@
        * [php-pecl-memcache](pkg-addon-php-pecl-memcache.md)
        * [php56-pecl-memcache](pkg-addon-php56-pecl-memcache.md)
        * [php-pecl-oauth](pkg-addon-php-pecl-oauth.md)
-       * [php56-pecl-oauth](pkg-addon-php56-pecl-oauth)
+       * [php56-pecl-oauth](pkg-addon-php56-pecl-oauth.md)
        * [php-pecl-xdebug](pkg-addon-php-pecl-xdebug)
        * [php56-pecl-xdebug](pkg-addon-php56-pecl-xdebug)
        * [php56](pkg-addon-php56)
