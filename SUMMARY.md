@@ -92,7 +92,7 @@
    * [[AN:addon]](annyung3-addon-packages.md)
        * [authbind](pkg-addon-authbind.md)
        * [cronolog](pkg-addon-cronolog.md)
-       * [hping3](pkg-addon-hping3)
+       * [hping3](pkg-addon-hping3.md)
        * [httpd-fcgid](pkg-addon-httpd-fcgid)
        * [imap](pkg-addon-imap)
        * [jfbterm](pkg-addon-jfbterm)
