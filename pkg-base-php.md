@@ -7,6 +7,8 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
 1. php 7 업데이트
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
  * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
+ * 기본값 _/var/lib/php/bin_
+  * 안녕의 PHP 에서 system 함수를 사용하려면 사용하려면 command가 /var/lib/php/bin 에 soft link나 복사 되어야 함.
  * system function에 의해서 실행된 command의 경로를 강제로 지정한 값으로 변환
  ```php
  exec_dir = /path/bin
