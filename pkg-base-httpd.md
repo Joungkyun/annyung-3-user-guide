@@ -21,3 +21,7 @@ Apache HTTP Server
 * **httpd-manual** - Documentation for the Apache HTTP server
 * **httpd-tools** - Tools for use with the Apache HTTP Server
 * [**httpd-conf**](pkg-core-httpd-conf.md) - 안녕 리눅스 아파치2의 바이너리를 제외한 설정파일들을 포함
+* **mod_ldap** - LDAP authentication modules for the Apache HTTP Server
+* **mod_proxy_html** - HTML and XML content filters for the Apache HTTP Server
+* **mod_session** - Session interface for the Apache HTTP Server
+* **mod_ssl** - SSL/TLS module for the Apache HTTP Server
