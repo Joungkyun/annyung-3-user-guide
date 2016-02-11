@@ -1,19 +1,19 @@
 # mm
 
 ### Description:
-
+Shared memory allocation library
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://www.ossp.org/pkg/lib/mm/
 
 ### Dependencies:
 * None
 
 ### Sub Packages:
-* None
+* **mm-devel** - Header files and libraries for mm development
 
 ### Releated Packages:
 * None
