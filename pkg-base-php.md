@@ -38,9 +38,21 @@ Apache2 PHP 엔진 (mod_php7, libphp7.so)
     * [escapeshellcmd](http://php.net/manual/kr/function.escapeshellcmd.php)
     * [pcntl_exec](http://php.net/manual/kr/function.pcntl-exec.php)
     * [backtick operator](http://php.net/manual/kr/language.operators.execution.php)
- 
- 
 3. disable_functions 기본 적용
+ * phpinfo
+ * php_uname
+ * sys_get_temp_dir
+ * phpversion
+ * ini_get
+ * ini_set
+ * ini_get_all
+ * get_cfg_var
+ * 상단의 적용 function들은 함수명 앞에 prefix로 under bar 3개를 붙이면 호출이 가능함.
+ ```php
+ <?php
+ ___phpinfo();
+ ?>
+ ```
 4. file upload시 image header의 injection code 여부 검사 기능 추가
 5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
 6. allow_include 기능 추가
