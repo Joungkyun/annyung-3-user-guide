@@ -1,13 +1,13 @@
 # mhash
 
 ### Description:
-
+Thread-safe hash 라이브러리
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://mhash.sourceforge.net/
 
 ### Dependencies:
 * None
