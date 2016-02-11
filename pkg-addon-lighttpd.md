@@ -19,9 +19,16 @@
  ```
 5. mod_dirlisting 기능 향상
  * dir-listing.gallery  
-   디렉토리 listing에 이미지 파일이 있을 경우, &lt;img&gt; tag
- * dir-listing.encoding 추가
- * dir-listing.html-lang 추가
+    * 디렉토리 listing에 이미지 파일이 있을 경우, &lt;img&gt; tag로 출력
+    * 파일 이름이 cover* 또는 preview-000 형식일 경우 cover mode로 출력
+ * dir-listing.encoding
+    * 문서의 charset을 지정
+ * dir-listing.html-lang
+    * &lt;html lang="VALUE"&gt;
+ * dir-listing.urlencode
+    * urlencoding 하여 출력 (기본값: enable)
+ * dir-listing.external-js
+    * listing시 지정한 외부 javascript를 삽입
 6. 추가 모듈
  * mod_throttlestatus
  * mod_url
