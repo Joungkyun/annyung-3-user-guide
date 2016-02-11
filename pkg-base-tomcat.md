@@ -5,7 +5,10 @@ Servlet 3.1/JSP 2.3 API를 위한 Apache Servlet/JSP Engine 및 RI
 
 ### Changes on AnNyung:
 1. http://tomcat.apache.org 의 binary version으로 packaging
-2. tomcat 구동 환경 변수 (/etc/sysconfig/tomcat)
+2. CentOS의 java 환경이 아니라 AnNyung의 oracle-jre 환경에 맞추어져 있음
+ * CentOS의 openjre 환경을 사용하려면, AnNyung의 tomcat을 사용하지 않는다.
+ * 이에 대해서는 사용자 가이드의 JAVA 환경에 대한 section을 참조
+3. tomcat 구동 환경 변수 (/etc/sysconfig/tomcat)
   ```bash
   [root@open ~]$ cat /etc/sysconfig/tomcat
   #
@@ -36,7 +39,7 @@ Servlet 3.1/JSP 2.3 API를 위한 Apache Servlet/JSP Engine 및 RI
   TC_AUTHBIND=
   [root@open ~]$
   ```
-3. tomcat base dir (CATALINA_HOME)
+4. tomcat base dir (CATALINA_HOME)
  * **_/usr/java/tomcat_**
 
 ### Sub packages:
