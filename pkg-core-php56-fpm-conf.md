@@ -18,7 +18,7 @@
 
 ### Dependencies:
 * [php56-common](pkg-core-php56-common.md)
-* [php56-fpm](pkg-base-php56-fpm)
+* [php56-fpm](pkg-addon-php56-fpm)
 
 ### Sub Packages:
 * None
