@@ -50,7 +50,7 @@
        * [apr](pkg-base-apr.md)
        * [authconfig](pkg-base-authconfig.md)
        * [bash](pkg-base-bash.md)
-       * [bind](pkg-base-bind)
+       * [bind](pkg-base-bind.md)
        * [chrony](pkg-base-chrony)
        * [coreutils](pkg-base-coreutils)
        * [ctags](pkg-base-ctags)
