@@ -68,7 +68,7 @@
        * [ntp](pkg-base-ntp.md)
        * [openssh](pkg-base-openssh.md)
        * [openssl](pkg-base-openssl.md)
-       * [pam](pkg-base-pam)
+       * [pam](pkg-base-pam.md)
        * [php](pkg-base-php)
        * [procmail](pkg-base-procmail)
        * [procps-ng](pkg-base-procps-ng)
