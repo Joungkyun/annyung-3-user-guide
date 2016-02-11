@@ -4,7 +4,7 @@
 Sendmail 메일 전송 에이전트
 
 ### Changes on AnNyung:
-
+1. 8.15.2 update
 
 ### Sub packages:
 * **sendmail-cf** - Sendmail을 설정하는데 필요한 파일들
