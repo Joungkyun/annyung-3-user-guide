@@ -13,7 +13,7 @@
 * http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
 
 ### Dependencies:
-* None
+* [libchardet](pkg-core-libchardet.md)
 
 ### Sub Packages:
 * None
