@@ -12,7 +12,7 @@ The JRE is freely redistributable, per the terms of the included license.
 
 
 ### Reference:
-* None
+* http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 ### Dependencies:
 * None
