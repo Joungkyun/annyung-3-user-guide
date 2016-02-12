@@ -1,6 +1,6 @@
 # 안녕 리눅스 3 패키지 일람
 
-안녕 리눅스 저장소(Repository)는 총 5개의 저장소를 가지고 있습니다. 각 저장소에 대한 설명은 다음과 같습니다.
+안녕 리눅스 저장소(Repository)는 총 5개의 저장소와 Fedora project의 EPEL repository를 이용하여 운영이 됩니다. 각 저장소에 대한 설명은 다음과 같습니다.
 
 ### [[AN:core]](AnNyung3-Core-Packages.md)
 
