@@ -9,7 +9,7 @@ Rudiments is an Open Source C++ class library providing base classes for things 
 
 
 ### Reference:
-* None
+* http://rudiments.sourceforge.net/documentation.html
 
 ### Dependencies:
 * None
