@@ -62,14 +62,3 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
   1. 2016.02.?? RHEL 7u2 / CentOS 7.2 기반으로 안녕 리눅스 3 출시
   2. 안녕 리눅스 2의 deploy 계승
-
-
-## 4. 안녕 리눅스의 특징 / CentOS 7과의 차이점
-
-1. 사용자 환경을 제외한 compact한 서버 전용 배포본
-2. Enterprise 환경에서 검증된 배포본
-3. ISMS 인증을 위한 deploy 반영
-4. 한글 환경을 위한 지원
-5. 보안성 강화
-6. EPEL repository 기본 지원
-7. 1일 1회 package 자동 업데이트(yum-cron 동작)
