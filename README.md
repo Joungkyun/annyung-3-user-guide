@@ -17,6 +17,32 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 ## 3. 안녕 리눅스 개발 이력
 
+### 1) 안녕 리눅스 1.0 ~ 1.1
+
+  1. 2003.06.14 1.0 release
+  2. 서버 전용으로 사용하기에 점점 비대해지는 Redhat 배포본에 좌절하여, 가볍고 국어 환경에 최적화된 Mini Redhat을 지향
+    1. ISO 크기 약 200M, 설치시 400M 정도 사이즈의 작은 크기
+    2. fbcon-hanio 패치를 이용하여, console에서 한글 입출력 지원
+    3. 문서 및 설정 파일 국문화
+    4. 모든 패키지들을 i686 optimize
+  3. IBM stack protect patch를 적용하여 Buffer overflow 공격을 원천 방지
+  4. Journaling filesystem 도입 (jfs, reiserFS, ext3, xfs 지원)
+  5. DevFS 도입
+  6. 국내 배포본 중 최초 자동 업데이트 시스템(**autoupdates**) 지원
+
+### 2) 안녕 리눅스 1.2 ~ 1.3
+
+  1. Redhat의 그늘에서 탈피 하여 <u>독자적인 배포본 추구</u>
+    * 커널의 독자적인 관리
+    * glibc를 제외한 거의 모든 패키지들을 안녕 리눅스에서 관리
+  2. 패키지 관리 시스템 고도화(Package Systems)
+    * autoupdates 를 버리고 처음 부터 새로 개발
+    * 자동 업데이트(**pkgsysupdate**) 및 패키지 의존성등을 통합 관리(**pkgadm**)
+
+### 3) 안녕 리눅스 2
+### 4) 안녕 리눅스 3
+
+
 안녕 리눅스는 Redhat 7.2를 기반으로 사용자 사용 환경(User interface)를 제거한 서버 전용의 작고 가벼운 배포본으로 2003년 6월 13일에 1.0이 release가 되었습니다.
 
 1.0 release 이후, 안녕 리눅스는 Rehat 배포본을 탈피하기 위한 방향으로 진행을 하였으나, 1인 프로젝트의 한계로 kernel 2.6 버전 도입이 늦어지고 관리상의 버거움이 발생하여, RHEL/CentOS 의 minimal version에 안녕 리눅스의 특징만을 변경한 repository를 운영하는 방식으로 선회를 하여 2012년 6월 RHEL 6u2/CentOS 6.2를 기반으로 2를 릴리즈 하게 되었습니다.
