@@ -9,6 +9,10 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 ## 2. 개요
 
+이 문서는 안녕 리눅스 3를 운영 관리하기 위한 정보를 전달 합니다.
+
+기본적으로 안녕 리눅스는 CentOS 7.2를 base로 하며, 성능향상 및 운영 고도화, 보안 고도화, ISMS 인증 지원등을 위하여 [OOPS.org](https://oops.org/)에서 개발한 패키지들이 제공이 되며, CentOS 7에서 제공하는 많은 패키지들이 수정이 되었습니다. 이에 대해서는 [***"안녕 리눅스 3 패키지 일람"***](AnNyung3-Package-Catalog.md)을 참조 하십시오.
+
 ## 3. 안녕 리눅스 개발 이력
 
 안녕 리눅스는 Redhat 7.2를 기반으로 사용자 사용 환경(User interface)를 제거한 서버 전용의 작고 가벼운 배포본으로 2003년 6월 13일에 1.0이 release가 되었습니다.
