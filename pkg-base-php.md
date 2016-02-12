@@ -3,6 +3,16 @@
 ### Description:
 Apache2 PHP 엔진 (mod_php7, libphp7.so)
 
+PHP is an HTML-embedded scripting language.  PHP attempts to make it
+easy for developers to write dynamically generated web pages.  PHP
+also offers built-in database integration for several commercial
+and non-commercial database management systems, so writing a
+database-enabled web page with PHP is fairly simple.  The most
+common use of PHP coding is probably as a replacement for CGI
+scripts.  The mod_php module enables the Apache web server to
+understand and process the embedded PHP language in web pages.
+
+
 ### Changes on AnNyung:
 1. php 7 업데이트
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
