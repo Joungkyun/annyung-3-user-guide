@@ -9,7 +9,7 @@ support for Excel dates. Unicode-aware.
 
 
 ### Reference:
-* None
+* https://secure.simplistix.co.uk/svn/xlrd/trunk/xlrd/doc/xlrd.html?p=4966
 
 ### Dependencies:
 * python
