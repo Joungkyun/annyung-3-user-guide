@@ -1,7 +1,8 @@
 # python-openpyxl
 
 ### Description:
-
+openpyxl is a pure python reader and writer of Excel OpenXML
+files. It is ported from the PHPExcel project
 
 ### Features:
 
@@ -10,7 +11,7 @@
 * None
 
 ### Dependencies:
-* None
+* python
 
 ### Sub Packages:
 * None
