@@ -1,7 +1,7 @@
 # php-fpm-conf
 
 ### Description:
-[php-fpm](pkg-base-php-fpm.md) 설정 파일 및 init 파일
+[php-fpm](pkg-base-php.md) 설정 파일 및 init 파일
 
 ### Features:
 * 설정 파일
