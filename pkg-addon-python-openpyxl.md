@@ -8,7 +8,7 @@ files. It is ported from the PHPExcel project
 
 
 ### Reference:
-* None
+* https://openpyxl.readthedocs.org/en/2.3.3/
 
 ### Dependencies:
 * python
