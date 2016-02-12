@@ -21,9 +21,6 @@ understand and process the embedded PHP language in web pages.
 * None
 
 ### Sub Packages:
-* None
-
-### Releated Packages:
 * **php56-cli** - php 5.6 cli 인터페이스
 * **php56-dba** - PHP 5.6 dba 확장
 * **php56-dblib** - PHP 5.6 dba 확장
@@ -82,3 +79,6 @@ understand and process the embedded PHP language in web pages.
 * [**php56-pecl-oauth**](pkg-addon-php56-pecl-oauth.md)
 * [**php56-pecl-xdebug**](pkg-addon-php56-pecl-xdebug.md)
 * [**php56-sqlrelay**](pkg-addon-sqlrelay.md)
+
+### Releated Packages:
+* None
