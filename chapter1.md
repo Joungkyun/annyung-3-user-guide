@@ -38,6 +38,7 @@
     * exec_dir과 open_basedir을 이용하여 remote 접근 환경 제한 가능
     * 기본적으로 .php 확장자만 php compile이 가능하도록 제한
   5. bind chroot 환경을 default로 변경
+  6. 1일 1회 yum update 기본 작동 (yum-cron: RHEL/CentOS는 기본으로 동작 안함)
 
 
 ## 4. 서비스 고도화
