@@ -23,6 +23,7 @@ The JRE is freely redistributable, per the terms of the included license.
   export JAVA_BASE JAVA_HOME PATH
   [root@an3 ~]$
   ```
+4. 안녕 리눅스 3의 JAVA 환경에 대해서는 사용자 매뉴얼을 참조 하십시오.
 
 ### Reference:
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html
