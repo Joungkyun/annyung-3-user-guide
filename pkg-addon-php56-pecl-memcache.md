@@ -1,7 +1,7 @@
 # php56-pecl-memcache
 
 ### Description:
-PHP PECL memcache 확장
+PHP 5.6 PECL memcache 확장
 
 ### Features:
 
