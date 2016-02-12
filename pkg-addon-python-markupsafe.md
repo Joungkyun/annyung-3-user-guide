@@ -7,7 +7,7 @@ Implements a XML/HTML/XHTML Markup safe string for Python
 
 
 ### Reference:
-* None
+* https://pypi.python.org/pypi/MarkupSafe
 
 ### Dependencies:
 * python
