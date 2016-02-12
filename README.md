@@ -1,13 +1,15 @@
 안녕 리눅스 3 사용자 가이드
 =======
 
-Copyright &copy; 2016 JoungKyun.Kim all rights reserved.
+Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 ## 1. 이력
 
 * 2016.02.11 초판 발행
 
 ## 2. 개요
+
+## 3. 안녕 리눅스 개발 이력
 
 안녕 리눅스는 Redhat 7.2를 기반으로 사용자 사용 환경(User interface)를 제거한 서버 전용의 작고 가벼운 배포본으로 2003년 6월 13일에 1.0이 release가 되었습니다.
 
@@ -18,7 +20,7 @@ Copyright &copy; 2016 JoungKyun.Kim all rights reserved.
 안녕 리눅스 최초의 시작은 비대해지는 Redhat 배포본이 너무 버거워 작고 가벼운 배포본을 만들자는 것이 목표였으며, 2.0 이후로는 서버 전용의 enterprise 배포본에 중점을 두고 있습니다. 안녕 리눅스는 CDN  업체 W사의 CDN Game publishing/patch download server(리니지, 마비노기등등의 대형 게임), Game portal N사, 전자상거래 업체 T사의 core system, KLDP에서 주 OS로 사용되어 enterprise 환경에서 검증이 되었고 knowhow를 가지고 있는 배포본 입니다.
 
 
-## 3. 안녕 리눅스의 특징 / CentOS 7과의 차이점
+## 4. 안녕 리눅스의 특징 / CentOS 7과의 차이점
 
 1. 사용자 환경을 제외한 compact한 서버 전용 배포본
 2. Enterprise 환경에서 검증된 배포본
