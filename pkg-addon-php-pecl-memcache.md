@@ -1,16 +1,16 @@
 # php-pecl-memcache
 
 ### Description:
-
+PHP PECL memcache 확장
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://pecl.php.net/package/memcache
 
 ### Dependencies:
-* None
+* [php](pkg-base-php.md)
 
 ### Sub Packages:
 * None
