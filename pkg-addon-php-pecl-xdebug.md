@@ -1,16 +1,16 @@
 # php-pecl-xdebug
 
 ### Description:
-
+PHP xdebug 확장
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://pecl.php.net/package/xdebug
 
 ### Dependencies:
-* None
+* [php](pkg-base-php.md)
 
 ### Sub Packages:
 * None
