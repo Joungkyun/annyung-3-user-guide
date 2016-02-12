@@ -6,10 +6,36 @@
  2. Enterprise 환경에서 검증된 배포본
 
 ## 2. 운영 고도화
+  1. 콘솔 한글 출력 지원 (jfbterm)
+  2. IP 기반 GEO system 지원
+    * kmod_geoip
+    * iptables xt_geoip
+    * libkrisp
+  3. 
 
 ## 3. 보안 고도화
+  1. chroot 환경 강화 ([pam chroot](pkg_base_pam.md) 모듈 개선)
+  2. [ISMS](http://isms.kisa.or.kr/kor/main.jsp) 인증 심사 기준 적용
+  3. account action 추적 시스템
+    * su, sudo 시에 SU_USER 환경 변수에 origianl account 유지
+    * history에 SU_USER 반영
+  4. PHP
+    * PHP shell injection 원천 방지 (exec_dir)
+    * 파일 업로드시, image header에 injection code 존재 여부 탐지
+    * exec_dir과 open_basedir을 이용하여 remote 접근 환경 제한 가능
+    * 기본적으로 .php 확장자만 php compile이 가능하도록 제한
+
 
 ## 4. 서비스 고도화
+  1. HTTP2 protocol 지원 (ALPN 지원)
+    * http 2.4.18 mod_http2
+    * nginx 1.9.5 http2 module 가능 (안녕 3에서는 stables인 1.8 지원)
+  2. PHP 고도화
+    * PHP 7 support
+    * PHP 5.6 compatible package 지원 (php-fpm)
+      * PHP 5.3 copatible mode 지원
+    * realpath_cache_force 지원 (file system 탐색 성능 향상)
+
 
 사용자 환경을 제외한 compact한 서버 전용 배포본
 Enterprise 환경에서 검증된 배포본
