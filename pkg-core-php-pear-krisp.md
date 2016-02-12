@@ -14,7 +14,7 @@
 ### Dependencies:
 * [php](pkg-base-php.md)
 * php-extension (sqlite extension)
-* [php-paer](pkg-base-php-pear.md)
+* [php-paer](pkg-base-php.md)
 
 ### Sub Packages:
 * None
