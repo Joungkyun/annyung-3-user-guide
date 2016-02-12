@@ -16,7 +16,7 @@ KSC5601 pear 패키지는 한글과 관련된 변환 및 체크에 대한 method
 
 ### Dependencies:
 * [php](pkg-base-php.md)
-* [php-paer](pkg-base-php-pear.md)
+* [php-paer](pkg-base-php.md)
 
 ### Sub Packages:
 * None
