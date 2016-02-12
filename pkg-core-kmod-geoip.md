@@ -13,7 +13,7 @@ GeoIP netfilter kernel module
 
 ### Dependencies:
 * kernel
-* [GeoIP](pkg-base-GeoIP.md)
+* [GeoIP](pkg-base-geoip.md)
 
 ### Sub Packages:
 
