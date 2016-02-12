@@ -124,7 +124,7 @@
        * [python-mcrypt](pkg-addon-python-mcrypt.md)
        * [python-openpyxl](pkg-addon-python-openpyxl.md)
        * [python-xlrd](pkg-addon-python-xlrd.md)
-       * [re2c](pkg-addon-re2c)
+       * [re2c](pkg-addon-re2c.md)
        * [redis](pkg-addon-redis)
        * [rudiments](pkg-addon-rudiments)
        * [splint](pkg-addon-splint)
