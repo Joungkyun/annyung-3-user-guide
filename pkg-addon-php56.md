@@ -29,6 +29,8 @@ understand and process the embedded PHP language in web pages.
 ### Reference:
 1. PHP 5.3 호환 기능
  * PHP 5.4에서 deprecated 되었거나 remove된 기능들을 지원
+ * Known unsupported functions
+    * **preg_replace** **"/e"** modifier : replace **preg_replace_callback**
  * _/etc/php56.d/{cli,fpm}/php53compatible.ini_
 
   ```ini
@@ -109,7 +111,7 @@ understand and process the embedded PHP language in web pages.
      * 이 기능은 engine level에서 처리를 하기 때문에, php code 쪽에서는 아무런 영향이 없음.
  * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
  * PHP 5.4 이전의 safe_mode_exec_dir을 safe_mode가 아닌 경우에도 사용할 수 있도록 수정하고 command 치환 parser를 확장
- * 기본값 _/var/lib/php/bin_
+ * 기본값 _/var/lib/php56/bin_
     * 안녕의 PHP 에서 system 함수를 사용하려면 사용하려면 command가 /var/lib/php/bin 에 soft link나 복사 되어야 함.
  * system function에 의해서 실행된 command의 경로를 강제로 지정한 값으로 변환
  ```php
