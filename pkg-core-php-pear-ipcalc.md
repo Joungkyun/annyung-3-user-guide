@@ -20,4 +20,4 @@
 
 ### Releated Packages:
 * [php-krisp](pkg-core-php-krisp.md)
-* [liipcalc](pkg-core-libipcacl.md)
+* [liipcalc](pkg-core-libipcalc.md)
