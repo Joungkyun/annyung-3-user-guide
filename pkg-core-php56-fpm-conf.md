@@ -1,7 +1,7 @@
 # php56-fpm-conf
 
 ### Description:
-[php56-fpm](pkg-base-php56.md) 설정 파일 및 init 파일
+[php56-fpm](pkg-addon-php56.md) 설정 파일 및 init 파일
 
 ### Features:
 * 설정 파일
