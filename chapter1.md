@@ -52,11 +52,6 @@
     * realpath_cache_force 지원 (file system 탐색 성능 향상)
   3. Mariadb 10.1 업데이트
 
+## 5. 기타
 
-사용자 환경을 제외한 compact한 서버 전용 배포본
-Enterprise 환경에서 검증된 배포본
-ISMS 인증을 위한 deploy 반영
-한글 환경을 위한 지원
-보안성 강화
-EPEL repository 기본 지원
-1일 1회 package 자동 업데이트(yum-cron 동작)
+위의 특징들 외에 많은 변경 사항이 있으며, 이에 대해서는 "[안녕 리눅스 3 패키지 일람](AnNyung3-Package-Catalog.md)"을 참조 하십시오.
