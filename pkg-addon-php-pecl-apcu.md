@@ -1,13 +1,13 @@
 # php-pecl-apcu
 
 ### Description:
-
+APC 사용자 캐시 PHP 확장
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://pecl.php.net/package/APCu
 
 ### Dependencies:
 * None
