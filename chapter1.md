@@ -11,7 +11,9 @@
     * kmod_geoip
     * iptables xt_geoip
     * libkrisp
-  3. 
+  3. cvs usermap 기능 지원으로 공용 repository 운영 고도화
+  4. IDN 지원 (bind, ssh client, whois 등등)
+  5. rsyslog mysql backend에서 mysql unix domain socket 사용 가능
 
 ## 3. 보안 고도화
   1. chroot 환경 강화 ([pam chroot](pkg_base_pam.md) 모듈 개선)
@@ -29,13 +31,14 @@
 
 ## 4. 서비스 고도화
   1. HTTP2 protocol 지원 (ALPN 지원)
-    * http 2.4.18 mod_http2
+    * http 2.4.18 mod_http2 (안녕 기본 지원)
     * nginx 1.9.5 http2 module 가능 (안녕 3에서는 stables인 1.8 지원)
   2. PHP 고도화
     * PHP 7 support
     * PHP 5.6 compatible package 지원 (php-fpm)
       * PHP 5.3 copatible mode 지원
     * realpath_cache_force 지원 (file system 탐색 성능 향상)
+  3. Mariadb 10.1 업데이트
 
 
 사용자 환경을 제외한 compact한 서버 전용 배포본
