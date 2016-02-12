@@ -2,7 +2,7 @@
 
 ### Description:
 
-[php56](pkg-base-php56.md)와 [php56-cli](pkg-base-php56-cli) 패키지에서 사용하는 PHP 설정 파일
+[php56](pkg-addon-php56.md)와 [php56-cli](pkg-addon-php56.md) 패키지에서 사용하는 PHP 설정 파일
 
 ### Features:
 * configration files
