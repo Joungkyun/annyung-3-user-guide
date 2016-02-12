@@ -18,7 +18,7 @@
 
 ### Dependencies:
 * [php-common](pkg-core-php-common.md)
-* [php-fpm](pkg-base-php-fpm.md)
+* [php-fpm](pkg-base-php.md)
 
 ### Sub Packages:
 * None
