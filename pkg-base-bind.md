@@ -64,7 +64,7 @@ bind-libs-lite-9.9.4-29.el7_2.2.x86_64.rpm  bind-utils-9.9.4-29.el7_2.2.x86_64.r
 ```
 
 ### Dependencies:
- * [GeoIP](pkg-base-GeoIP.md)
+ * [GeoIP](pkg-base-geoip.md)
 
 ### Sub packages:
  * **bind-devel**- BIND DNS 개발을 위해 필요한 헤더 파일과 라이브러리
