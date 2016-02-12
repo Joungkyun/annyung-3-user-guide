@@ -1,16 +1,16 @@
 # perl-CSS-DOM
 
 ### Description:
-
+Document Object Model for Cascading Style Sheets perl module
 
 ### Features:
 
 
 ### Reference:
-* None
+* https://metacpan.org/pod/CSS::DOM
 
 ### Dependencies:
-* None
+* perl
 
 ### Sub Packages:
 * None
