@@ -29,6 +29,8 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
   4. Journaling filesystem 도입 (jfs, reiserFS, ext3, xfs 지원)
   5. DevFS 도입
   6. 국내 배포본 중 최초 자동 업데이트 시스템(**autoupdates**) 지원
+  7. 서버 전용 배포본
+  8. 중소 규모의 서비스 지향
 
 ### 2) 안녕 리눅스 1.2 ~ 1.3
 
@@ -40,16 +42,26 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
     * 자동 업데이트(**pkgsysupdate**) 및 패키지 의존성등을 통합 관리(**pkgadm**)
 
 ### 3) 안녕 리눅스 2
+
+  1. 1인 프로젝트 및 非 전업 프로젝트의 한계로 개발 방법 전환
+    * Installer 및 설치 image 제공 포기 (CentOS installer에 기생)
+    * install image를 제공하지 않는 대신 Yum repository로 제공
+    * Yum system 도입 (Packages System 포기)
+  2. Enterprise 환경 지향
+    * 대형 게임 포털 N사 (DB를 제외한 거의 모든 시스템)
+    * 전자상거래 T사 (일부를 제외한 거의 모든 시스템)
+    * KLDP 전 시스템
+  3. Kernel과 Glibc는 RHEL/CentOS의 것을 수정하지 않음.
+  4. 운영 고도화
+  5. 보안 고도화
+  6. ISMS 인증 조건 반영
+  7. 2012.06.01 RHEL 6u2 / CentOS 6.2 기반으로 안녕 리눅스 2 출시
+
+
 ### 4) 안녕 리눅스 3
 
-
-안녕 리눅스는 Redhat 7.2를 기반으로 사용자 사용 환경(User interface)를 제거한 서버 전용의 작고 가벼운 배포본으로 2003년 6월 13일에 1.0이 release가 되었습니다.
-
-1.0 release 이후, 안녕 리눅스는 Rehat 배포본을 탈피하기 위한 방향으로 진행을 하였으나, 1인 프로젝트의 한계로 kernel 2.6 버전 도입이 늦어지고 관리상의 버거움이 발생하여, RHEL/CentOS 의 minimal version에 안녕 리눅스의 특징만을 변경한 repository를 운영하는 방식으로 선회를 하여 2012년 6월 RHEL 6u2/CentOS 6.2를 기반으로 2를 릴리즈 하게 되었습니다.
-
-그리고, 2013년 2월, RHEL 7u2/CentOS 7.2를 기반으로 안녕 리눅스 3을 릴리즈 하게 되었습니다.
-
-안녕 리눅스 최초의 시작은 비대해지는 Redhat 배포본이 너무 버거워 작고 가벼운 배포본을 만들자는 것이 목표였으며, 2.0 이후로는 서버 전용의 enterprise 배포본에 중점을 두고 있습니다. 안녕 리눅스는 CDN  업체 W사의 CDN Game publishing/patch download server(리니지, 마비노기등등의 대형 게임), Game portal N사, 전자상거래 업체 T사의 core system, KLDP에서 주 OS로 사용되어 enterprise 환경에서 검증이 되었고 knowhow를 가지고 있는 배포본 입니다.
+  1. 2016.02.?? RHEL 7u2 / CentOS 7.2 기반으로 안녕 리눅스 3 출시
+  2. 안녕 리눅스 2의 deploy 계승
 
 
 ## 4. 안녕 리눅스의 특징 / CentOS 7과의 차이점
