@@ -172,6 +172,7 @@ understand and process the embedded PHP language in web pages.
  * include / require 모두 해당
  * 등록된 확장자 파일을 upload 할 경우, **UPLOAD_ERR_ILL** 에러를 반환하고 업로드 되지 않음.
 7. **short_open_tag** 기본 값 Off
+  * short_open_tag 가 Off 이더라도, ***&lt;?=$var?&gt;*** 구문은 사용 가능.
 
 ### Dependencies:
 * None
