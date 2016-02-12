@@ -15,7 +15,7 @@ CAST-256, ARCFOUR, SERPENT, SAFER+, and more.
 * None
 
 ### Dependencies:
-* None
+* python
 
 ### Sub Packages:
 * None
