@@ -12,7 +12,7 @@ http://pear.oops.org/ 에서 제공하는 pear package를 설치하기 위한 �
 * http://pear.oops.org
 
 ### Dependencies:
-* [php-paer](pkg-base-php-pear.md)
+* [php-paer](pkg-base-php.md)
 
 ### Sub Packages:
 * None
