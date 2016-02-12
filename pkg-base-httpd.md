@@ -25,6 +25,6 @@ Apache HTTP Server
 * **mod_proxy_html** - HTML and XML content filters for the Apache HTTP Server
 * **mod_session** - Session interface for the Apache HTTP Server
 * **mod_ssl** - SSL/TLS module for the Apache HTTP Server
-* [**httpd-url**](pkg-core-httpd-url) - 아파치2 URL 모듈
-* [**httpd-krisp**](pkg-core-httpd-krisp) - 아파치2 KRISP 모듈
-* [**httpd-nis**](pkg-core-httpd-nis) - 아파치2 NIS 인증 모듈
+* [**httpd-url**](pkg-core-httpd-url.md) - 아파치2 URL 모듈
+* [**httpd-krisp**](pkg-core-httpd-krisp.md) - 아파치2 KRISP 모듈
+* [**httpd-nis**](pkg-core-httpd-nis.md) - 아파치2 NIS 인증 모듈
