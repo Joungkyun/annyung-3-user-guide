@@ -1,16 +1,16 @@
 # php56-pecl-oauth
 
 ### Description:
-
+PHP 5.6 OAUTH 1.0 확장
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://pecl.php.net/package/oauth
 
 ### Dependencies:
-* None
+* [php56](pkg-addon-php56.md)
 
 ### Sub Packages:
 * None
