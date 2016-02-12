@@ -186,7 +186,7 @@ understand and process the embedded PHP language in web pages.
   * php56-cli, php56-fpm 공용으로 사용
   * /etc/php56.d/{cli,fpm}/SHARED.ini 에서 module loading 설정을 해 주어야 함. 기본으로 loading 하지 않음
   ```bash
-[root@an3 ~]$ cat /etc/php.d/cli/SHARED.ini
+[root@an3 ~]$ cat /etc/php56.d/cli/SHARED.ini
 ;
 ; Follow extensions need php-extension package
 ;
