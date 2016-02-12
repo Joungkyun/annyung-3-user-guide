@@ -14,7 +14,7 @@ SQLite 는 향상된 내장 SQL 데이터베이스 엔진 C 라이브러리 이�
 1. sqlite 3.2 호환 패키지로 sqlite 3.3 이전의 database format을 사용한 DB file을 control 하기 위하여 지원
 
 ### Reference:
-* None
+* http://www.sqlite.org/
 
 ### Dependencies:
 * None
