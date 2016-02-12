@@ -21,4 +21,5 @@ flexible.
 * None
 
 ### Releated Packages:
-* None
+* [php-devel](pkg-base-php.md)
+* [php56-devel](pkg-addon-php56.md)
