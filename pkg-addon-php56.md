@@ -24,13 +24,13 @@ understand and process the embedded PHP language in web pages.
 * None
 
 ### Releated Packages:
-* **php56-cli** - php7 cli 인터페이스
-* **php56-dba** - PHP7 dba 확장
-* **php56-dblib** - PHP7 dba 확장
-* **php56-devel** - php7 확장 개발을 위한 파일들
-* **php56-extension** - php7 shared extension
-  * php, php-cli, php-fpm 공용으로 사용
-  * /etc/php.d/{apache,cli,fpm}/SHARED.ini 에서 module loading 설정을 해 주어야 함. 기본으로 loading 하지 않음
+* **php56-cli** - php 5.6 cli 인터페이스
+* **php56-dba** - PHP 5.6 dba 확장
+* **php56-dblib** - PHP 5.6 dba 확장
+* **php56-devel** - php 5.6 확장 개발을 위한 파일들
+* **php56-extension** - php 5.6 shared extension
+  * php56-cli, php56-fpm 공용으로 사용
+  * /etc/php56.d/{cli,fpm}/SHARED.ini 에서 module loading 설정을 해 주어야 함. 기본으로 loading 하지 않음
   ```bash
 [root@an3 ~]$ cat /etc/php.d/cli/SHARED.ini
 ;
@@ -39,23 +39,26 @@ understand and process the embedded PHP language in web pages.
 ;extension = bcmath.so
 ;extension = calendar.so
 ;extension = curl.so
+;extension = event.so
 ;extension = exif.so
 ;extension = fileinfo.so
 ;extension = ftp.so
 ;extension = gd.so
 ;extension = gettext.so
+;extension = gmp.so
 ;extension = imap.so
 ;extension = json.so
 ;extension = ldap.so
 ;extension = libevent.so
 ;extension = mcrypt.so
+;extension = memcache.so
 ;extension = mysql.so
 ;extension = mysqli.so
 ;extension = pdo_mysql.so
 ;extension = pdo_sqlite.so
-;extension = snmop.so
 ;extension = snmp.so
 ;extension = soap.so
+;extension = sqlite.so
 ;extension = sqlite3.so
 ;extension = wddx.so
 ;extension = xmlreader.so
@@ -64,19 +67,18 @@ understand and process the embedded PHP language in web pages.
 ;zend_extension = /usr/lib64/php/extensions/opcache.so
 [root@an3 ~]
 ```
-* **php56-fpm** - php7 fpm engine
-* **php56-oci** - PHP7 oci8/pdo_oci 확장
-* **php56-odbc** - PHP7 odbc, pdo_odbc 확장
-* **php-pear** - PHP 확장및 응용 프로그램 저장소 프레임웍
-* **php56-pgsql** - PHP7 pgsql, pdo_pgsql 확장
-* **php56-recode** - PHP7 recode 확장
+* **php56-fpm** - php 5.6 fpm engine
+* **php56-oci** - PHP 5.6 oci8/pdo_oci 확장
+* **php56-odbc** - PHP 5.6 odbc, pdo_odbc 확장
+* **php-pear** - PHP 5.6 확장및 응용 프로그램 저장소 프레임웍
+* **php56-pgsql** - PHP 5.6 pgsql, pdo_pgsql 확장
+* **php56-recode** - PHP 5.6 recode 확장
 * [**php56-common**](pkg-core-php56-common.md)
 * [**php56-fpm-conf**](pkg-core-php56-fpm-conf.md)
 * [**php56-geoip**](pkg-core-php56-geoip.md)
 * [**php56-krisp**](pkg-core-php56-krisp.md)
 * [**php56-nis**](pkg-core-php56-nis.md)
 * [**php56-pecl-apcu**](pkg-addon-php56-pecl-apcu.md)
-* [**php56-pecl-memcache**](pkg-addon-php56-pecl-memcache.md)
 * [**php56-pecl-oauth**](pkg-addon-php56-pecl-oauth.md)
 * [**php56-pecl-xdebug**](pkg-addon-php56-pecl-xdebug.md)
 * [**php56-sqlrelay**](pkg-addon-sqlrelay.md)
