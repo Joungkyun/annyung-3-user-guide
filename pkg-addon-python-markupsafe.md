@@ -10,7 +10,7 @@ Implements a XML/HTML/XHTML Markup safe string for Python
 * None
 
 ### Dependencies:
-* None
+* python
 
 ### Sub Packages:
 * None
