@@ -16,6 +16,6 @@
 * None
 
 ### Releated Packages:
-* [httpd](pkg-core-httpd.md)
+* [httpd](pkg-base-httpd.md)
 * [lighttpd](pkg-addon-lighttpd.md)
 * [nginx](pkg-addon-nginx.md)
