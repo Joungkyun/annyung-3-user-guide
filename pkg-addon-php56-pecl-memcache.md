@@ -1,16 +1,16 @@
 # php56-pecl-memcache
 
 ### Description:
-
+PHP PECL memcache 확장
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://pecl.php.net/package/memcache
 
 ### Dependencies:
-* None
+* [php56](pkg-addon-php56.md)
 
 ### Sub Packages:
 * None
