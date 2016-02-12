@@ -12,7 +12,7 @@ CAST-256, ARCFOUR, SERPENT, SAFER+, and more.
 
 
 ### Reference:
-* None
+* http://labix.org/python-mcrypt
 
 ### Dependencies:
 * python
