@@ -125,7 +125,7 @@
        * [python-openpyxl](pkg-addon-python-openpyxl.md)
        * [python-xlrd](pkg-addon-python-xlrd.md)
        * [re2c](pkg-addon-re2c.md)
-       * [redis](pkg-addon-redis)
+       * [redis](pkg-addon-redis.md)
        * [rudiments](pkg-addon-rudiments)
        * [splint](pkg-addon-splint)
        * [sqlite32](pkg-addon-sqlite32)
