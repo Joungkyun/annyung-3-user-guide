@@ -218,7 +218,7 @@ understand and process the embedded PHP language in web pages.
 ;extension = xmlreader.so
 ;extension = xmlwriter.so
 ;extension = zip.so
-;zend_extension = /usr/lib64/php/extensions/opcache.so
+;zend_extension = /usr/lib64/php56/extensions/opcache.so
 [root@an3 ~]
 ```
 * **php56-fpm** - php 5.6 fpm engine
