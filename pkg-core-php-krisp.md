@@ -51,5 +51,4 @@ try {
 ### Releated Packages:
 * [httpd-krisp](pkg-core-httpd-krisp.md)
 * [perl-KRISP](pkg-core-perl-KRISP.md)
-* [php-krisp](pkg-core-php-krisp.md)
 * [python-krisp](pkg-core-python-krisp.md)
