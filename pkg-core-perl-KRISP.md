@@ -20,5 +20,5 @@ krisp perl C binding 모듈
 ### Releated Packages:
 * [httpd-krisp](pkg-core-httpd-krisp.md)
 * [php-krisp](pkg-core-php-krisp.md)
-* [php-pecl-krisp](pkg-core-php-pecl-krisp.md)
+* [php-krisp](pkg-core-php-krisp.md)
 * [python-krisp](pkg-core-python-krisp.md)
