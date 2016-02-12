@@ -1,16 +1,16 @@
 # php-pecl-oauth
 
 ### Description:
-
+PHP OAUTH 1.0 확장
 
 ### Features:
 
 
 ### Reference:
-* None
+* http://pecl.php.net/package/oauth
 
 ### Dependencies:
-* None
+* [php](pkg-base-php.md)
 
 ### Sub Packages:
 * None
