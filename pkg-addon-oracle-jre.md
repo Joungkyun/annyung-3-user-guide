@@ -9,7 +9,20 @@ platform classes and supporting files.
 The JRE is freely redistributable, per the terms of the included license.
 
 ### Features:
+1. Oracle JRE의 업데이트는 년 3회 security update 버전을 따라 업데이트 됩니다.
+2. Oracle JRE binary version을 rpm packaging 하였습니다.
+3. oracle-jre profile
+  ```bash
+  [root@an3 ~]$ cat /etc/profile.d/jre.sh
+  # JRE Profile
 
+  JAVA_BASE="/usr/java"
+  JAVA_HOME="/usr/java/default"
+  PATH="${PATH}:${JAVA_HOME}/bin"
+
+  export JAVA_BASE JAVA_HOME PATH
+  [root@an3 ~]$
+  ```
 
 ### Reference:
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html
