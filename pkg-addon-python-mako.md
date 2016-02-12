@@ -1,7 +1,7 @@
 # python-Mako
 
 ### Description:
-
+Mako is a template library written in Python
 
 ### Features:
 
@@ -10,7 +10,7 @@
 * None
 
 ### Dependencies:
-* None
+* python
 
 ### Sub Packages:
 * None
