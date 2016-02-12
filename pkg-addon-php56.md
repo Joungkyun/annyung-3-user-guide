@@ -28,7 +28,82 @@ understand and process the embedded PHP language in web pages.
 
 ### Reference:
 1. PHP 5.3 호환 기능
+ * PHP 5.4에서 deprecated 되었거나 remove된 기능들을 지원
+ * _/etc/php56.d/{cli,fpm}/php53compatible.ini_
 
+  ```ini
+  ; PHP 5.3 호환 모드 지원
+  ;
+  ; 이 파일의 설정을 주석처리할 경우, php.ini 또는 php-cli.ini 또는
+  ; php-fcig.ini 의 기본값으로 동작을 하게 되니 주석 처리시에는 주의해야
+  ; 합니다.
+  ;
+  ; On으로 설정시 php 5.4에서 제거되었거나 변경된 기능을 5.3과 같이 동작함
+  ;
+  ; . allow_call_time_pass_reference 지시자 사용 가능 (Default: Off)
+  ; . magic_quotes_gpc, magic_quotes_runtime, magic_quotes_sybase 지시자
+  ;   및 magic_quotes 관련 함수 사용 가능 (기본값: Off)
+  ; . NULL, false, 빈문자열의 값을 가진 변수에 object property를 추가할
+  ;   경우에도 E_WARNING 에러 메시지 발생 하지 않음
+  ; . TZ 환경 변수로 timezone 지정 가능
+  ; . array_combine() 함수에서 key array가 비었을 경우 false 반환
+  ; . 5.4에서 제거된 다음의 함수 사용 가능 (E_DEPRECATED level 에러 처리)
+  ;   session_is_registered(), session_register(), session_unregister()
+  ;   mysqli_bind_param(), mysqli_bind_result(), mysqli_client_encoding(),
+  ;   mysqli_fetch(), mysqli_param_count(), mysqli_get_metadata(),
+  ;   mysqli_send_long_data(), mysqli::client_encoding()
+  ;
+  ; Default Value: Off
+  ; Development Value: Off
+  ; Production Value: Off
+  ;
+  php53_compatible = Off
+
+  ; This directive allows you to enable and disable warnings which PHP will issue
+  ; if you pass a value by reference at function call time. Passing values by
+  ; reference at function call time is a deprecated feature which will be removed
+  ; from PHP at some point in the near future. The acceptable method for passing a
+  ; value by reference to a function is by declaring the reference in the functions
+  ; definition, not at call time. This directive does not disable this feature, it
+  ; only determines whether PHP will warn you about it or not. These warnings
+  ; should enabled in development environments only.
+  ; Default Value: On (Suppress warnings)
+  ; Development Value: Off (Issue warnings)
+  ; Production Value: Off (Issue warnings)
+  ; http://php.net/allow-call-time-pass-reference
+  ;
+  ; This directive has dependency with 'php53_compatible=On'
+  allow_call_time_pass_reference = Off
+
+  ; Magic quotes are a preprocessing feature of PHP where PHP will attempt to
+  ; escape any character sequences in GET, POST, COOKIE and ENV data which might
+  ; otherwise corrupt data being placed in resources such as databases before
+  ; making that data available to you. Because of character encoding issues and
+  ; non-standard SQL implementations across many databases, it's not currently
+  ; possible for this feature to be 100% accurate. PHP's default behavior is to
+  ; enable the feature. We strongly recommend you use the escaping mechanisms
+  ; designed specifically for the database your using instead of relying on this
+  ; feature. Also note, this feature has been deprecated as of PHP 5.3.0
+  ; Default Value: On
+  ; Development Value: Off
+  ; Production Value: Off
+  ; http://php.net/magic-quotes-gpc
+  ;
+  ; This directive has dependency with 'php53_compatible=On'
+  magic_quotes_gpc = Off
+
+  ; Magic quotes for runtime-generated data, e.g. data from SQL, from exec(), etc.
+  ; http://php.net/magic-quotes-runtime
+  ;
+  ; This directive has dependency with 'php53_compatible=On'
+  magic_quotes_runtime = Off
+
+  ; Use Sybase-style magic quotes (escape ' with '' instead of \').
+  ; http://php.net/magic-quotes-sybase
+  ;
+  ; This directive has dependency with 'php53_compatible=On'
+  magic_quotes_sybase = Off
+  ```
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
  * PHP의 shell injection을 **engine level에서 방어**하기 위한 기능
      * 이 기능은 engine level에서 처리를 하기 때문에, php code 쪽에서는 아무런 영향이 없음.
