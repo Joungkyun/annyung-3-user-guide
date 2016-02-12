@@ -14,6 +14,17 @@
   3. cvs usermap 기능 지원으로 공용 repository 운영 고도화
   4. IDN 지원 (bind, ssh client, whois 등등)
   5. rsyslog mysql backend에서 mysql unix domain socket 사용 가능
+  6. tcping, tcptraceroute 등 ICMP 제한된 네트워크 탐지를 위해 기본 제공
+  7. vim
+    * PHP native manual 지원(shift + K)
+    * vim folder 기능 개선
+    * checksyntax 플러그인 추가
+  8. legacy 호환 패키지 지원
+    * [PHP56](pkg-addon-php56.md)
+    * [libevent14](pkg-addon-libevent14.md)
+    * [sqlite32](pkg-addon-sqlite32.md)
+  9. Oracle JVM 환경 지원
+
 
 ## 3. 보안 고도화
   1. chroot 환경 강화 ([pam chroot](pkg_base_pam.md) 모듈 개선)
