@@ -28,5 +28,6 @@
 
 ### [[EPEL]](https://fedoraproject.org/wiki/EPEL)
 
+* https://fedoraproject.org/wiki/EPEL
 * 안녕 리눅스에서 직접 관리하는 저장소는 아닙니다.
 * Fedora project에서 운영하는 repository로서, RHEL에서 제공하지 않는 pacakge들을 3rd party package 형식으로 지원합니다.
