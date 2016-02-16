@@ -50,6 +50,7 @@
     * PHP 5.6 compatible package 지원 (php-fpm)
       * PHP 5.3 copatible mode 지원
     * realpath_cache_force 지원 (file system 탐색 성능 향상)
+    * ZEND VM을 GOTO mode로 빌드하여 기본 CALL type VM보다 15% 성능 향상
   3. Mariadb 10.1 업데이트
 
 ## 5. 기타
