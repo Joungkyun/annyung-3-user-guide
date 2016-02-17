@@ -12,7 +12,7 @@
 2. _/etc/login.def.exceptioin_
  * password expire를 하지 않을 예외 account 관리
 3. _~/.ssh/google-authenticator_
- * google authenticator를 이용하여 2 factor OPT 설정을 하였을 경우 password expire check skip
+ * google authenticator를 이용하여 2 factor OPT 설정을 하였을 경우 password expire check skip (1:1.1.8-12.an3.1.1 부터)
 
 ### Sub packages:
 * **pam-devel** - PAM을 이용한 PAM관련 응용프로그램 및 모듈 개발을 위해 필요한 파일들
