@@ -12,6 +12,7 @@
  * [authbind](pkg-addon-authbind.md)
  * [cronolog](pkg-addon-cronolog.md)
  * [hping3](pkg-addon-hping3.md)
+ * [google-authenticator](pkg-addon-google-authenticator.md)
  * [httpd-fcgid](pkg-addon-httpd-fcgid.md)
  * [imap](pkg-addon-imap.md)
  * [jfbterm](pkg-addon-jfbterm.md)
