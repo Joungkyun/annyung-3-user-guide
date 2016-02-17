@@ -15,7 +15,7 @@ Google OPT와 연동이 가능하며, iOS와 Android App으로 지원합니다.
 * https://www.lesstif.com/pages/viewpage.action?pageId=24444948
 
 ### Dependencies:
-* pam
+* [pam](pkg-core-pam.md)
 
 ### Sub Packages:
 * None
