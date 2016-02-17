@@ -99,6 +99,7 @@
    * [[AN:addon]](annyung3-addon-packages.md)
        * [authbind](pkg-addon-authbind.md)
        * [cronolog](pkg-addon-cronolog.md)
+       * [google-authenticator](pkg-addon-google-authenticator)
        * [hping3](pkg-addon-hping3.md)
        * [httpd-fcgid](pkg-addon-httpd-fcgid.md)
        * [imap](pkg-addon-imap.md)
