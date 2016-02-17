@@ -50,7 +50,7 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
   2. Enterprise 환경 지향
     * 대형 게임 포털 N사 (DB를 제외한 거의 모든 시스템)
     * 전자상거래 T사 (일부를 제외한 거의 모든 시스템)
-    * KLDP 전 시스템
+    * KLDP 모든 시스템
   3. Kernel과 Glibc는 RHEL/CentOS의 것을 수정하지 않음.
   4. 운영 고도화
   5. 보안 고도화
