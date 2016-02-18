@@ -19,7 +19,27 @@
   ```
 4. 실행 명령을 이용한 oops-firewall 구동
 
+  **_oops-firewall_** 구동 방법에 주의할 점이 있다. 일단, **_oops-firewlall_** 명령어에는 적용되어 있는 ruleset을 내릴 수 있는 방법이 없다 그렇기 때문에 rule set을 모두 내리기 위해서는 무조건 아래의 방법만이 가능합니다.
+  
+```bash
+    [root@an3 ~]$ service oops-firewall stop
+```
 
+  그리고, oops-firewall을 구동하는 방법은 3번 항목에서 기술한 service 또는 systemctl 명령을 이용하는 방법과 여기서 기술할 **_oops-firewall_** 명령을 직접 실행하는 방법이 있습니다.
+  
+  이 둘의 차이를 잘 이해를 해야 하는데, 이는 설정 작업 환경에 따라 유리한 부분이 있기 때문입니다.
+  
+  먼저, 원격에서 작업을 한다면, **_oops-firewall_**을 직접 구동하는 것 보다는 **_serivce_**나 **_systemctl_**을 이용해서 구동하는 권장한다. 이유는, **_service_**나 **_systemctl_**을 이용하여 구동을 할 경우, rule set 적용에 에러가 발생할 경우 먼저 적용된 rule들을 **_rollback_**하는 기능이 있기 때문입니다.
+  
+  그리고, **_oops-firewall_**을 직접 구동하는 경우의 장점은 **_oops-firewall_**을 실행할 경우 기존의 rule set을 모두 초기화 한 후에 다시 적용하는 구조이기 때문에 굳이 restart를 할 필요가 없기 때문입니다.
+  
+  또한, -v 옵션을 주면 **_oops-firewall_**이 어떻게 ruleset을 적용하는지를 모두 출력해 주기 때문에 내가 만든 정책이 잘 반영이 되었는지 확인이 가능합니다.
+  
+  또한 -t 옵션을 같이 주면, 실제 deploy는 하지 않고 적용될 rule set을 미리 확인을 할 수도 있습니다.
+  
+  어떻게 구동을 하든지는 편리한 쪽을 선택하면 됩니다.
+  
+  다음은 **_oops-firewall_**에 -v 옵션을 주고 실행했을 때의 출력 메시지 입니다.
 
 ```bash
     [root@an3 ~]$ oops-firewall -h
