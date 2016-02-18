@@ -6,7 +6,16 @@
 
 사전 공격(Dictionary attack)의 진화된 형태인데, 사전 공격이라는 것은 ID와 password를 일종의 사전화 하여 가지고 있는 데이터로 대입을 하여 인증을 통과하는 공격을 의미합니다.
 
-대표적인 brute force attack의 흔적을 보자면, _/var/log/secure_ 에서 하나의 IP에서 여러 account로 SSH shell login을 시도하는 흔적을 볼 수 있습니다.
+[brute force attack](https://ko.wikipedia.org/wiki/%EB%AC%B4%EC%B0%A8%EB%B3%84_%EB%8C%80%EC%9E%85_%EA%B3%B5%EA%B2%A9)은 보통 두가지 부류로 많이 볼 수 있습니다.
+
+  1. SSH/telnet/ftp 등의 shell login service에 대한 공격으로 login shell 권한 획득 목적
+  2. drupal/phpBB/wordpress 등의 web application에 spam 등록 및 web service를 통한 shell 권한 획득을 위한 목적
+
+여기서, 두번째 web에 대한 brute force attack에 대한 방어는 netfilter의 l7-filter를 이용할 수 있으나, 이 rule 작성을 하려면 고도의 지식이 필요하므로 web에 대한 부분은 웹방화벽 solution에서 처리를 하는 것이 더 효과적입니다.
+
+그러므로 여기서는 첫번째 shell login 권한 획득에 대한 방어에 대해서 기술을 합니다.
+
+서버에서 볼 수 있는 대표적인 brute force attack의 흔적을 보자면, _/var/log/secure_ 에서 하나의 IP에서 여러 account로 SSH shell login을 시도하는 흔적을 볼 수 있습니다.
 
 ```
 Feb 18 16:00:01 kill sshd[4320]: Received disconnect from 125.88.177.93: 11:
@@ -44,4 +53,60 @@ Feb 18 16:00:58 kill sshd[4335]: PAM 2 more authentication failures; logname= ui
 
 ```
 
-또는, drupal이나 phpBB, word press 등과 같이 전세계적으로 사용이 많이 되는 web application에 spam을 등록하기 위한 bot들이 가입 및 글 등록 시도를 하는 경우를 brute force attack의 대표적인 형태라고 볼 수 있습니다.
+burte force attack의 문제점은 3가지의 큰 문제가 있습니다.
+
+1. 엄청난 시도로 서비스 resource에 부하를 줄 수 있다.
+2. logging message가 너무 많이 남아 logging 활용성이 떨어진다.
+3. 엄청난 시도로 취약한 암호를 사용하는 계정은 탈취를 당할 수 있다.
+
+
+일단, 안녕 리눅승 shell login에 대한 brute force attack 방어는 **_/etc/oops-firewall/application.conf_** 에서 할 수 있습니다.
+
+  ```bash
+  [root@an3 ~]$ cat application.conf
+  ##########################################################################
+  # Application filtering
+  # $Id: application.conf 338 2013-01-04 19:17:13Z oops $
+  #
+  # 이 파일은 특정 공격이나 scan 등을 막기위한 정형적인 서비스를 제공한다.
+
+  ##########################################################################
+  # SSH Brute Force Attack
+  ##########################################################################
+  #
+  # BRUTE FORCE FILTER 는 PORT:SECONDS:HIT 로 설정을 한다. 예를 들어 60:10
+  # 으로 설정을 할 경우, 60 초 동안 10 번째 접속이 발생하면 다음 60 초동안
+  # 필터 한다는 의미이다.
+  #
+  # Rule:
+  #       BRUTE_FORCE_FILTER    = DEST_PORT:SECOND:HIT
+  #       BR_BRUTE_FORCE_FILTER = SOURCE_IP|DEST_IP|DEST_PORT:SECOND:HIT
+  #
+  #BRUTE_FORCE_FILTER = 22:60:10
+  BRUTE_FORCE_FILTER    =
+  BR_BRUTE_FORCE_FILTER =
+
+  # BFUTE FORCE FILTER 사용시에 로깅을 할지 안할지를 결정한다.
+  #
+  BRUTE_FORCE_LOG = false
+
+  ** 하략 **
+  [root@an3 ~]$
+  ```
+위의 설정 주석과 같이 SSH service에 대한 공격을 막기 위해서는 **_BURTE_FORCE_FILTER_** 설정을 해 줍니다.
+
+  ```bash
+  BRUTE_FORCE_FILTER = 22:60:10
+  ```
+
+위의 설정은 다음의 의미를 가집니다.
+
+> 22번 포트로 60초 동안 10번의 접속을 시도하면 다음 60초 동안 접속을 제한한다.
+
+이 설정 처럼 SSH외의 shell login이 가능한 서비스가 있다면 설정을 해 주는 것이 좋습니다.
+
+  ```bash
+  BURTE_FORCE_FILTER = 21:60:10 22:60:10 23:60:10
+  ```
+
+상기 설정은 FTP(21), SSH(22), TELNET(23) 서비스에 대해 적용을 한 예 입니다. 안녕 리눅스의 shell login은 기본으로 SSH(22)만 가능하므로, 만약 FTP나 TELNET과 같은 서비스를 추가 한다면, 여기에 추가해 주시면 되겠습니다.
