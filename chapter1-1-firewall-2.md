@@ -1,6 +1,6 @@
 # Chapter 2. Access Control
 ## 1. 안녕 리눅스 방화벽 설정
-### 2. Inbound 제어
+### 3. Inbound 제어
 
 Inbound 제어를 한다는 것은 여러가지 의미가 있습니다.
 
