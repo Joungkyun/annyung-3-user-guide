@@ -1,5 +1,7 @@
 # 1. 안녕 리눅스 방화벽 설정
 
+## 1. 개요
+
 안녕 리눅스는 CentOS/RHEL 7이 기본으로 제공하는 [firewalld](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html)를 사용하지 않고, 안녕 1.x 부터 제공해 오던 **[oops-firewall](core-pkg-oops-firewall.md)**을 제공합니다.
 
 **oops-firewall**이나 **firewalld**는 모두 iptables를 backend로 하는 즉, iptables rule을 대신 작성해 주는 utility라고 볼 수 있습니다. 즉, **oops-firewall**이나 **firewalld**에서 설정은 iptables rule을 작성한 것이고, 이 rule을 ipatbles로 deploy하여 netfilter에 반영을 하게 되는 것입니다.
@@ -77,7 +79,7 @@
 
 
 
-## 1.기본 설정
+## 2.기본 설정
 
 처음 안녕 리눅스를 설치를 했을 때 **oops-firewall**의 기본 설정 상태는 다음과 같습니다. 서비스 포트 번호에 대해서는 **_/etc/services_** 파일을 참조 하십시오.
 
@@ -97,7 +99,7 @@
 상기와 같이 처음 설치 시에는 상당히 제약적으로 **ACL**이 설정이 되어 있습니다. 특히 안녕 리눅스 3에서 제공되는 **oops-firewall** 7 버전대는 outbound ACL 설정부분이 강화가 되어 이전 버전과는 달리 <u>명확하게 지정되지 않은 outbound 설정은 막히게 됩니다.</u>
 
 
-## 2. **oops-firewall** 설정 파일
+## 3. **oops-firewall** 설정 파일
 
 **oops-firewall**의 모든 설정 파일은 **_/etc/oops-firewall_**에 위치 합니다.
 
@@ -113,7 +115,7 @@
     
 이 문서에서는 현재 까지는 기본적인 설정인 filter.conf와 user.conf 그리고 application.conf 의 일부에 대해서만 기술합니다. 향후, 더 많은 내용이 추가될 예정입니다. 이 외의 기능에 대해서는 [**oops-firewall** 사용 설명서](http://oops.org/?t=lecture&sb=firewall&n=2)를 참조 하십시오.
 
-## 3. Inbound 제어
+## 4. Inbound 제어
 
 Inbound 제어를 한다는 것은 여러가지 의미가 있습니다.
 
@@ -208,7 +210,7 @@ Inbound 설정은 filter.conf에서 하며, TCP/UDP/ICMP 이렇게 3개의 secti
 이런 형식으로 서비스에 맞게 protocol을 지정해 주실 수 있습니다.
 
 
-## 3. Outbound 제어
+## 5. Outbound 제어
 
 **oops-firewall**의 기본 outbound rule은 왠만한 것은 동작하도록 기본 설정이 되어 있습니다만, 간혹 외부 서비스와의 연계 때문에 outbound 설정을 해야 하는 경우가 있습니다.
 
