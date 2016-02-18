@@ -29,7 +29,7 @@
 [root@an3 ~]$ service firewalld enable
 ```
 
-상기 작업을 완료 하였다면, **oops-firewall** 대신에 **firewalld**를 사용할 준비가 완료된 상태 입니다. 여기서 부터는 [RHEL 7 System Admin Guidel의 firewalld 부분]((https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html))을 참조 하십시오. 이 이하는 **oops-firewall**에 대한 기술을 진행 합니다.
+상기 작업을 완료 하였다면, **oops-firewall** 대신에 **firewalld**를 사용할 준비가 완료된 상태 입니다. 여기서 부터는 [RHEL 7 System Admin Guidel의 firewalld 설명]((https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html)을 참조 하십시오. 이 이하는 **oops-firewall**에 대한 기술을 진행 합니다.
 
 이 문서에서는 **oops-firewall**에 대하여 바로 사용을 할 수 있는 대략적인 기법에 대해서만 기술을 합니다. **oops-firewall**의 전체적인 특징과 자세한 사용 방법은 [**oops-firewall** 사용 설명서](http://oops.org/?t=lecture&sb=firewall&n=2)를 참조 하십시오.
 
