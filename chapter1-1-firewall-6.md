@@ -6,6 +6,11 @@
 
 안녕 리눅스에서는 이 작업을 간편하게 하기 위하여 **_geoip-csv2bin_** 이라는 실행 명령을 제공합니다.
 
+> **주의!!**  
+> GeoIP database를 배포하는 Maxmind의 경우, 연속해서 2번 이상의 다운로드를 시도하면 하루 동안 IP를 block 시켜 버립니다. 그렇기 때문에 여러 대에서 GeoIP database를 사용한다면 각 서버에서 다운로드를 받지 말고, 한대의 서버에서 다운로드를 받은 후에, 사용할 서버들로 배포하는 형식을 취하시기 바랍니다. 안 그러면 금방 block 되어 버려 업데이트가 불가능해 집니다.
+
+> Maxmind의 Geo lite(free) database는 한달에 1회 갱신 되며, 보통 4~8일 사이에 업데이트가 됩니다. 그러므로 cronjob에 8~10일 사이에 1회 업데이트 되도록 설정해 주시면 됩니다.
+
 ```bash
 [root@an3 ~]$ cd /usr/share/GeoIP
 [root@an3 GeoIP]$ /usr/bin/geoip-csv2bin
@@ -64,18 +69,40 @@ drwxr-xr-x 2 root root    12288  1월 29 18:06 LE/
 **_geoip-csv2bin_** 명령을 실행을 하면 다음의 작업을 하게 됩니다.
 
 1. GeoIP database 갱신
-  * GeoIP.dat
-  * GeoIPASNum.dat
-  * GeoIPASNumv6.dat
-  * GeoIPv6.dat
-  * GeoLiteCity.dat
-  * GeoIPCountryWhois.csv
-  * GeoIPv6.csv
+    ```
+    * GeoIP.dat             - IPv4 Country database
+    * GeoIPASNum.dat        - IPv4 Network AS Number database
+    * GeoIPASNumv6.dat      - IPv6 Network AS Number database
+    * GeoIPv6.dat           - IPv6 Country database
+    * GeoLiteCity.dat       - IPv4 City database (한국 환경에서는 매우 부정확함)
+    * GeoIPCountryWhois.csv - IPv4 Country database CVS format
+    * GeoIPv6.csv           - IPv6 Country database CVS format
+    ```
 2. GeoIPCountryWhois.csv 와 GeoIPv6.csv를 이용하여 netfilter용 database 생성
-  * /usr/share/GeoIP/BE/* (Big endian을 사용하는 cpu용)
-  * /usr/share/GeoIP/LE/* (intel machine용)
+    ```
+    * /usr/share/GeoIP/BE/  - Big endian을 사용하는 cpu용)
+    * /usr/share/GeoIP/LE/  - intel machine용
+    ```
 3. GeoIPCountryWhois.csv 와 GeoIPv6.csv를 이용하여 netfilter용 이전 database 생성
-  * 안녕 리눅스 1/2 에서 사용하는 format
-  * geoipdb.bin
-  * geoipdb.idx
+    ```
+    * 안녕 리눅스 1/2 에서 사용하는 format
+    * geoipdb.bin
+    * geoipdb.idx
+    ```
 
+GeoIP database가 준비 되었다면, **_/etc/oops-firewall/user.conf_** 에서 다음의 rule을 이용하여 관리할 수 있습니다.
+
+  ```bash
+  # Rusia로 부터의 접근을 모두 막는다.
+  %-A INPUT -m geoip --src-cc RU -j DROP
+  
+  # 한국을 제외하고 ssh 연결을 모두 막는다.
+  %-A INPUT -p tcp --dport 22 -m geoip ! --src-cc KR -j DROP
+  ```
+  
+다음, geoip database 업데이트를 Cronjob에 등록해 줍니다.
+
+  ```bash
+  [root@an3 ~] cat /etc/cron.d/geoip-update
+  
+  [root@an3 ~]
