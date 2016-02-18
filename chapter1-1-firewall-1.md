@@ -34,3 +34,5 @@
     * user.conf        - 사용자 작성 rule
     
 이 문서에서는 현재 까지는 기본적인 설정인 filter.conf와 user.conf 그리고 application.conf 의 일부에 대해서만 기술합니다. 향후, 더 많은 내용이 추가될 예정입니다. 이 외의 기능에 대해서는 [**oops-firewall** 사용 설명서](http://oops.org/?t=lecture&sb=firewall&n=2)를 참조 하십시오.
+
+기본으로 oops-firewall의 설정 파일은 영문으로 작성이 되어 있습니다만, 영어가 부담스러운 분들은 [oops-firewall 소스 저장소](http://svn.oops.org/wsvn/OOPS.oops-firewall/trunk/src/conf/ko/?#a91d11b1fba72eee6e29759121cc3d68a)에서 한글 설정 파일을 참고 하실 수 있습니다.
