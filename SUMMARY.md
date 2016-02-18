@@ -4,7 +4,7 @@
 * [Chapter 1. 안녕 리눅스 3 / CentOS 7.2 차이점](chapter1.md)
 * [Chapter 2. Access Control](chapter_2_c811_adfc_c81c_d55c.md)
    * [1. 안녕 리눅스 방화벽 설정](chapter1-1-firewall.md)
-       * 1. 기본 설정
+       * [1. 기본 설정](charter1-1-firewall-1)
 * Chapter 3. Web Operation
 * Chapter 4. JVM Operation
 * Chapter 5. DNS Operation
