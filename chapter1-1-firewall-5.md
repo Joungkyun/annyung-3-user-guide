@@ -192,9 +192,9 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
     4    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 11
     5    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 3 code 3
     6    ACCEPT     all  --  0.0.0.0/0     0.0.0.0/0
-    7    ACCEPT     all  --  211.237.1.226 0.0.0.0/0
-    8    ACCEPT     all  --  211.237.1.229 0.0.0.0/0
-    9    ACCEPT     all  --  1.235.149.42  0.0.0.0/0
+    7    ACCEPT     all  --  21.27.1.26 0.0.0.0/0
+    8    ACCEPT     all  --  21.27.1.29 0.0.0.0/0
+    9    ACCEPT     all  --  1.25.19.42  0.0.0.0/0
     10              tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: SET name: OFIRE_22 side: source mask: 255.255.255.255
     11   DROP       tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: UPDATE seconds: 60 hit_count: 10 TTL-Match name: OFIRE_22 side: source mask: 255.255.255.255
     12   ACCEPT     udp  --  0.0.0.0/0     0.0.0.0/0   udp dpts:33434:33525
@@ -223,9 +223,9 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
     5    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 11
     6    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 3 code 3
     7    ACCEPT     all  --  0.0.0.0/0     0.0.0.0/0
-    8    ACCEPT     all  --  211.237.1.226 0.0.0.0/0
-    9    ACCEPT     all  --  211.237.1.229 0.0.0.0/0
-    10   ACCEPT     all  --  1.235.149.42  0.0.0.0/0
+    8    ACCEPT     all  --  21.27.1.26 0.0.0.0/0
+    9    ACCEPT     all  --  21.27.1.29 0.0.0.0/0
+    10   ACCEPT     all  --  1.25.19.42  0.0.0.0/0
     11              tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: SET name: OFIRE_22 side: source mask: 255.255.255.255
     12   DROP       tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: UPDATE seconds: 60 hit_count: 10 TTL-Match name: OFIRE_22 side: source mask: 255.255.255.255
     13   ACCEPT     udp  --  0.0.0.0/0     0.0.0.0/0   udp dpts:33434:33525
