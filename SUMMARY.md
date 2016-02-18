@@ -10,6 +10,7 @@
        * [4. brute force attack 제어](chapter1-1-firewall-4.md)
        * [5. User defined rule 제어](chapter1-1-firewall-5.md)
        * [6. 특정 국가에서의 접속 제어](chapter1-1-firewall-6.md)
+       * [7. oops-firewall 실행 방법](chapter1-1-firewall-7.md)
 * Chapter 3. Web Operation
 * Chapter 4. JVM Operation
 * Chapter 5. DNS Operation
