@@ -11,6 +11,7 @@
 다룰 대상에 대해서는 다음과 같습니다.
 
 1. 안녕 리눅스 방화벽 설정
+2. Authentification
 2. Geo data를 이용한 Network Access control
 3. PAM을 이용한 account 기반의 Access control
   1. login account 제한
