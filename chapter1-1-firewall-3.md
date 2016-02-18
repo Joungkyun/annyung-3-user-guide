@@ -1,6 +1,6 @@
 # Chapter 2. Access Control
 ## 1. 안녕 리눅스 방화벽 설정
-### 4. Outbound 제어
+### 3. Outbound 제어
 
 **oops-firewall**의 기본 outbound rule은 왠만한 것은 동작하도록 기본 설정이 되어 있습니다만, 간혹 외부 서비스와의 연계 때문에 outbound 설정을 해야 하는 경우가 있습니다.
 
