@@ -101,3 +101,5 @@
   **_pre rule_** 이라는 것은 oops-firewall이 rule을 적용하기 전에 적용을 한다는 의미이고, **_post rule_**은 oops-firewall이 rule을 모두 적용한 후에 적용을 한다는 의미입니다.
   
   보통은 **_pre rule_**을 많이 사용을 하며, **_post rule_**을 사용하는 경우는 oops-firewall이 적용한 rule 중간에 내가 원하는 rule을 끼워 넣고 싶을 경우 **_post rule_**을 사용하면 됩니다.
+  
+  상단의 **_oops-firewall_** 룰 적용 순서를 보면, 4번째가 **_pre rule_**이 적용이 되고, 28번째에 **_post rule_**이 적용이 되는 것을 확인 하실 수 있습니다.
