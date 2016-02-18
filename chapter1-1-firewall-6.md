@@ -82,7 +82,7 @@ drwxr-xr-x 2 root root    12288  1월 29 18:06 LE/
     ```
 2. GeoIPCountryWhois.csv 와 GeoIPv6.csv를 이용하여 netfilter용 database 생성
     ```
-    * /usr/share/GeoIP/BE/  - Big endian을 사용하는 cpu용)
+    * /usr/share/GeoIP/BE/  - Big endian을 사용하는 cpu용
     * /usr/share/GeoIP/LE/  - intel machine용
     ```
 3. GeoIPCountryWhois.csv 와 GeoIPv6.csv를 이용하여 netfilter용 이전 database 생성
@@ -124,6 +124,6 @@ GeoIP database가 준비 되었다면, **_/etc/oops-firewall/user.conf_** 에서
   # *  *  *  *  * user-name  command to be executed
 
   # 매월 11일 새벽 3시 14분에 실행
-  14 3 11 * * root /usr/bin/geoip-update &> /dev/null
+  14 3 11 * * root /usr/bin/geoip-csv2bin &> /dev/null
   [root@an3 ~]
   ```
