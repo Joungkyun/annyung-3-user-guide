@@ -11,10 +11,8 @@
 다룰 대상에 대해서는 다음과 같습니다.
 
 1. 안녕 리눅스 방화벽 설정
-2. Authentification
-2. Geo data를 이용한 Network Access control
-3. PAM을 이용한 account 기반의 Access control
-  1. login account 제한
+2. Shell login Control (with PAM)
+  1. login 가능한 account 제한
   2. login account chroot
   3. Google OPT를 이용한 2 factor 인증
 4. Web server level의 IP및 account, Country/ISP data 기반의 Access control
