@@ -1,9 +1,15 @@
 # Chapter 2. Access Control
 ## 2. Shell login Control (with PAM)
 
+> 목차
+1. [login 가능한 account 제한](chapter1-2-pam-control-1.md)
+2. [login account chroot](chapter1-2-pam-control-2.md)
+3. [Google OTP를 이용한 2factor 인증](chapter1-2-pam-control-3.md)
+
+
 PAM 모듈을 이용하여 account access control을 하는 방법에 대하여 기술을 합니다.
 
-일단, account 접근 관리를 하기 전에, 안녕 리눅스에서 처리하고 있는 account 기본 정책에 대해서 설명을 합니다.
+일단, account 접근 관리를 하기 전에, 안녕 리눅스에서 처리하고 있는 account 기본 정책에 대해서 설명을 합니다. 이 정책을 먼저 숙지 하시고, 서브 메뉴를 구독 하시기 바랍니다.
 
 
 안녕 리눅스의 account 기본 정책은 **"개인 정보 보호법"**에 의하여 년 1회의 보안 감사를 ISMS 인증으로 대체를 하게 되면서, ISMS에서 요구하는 사항을 기본으로 반영해 놓고 있습니다.
