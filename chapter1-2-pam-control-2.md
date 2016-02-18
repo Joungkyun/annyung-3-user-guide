@@ -116,8 +116,6 @@ chroot="/chroot"
 create_dir="bin dev home lib64 lib proc sbin var/tmp var/log usr"
 bind_dir="home var/log usr proc dev"
 root_bind="bin sbin lib64 lib"
-read_only="dev bin sbin lib64 lib usr"
-
 
 if [ "${chroot}" = "" -o "${chroot}" = "/" ]; then
     echo "Invalid base chroot path \"${chroot}\"" 1> /dev/stderr
