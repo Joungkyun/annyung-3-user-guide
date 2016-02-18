@@ -2,7 +2,7 @@
 ## 1. 안녕 리눅스 방화벽 설정
 ### 5. User defined rule 제어
 
-#### 1. 개요
+
 **_oops-firewall_**은 일종의 iptables rule을 생성하는 template 같은 도구 이기 때문에, rule을 만들다 보면 의도하는 바가 제한이 될 수 있습니다.
 
 그렇게 때문에 사용자 rule을 등록 할 수 있도록 지원을 합니다.
@@ -95,3 +95,9 @@
   #@-t mangle -A FORWARD -p tcp --sport 94 -j TOS --set-tos 0x10
   [root@an3 ko]$
   ```
+  
+  사용자 정의 rule은 위의 설명과 같이 **_pre rule_**과 **_post rule_** 두가지로 구분이 됩니다.
+  
+  **_pre rule_** 이라는 것은 oops-firewall이 rule을 적용하기 전에 적용을 한다는 의미이고, **_post rule_**은 oops-firewall이 rule을 모두 적용한 후에 적용을 한다는 의미입니다.
+  
+  보통은 **_pre rule_**을 많이 사용을 하며, **_post rule_**을 사용하는 경우는 oops-firewall이 적용한 rule 중간에 내가 원하는 rule을 끼워 넣고 싶을 경우 **_post rule_**을 사용하면 됩니다.
