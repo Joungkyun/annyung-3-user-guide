@@ -1,2 +1,69 @@
 # 1. 안녕 리눅스 방화벽 설정
 
+안녕 리눅스는 CentOS/RHEL 7이 기본으로 제공하는 [firewalld](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html)를 사용하지 않고, 안녕 1.x 부터 제공해 오던 **[oops-firewall](core-pkg-oops-firewall.md)**을 제공합니다.
+
+**oops-firewall**이나 **firewalld**는 모두 iptables를 backend로 하는 즉, iptables rule을 대신 작성해 주는 utility라고 볼 수 있습니다. 즉, **oops-firewall**이나 **firewalld**에서 설정은 iptables rule을 작성한 것이고, 이 rule을 ipatbles로 deploy하여 netfilter에 반영을 하게 되는 것입니다.
+
+한마디로, 어려운 iptables rule을 만들기 쉽게 도와주고, 정책을 생성/제거/반영을 쉽게 도와주는 도구라는 것이기 때문에 익숙한 것을 사용하시면 됩니다.
+
+만약 CentOS/RHEL 7에서 제공하는 **firewalld**를 사용하기 원한다면, 다음의 절차를 따라 주십시오.
+
+```sh
+[root@an3 ~]$ yum remove oops-firewall
+[root@an3 ~]$ yum install firewalld
+[root@an3 ~]$ service firewalld enable
+```
+
+상기 작업을 완료 하였다면, **oops-firewall** 대신에 **firewalld**를 사용할 준비가 완료된 상태 입니다. 여기서 부터는 [RHEL 7 System Admin Guidel의 firewalld 부분]((https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html))을 참조 하십시오. 이 이하는 **oops-firewall**에 대한 기술을 진행 합니다.
+
+이 문서에서는 **oops-firewall**에 대하여 바로 사용을 할 수 있는 대략적인 기법에 대해서만 기술을 합니다. **oops-firewall**의 전체적인 특징과 자세한 사용 방법은 [**oops-firewall** 사용 설명서](http://oops.org/?t=lecture&sb=firewall&n=2)를 참조 하십시오.
+
+안녕 리눅스에서 **firewalld** 대신 **oops-firewall**을 제공하는 이유는 iptables rule에 대해서 전혀 지식이 없어서 사용을 할 수 있는 간단함과 명료한 설정이 하나이고, iptables를 잘 다를 수 있는 경우, **oops-firewall** 이 만든 rule의 쉽게 customizing을 할 수 있다는 점 입니다.
+
+
+    ** 참고!
+
+    다음 용어(표현)를 기억 하십시오.
+
+    Inbound  - 외부(remote) 에서 내부(local)로 들어오는 접근
+    Outbound - 내부(local) 에서 외부(remote)로 나가는 접근
+    TCP/22   - TCP 22번 포트
+    TCP/1.1.1.1:22 - TCP 1.1.1.1 IP의 22번 포트
+
+
+## 1.기본 설정
+
+처음 안녕 리눅스를 설치를 했을 때 **oops-firewall**의 기본 설정 상태는 다음과 같습니다. 서비스 포트 번호에 대해서는 **_/etc/services_** 파일을 참조 하십시오.
+
+  1. Inbound 허가
+    * TCP/22 (**ssh**)
+  2. Outbound 허가
+    * TCP/21 (**FTP**)
+    * TCP/22 (**SSH**)
+    * TCP/25 (**SMTP**)
+    * TCP/43 (**WHOIS**)
+    * TCP/80 (**HTTP**)
+    * TCP/443 (**HTTPS**)
+    * TCP/873 (**RSYNC**)
+    * UDP/53 (**DNS**)
+    * UDP/123 (**NTP**)
+
+상기와 같이 처음 설치 시에는 상당히 제약적으로 **ACL**이 설정이 되어 있습니다. 특히 안녕 리눅스 3에서 제공되는 **oops-firewall** 7 버전대는 outbound ACL 설정부분이 강화가 되어 이전 버전과는 달리 <u>명확하게 지정되지 않은 outbound 설정은 막히게 됩니다.</u>
+
+
+## 2. **oops-firewall** 설정 파일
+
+**oops-firewall**의 모든 설정 파일은 **_/etc/oops-firewall_**에 위치 합니다.
+
+    * application.conf - layer 7 레벨의 제어
+    * bridge.conf      - bridge packet 제어
+    * filter.conf      - 기본적인 inbound/oubound packet 제어
+    * forward.conf     - forwarding packet 제어
+    * interface.conf   - Ethernet device 설정
+    * masq.conf        - Masquerading 
+    * modules.list     - Netfilter kernel module 제어
+    * tos.conf         - TOS(Type of Service) 제어
+    * user.conf        - 사용자 작성 rule
+    
+
+
