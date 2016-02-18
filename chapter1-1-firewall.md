@@ -6,7 +6,9 @@
 2. [Inbound 제어](chapter1-1-firewall-2)  
 3. [Outbound 제어](chapter1-1-firewall-3)  
 4. [brute force attack 제어](chapter1-1-firewall-4)  
-5. [User defined ruel 제어](chapter1-1-firewall-5)
+5. [User defined rule 제어](chapter1-1-firewall-5)
+6. [특정 국가에서의 접속 제어](chapter1-1-firewall-6)
+7. [oops-firewall 실행 방법](chapter1-1-firewall-7)
 
 
 ---
