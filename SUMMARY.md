@@ -7,7 +7,7 @@
        * [1. 기본 설정](chapter1-1-firewall-1.md)
        * [2. Inbound 제어](chapter1-1-firewall-2.md)
        * [3. Outbound 제어](chapter1-1-firewall-3.md)
-       * [4. brute force attack 제어](chapter1-1-firewall-4)
+       * [4. brute force attack 제어](chapter1-1-firewall-4.md)
        * [5. User defined ruel 제어](chapter1-1-firewall-5)
 * Chapter 3. Web Operation
 * Chapter 4. JVM Operation
