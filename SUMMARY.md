@@ -13,7 +13,7 @@
        * [oops-firewall 실행 방법](chapter1-1-firewall-7.md)
    * [Shell login Control (with PAM)](chapter1-2-pam-control.md)
        * [login 가능한 account 제한](chapter1-2-pam-control-1.md)
-       * [login account chroot](chapter1-2-pam-control-2)
+       * [login account chroot](chapter1-2-pam-control-2.md)
        * [Google OPT를 이용한 2 factor 인증](chapter1-2-pam-control-3)
 * Chapter 3. Web Operation
 * Chapter 4. JVM Operation
