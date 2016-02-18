@@ -109,6 +109,9 @@ GeoIP database가 준비 되었다면, **_/etc/oops-firewall/user.conf_** 에서
   # GeoIP Lite/Free database는 매월 4~7일 사이에 업데이트가 됩니다.
   # 그러므로, 한국 시간으로 8~10 사이에 업데이트를 등록해 놓으면 됩니다.
   #
+  # 여러대에서 동시에 업데이트를 하면 block이 되니 여러대를 관리할 경우
+  # 한대에서 다운로드 받은 다음, 다른 서버로 배포하는 형식을 취하십시오.
+  #
   # Example of job definition:
   # .---------------- minute (0 - 59)
   # |  .------------- hour (0 - 23)
