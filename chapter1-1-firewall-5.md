@@ -174,3 +174,72 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
 즉, shell에서 실행했던 commaind line중 실행 명령어(여기서는 iptables)를 **'@'**으로 치환해 주면 됩니다.
 
 ##### 2. Case study
+
+**_post rule_**을 사용하는 경우는 **_oops-firewall_**이 생성한 rule 중간에 rule 을 끼워 놓고 싶을 경우 외에는 사용할 일이 거의 없습니다.
+
+그러므로, 여기서는 rule을 끼워 넣는 방법에 대해서 기술을 합니다.
+
+일단 INPUT chain에 rule을 끼워 넣어 보겠습니다.
+
+1. 현재 INPUT chain의 rule을 line-number와 함께 확인 합니다.
+    ```bash
+    [root@an3 ~]$ iptables -L INPUT -n --line-number
+    Chain INPUT (policy ACCEPT)
+    num  target     prot opt source        destination
+    1    DROP       all  --  0.0.0.0/0     0.0.0.0/0   state INVALID
+    2    ACCEPT     all  --  0.0.0.0/0     0.0.0.0/0   state RELATED,ESTABLISHED
+    3    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 0
+    4    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 11
+    5    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 3 code 3
+    6    ACCEPT     all  --  0.0.0.0/0     0.0.0.0/0
+    7    ACCEPT     all  --  211.237.1.226 0.0.0.0/0
+    8    ACCEPT     all  --  211.237.1.229 0.0.0.0/0
+    9    ACCEPT     all  --  1.235.149.42  0.0.0.0/0
+    10              tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: SET name: OFIRE_22 side: source mask: 255.255.255.255
+    11   DROP       tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: UPDATE seconds: 60 hit_count: 10 TTL-Match name: OFIRE_22 side: source mask: 255.255.255.255
+    12   ACCEPT     udp  --  0.0.0.0/0     0.0.0.0/0   udp dpts:33434:33525
+    13   ACCEPT     udp  --  0.0.0.0/0     0.0.0.0/0   udp dpts:44444:44624
+    14   DROP       tcp  --  0.0.0.0/0     0.0.0.0/0
+    15   DROP       udp  --  0.0.0.0/0     0.0.0.0/0
+    16   DROP       icmp --  0.0.0.0/0     0.0.0.0/0
+    [root@an3 ~]$
+    ```
+    
+2. 2번 rule 앞에 "10.0.0.1/32 에서의 접근 허가 rule"을 넣도록 합니다.
+    ```bash
+    [root@an3 ~]$ iptables -I INPUT 2 -s 10.0.0.1/32 -j ACCEPT
+    ```
+
+3. 2번째 rule로 들어갔는지 확인해 봅니다.
+
+   ```bash
+    [root@an3 ~]$ iptables -nL INPUT --line-number
+    Chain INPUT (policy ACCEPT)
+    num  target     prot opt source        destination
+    1    DROP       all  --  0.0.0.0/0     0.0.0.0/0   state INVALID
+    2    ACCEPT     all  --  10.0.0.1      0.0.0.0/0
+    3    ACCEPT     all  --  0.0.0.0/0     0.0.0.0/0   state RELATED,ESTABLISHED
+    4    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 0
+    5    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 11
+    6    ACCEPT     icmp --  0.0.0.0/0     0.0.0.0/0   icmptype 3 code 3
+    7    ACCEPT     all  --  0.0.0.0/0     0.0.0.0/0
+    8    ACCEPT     all  --  211.237.1.226 0.0.0.0/0
+    9    ACCEPT     all  --  211.237.1.229 0.0.0.0/0
+    10   ACCEPT     all  --  1.235.149.42  0.0.0.0/0
+    11              tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: SET name: OFIRE_22 side: source mask: 255.255.255.255
+    12   DROP       tcp  --  0.0.0.0/0     0.0.0.0/0   tcp dpt:22 state NEW recent: UPDATE seconds: 60 hit_count: 10 TTL-Match name: OFIRE_22 side: source mask: 255.255.255.255
+    13   ACCEPT     udp  --  0.0.0.0/0     0.0.0.0/0   udp dpts:33434:33525
+    14   ACCEPT     udp  --  0.0.0.0/0     0.0.0.0/0   udp dpts:44444:44624
+    15   DROP       tcp  --  0.0.0.0/0     0.0.0.0/0
+    16   DROP       udp  --  0.0.0.0/0     0.0.0.0/0
+    17   DROP       icmp --  0.0.0.0/0     0.0.0.0/0
+    [root@an3 ~]$
+
+   ```
+   
+2번 라인에 10.0.0.1에 대한 ACCEPT가 들어가 있는 것이 확인이 됩니다. 그럼,
+   
+   ```bash
+   @-I INPUT 2 -s 10.0.0.1/32 -j ACCEPT
+   ```
+와 같이 등록을 해 주면 됩니다.
