@@ -49,9 +49,9 @@
   3. IP 주소 체크
 
     * ETH0 정보
-      IP 주소                                    : 14.0.82.85
+      IP 주소                                    : 12.1.87.15
       서브넷 마스크                              : 255.255.255.224
-      네트워크                                   : 14.0.82.64
+      네트워크                                   : 12.1.87.64
       네트워크 프리픽스                          : 27
 
   4. 인터페이스 정보
@@ -138,12 +138,12 @@
 
     * iptables -A INPUT  -i lo -j ACCEPT
     * iptables -A OUTPUT -o lo -j ACCEPT
-    * iptables -A INPUT  -s 211.237.1.226 -j ACCEPT
-    * iptables -A OUTPUT -d 211.237.1.226 -j ACCEPT
-    * iptables -A INPUT  -s 211.237.1.229 -j ACCEPT
-    * iptables -A OUTPUT -d 211.237.1.229 -j ACCEPT
-    * iptables -A INPUT  -s 1.235.149.42 -j ACCEPT
-    * iptables -A OUTPUT -d 1.235.149.42 -j ACCEPT
+    * iptables -A INPUT  -s 21.27.1.26 -j ACCEPT
+    * iptables -A OUTPUT -d 21.27.1.26 -j ACCEPT
+    * iptables -A INPUT  -s 21.27.1.29 -j ACCEPT
+    * iptables -A OUTPUT -d 21.27.1.29 -j ACCEPT
+    * iptables -A INPUT  -s 1.25.19.42 -j ACCEPT
+    * iptables -A OUTPUT -d 1.25.19.42 -j ACCEPT
 
   11. 전처리 사용자 설정 규칙 추가
 
