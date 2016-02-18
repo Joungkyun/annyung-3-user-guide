@@ -158,4 +158,19 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
 #### 3. Post user defined rule
 ##### 1. Syntax
 
+**_post rule_** 역시 **_pre rule_**의 문법과 동일하며, 처음의 **_'%'_** 대신 **_'@'_**을 사용해 주면 됩니다.
+예를 들어
+
+  ```bash
+  [root@an3 ~]$ iptables -A INPUT -s 10.0.0.1 -j DROP
+  ```
+  
+위와 같은 rule을 **_post user defined rule_** 로 설정을 하기 위해서, **_user.conf_**에 다음과 같이 설정을 합니다.
+
+  ```bash
+  @-A INPUT -s 10.0.0.1 -j DROP
+  ```
+
+즉, shell에서 실행했던 commaind line중 실행 명령어(여기서는 iptables)를 **'@'**으로 치환해 주면 됩니다.
+
 ##### 2. Case study
