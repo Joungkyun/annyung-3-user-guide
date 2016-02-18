@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Chapter 1. 안녕 리눅스 3 / CentOS 7.2 차이점](chapter1.md)
-* [Chapter 2. 접근 제한](chapter_2_c811_adfc_c81c_d55c.md)
+* [Chapter 2. Access Control](chapter_2_c811_adfc_c81c_d55c.md)
 * Chapter 3. Web Operation
 * Chapter 4. JVM Operation
 * Chapter 5. DNS Operation
