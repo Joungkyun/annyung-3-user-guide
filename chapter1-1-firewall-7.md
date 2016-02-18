@@ -19,7 +19,7 @@
   ```
 4. 실행 명령을 이용한 oops-firewall 구동
 
-  **_oops-firewall_** 구동 방법에 주의할 점이 있다. 일단, **_oops-firewlall_** 명령어에는 적용되어 있는 ruleset을 내릴 수 있는 방법이 없다 그렇기 때문에 rule set을 모두 내리기 위해서는 무조건 아래의 방법만이 가능합니다.
+  **_oops-firewall_** 구동 방법에 주의할 점이 있습니다. 일단, **_oops-firewlall_** 명령어에는 적용되어 있는 ruleset을 내릴 수 있는 방법이 없다 그렇기 때문에 rule set을 모두 내리기 위해서는 무조건 아래의 방법만이 가능합니다.
   
   ```bash
     [root@an3 ~]$ service oops-firewall stop
