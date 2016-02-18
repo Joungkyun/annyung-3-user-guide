@@ -20,7 +20,7 @@
 ## 2. 운영 고도화
   1. 콘솔 한글 출력 지원 (jfbterm)
   2. IP 기반 GEO system 지원
-    * [kmod_geoip](chapter1-1-oops-firewall-6.md)
+    * [kmod_geoip](chapter1-1-firewall-6.md)
     * iptables xt_geoip
     * libkrisp
   3. cvs usermap 기능 지원으로 공용 repository 운영 고도화
