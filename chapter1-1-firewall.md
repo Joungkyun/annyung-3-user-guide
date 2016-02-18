@@ -33,6 +33,10 @@
 
 안녕 리눅스에서 **firewalld** 대신 **oops-firewall**을 제공하는 이유는 iptables rule에 대해서 전혀 지식이 없어서 사용을 할 수 있는 간단함과 명료한 설정이 하나이고, iptables를 잘 다를 수 있는 경우, **oops-firewall** 이 만든 rule의 쉽게 customizing을 할 수 있다는 점 입니다.
 
+안녕 리눅스의 구동은 다음과 같습니다.
+
+기본적으로는 RHEL 시스템의 init service 구동 명령인 /sbin/service를 이용하면 됩니다.
+
 
     ** 참고!
 
