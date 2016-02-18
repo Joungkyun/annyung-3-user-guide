@@ -36,7 +36,7 @@ session     required      pam_unix.so
 [root@an3 ~]$
 ```
 
-위의 설정과 같이 ***account*** section의 가장 상단에 ***pam_access.so***를 required로 설정 합니다.
+위의 설정과 같이 ***account*** section의 가장 상단에 ***pam_access.so***를 required로 설정 합니다. pam_access 모듈의 option에 대해서는 ***"man pam_access"***를 참고 하십시오.
 
 다음, ***/etc/security/access.conf*** 에서 login 가능한 account, group 설정을 하도록 합니다.
 
