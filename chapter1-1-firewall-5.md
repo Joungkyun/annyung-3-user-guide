@@ -95,7 +95,7 @@
   # 만약, 추가적인 netfilter 모듈을 사용하는 룰을 이용한다면, moduless.list
   # 에 해당 모듈 이름을 등록해 줘야 한다.
   #
-  # 먼저 실행할 설정 (명령행 제일 앞에 ! 가 있다.)
+  # 먼저 실행할 설정 (명령행 제일 앞에 % 가 있다.)
   #%-t mangle -A FORWARD -p tcp --sport 90 -j TOS --set-tos 0x10
   #
   # OOPS Firewall 이 실행된 후에 실행이 되어야 하는 명령을 경우에는 아래와
@@ -116,6 +116,21 @@
 
 #### 2. Pre user defined rule
 ##### 1. Syntax
+
+user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일하게 설정이 됩니다.
+예를 들어
+
+  ```bash
+  [root@an3 ~]$ iptables -A INPUT -s 10.0.0.1 -j ACCEPT
+  ```
+  
+위와 같은 rule을 **_pre user defined rule_** 로 설정을 하기 위해서, **_user.conf_**에 다음과 같이 설정을 합니다.
+
+  ```bash
+  %-A INPUT -s 10.0.0.1 -j ACCEPT
+  ```
+
+즉, shell에서 실행했던 commaind line중 실행 명령어(여기서는 iptables)를 **'%'**로 치환해 주면 됩니다. rule의 제일 처음이 **'%'**로 시작하면, **_pre rule_**로 처리가 되고, **'@'**으로 시작이 되면 **_post rule_**로 처리가 되는 것입니다.
 
 ##### 2. Case study
 
