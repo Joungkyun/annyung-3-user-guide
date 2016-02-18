@@ -1,14 +1,22 @@
-# Chapter 2. 접근 제한
+# Chapter 2. Access Control
 
-이 챕터에서는 안녕 리눅스의 **ACL(Access Control List)**에 대해서 설명을 하고자 합니다.
+이 챕터에서는 안녕 리눅스의 **ACL(Access Control List)**에 대해서 기술 합니다.
 
-일단 리눅스에서의 ACL은 여러가지 기법이 있습니다. PAM(Plugged Authentification Module)을 이용하여 account 또는 group 별 login 및 chroot 설정이 가능하며, **GeoIP**를 이용한 IP 기반의 설정을 기본으로 제공 합니다.
+**ACL(Access Control List)**이라는 단어는 보통은 Network 관련하여 접근제어를 할 때 많이 사용하는 단어 입니다. 대부분 IP 기반에서 많이 사용하지만 IP base 외에도 account base의 ACL도 가능 합니다.
 
-또한, 안녕 리눅스에서는 웹 접근 제어에 대해서 KRISP, NIS 등, CentOS 보다 다양한 방법을 제시 합니다.
+여기서는 안녕 리눅스를 이용하여 다양한 **ACL(Access Control List)** 설정 기법에 대해서 기술 합니다.
 
-1. account 접근 제어
- 2. login 접근 제어
- 3. 경로 접근 제어
-2. IP base 접근 제어
- 1. Shell login 제어
- 2. 웹 접근 제어
+안녕 리눅스의 **ACL(Access Control List)**의 특징 중의 하나는 국가/ISP base의 control에 대해서 적극적으로 지원을 한다는 점입니다.
+
+다룰 대상에 대해서는 다음과 같습니다.
+
+1. 안녕 리눅스 방화벽 설정
+2. Geo data를 이용한 Network Access control
+3. PAM을 이용한 account 기반의 Access control
+  1. login account 제한
+  2. login account chroot
+  3. Google OPT를 이용한 2 factor 인증
+4. Web server level의 IP및 account, Country/ISP data 기반의 Access control
+  1. Apache
+  2. nginx
+  3. lighttpd
