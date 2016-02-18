@@ -11,7 +11,7 @@
        * [User defined rule 제어](chapter1-1-firewall-5.md)
        * [특정 국가에서의 접속 제어](chapter1-1-firewall-6.md)
        * [oops-firewall 실행 방법](chapter1-1-firewall-7.md)
-   * [Shell login Control (with PAM)](chapter1-2-pam-control)
+   * [Shell login Control (with PAM)](chapter1-2-pam-control.md)
        * [login 가능한 account 제한](chapter1-2-pam-control-1)
        * [login account chroot](chapter1-2-pam-control-2)
        * [Google OPT를 이용한 2 factor 인증](chapter1-2-pam-control-3)
