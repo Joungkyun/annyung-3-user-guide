@@ -29,6 +29,51 @@
     Outbound - 내부(local) 에서 외부(remote)로 나가는 접근
     TCP/22   - TCP 22번 포트
     TCP/1.1.1.1:22 - TCP 1.1.1.1 IP의 22번 포트
+    
+    Rule 표현식:
+    ------------
+    
+    * IP address 표현식
+    
+     - Anywhere(모든 IP) 표현식
+       0.0.0.0/0 = 0/0 = ANYWHERE = anywhere
+       
+     - IP 범위 표현식
+       1.1.1.1-255       => 1.1.1.1-1.1.1.255
+       1.1.1.1-2.255     => 1.1.1.1-1.1.2.255
+       1.1.1.1-2.3.255   => 1.1.1.1-1.2.3.255
+       1.1.1.1-1.2.3.255 => 1.1.1.1-1.2.3.255
+       
+     - subnet
+       10.10.10.0/24
+       10.10.10.0/255.255.255.0
+
+    * Port 표현식
+      port[:state] => state가 지정되지 않으면 기본으로 NEW를 사용
+
+      53
+      53-100 (53번 부터 100번 포트까지의 범위 지정)
+      53:NEW
+      20:ESTABLISHED,RELATED
+
+      => STATE
+         NEW          : 새로운 연결
+         ESTABLISHED  : 연결이 성립되어 있는 상태
+         RELATED      : FTP의 20번 포트나 passive port와 같은 연관 연결
+         INVALID      : 이상 패킷
+
+    * 설정 format
+
+      값의 구분자는 공백문자를 사용함.
+
+        Directive = VALUE1 VALUE2 VALUE3
+
+      다음과 같이 값을 여러줄로 설정이 가능. 마지막은 '\' 문자가 없어야 함.
+
+        Directive = VALUE1 \
+                    VALUE2 \
+                    VALUE3
+
 
 
 ## 1.기본 설정
@@ -65,5 +110,18 @@
     * tos.conf         - TOS(Type of Service) 제어
     * user.conf        - 사용자 작성 rule
     
+이 문서에서는 현재 까지는 기본적인 설정인 filter.conf와 user.conf 그리고 application.conf 의 일부에 대해서만 기술합니다. 향후, 더 많은 내용이 추가될 예정입니다. 이 외의 기능에 대해서는 [**oops-firewall** 사용 설명서](http://oops.org/?t=lecture&sb=firewall&n=2)를 참조 하십시오.
+
+## 3. Inbound 제어
+
+Inbound 제어를 한다는 것은 여러가지 의미가 있습니다.
+
+    1. 외부의 사용자가 이 서버로 ssh 접속을 한다.
+    2. 외부의 사용자가 이 서버로 http 접속을 한다.
+
+이해하기 쉽게 표현하자면 위의 기술과 같이 외부의 사용자 또는 프로그램이 이 서버로 접근을 하는 것을 의미하며, 좀더 정확하게는 외부에서 들어오는 syn packet을 제어하는 것으로 이해를 하면 됩니다. (syn packet이 무엇인지 꼭!! 알야야 하는 것은 아닙니다)
+
+**oops-firewall**의 Inbound 설정은 다음과 같습니다.
+
 
 
