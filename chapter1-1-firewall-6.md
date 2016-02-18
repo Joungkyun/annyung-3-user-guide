@@ -104,5 +104,21 @@ GeoIP database가 준비 되었다면, **_/etc/oops-firewall/user.conf_** 에서
 
   ```bash
   [root@an3 ~] cat /etc/cron.d/geoip-update
-  
+  # GeoIP database update cronjob
+  #
+  # GeoIP Lite/Free database는 매월 4~7일 사이에 업데이트가 됩니다.
+  # 그러므로, 한국 시간으로 8~10 사이에 업데이트를 등록해 놓으면 됩니다.
+  #
+  # Example of job definition:
+  # .---------------- minute (0 - 59)
+  # |  .------------- hour (0 - 23)
+  # |  |  .---------- day of month (1 - 31)
+  # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+  # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+  # |  |  |  |  |
+  # *  *  *  *  * user-name  command to be executed
+
+  # 매월 11일 새벽 3시 14분에 실행
+  14 3 11 * * root /usr/bin/geoip-update &> /dev/null
   [root@an3 ~]
+  ```
