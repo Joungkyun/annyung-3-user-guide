@@ -18,8 +18,10 @@ oops-firewall 은 IP/포트 필터링, 매스커래이딩, 브릿지 네트워�
  * _/etc/oops-firewall/user.conf_ - User defined filter
 
 ### Reference:
+* [안녕리눅스 방화벽 설정](chapter1-1-firewall.md)
+* [oops-firewall 사용 설명서](http://oops.org/?t=lecture&sb=firewall&n=2)
 * http://svn.oops.org/wsvn/OOPS.oops-firewall/trunk/doc/ko/
-* http://oops.org/?t=lecture&sb=firewall&n=2
+
 
 ### Dependencies:
 * iptables
