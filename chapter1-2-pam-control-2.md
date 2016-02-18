@@ -105,7 +105,12 @@ ACCOUNT   CHROOT_DIR
 다음의 script는 ***/chroot*** 디렉토리에 chroot 환경을 구성하는 script 입니다. 이 script를 구동하면 일단 chroot 환경에서 동작이 가능 합니다.
 
 ```bash
+[root@an3 ~]$ cat chroot-installer.sh
 #!/bin/bash
+
+# Chroot installer
+# Copyright (c) 2016 JoungKyun.Kim <http://oops.org> all rights reserved
+# License by BSD 2-Clause
 
 chroot="/chroot"
 create_dir="bin dev home lib64 lib proc sbin var/tmp var/log usr"
@@ -162,4 +167,13 @@ case "$1" in
 esac
 
 exit 0
+[root@an3 ~]$
+[root@an3 ~]$ bash ./chroot-installer.sh start
+[root@an3 ~]$ [ -f /chroot/bin/bash -a ! -f "/chroot/etc/shadow" ] && echo "Success" || echo "Failure"
+Success
+[root@an3 ~]$ bash ./chroot-installer.sh stop
 ```
+
+chroot 환경을 구성하기 전에 상단의 ***chroot-installer.sh***를 구동해 주면 ***/chroot***에 Jail 환경을 구성해 주게 됩니다.
+
+다만, 위의 script는 chroot 시에 동작을 할 수 있는 최소한의 환경이며, 용량 문제로 ***RW***가 가능한 bind mount를 한 상태이기 때문에 100% Jail 시켰다고 할 수가 없습니다. 이 script를 기본으로 하여 dev, dev/pts, sys, proc를 제외한 나머지는 copy가 되어야지 정말 system jail을 구성했다고 할 수 있으니, 이 script를 기준으로 ***chroot Jail*** 환경을 구성하시기 바랍니다.
