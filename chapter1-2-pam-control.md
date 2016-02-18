@@ -103,9 +103,11 @@ password    sufficient    pam_unix.so sha512 shadow nullok try_first_pass use_au
         
     * 암호 강도 설정
       - pam_pwquality 모듈 이용.
-        + difok=1     - 이전 암호 기억 회수. 이전 암호를 사용하지 못하기 위하여 저장
+        + difok=1     - 이전 암호와의 유사도 검사. 이 설정은 기본 설정보다 약화 시켜 놓음. 기본 10(50%)
         + minlen=8    - 최소 길이 8자
         + minclass=3  - 암호 생성시에, 숫자/대문자/소문자/특수문자 중 3가지를 조합해야 함
+      - pam_unix 모듈 이용
+        + remember=4  - /etc/security/opasswd에 기록할 이전 암호 수. 이전 암호 사용하지 못하게 하는데 사용
 
       
 
