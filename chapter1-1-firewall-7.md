@@ -21,11 +21,11 @@
 
   **_oops-firewall_** 구동 방법에 주의할 점이 있다. 일단, **_oops-firewlall_** 명령어에는 적용되어 있는 ruleset을 내릴 수 있는 방법이 없다 그렇기 때문에 rule set을 모두 내리기 위해서는 무조건 아래의 방법만이 가능합니다.
   
-```bash
+  ```bash
     [root@an3 ~]$ service oops-firewall stop
-```
+  ```
 
-  그리고, oops-firewall을 구동하는 방법은 3번 항목에서 기술한 service 또는 systemctl 명령을 이용하는 방법과 여기서 기술할 **_oops-firewall_** 명령을 직접 실행하는 방법이 있습니다.
+ 그리고, oops-firewall을 구동하는 방법은 3번 항목에서 기술한 service 또는 systemctl 명령을 이용하는 방법과 여기서 기술할 **_oops-firewall_** 명령을 직접 실행하는 방법이 있습니다.
   
   이 둘의 차이를 잘 이해를 해야 하는데, 이는 설정 작업 환경에 따라 유리한 부분이 있기 때문입니다.
   
