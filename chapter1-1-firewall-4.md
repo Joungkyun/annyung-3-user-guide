@@ -110,3 +110,5 @@ burte force attack의 문제점은 3가지의 큰 문제가 있습니다.
   ```
 
 상기 설정은 FTP(21), SSH(22), TELNET(23) 서비스에 대해 적용을 한 예 입니다. 안녕 리눅스의 shell login은 기본으로 SSH(22)만 가능하므로, 만약 FTP나 TELNET과 같은 서비스를 추가 한다면, 여기에 추가해 주시면 되겠습니다.
+
+**_BR_BRUTE_FORCE_FILTER_**는 만약 이 서버가 network bridge로 구성이 되어 있을 경우 bridge device를 통해서 지나가는 packet을 제어하기 위해 사용합니다. bridge device를 구성하지 않았다면(기본으로는 구성되지 않습니다.) 신경쓰실 필요 없습니다.
