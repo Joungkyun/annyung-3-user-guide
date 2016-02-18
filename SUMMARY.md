@@ -9,7 +9,7 @@
        * [3. Outbound 제어](chapter1-1-firewall-3.md)
        * [4. brute force attack 제어](chapter1-1-firewall-4.md)
        * [5. User defined rule 제어](chapter1-1-firewall-5.md)
-       * [6. 구동 방법](chapter1-1-firewall-6)
+       * [6. 특정 국가에서의 접속 제어](chapter1-1-firewall-6)
 * Chapter 3. Web Operation
 * Chapter 4. JVM Operation
 * Chapter 5. DNS Operation
