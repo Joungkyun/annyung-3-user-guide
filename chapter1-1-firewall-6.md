@@ -4,7 +4,7 @@
 
 안녕 리눅스는 1.0 부터 IP 기반의 Geo data를 기본으로 제공하고 있습니다.
 
-**_oops-firewall_**에서 국가 기반의 filtering을 하기 위해서는 Netfilter용 GeoIP database를 생성해야 합니다.
+**_oops-firewall_**에서 국가 기반의 filtering을 하기 위해서는 [kmod-geoip](pkg-core-kmod-geoip.md)가 설치되어 있어야 하고, Netfilter용 GeoIP database를 생성해야 합니다. (kmod-geoip 설치시에 post script 작업으로 2~3분 정도 설치 중 먹통이 된 것 같은 느낌이 나니, 인내하시기 바랍니다.)
 
 안녕 리눅스에서는 이 작업을 간편하게 하기 위하여 **_geoip-csv2bin_** 이라는 실행 명령을 제공합니다.
 
@@ -14,6 +14,7 @@
 > Maxmind의 Geo lite(free) database는 한달에 1회 갱신 되며, 보통 4~8일 사이에 업데이트가 됩니다. 그러므로 cronjob에 8~10일 사이에 1회 업데이트 되도록 설정해 주시면 됩니다.
 
 ```bash
+[root@an3 ~]$ yum -y install kmod-geoip
 [root@an3 ~]$ cd /usr/share/GeoIP
 [root@an3 GeoIP]$ /usr/bin/geoip-csv2bin
 Get GeoLiteCountry/GeoIP.dat.gz .. OK
