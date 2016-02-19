@@ -15,12 +15,12 @@
        * [login 가능한 account 제한](chapter1-2-pam-control-1.md)
        * [login account chroot](chapter1-2-pam-control-2.md)
        * [Google OTP를 이용한 2 factor 인증](chapter1-2-pam-control-3.md)
-* Chapter 3. Web Operation
-* Chapter 4. JVM Operation
-* Chapter 5. DNS Operation
-* Chapter 6. Time Server Operation
-* Chapter 7. VPN 구성
-* Chapter 8. SMTP Operation
+* Chapter 3. HTTP 운영
+* Chapter 4. JVM 운영
+* Chapter 5. DNS 운영
+* Chapter 6. Time Server 운영
+* Chapter 7. VPN 운영
+* Chapter 8. SMTP 운영
 * [안녕 리눅스 3 패키지 일람](AnNyung3-Package-Catalog.md)
    * [[AN:core]](AnNyung3-Core-Packages.md)
        * [annyung-release](pkg-core-annyung-release.md)
