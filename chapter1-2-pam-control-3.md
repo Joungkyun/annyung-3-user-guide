@@ -110,4 +110,7 @@ size of 1:30min to about 4min. Do you want to do so (y/n) y
 
 실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 ***~/.ssh/google-authenficator.info*** 라는 파일을 만들어(파일 이름은 중요하지 않습니다.) 남들이 보지 못하게(***chmod 600 filename***) 저장해 두시기 바랍니다.
 
+> ***다시 한번 강조***  
+위의 결과에서 secret key를 잘 보존하십시오!
+
 보너스로, 안녕 리눅스의 경우, Google authenticator 설정을 해 놓으면, passowrd expire 체크를 하지 않도록 패치가 되어 있습니다. 즉, 꽁수를 좀 부려 보자면 ***Google Authentifator 설정을 하지 않은 서버에서, 계정에 ~/.ssh/google-authenticator 파일이 존재할 경우, password expire를 피해갈 수 있습니다.
