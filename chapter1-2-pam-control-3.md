@@ -135,8 +135,8 @@ Login an3test.oops.org on an 18:23 on Friday, 19 February 2016
 Warning!! Authorized users only.
 All activity may be monitored and reported
 
-Verification code:
-Password:
+Verification code: ******
+Password: ******************
 Last login: Fri Feb 19 18:09:09 2016 from 1.116.49.24
 [bbuwoo@an3test ~]$ 
 ```
