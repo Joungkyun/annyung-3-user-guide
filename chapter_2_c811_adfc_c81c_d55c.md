@@ -15,7 +15,4 @@
   1. [login 가능한 account 제한](chapter1-2-pam-control-1.md)
   2. [login account chroot](chapter1-2-pam-control-2.md)
   3. [Google OPT를 이용한 2 factor 인증](chapter1-2-pam-control-3.md)
-4. Web server level의 IP및 account, Country/ISP data 기반의 Access control
-  1. Apache
-  2. nginx
-  3. lighttpd
+
