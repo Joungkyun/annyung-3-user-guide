@@ -28,7 +28,7 @@ Complete!
 ```bash
 [root@an3 ~]$ cat /etc/pam.d/sshd
 #%PAM-1.0
-auth       required     pam_google_authenticator.so nullok no_increment_hotp
+auth       required     pam_google_authenticator.so nullok try_first_pass no_increment_hotp
 auth       required     pam_sepermit.so
 auth       substack     password-auth
 auth       include      postlogin
@@ -38,7 +38,19 @@ auth       include      postlogin
 [root@an3 ~]$
 ```
 
-***auth*** 제일 상단에 ***required***로 ***pam_google_authenticator*** 를 등록 합니다. 여기서 ***nullok*** 옵션을 지정하면, account에 google-authenticator secret 파일이 있을 경우에만 2-factor 인증이 진행 됩니다. 없을 경우에는 기존의 1-factor 인증으로 진행이 되게 됩니다. 일단 ***nullok**** 옵션이 없으면 login을 하지 못하므로 지정하도록 합니다.
+***auth*** 제일 상단에 ***required***로 ***pam_google_authenticator*** 를 등록 합니다.
+
+지정된 ***pam_google_authenticator***의 옵션은 내용은 다음과 같습니다.
+
+    * nullok            - ~/.ssh/google-authenticator 가 없으면 1-factor 인증 진행
+                          이 옵션이 없으면 무조건 2-factor 인증을 진행 함
+    * try_first_pass    - client에서 2-factor 인증을 하지 못할 경우 암호 입력시에 
+                          "password veri_code" 형식으로 처리 가능 (확인 못함)
+    * no_increment_htop - vefication code 확인 실패시에 count를 올리지 않음
+    
+다른 옵션들에 대해서는 [google-authenticator README](https://github.com/google/google-authenticator/tree/master/libpam)를 참고 하십시오.
+
+여기서 ***nullok*** 옵션을 지정하면, account에 google-authenticator secret 파일이 있을 경우에만 2-factor 인증이 진행 됩니다. 없을 경우에는 기존의 1-factor 인증으로 진행이 되게 됩니다. 일단 ***nullok**** 옵션이 없으면 login을 하지 못하므로 지정하도록 합니다.
 
 다음, openssh 서버 설정 파일에서 Verication code를 사용할 수 있도록 설정해 줍니다.
 
