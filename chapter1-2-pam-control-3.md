@@ -4,6 +4,8 @@
 
 이 문서는 ***Google-Authenticator***를 이용하여 2-factor 인증을 구현하는 방법에 대해서 기술 합니다. ***Google-Authenticator***는 ***HMAC-Based One-time Password (HOTP)*** 방식과 ***Time-based One-time Password (TOTP)*** 방식을 지원하며, 여기서는 ***TOTP***를 이용하여 구성을 합니다.
 
+2-factor 인증은, password 유출이나 brute force attack 대응에 훌륭한 방어 수단이 될 수 있습니다. 이를 위하여
+
 현재 안녕 리눅스에서 google OTP를 이용한 인증은 ssh에만 국한이 됩니다. 차후 업데이트가 가능하면 가능한대로 추가하도록 하겠습니다.
 
 먼저 google OPT를 사용하기 위해서는 ***google-authenticator package***가 필요 합니다.
@@ -45,7 +47,7 @@ auth       include      postlogin
     * nullok            - ~/.ssh/google-authenticator 가 없으면 1-factor 인증 진행
                           이 옵션이 없으면 무조건 2-factor 인증을 진행 함
     * try_first_pass    - client에서 2-factor 인증을 하지 못할 경우 암호 입력시에 
-                          "password veri_code" 형식으로 처리 가능 (확인 못함)
+                          "PasswordVeri_code" 형식으로 처리 가능 (확인 못함)
     * no_increment_htop - vefication code 확인 실패시에 count를 올리지 않음
     
 다른 옵션들에 대해서는 [google-authenticator README](https://github.com/google/google-authenticator/tree/master/libpam)를 참고 하십시오.
