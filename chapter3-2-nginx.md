@@ -47,7 +47,7 @@ etc
 
 1. ***/etc/ngninx/nginx.conf***는 구동을 위한 최소한의 설정만을 가지고 있습니다. 그러므로 <u>이 파일을 수정하지 마십시오</u>.
 2. 사용자 설정은 ***/etc/nginx/conf.d*** 에서 하십시오.
-3. ***/etc/logrotate.d/nginx*** 에서 log ratation 설정을 하고 있습니다.
+3. ***/etc/logrotate.d/nginx*** 에서 log ratation 설정을 하고 있습니다. 기본으로 10일치의 로그를 남기도록 되어 있습니다.
 4. ***/etc/sysconfig/nginx***에서 init script에 필요한 옵션을 설정하고 있습니다.
 5. ***server*** block의 마지막에 아래 예제와 같이 ___common.d/*.conf___를 include 하십시오.
 ```nginx
