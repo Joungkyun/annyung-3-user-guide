@@ -40,7 +40,7 @@ etc
 2. 사용자 설정은 ***/etc/nginx/conf.d*** 에서 하십시오.
 3. ***/etc/logrotate.d/nginx*** 에서 log ratation 설정을 하고 있습니다.
 4. ***/etc/sysconfig/nginx***에서 init script에 필요한 옵션을 설정하고 있습니다.
-5. ***server*** block의 마지막에 다음 common.d/*.conf를 include 하십시오.
+5. ***server*** block의 마지막에 아래 예제와 같이 ___common.d/*.conf___를 include 하십시오.
 ```nginx
 server {
     listen       443 ssl spdy;
