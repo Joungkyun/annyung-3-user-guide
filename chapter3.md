@@ -80,29 +80,29 @@
 #<IfModule cgi_module>
 <IfModule cgid_module>
         <IfModule alias_module>
-                ScriptAlias                     /cgi-bin/ /home/httpd/cgi-bin/
+                ScriptAlias     /cgi-bin/ /home/httpd/cgi-bin/
         </IfModule>
 
         <Directory /home/httpd/cgi-bin>
-                AllowOverride           None
-                Options                         ExecCGI
-                Require                         all granted
+                AllowOverride   None
+                Options         ExecCGI
+                Require         all granted
         </Directory>
 
         #
         # .cgi, .pl 파일의 경우 위치와 상관없이 cgi로 실행함
         #
         #<IfModule mime_module>
-        #       AddHandler                      cgi-script      .cgi .pl
+        #       AddHandler      cgi-script      .cgi .pl
         #</IfModule>
 </IfModule>
 
 #<IfModule !cgi_module>
 <IfModule !cgid_module>
         <Directory /home/httpd/cgi-bin>
-                AllowOverride           None
-                Options                         None
-                Require                         all denied
+                AllowOverride   None
+                Options         None
+                Require         all denied
         </Directory>
 </IfModule>
 
