@@ -55,7 +55,7 @@
       ssl.use-sslv3          = "disable"
       ssl.honor-cipher-order = "enable"
       ssl.cipher-list = "ECDH+AESGCM:ECDH+AES256:ECDH+AES128:ECDH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL"
-      ssl.pemfile = "/etc/pki/lighttpd/oops.org.pem"
+      ssl.pemfile = "/etc/pki/lighttpd/annyung-sample.org.pem"
       ssl.ca-file = "/etc/pki/lighttpd/startssl-sub.class2.server.ca.sha2.pem"
   }
 
@@ -66,14 +66,16 @@
   먼저 구동시에 key 암호를 물어보기 때문에, 암호를 제거한 key file을 생성 합니다.
   
   ```bash
-  [root@an3 ~]$ openssl rsa -in oops.org.key -out oops.key.decrypt.key
+  [root@an3 ~]$ openssl rsa -in annyung-sample.org.key -out annyung-sample.org.decrypt.key
   ```
   
   다음 key file과 crt 파일을 합쳐서 [lighttpd](pkg-addon-lighttpd.md)에서 사용할 인증서를 생성 합니다.
   
   ```bash
-  [root@an3 ~] cat oops.org.decrypt.key oops.org.crt > oops.org.pem
+  [root@an3 ~] cat annyung-sample.org.decrypt.key annyung-sample.org.crt > annyung-sample.org.pem
   ```
+  
+  chain 인증서가 여러개 일 경우, 인증서 pem 파일(여기서는 annyung-sample.org.pem)에 합치면 됩니다.
 
   [lighttpd](pkg-addon-lighttpd.md) 1.4 branch는 spdy와 http2를 지원하지 않습니다.
 
