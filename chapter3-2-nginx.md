@@ -63,16 +63,24 @@ server {
     include /etc/nginx/common.d/*.conf;
 }
 ```
-6. ***/etc/nginx/common.d/core-secure.conf***에서 취약한 웹접근을 막는 설정이 있습니다. 운영에 문제가 될 수 있는 설정이니, 서비스전에 꼭 확인 하십시오.
+6. ***/etc/nginx/common.d/core-secure.conf***에서 취약한 웹접근을 막는 설정이 있습니다. 운영에 문제가 될 수 있는 설정이니, 서비스 전에 꼭 확인 하십시오.
 
-##3. 안녕에 제공하는 추가 모듈
+##3. SSL 설정 및 HTTP2 protocol 지원
 
-##4. PHP 연동
-##5. JAVA/Python/Perl 연동
+  ***/etc/nginx/conf.d/ssl.conf*** 를 참고 하십시오. 이 설정으로 [SSLlabs](https://www.ssllabs.com/]의 ***A-*** 등급을 받을 수 있도록 되어 있습니다.
+  
+  또한, ningx 는 http2 protocol을 1.9 main line에서 지원하고 있습니다. 안녕 리눅스는 ***stable*** 버전인 1.8을 제공하고 있으므로 h2c protocol 대신 spdy v3를 이용해야 합니다.
+  
+  안녕 리눅스의 ssl 설정 예제는 기본으로 spdy v3를 사용하도록 되어 있습니다.
+
+##4. 안녕에 제공하는 추가 모듈
+
+##5. PHP 연동
+##6. JAVA/Python/Perl 연동
 
   안녕 리눅스에서 특별히 반영한 것이 없습니다. 기존에 하시던 방법이 있으면 그대로 하시면 무방 합니다. 또한, 인터넷 검색을 활용 하십시오. 
 
-##6. nginx 구동
+##7. nginx 구동
 
   간단한 apcahe control 방법에 대하여 기술 합니다.
 
