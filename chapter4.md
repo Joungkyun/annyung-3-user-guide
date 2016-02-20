@@ -25,7 +25,7 @@
 
 ## 3. Oracle JDK
 
-Oracle JDK의 경우, 재배포 라이센스가 제한되어 있기 때문에 <u>binary package를 제공하지 않습니다.</u> 다만, 안녕 리눅스 3의 ***srpms repository***에 보시면 ***oracle-jdk*** source rpm을 제공 합니다. ***oracle-jdk*** source rpm은 재배포 제한 때문에 jdk binary를 포함하고 있지 않기 때문에 매우 사이즈가 작습니다.
+Oracle JDK의 경우, 재배포 라이센스가 제한되어 있기 때문에 <u>binary package를 제공하지 않습니다.</u> 다만, 안녕 리눅스 3의 ***srpms repository***에 보시면 ***oracle-jdk*** source rpm을 제공 합니다. ***oracle-jdk*** source rpm은 재배포 제한 때문에 jdk binary를 포함하고 있지 않기 때문에 매우 사이즈가 작습니다. (binary package를 빌드시 직접 다운로드 받음)
 
 그러므로 다음의 작업으로 oracle-jdk package를 구하실 수 있습니다.
 
