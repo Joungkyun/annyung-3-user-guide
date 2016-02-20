@@ -75,6 +75,24 @@ server {
 
 ##4. 안녕에 제공하는 추가 모듈
 
+ 1. [URL module](https://github.com/vozlt/nginx-module-url)  
+    apache mod_url 과 동일한 동작을 합니다.
+ 2. [krisp module](https://github.com/vozlt/nginx-module-krisp)  
+    nginx libkrisp module
+ 3. [vtm module](https://github.com/vozlt/nginx-module-vts)  
+    가상 호스트별 tracffic 상태를 확인 할 수 있습니다.
+ 4. [fancyindex](https://www.nginx.com/resources/wiki/modules/fancy_index/)  
+    directory listing을 이쁘게 해 줍니다.
+    안녕 리눅스에는 다음의 지시자가 추가 되었습니다.
+    * fancyindex_readme  
+      지정된 파일을 listing 아래에 출력 합니다. Github의 README.md 와 같이 보여진다고 생각하면 됩니다. 마단 markup은 지원하지 않고 HTML tag를 지원합니다.
+    * fancyindex_ignore_user  
+      지정된 user권한을 가진 파일/디렉토리는 listing 하지 않습니다.
+    * fancyindex_ignore_group  
+      지정된 group 권한을 가진 파일/디렉토리는 listing 하지 않습니다.
+ 5. [Headers more](https://www.nginx.com/resources/wiki/modules/headers_more/)
+    Response header에 header를 추가 하거나 제거 합니다.
+
 ##5. PHP 연동
 ##6. JAVA/Python/Perl 연동
 
