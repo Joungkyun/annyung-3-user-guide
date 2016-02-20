@@ -2,9 +2,9 @@
 
 ## 1. 개요
 
-안녕 리눅스의 JVM 환경은 oracle JRE 8과 tomcat 8을 지원합니다.
+안녕 리눅스의 JVM 환경은 ***oracle JRE 8***과 ***tomcat 8***을 지원합니다.
 
-안녕 리눅스에서 제공하는 oracle JRE 8과 tomcat 8은 oracle과 tomcat 에서 제공하는 binary package들을 풀어서 경로만 재구성 한 다음 re-packaing 한 것이기 때문에, 다운로드 버전과 차이가 없습니다.
+안녕 리눅스에서 제공하는 ***oracle JRE 8***과 ***tomcat 8***은 oracle과 tomcat 에서 제공하는 ***binary package***들을 풀어서 경로만 재구성 한 다음 ***re-packaing*** 한 것이기 때문에, 다운로드 버전과 차이가 없습니다.
 
 ## 2. 권고 사항
 
@@ -14,14 +14,16 @@
   * tomcat 8
   * javapackages-tool (X/GUI 관련 의존성 제거)
 
-다음의 조건에 해당한다면, ***CentOS JVM 환경***을 이용하십시오. ***CentOS JVM 환경***을 이용하는 방법은 ***"6. CentOS JVM 환경으로 rollback"*** 섹션을 참고 하십시오.
+다음의 조건에 해당한다면, ***CentOS JVM 환경***을 이용하십시오. ***CentOS JVM 환경***을 이용하는 방법은 <u>***"6. CentOS JVM 환경으로 rollback"*** 섹션을 참고</u> 하십시오.
 
 1. X 또는 GUI 관련 리소스가 필요한 경우  
   안녕 리눅스의 JVM 환경은 X 의존성이 없고, 간단한 web service정도를 하기 위해 구성된 환경 입니다.
-2. 안녕/CentOS에서 제공하는 marven package를 사용하기를 marven을 구성하려고 할 경우.
+2. 안녕/CentOS에서 제공하는 marven package를 사용하여 marven을 구성하려고 할 경우.
 3. 그냥 안녕의 JVM 환경은 못 믿겠다..
 
-일단, JVM 환경은 워낙 다양한 경우가 많아서 일일이 대응을 하기가 힘이 듭니다. 그러므로, 무언가 문제가 있다고 판단이 되면, CentOS JVM 환경으로 rollback 하여 테스트 해 보시기 바랍니다.
+일단, JVM 환경은 워낙 다양한 경우가 많아서 일일이 대응을 하기가 힘이 듭니다. 그러므로, 무언가 문제가 있다고 판단이 되면, <u>CentOS JVM 환경으로 rollback</u> 하여 테스트 해 보시기 바랍니다.
+
+현재 안녕 리눅스의 JVM환경으로 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU) 가 운영 중입니다.
 
 ## 3. Oracle JDK
 
