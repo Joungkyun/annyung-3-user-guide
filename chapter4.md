@@ -4,7 +4,7 @@
 
 안녕 리눅스의 JVM 환경은 ***oracle JRE 8***과 ***tomcat 8***을 지원합니다.
 
-안녕 리눅스에서 제공하는 ***oracle JRE 8***과 ***tomcat 8***은 oracle과 tomcat 에서 제공하는 ***binary package***들을 풀어서 경로만 재구성 한 다음 ***re-packaing*** 한 것이기 때문에, 다운로드 버전과 차이가 없습니다.
+안녕 리눅스에서 제공하는 ***oracle JRE 8***과 ***tomcat 8***은 oracle과 tomcat 에서 제공하는 ***binary package***들을 풀어서 경로만 재구성 한 다음 ***re-packaing*** 한 것이기 때문에, 다운로드 받은 binary package와 차이가 없습니다.
 
 ## 2. 권고 사항
 
