@@ -17,7 +17,7 @@
        * [Google OTP를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
 * [Chapter 3. HTTP 운영](chapter3.md)
    * [httpd](chapter3-1-httpd.md)
-   * [nginx](chapter3-2-nginx)
+   * [nginx](chapter3-2-nginx.md)
    * [lighttpd](chapter3-3-lighttpd)
    * [PHP](chapter3-4-php)
 * [Chapter 4. JVM 운영](chapter4.md)
