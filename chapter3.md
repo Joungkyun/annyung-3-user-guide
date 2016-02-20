@@ -87,6 +87,36 @@ LoadModule http2_module     modules/mod_http2.so
 ***h2c***(over SSL)은 [***mod_ssl***](pkg-core-base-httpd.md) package를 설치 하면 자동으로 동작 합니다.
 
 ### 4. SSL 설정
+
+SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니다.
+
+```bash
+[root@an3 ~]$ yum install mod_ssl
+```
+
+설치를 하면 ***/etc/httpd/conf.d/ssl.conf*** 가 설치 됩니다. 이 설정 파일에 기본적인 Chiper 설정등등이 들어가 있으므로, vhost 설정에 인증서 설정을 하는 것으로 SSL을 운영할 수 있습니다.
+
+참고로, 인증서에 문제만 없다면 기몬으로 [SSLLabs](https://www.ssllabs.com/)의 SSL 인증 등급을 ***A-***가 되도록 되어 있습니다. 참고로 ***A+***가 되기 위해서는 ***Strict-Transport-Security*** 헤더 설정을 해야 하는데, 이 설정은 서브 도메인을 모두 SSL로 보내도 된다는 의미이기 도메인 관련 전 사이트가 SSL이 아니면 안됩니다. 만약 보장 한다면 가상 호스트 block에 다음의 설정을 해 주시면 됩니다.
+
+```apache
+<VirtualHost *:443>
+    ServerAdmin    hostmaster@annyung-smaple.rog
+    ServerName     annyung-spample.org
+    DocumentRoot   /home/httpd/html
+
+    SSLEngine on
+    SSLCertificateFile      /etc/pki/httpd/annung-sample.sha2.crt
+    SSLCertificateKeyFile   /etc/pki/httpd/annyung-sample.sha2.key
+    SSLCACertificatePath    /etc/pki/httpd
+    SSLCACertificateFile    /etc/pki/httpd/startssl-ca.pem
+    SSLCertificateChainFile /etc/pki/httpd/startssl-sub.class2.server.ca.sha2.pem
+
+    <IfModule mod_headers.c>
+        Header always set Strict-Transport-Security "max-age=31536000;"
+    </IfModule>
+</VirtualHost>
+```
+
 ### 5. /~user 접근
 
 안녕 리눅스는 기본으로 /~user 의 접근이 차단 되어 있습니다. 계정 서비스를 하기 위해서는 ***/etc/httpd/conf.d/userdir.conf*** 에서 다음 설정을 반영한 다음 apache를 재시작 하십시오.
