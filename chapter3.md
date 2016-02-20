@@ -94,9 +94,12 @@ SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니�
 [root@an3 ~]$ yum install mod_ssl
 ```
 
-설치를 하면 ***/etc/httpd/conf.d/ssl.conf*** 가 설치 됩니다. 이 설정 파일에 기본적인 Chiper 설정등등이 들어가 있으므로, vhost 설정에 인증서 설정을 하는 것으로 SSL을 운영할 수 있습니다.
+설치를 하면 ***/etc/httpd/conf.d/ssl.conf*** 가 설치 됩니다. 이 설정 파일에 기본적인 ***Chiper*** 설정등이 이미 들어가 있으므로, vhost 설정에 인증서 설정을 하는 것으로 간단히 SSL을 운영할 수 있습니다.
 
-참고로, 인증서에 문제만 없다면 기몬으로 [SSLLabs](https://www.ssllabs.com/)의 SSL 인증 등급을 ***A-***가 되도록 되어 있습니다. 참고로 ***A+***가 되기 위해서는 ***Strict-Transport-Security*** 헤더 설정을 해야 하는데, 이 설정은 서브 도메인을 모두 SSL로 보내도 된다는 의미이기 도메인 관련 전 사이트가 SSL이 아니면 안됩니다. 만약 보장 한다면 가상 호스트 block에 다음의 설정을 해 주시면 됩니다.
+인증서 설정은 기존의 CentOS와 동일하니, 여기서 설명은 생략 합니다.
+
+
+참고로, 인증서에 문제만 없다면 기본 설정만으로 [SSLLabs](https://www.ssllabs.com/)의 SSL 인증 등급을 ***A-***가 되도록 되어 있습니다. 참고로 ***A+***가 되기 위해서는 ***Strict-Transport-Security*** 헤더 설정을 해야 하는데, 이 설정은 서브 도메인을 모두 SSL로 보내도 된다는 의미이기 때문에, 도메인 관련 전 사이트가 SSL이 아니면 안됩니다. 만약 보장 한다면 가상 호스트 block에 다음의 설정을 해 주시면 됩니다.
 
 ```apache
 <VirtualHost *:443>
