@@ -74,7 +74,6 @@
   ```bash
   [root@an3 ~] cat oops.org.decrypt.key oops.org.crt > oops.org.pem
   ```
-  
 
   [lighttpd](pkg-addon-lighttpd.md) 1.4 branch는 spdy와 http2를 지원하지 않습니다.
 
