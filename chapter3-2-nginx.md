@@ -73,7 +73,7 @@ server {
   
   안녕 리눅스의 ssl 설정 예제는 기본으로 spdy v3를 사용하도록 되어 있습니다.
 
-##4. 안녕에 제공하는 추가 모듈
+##4. 안녕에서 제공하는 추가 모듈
 
  1. [URL module](https://github.com/vozlt/nginx-module-url)  
     apache mod_url 과 동일한 동작을 합니다.
