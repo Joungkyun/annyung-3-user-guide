@@ -1,5 +1,14 @@
 # nginx
 
+> 목차
+1. 개요
+2. nginx 설정 파일
+3. SSL 설정 및 HTTP2 protocol 지원
+4. 안녕에서 제공하는 추가 모듈
+5. PHP 연동
+6. JAVA(tomcat)/Python/Perl 연동
+7. nginx 구동
+
 ##1. 개요
 
   안녕 리눅스에서 제공하는 nginx는 1.8 ***stable*** branch를 제공합니다.
@@ -97,7 +106,7 @@ server {
 
   Nginx에서의 PHP연동은 fastcgi protocol을 이용하여 PHP-FPM과 연동을 합니다. PHP-FPM 구동은 안녕 리눅스 사용자 가이드 [3.1.4 PHP](chapter3-4-php.md) 문서를 참조 하십시오.
   
-  다음은 http://wiki.kldp.org (moniwiki) 의 설정 예제 입니다.
+  nginx의 fastcgi 연동은 case by case의 경우가 많습니다. 여기서 모든 설명을 하기 힘드니, 여기서는 http://wiki.kldp.org (moniwiki) 의 실제 설정 예제를 참조 합니다.
   
   ```nginx
   server {
