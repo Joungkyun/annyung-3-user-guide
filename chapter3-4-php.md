@@ -19,14 +19,27 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
 
 2. package 구성
   1. php 7
+    * php-common - php 7 설정 파일
     * php - php 7 apache module (php-fpm을 이용하십시오. 곧 deprecated 시킬 예정)
     * php-cli - php 7 CLI interface
     * php-devel - php 7 모듈을 빌드하기 위한 개발 환경
     * php-fpm - php7 FastCGI 연동을 위한 FPM interface
+    * php-fpm-conf - php7 FPM 설정 파일
     * 이외 3rd party module - [php 패키지 일람](pkg-base-php.md)의 ***Sub packages*** 항목 참조
-  2. php 5
+  2. php 5.6
+    * Docker 환경 만들기 귀찮아서 만들었습니다.
+    * php56-common - php 5.6 설정 파일
     * php56-cli - php 5.6 CLI interface
     * php56-devel - php 5.6 모듈을 빌드하기 위한 개발 환경
     * php56-fpm - php 5.6 FastCGI 연동을 위한 FPM interface
+    * php56-fpm-conf - php 5.6 FPM 설정 파일
     * 이외 3rd party module - [php56 패키지 일람](pkg-addon-php56.md)의 ***Sub packages*** 항목 참조
+
+3. 설정 파일 및 개발 헤더 파일
+  1. php7
+    * /etc/php.d
+    * /etc/php.d/apache
+    * /etc/php.d/cli
+    * /etc/php.d/fpm
+  2. php 5.6
 
