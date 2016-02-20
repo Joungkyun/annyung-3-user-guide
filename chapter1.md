@@ -39,7 +39,7 @@
 
 
 ## 3. 보안 고도화
-  1. [chroot 환경 강화](chapter2-2-pam-control-2.md) ([pam chroot](pkg_base_pam.md) 모듈 개선)
+  1. [chroot 환경 강화](chapter2-2-pam-control-2.md) ([pam chroot](pkg-base-pam.md) 모듈 개선)
   2. [ISMS](http://isms.kisa.or.kr/kor/main.jsp) 인증 [심사 기준 적용](chapter2-2-pam-control.md)
   3. account action 추적 시스템
     * su, sudo 시에 SU_USER 환경 변수에 origianl account 유지
