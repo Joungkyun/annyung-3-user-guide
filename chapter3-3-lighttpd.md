@@ -125,29 +125,13 @@
   server.module         += ("mod_fastcgi")
   fastcgi.debug          = 0
   fastcgi.map-extension  = ( ".kldp" => ".php" )
-  castcgi.server         = (
+  fastcgi.server         = (
       ".php" => (
           (
             "host" => "127.0.0.1",
             "port" => 9000,
             "broken-scriptfilename" => "enable",
             "allow-x-send-file" => "enable"
-          )
-      ),
-      "/status" => (
-          (
-            "host" => "127.0.0.1",
-            "port" => 9000,
-            "broken-scriptfilename" => "enable",
-            "allow-x-send-file" => "disable"
-          )
-      ),
-      "/operate" => (
-          (
-            "host" => "127.0.0.1",
-            "port" => 9000,
-            "broken-scriptfilename" => "enable",
-            "allow-x-send-file" => "disable"
           )
       )
   )
@@ -157,7 +141,33 @@
 
 ##6. JAVA(tomcat)/Python/Perl 연동
 
-  안녕 리눅스에서 특별히 반영한 것이 없습니다. 기존에 하시던 방법이 있으면 그대로 하시면 무방 합니다. 또한, 인터넷 검색을 활용 하십시오. 
+  1. tomcat  
+    * proxy module을 이용 (ajp 지원 안함)
+    * http://annyung-sample.org/srv/ 를 tomcat 에 연동.
+
+    ```php
+      server.module         += ("mod_proxy")
+    
+      $HTTP["host"] == "annyung-sample.org" {
+          $HTTP["url"] =~ "^/srv/" {
+              proxy.server = (
+                  "" => (
+                      "tomcat" => (
+                          "host" => "127.0.0.1",
+                          "port" => 8080,
+                          "fix-redirects" => 1
+                      )
+                  )
+              )
+          }
+       }
+    ```
+
+  2. python django
+    * PHP와 동일하게 fastcgi 로 연결합니다. 아래 dango fastcgi 문서에 lighttpd 연동 예제가 포함 되어 있습니다.
+    * [django를 fastcgi로 띄우는 구동](https://docs.djangoproject.com/en/1.8/howto/deployment/fastcgi/)
+  3. perl
+
 
 ##7. lighttpd 구동
 
