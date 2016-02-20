@@ -67,7 +67,7 @@ server {
 
 ##3. SSL 설정 및 HTTP2 protocol 지원
 
-  ***/etc/nginx/conf.d/ssl.conf*** 를 참고 하십시오. 이 설정으로 [SSLlabs](https://www.ssllabs.com/]의 ***A-*** 등급을 받을 수 있도록 되어 있습니다.
+  ***/etc/nginx/conf.d/ssl.conf*** 를 참고 하십시오. 이 설정으로 [SSLlabs](https://www.ssllabs.com/)의 ***A-*** 등급을 받을 수 있도록 되어 있습니다.
   
   또한, ningx 는 http2 protocol을 1.9 main line에서 지원하고 있습니다. 안녕 리눅스는 ***stable*** 버전인 1.8을 제공하고 있으므로 h2c protocol 대신 spdy v3를 이용해야 합니다.
   
