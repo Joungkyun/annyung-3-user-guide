@@ -139,7 +139,7 @@
 
   lighttpd 문서상, TCP가 아닌 unix domain soecket으로도 fastcgi 연결이 가능하다고 되어 있으나, 실상은 동작하지 않는다. 그러므로 PHP-FPM을 lighttpd와 연동을 하려면 PHP-FPM의 listen을 TCP로 설정해야 한다.
 
-##6. JAVA(tomcat)/Python/Perl 연동
+##6. JAVA(tomcat)/Python/Perl/CGI 연동
 
   1. tomcat  
     * proxy module을 이용 (ajp 지원 안함)
