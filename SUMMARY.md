@@ -19,7 +19,7 @@
    * [httpd](chapter3-1-httpd.md)
    * [nginx](chapter3-2-nginx.md)
    * [lighttpd](chapter3-3-lighttpd.md)
-   * [PHP](chapter3-4-php)
+   * [PHP](chapter3-4-php.md)
 * [Chapter 4. JVM 운영](chapter4.md)
 * Chapter 5. DNS 운영
 * Chapter 6. Time Server 운영
