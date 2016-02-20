@@ -17,7 +17,7 @@
   1. 안녕 리눅스는 ***event MPM을 사용***하는 것을 권장 합니다.  
      ***event*** MPM은 ***prefork***와 ***worker***의 hybrid 방식으로 기존의 ***prefork***와 ***worker***보다 성능이 월등히 좋습니다.
   2. ***mod_php7***(apache module) 을 사용하기 위해서는 MPM을 ***prefork***로 변경해야 합니다. 권장하지 않습니다. (추후에 ***mod_php7***은 deprecated 될 수 있습니다.)
-  3. ***mod_php7*** 보다는 ***php-fpm*** 구성을 권고 합니다. 자세한 사항은 ***PHP*** 섹션을 참고 하십시오.
+  3. ***mod_php7*** 보다는 ***php-fpm***(FastCGI) 구성을 권고 합니다. 자세한 사항은 ***PHP*** 섹션을 참고 하십시오.
   4. ***CGI*** 설정시, MPM이 ***event***나 ***worker***일 경우, ***cgi module***이 아니라 ***cgid*** 모듈을 사용해야 합니다.
   5. 이 문서 가이드는 <u>***event MPM***으로 운영하는 것을 기준으로 기술</u> 합니다.
 2. ***user_dir***이 기본 off 로 설정 되어 있습니다. (기본으로 /~user 접근이 차단 되어 있습니다.)
