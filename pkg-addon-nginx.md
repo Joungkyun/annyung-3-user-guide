@@ -4,7 +4,7 @@
 A high performance web server and reverse proxy server
 
 ### Features:
-- add [url module](https://github.com/vozlt/nginx-module-vts)
+- add [url module](https://github.com/vozlt/nginx-module-url)
 - add [krisp module](https://github.com/vozlt/nginx-module-krisp)
 - add [vhost traffic module](https://github.com/vozlt/nginx-module-vts)
 - add fancyindex module
