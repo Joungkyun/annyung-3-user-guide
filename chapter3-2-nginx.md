@@ -53,20 +53,11 @@ etc
 ```nginx
 server {
     listen       443 ssl spdy;
-    server_name  annyung-test.oops.org;
-    root         /home/httpd/annyung-test.oops.org;
+    server_name  annyung-sample.org;
+    root         /home/httpd/annyung-smaple.org;
     index        index.html;
 
-    # for ssl certificate configuration
-    include      /etc/nginx/cert.d/annyung-test.conf;
-
-    location /httpd/ {
-        deny all;
-    }
-
-    location ~* \.(ttf|otf|eot|svg|woff|woff2) {
-        add_header 'Access-Control-Allow-Origin' '*' always;
-    }
+    # ** 중략 **
 
     # Load configuration files for the default server block.
     include /etc/nginx/common.d/*.conf;
@@ -76,7 +67,43 @@ server {
 
 ##3. SSL 설정 및 HTTP2 protocol 지원
 
-  ***/etc/nginx/conf.d/ssl.conf*** 를 참고 하십시오. 이 설정으로 [SSLlabs](https://www.ssllabs.com/)의 ***A-*** 등급을 받을 수 있도록 되어 있습니다.
+```nginx
+server {
+    listen       443 ssl spdy;
+    server_name  annyung-sample.org;
+    root         /home/httpd/annyung-smaple.org;
+    index        index.html;
+
+    # for ssl certificate configuration
+    ssl                 on
+    ssl_certificate     annyung-sample.org.pem
+    ssl_certificate_key annyung-sample.org.decrypt.key
+    
+    ssl_protocols        TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers          ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+    ssl_prefer_server_ciphers on;
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/common.d/*.conf;
+}
+```
+
+  위의 설정을 참고 하십시오. 이 설정으로 [SSLlabs](https://www.ssllabs.com/)의 ***A-*** 등급을 받을 수 있습니다.
+  
+  nginx의 인증서는 chain 인증서가 존재할 경우, 인증서와 chain 인증서를 합쳐서 만들어야 합니다.
+  
+  다음은 startssl class2 chain 인증서를 이용하여 만드는 경우 입니다.
+  
+  ```bash
+  [root@an3 ~]$ cat annyung-sample.org.crt startssl-sub.class2.server.ca.sha2.pem > annyung-sample.org.pem
+  ```
+  
+  key 파일의 암호를 제거하지 않으면, ngninx 구동시에 key 암호를 입력해야 합니다. 이를 해결하기 위해서 암호를 제거한 key 파일을 설정 합니다.
+  
+  ```bash
+  [root@an3 ~]$ openssl rsa -in annyung-sample.org.key -out annyung-sample.org.decrypt.key
+  ```
+  
   
   또한, ningx 는 http2 protocol을 1.9 main line에서 지원하고 있습니다. 안녕 리눅스는 ***stable*** 버전인 1.8을 제공하고 있으므로 h2c protocol 대신 spdy v3를 이용해야 합니다.
   
