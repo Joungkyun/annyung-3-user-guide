@@ -154,25 +154,25 @@ server {
 
   * 부팅시 nginx 시작하도록 설정
   ```bash
-  [root@an3 ~]$ service httpd enable
+  [root@an3 ~]$ service nginx enable
   ```
   * 부팅시 nginx 시작 하지 않도록 설정
   ```bash
-  [root@an3 ~]$ service httpd disable
+  [root@an3 ~]$ service nginx disable
   ```
   * nginx 시작
   ```bash
-  [root@an3 ~]$ service httpd start
+  [root@an3 ~]$ service nginx start
   ```
   * nginx 정지
   ```bash
-  [root@an3 ~]$ service httpd stop
+  [root@an3 ~]$ service nginx stop
   ```
   * nginx 재시작
   ```bash
-  [root@an3 ~]$ service httpd restart
+  [root@an3 ~]$ service nginx restart
   ```
   * nginx 상태 보기
   ```bash
-  [root@an3 ~]$ service httpd status
+  [root@an3 ~]$ service nginx status
   ```
