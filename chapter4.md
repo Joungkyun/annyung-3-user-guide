@@ -59,8 +59,8 @@ oracle-jdk-1.8.0-71.el7.x86_64.rpm
   * End of Public Updates Notification : TBD
   * End of Public Updates : 2017.09
     * long term 유지보수를 원하신다면, open-jdk 사용을 고려해 보시기 바랍니다.
-    * CentOS JVM 환경은 open-jdk를 제공합니다.
-    * http://stunstun.tistory.com/222 참조
+    * CentOS JVM 환경은 open-jdk 1.7을 제공합니다.
+    * oracle-jdk와 openjdk의 차이 - http://stunstun.tistory.com/222 참조
     * 안녕 4에서는 openjdk로 갈아탈 예정입니다. :-)
 2. tomcat
   * 배포처에서 EOL 관련 계획에 대한 공지 없음.
