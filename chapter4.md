@@ -52,7 +52,28 @@ oracle-jdk-1.8.0-71.el7.x86_64.rpm
 
 안녕 리눅스에서 제공하는 JVM(oracle-jre)와 tomcat package는 해당 패키지 배포처의 binary package를 사용하는 것이기 때문에, 이들 package의 life time은 각 패키지의 life time 까지만 제공 합니다.
 
+1. JAVA SE 8
+  * http://www.oracle.com/technetwork/java/eol-135779.html
+  * End of Public Updates Notification : TBD
+  * End of Public Updates : 2017.09
+    * long term 유지보수를 원하신다면, open-jdk 사용을 고려해 보시기 바랍니다.
+    * CentOS JVM 환경은 open-jdk를 제공합니다.
+    * http://stunstun.tistory.com/222 참조
+2. tomcat
+  * 배포처에서 EOL 관련 계획에 대한 공지 없음.
+  * 2016년 2월 tomcat 6 EOL 공지 (2016.12.31 까지)
+
 ## 5. 안녕 리눅스 oracle-jre 업데이트 주기
+
+안녕 리눅스의 oracle-jre 업데이트는 oracle에서 제공하는 년 3회의 ***Critical Patch Update*** release에 대응 합니다.
+
+Oracle의 2016년 ***Critical Patch Update*** 예정은 다음과 같습니다.
+
+  * http://www.oracle.com/technetwork/topics/security/alerts-086861.html
+  * 2016.04.19
+  * 2016.07.19
+  * 2016.10.18
+  * 2017.01.17
 
 
 ## 6. CentOS JVM 환경으로 rollback
