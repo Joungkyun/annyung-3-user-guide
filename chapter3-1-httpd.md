@@ -108,13 +108,13 @@ SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니�
 
 ```apache
 <VirtualHost *:443>
-    ServerAdmin    hostmaster@annyung-smaple.rog
+    ServerAdmin    hostmaster@annyung-smaple.org
     ServerName     annyung-spample.org
     DocumentRoot   /home/httpd/html
 
     SSLEngine on
-    SSLCertificateFile      /etc/pki/httpd/annung-sample.sha2.crt
-    SSLCertificateKeyFile   /etc/pki/httpd/annyung-sample.sha2.key
+    SSLCertificateFile      /etc/pki/httpd/annyung-sample.org.crt
+    SSLCertificateKeyFile   /etc/pki/httpd/annyung-sample.org.decrypt.key
     SSLCACertificatePath    /etc/pki/httpd
     SSLCACertificateFile    /etc/pki/httpd/startssl-ca.pem
     SSLCertificateChainFile /etc/pki/httpd/startssl-sub.class2.server.ca.sha2.pem
@@ -124,6 +124,15 @@ SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니�
     </IfModule>
 </VirtualHost>
 ```
+
+apache 구동시에 key에 암호가 걸려 있으면 구동할 때 암호를 물어보게 됩니다. 그러므로 key file은 암호를 제거한 파일로 등록을 하도록 합니다.
+
+```bash
+[root@an3 ~]$ openssl rsa -in annyung-sample.org.key -out annyung-sample.org.decrypt.key
+```
+
+***SSLPassPhraseDialog*** 지시자를 이용하여 암호가 걸린 key 파일을 사용할 수는 있으나, 설정이 번거롭고 또한 암호를 기록한 파일이 있어야 한다는 점에서, 그냥 암호를 제거한 key파일을 사용하는 것이 유용하다고 판단이 되어 집니다. 어떤 key 파일을 사용할 지에 대해서는 사용자가 직접 선택을 하시기 바랍니다.
+
 
 만약, http2 module이 Load 되어 있다면 ***/etc/httpd/conf.d/ssl.conf***의 다음 설정에 의해 자동으로 http2 protocol로 동작을 합니다.
 
