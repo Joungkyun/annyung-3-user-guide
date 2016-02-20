@@ -9,7 +9,7 @@
 6. CGI 설정
 7. PHP 연동
 8. Python/Perl/tomcat 등의 연동
-
+9. apcahe 구동
 
 ## 1. 주의 사항
 
@@ -214,3 +214,32 @@ LoadModule  userdir_module      modules/mod_userdir.so
 ## 8. Python/Perl/tomcat 등의 연동
 
 이 환경에 대해서는 별개의 변경 사항이 없기 때문에 CentOS 기준과 Apache 2.4의 기준으로 설정 하시면 됩니다.
+
+## 9. apache 구동
+
+간단한 apcahe control 방법에 대하여 기술 합니다.
+
+* 부팅시 apache 시작하도록 설정
+  ```bash
+  [root@an3 ~]$ service httpd enable
+  ```
+* 부팅시 apache 시작 하지 않도록 설정
+  ```bash
+  [root@an3 ~]$ service httpd disable
+  ```
+* apache 시작
+  ```bash
+  [root@an3 ~]$ service httpd start
+  ```
+* apache 정지
+  ```bash
+  [root@an3 ~]$ service httpd stop
+  ```
+* apache 재시작
+  ```bash
+  [root@an3 ~]$ service httpd restart
+  ```
+* apache 상태 보기
+  ```bash
+  [root@an3 ~]$ service httpd status
+  ```
