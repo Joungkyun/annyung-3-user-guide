@@ -15,7 +15,7 @@
 <br>
 
 
-안녕 리눅스는 CentOS/RHEL 7이 기본으로 제공하는 [firewalld](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html)를 사용하지 않고, 안녕 1.x 부터 제공해 오던 **[oops-firewall](core-pkg-oops-firewall.md)**을 제공합니다.
+안녕 리눅스는 CentOS/RHEL 7이 기본으로 제공하는 [firewalld](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html)를 사용하지 않고, 안녕 1.x 부터 제공해 오던 **[oops-firewall](pkg-core-oops-firewall.md)**을 제공합니다.
 
 **oops-firewall**이나 **firewalld**는 모두 iptables를 backend로 하는 즉, iptables rule을 대신 작성해 주는 utility라고 볼 수 있습니다. 즉, **oops-firewall**이나 **firewalld**에서 설정은 iptables rule을 작성한 것이고, 이 rule을 ipatbles로 deploy하여 netfilter에 반영을 하게 되는 것입니다.
 
