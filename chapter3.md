@@ -5,13 +5,14 @@
 ##1. httpd(apache)
 ### 1. 주의 사항
 
-1. 안녕 리눅스의 httpd의 기본 MPM은 event 입니다.
-  1. 안녕 리눅스는 event MPM을 사용하는 것을 권장 합니다.
-  2. mod_php7 을 사용하기 위해서는 MPM을 prefork로 변경해야 합니다.
-  3. mod_php7 보다는 php-fpm 구성을 권고 합니다. 자세한 사항은 PHP 섹션을 참고 하십시오.
-  4. CGI 설정시, MPM이 event나 worker일 경우, cgi module이 아니라 cgid 모듈을 사용해야 합니다.
+1. 안녕 리눅스의 httpd의 기본 MPM은 ***event*** 입니다.
+  1. 안녕 리눅스는 ***event MPM을 사용***하는 것을 권장 합니다.  
+     ***event*** MPM은 ***prefork***와 ***worker***의 hybrid 방식으로 기존의 ***prefork***와 ***worker***보다 성능이 월등히 좋습니다.
+  2. ***mod_php7*** 을 사용하기 위해서는 MPM을 ***prefork***로 변경해야 합니다. 권장하지 않습니다. (추후에 ***mod_php7***은 deprecated 될 수 있습니다.)
+  3. ***mod_php7*** 보다는 ***php-fpm*** 구성을 권고 합니다. 자세한 사항은 ***PHP*** 섹션을 참고 하십시오.
+  4. ***CGI*** 설정시, MPM이 ***event***나 ***worker***일 경우, ***cgi module***이 아니라 ***cgid*** 모듈을 사용해야 합니다.
   5. 이 문서 가이드는 <u>***event MPM***으로 운영하는 것을 기준으로 기술</u> 합니다.
-2. user_dir이 기본 off 로 설정 되어 있습니다. (기본으로 /~user 접근이 차단 되어 있습니다.)
+2. ***user_dir***이 기본 off 로 설정 되어 있습니다. (기본으로 /~user 접근이 차단 되어 있습니다.)
 3. ***/etc/httpd/conf.d/Security.conf*** 를 꼭 확인 하십시오.  
   웹 공격에 취약한 접근에 대하여 미리 접근을 차단하고 있습니다. <u>이 설정은 서비스 운영 시에 꼭 확인</u>을 하시기 바랍니다. 이 설정 때문에 원하는 동작이 되지 않을 수 있습니다. 
 
@@ -60,7 +61,71 @@
  * ***/etc/httpd/httpd.conf*** 에서 ***/etc/httpd/conf.d/*.conf***를 include 한 다음 ***/etc/httpd/user.d/*.conf***를 include 하기 때문에 중복되는 지시자 중 ***/etc/httpd/user.d/***에 설정된 지시자가 최종 반영이 됩니다.
 
 
+### 3. HTTP2 protocol 지원
+### 4. SSL 설정
+### 5. /~user 접근
+### 6. CGI 설정
 
+안녕 리눅스에서 cgi를 사용하기 위해서는 ***/etc/httpd/conf.d/cgi.conf*** 에서 모듈을 load 해 주셔야 합니다. 기본으로 load 설정이 주석 처리 되어 있습니다.
+
+```apache
+<IfModule mpm_event_module>
+   LoadModule  cgid_module     modules/mod_cgid.so
+</IfModule>
+```
+
+다음 기본으로 설정 되어 있는 cgi 설정들을 사용하기 위해서는 &lt;ifModule&gt;의 조건을 ***cig_module***에서 ***cgid_module***로 변경 하십시오.
+
+```apache
+#<IfModule cgi_module>
+<IfModule cgid_module>
+        <IfModule alias_module>
+                ScriptAlias                     /cgi-bin/ /home/httpd/cgi-bin/
+        </IfModule>
+
+        <Directory /home/httpd/cgi-bin>
+                AllowOverride           None
+                Options                         ExecCGI
+                Require                         all granted
+        </Directory>
+
+        #
+        # .cgi, .pl 파일의 경우 위치와 상관없이 cgi로 실행함
+        #
+        #<IfModule mime_module>
+        #       AddHandler                      cgi-script      .cgi .pl
+        #</IfModule>
+</IfModule>
+
+#<IfModule !cgi_module>
+<IfModule !cgid_module>
+        <Directory /home/httpd/cgi-bin>
+                AllowOverride           None
+                Options                         None
+                Require                         all denied
+        </Directory>
+</IfModule>
+
+```
+
+만약 ***prefork*** MPM을 선택하였다면 ***cgi_module***을 load 해 주시면 됩니다.
+
+```apache
+<IfModule prefork_module>
+   LoadModule  cgi_module     modules/mod_cgi.so
+</IfModule>
+```
+
+
+### 7. PHP 연동
+
+안녕 리눅스는 기본으로 PHP7을 지원 합니다. 그리고, PHP5의 호환성을 위하여 PHP56 compat package를 FPM으로 지원을 합니다. 그러므로, PHP7과 PHP56을 모두 사용하기 위해서는 mod_php를 사용하는 것 보다 php-fpm(FastCGI)로 구성 하는 것을 권고 합니다.
+
+자세한 사항은 PHP 섹션을 참고 하십시오.
+
+### 8. Python/Perl/tomcat 등의 연동
+
+이 환경에 대해서는 별개의 변경 사항이 없기 때문에 CentOS 기준과 Apache 2.4의 기준으로 설정 하시면 됩니다.
 
 
 
