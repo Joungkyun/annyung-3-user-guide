@@ -94,7 +94,48 @@ server {
     Response header에 header를 추가 하거나 제거 합니다.
 
 ##5. PHP 연동
-##6. JAVA/Python/Perl 연동
+
+  Nginx에서의 PHP연동은 fastcgi protocol을 이용하여 PHP-FPM과 연동을 합니다. PHP-FPM 구동은 안녕 리눅스 사용자 가이드 [3.1.4 PHP](chapter3-4-php.md) 문서를 참조 하십시오.
+  
+  다음은 http://wiki.kldp.org (moniwiki) 의 설정 예제 입니다.
+  
+  ```nginx
+  server {
+    listen       443 ssl spdy;
+    server_name  wiki.kldp.org;
+    root         /home/wiki;
+    index        index.html;
+
+    # for ssl
+    include      /etc/nginx/cert.d/kldp.org.conf;
+
+    location ~ ^/(data|conf(ig)?|bin|inc(lude)?|plugins?|wikiseed)/ {
+        deny     all;
+    }
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/common.d/*.conf;
+
+    location ~ \.php($|/) {
+        include  params/fastcgi_params;
+        fastcgi_pass unix:/var/run/php-fpm.sock;
+
+        if ( !-f $document_root$fastcgi_script_name ) {
+            return 404;
+        }
+
+        fastcgi_index index.php;
+        fastcgi_split_path_info ^((?U).+\.php)(/?.+)$;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_read_timeout 60;
+    }
+  }
+
+  ```
+
+##6. JAVA(tomcat)/Python/Perl 연동
 
   안녕 리눅스에서 특별히 반영한 것이 없습니다. 기존에 하시던 방법이 있으면 그대로 하시면 무방 합니다. 또한, 인터넷 검색을 활용 하십시오. 
 
