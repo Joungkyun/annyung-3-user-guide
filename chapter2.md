@@ -10,9 +10,9 @@
 
 다룰 대상에 대해서는 다음과 같습니다.
 
-1. [안녕 리눅스 방화벽 설정](chapter1-1-firewall.md)
-2. [Shell login Control (with PAM)](chapter1-2-pam-control.md)
-  1. [login 가능한 account 제한](chapter1-2-pam-control-1.md)
-  2. [login account chroot](chapter1-2-pam-control-2.md)
-  3. [Google OPT를 이용한 2 factor 인증](chapter1-2-pam-control-3.md)
+1. [안녕 리눅스 방화벽 설정](chapter2-1-firewall.md)
+2. [Shell login Control (with PAM)](chapter2-2-pam-control.md)
+  1. [login 가능한 account 제한](chapter2-2-pam-control-1.md)
+  2. [login account chroot](chapter2-2-pam-control-2.md)
+  3. [Google OPT를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
 
