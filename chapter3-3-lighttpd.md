@@ -167,7 +167,21 @@
     * PHP와 동일하게 fastcgi 로 연결합니다. 아래 dango fastcgi 문서에 lighttpd 연동 예제가 포함 되어 있습니다.
     * [django를 fastcgi로 띄우는 구동](https://docs.djangoproject.com/en/1.8/howto/deployment/fastcgi/)
   3. perl
-
+    1. fastcgi 연동
+       * http://nginxlibrary.com/perl-fastcgi/ 문서에서 perl fastcgi wrapper 부분을 참조 하십시오.
+       * lighttpd 설정은 PHP나 Python django와 동일하게 하면 됩니다.
+    2. CGI 연동 - ***4. CGI 연동***을 참조 하십시오.
+  4. CGI 연동
+    ```php
+    server.module      += ("mod_cgi")
+    server.breakagelog  = "/var/log/lighttpd/breakage.log"
+    cgi.assign = (
+        ".pl"  => "/usr/bin/perl",
+        ".py"  => "/usr/bin/python",
+        ".cgi" => "/usr/bin/perl"
+    )
+    ```
+    http://redmine.lighttpd.net/projects/1/wiki/docs_modcgi 참조
 
 ##7. lighttpd 구동
 
