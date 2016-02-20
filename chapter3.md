@@ -84,7 +84,7 @@ LoadModule http2_module     modules/mod_http2.so
 </IfModule>
 ```
 
-***h2c***(over SSL)은 [***mod_ssl***](pkg-core-base-httpd.md) package를 설치 하면 자동으로 동작 합니다.
+***h2c***(over SSL)은 [***mod_ssl***](pkg-base-httpd.md) package를 설치 하면 자동으로 동작 합니다.
 
 ### 4. SSL 설정
 
