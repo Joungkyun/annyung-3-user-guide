@@ -1,5 +1,8 @@
 # Chapter 3. HTTP 운영
 
+##이 문서는 현재 작성 중입니다. !!!!!!!!!!!!!!!!
+
+
 이 문서는 HTTP를 운영함에 있어 CentOS와 차별/추가/변경된 사항에 대하여 기술 합니다. 특히 httpd(apache) 2.4와 PHP의 경우 큰 변경 사항이 있으니 참고 하시기 바랍니다.
 
 ##1. httpd(apache)
@@ -62,8 +65,44 @@
 
 
 ### 3. HTTP2 protocol 지원
+
+안녕 리눅스의 apache는 ***http2*** protpcol을 지원하기 위해서 2.4.17 이상 버전으로 업그레이드 되었으며, 또한 openssl 1.0.1e에 ***ALPN*** patch를 추가 하였습니다.
+
+***/etc/httpd/conf.d/LoadModules.conf*** 에서 다음 라인을 찾아서 주석을 풀어 준 다음, apache를 재시작 합니다.
+
+```apache
+LoadModule http2_module     modules/mod_http2.so
+```
+
+***http2*** protocol은 ***h2*** 와 ***h2c***(over SSL)로 구분이 됩니다.
+
+***h2*** protocol은 ***mod_http2***가 로드가 되면 ***/etc/httpd/user.d/vhost.conf***에서 다음의 설정에 의해 자동으로 구동이 됩니다.
+
+```apache
+<IfModule http2_module>
+    Protocols           h2c HTTP/1.1
+</IfModule>
+```
+
+***h2c***(over SSL)은 [***mod_ssl***](pkg-core-base-mod_ssl.md) package를 설치 하면 자동으로 동작 합니다.
+
 ### 4. SSL 설정
 ### 5. /~user 접근
+
+안녕 리눅스는 기본으로 /~user 의 접근이 차단 되어 있습니다. 계정 서비스를 하기 위해서는 ***/etc/httpd/conf.d/userdir.conf*** 에서 다음 설정을 반영한 다음 apache를 재시작 하십시오.
+
+```apache
+#
+# 사용하기 위해서는 모듈 설정 주석을 해제해야 함
+#
+LoadModule  userdir_module      modules/mod_userdir.so
+
+<IfModule mod_userdir.c>
+    UserDir                     On
+</IfModule>
+```
+
+
 ### 6. CGI 설정
 
 안녕 리눅스에서 cgi를 사용하기 위해서는 ***/etc/httpd/conf.d/cgi.conf*** 에서 모듈을 load 해 주셔야 합니다. 기본으로 load 설정이 주석 처리 되어 있습니다.
