@@ -20,7 +20,7 @@
 ## 2. 운영 고도화
   1. 콘솔 한글 출력 지원 (jfbterm)
   2. IP 기반 GEO system 지원
-    * [kmod_geoip](chapter1-1-firewall-6.md)
+    * [kmod_geoip](chapter2-1-firewall-6.md)
     * iptables xt_geoip
     * libkrisp
   3. cvs usermap 기능 지원으로 공용 repository 운영 고도화
@@ -39,8 +39,8 @@
 
 
 ## 3. 보안 고도화
-  1. [chroot 환경 강화](chapter1-2-pam-control-2.md) ([pam chroot](pkg_base_pam.md) 모듈 개선)
-  2. [ISMS](http://isms.kisa.or.kr/kor/main.jsp) 인증 [심사 기준 적용](chapter1-2-pam-control.md)
+  1. [chroot 환경 강화](chapter2-2-pam-control-2.md) ([pam chroot](pkg_base_pam.md) 모듈 개선)
+  2. [ISMS](http://isms.kisa.or.kr/kor/main.jsp) 인증 [심사 기준 적용](chapter2-2-pam-control.md)
   3. account action 추적 시스템
     * su, sudo 시에 SU_USER 환경 변수에 origianl account 유지
     * history에 SU_USER 반영
