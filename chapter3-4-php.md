@@ -17,7 +17,7 @@
 
 PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고는 있으나, 아마도 곧 decprecated 될 예정입니다. (빌드 시간이 너무 오래 걸립니다 T.T)
 
-2. package 구성
+##2. package 구성
   1. php 7
     * php-common - php 7 설정 파일
     * php - php 7 apache module (php-fpm을 이용하십시오. 곧 deprecated 시킬 예정)
@@ -35,7 +35,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
     * php56-fpm-conf - php 5.6 FPM 설정 파일
     * 이외 3rd party module - [php56 패키지 일람](pkg-addon-php56.md)의 ***Sub packages*** 항목 참조
 
-3. 설정 파일 및 개발 헤더 파일
+##3. 설정 파일 및 개발 헤더 파일
   1. php7
     * /etc/php.d
     * /etc/php.d/apache
