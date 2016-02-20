@@ -40,6 +40,30 @@ etc
 2. 사용자 설정은 ***/etc/nginx/conf.d*** 에서 하십시오.
 3. ***/etc/logrotate.d/nginx*** 에서 log ratation 설정을 하고 있습니다.
 4. ***/etc/sysconfig/nginx***에서 init script에 필요한 옵션을 설정하고 있습니다.
+5. ***server*** block의 마지막에 다음 common.d/*.conf를 include 하십시오.
+```nginx
+server {
+    listen       443 ssl spdy;
+    server_name  annyung-test.oops.org;
+    root         /home/httpd/annyung-test.oops.org;
+    index        index.html;
+
+    # for ssl certificate configuration
+    include      /etc/nginx/cert.d/annyung-test.conf;
+
+    location /httpd/ {
+        deny all;
+    }
+
+    location ~* \.(ttf|otf|eot|svg|woff|woff2) {
+        add_header 'Access-Control-Allow-Origin' '*' always;
+    }
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/common.d/*.conf;
+}
+```
+6. ***/etc/nginx/common.d/core-secure.conf***에서 취약한 웹접근을 막는 설정이 있습니다. 운영에 문제가 될 수 있는 설정이니, 서비스전에 꼭 확인 하십시오.
 
 ##3. 안녕에 제공하는 추가 모듈
 
