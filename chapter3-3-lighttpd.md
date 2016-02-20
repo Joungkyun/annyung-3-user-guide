@@ -105,9 +105,19 @@
       * listing시 image 파일이 존재하면 &lt;img&gt; tag로 출력
       * 파일 이름이 cover 또는 preview-000 형식일 경우, cover mode로 출력
     * dir-listing.encoding
+      * 문서의 charset을 &lt;meta&gt; tag로 지정
     * dir-listing.html-lang
+      * &lt;html lang="VALUE"&gt;
     * dir-listing.urlencode
+      * listing file link를 urlencode 하여 출력 (기본값: enable)
     * dir-listing.external-js
+      * 외부 javascript url을 삽입
+  6. 3rd party module
+    * [mod_throttlestatus](http://svn.oops.org/wsvn/Lighttpd.mod_throttlestatus/trunk/throttlestatus.ko.txt) - 디렉토리별 traffic 전송량 표시
+    * [mod_url](http://svn.oops.org/wsvn/Lighttpd.mod_url/trunk/README) - URI 문자셋 보정 (apache mod_url의 lighttpd 버전)
+    * [mod_net_access](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README) - network 접근 제한 고도화
+    * [mod_auth_nis](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README) - NIS 인증 모듈
+    * [mod_krisp](http://svn.oops.org/wsvn/Lighttpd.mod_krisp/trunk/README) - IP 관련 Geo data를 환경 변수로 생성
 
 ##5. PHP 연동
 
