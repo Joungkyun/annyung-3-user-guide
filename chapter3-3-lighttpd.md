@@ -117,7 +117,7 @@
     * [mod_url](http://svn.oops.org/wsvn/Lighttpd.mod_url/trunk/README) - URI 문자셋 보정 (apache mod_url의 lighttpd 버전)
     * [mod_net_access](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README) - network 접근 제한 고도화
     * [mod_auth_nis](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README) - NIS 인증 모듈
-    * [mod_krisp](http://svn.oops.org/wsvn/Lighttpd.mod_krisp/trunk/README) - IP 관련 Geo data를 환경 변수로 생성
+    * [mod_krisp](http://svn.oops.org/wsvn/Lighttpd.mod_krisp/trunk/README) - IP 관련 Geo data를 환경 변수로 생성. 링크 문서 참조
 
 ##5. PHP 연동
 
