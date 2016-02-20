@@ -99,7 +99,7 @@ SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니�
 인증서 설정은 기존의 CentOS와 동일하니, 여기서 설명은 생략 합니다.
 
 
-참고로, 인증서에 문제만 없다면 기본 설정만으로 [SSLLabs](https://www.ssllabs.com/)의 SSL 인증 등급을 ***A-***가 되도록 되어 있습니다. 참고로 ***A+***가 되기 위해서는 ***Strict-Transport-Security*** 헤더 설정을 해야 하는데, 이 설정은 서브 도메인을 모두 SSL로 보내도 된다는 의미이기 때문에, 도메인 관련 전 사이트가 SSL이 아니면 안됩니다. 만약 보장 한다면 가상 호스트 block에 다음의 설정을 해 주시면 됩니다.
+참고로, 인증서에 문제만 없다면 기본 설정으로 [SSLLabs](https://www.ssllabs.com/)의 SSL 인증 등급을 ***A-***가 되도록 되어 있습니다. 참고로 ***A+***가 되기 위해서는 ***Strict-Transport-Security*** 헤더 설정을 해야 하는데, 이 설정은 서브 도메인을 모두 SSL로 보내도 된다는 의미이기 때문에, 도메인 관련 전 사이트가 SSL이 아니면 안됩니다. 만약 보장 한다면 가상 호스트 block에 다음의 설정을 해 주시면 됩니다.
 
 ```apache
 <VirtualHost *:443>
@@ -118,6 +118,16 @@ SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니�
         Header always set Strict-Transport-Security "max-age=31536000;"
     </IfModule>
 </VirtualHost>
+```
+
+만약, http2 module이 Load 되어 있다면 ***/etc/httpd/conf.d/ssl.conf***의 다음 설정에 의해 자동으로 http2 protocol로 동작을 합니다.
+
+```apache
+# HTTP2 configuration
+#
+<IfModule http2_module>
+        Protocols h2 HTTP/1.1
+</IfModule>
 ```
 
 ### 5. /~user 접근
