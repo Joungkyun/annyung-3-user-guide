@@ -4,7 +4,7 @@
 1. 개요
 2. lighttpd 설정 파일
 3. SSL 설정 및 HTTP2 protocol 지원
-4. 안녕에서 제공하는 추가 모듈
+4. 안녕에서 제공하는 기능 및 추가 모듈
 5. PHP 연동
 6. JAVA(tomcat)/Python/Perl 연동
 7. lighttpd 구동
@@ -80,9 +80,34 @@
   [lighttpd](pkg-addon-lighttpd.md) 1.4 branch는 spdy와 http2를 지원하지 않습니다.
 
 
-##4. 안녕에서 제공하는 추가 모듈
+##4. 안녕에서 제공하는 기능 및 추가 모듈
 
+  1. include 지시자에 astrik를 사용할 수 있습니다. 파일이 존재하지 않아도 error가 발생하지 않습니다.
+    ```php
+    include "conf.d/*.conf"
+    ```
+    http://redmine.lighttpd.net/issues/1221 참조
+    
+  2. Apache style의 KeepAlive reponse header를 지원합니다.
+    ```
+    Connection: Keep-Alive
+    Keep-Alive: timeout=60, max=1000
+    ```
+    http://redmine.lighttpd.net/issues/1284 참조
 
+  3. 404 error page를 URL로 지정할 있습니다. 이는 외부 404 page를 지정할 경우에 200으로 처리되는 문제를 해결하기 위하여 patch 되었습니다.
+  4. TCP backlog를 변경할 수 있습니다. (기존은 코드에 1024로 hard coding 되어 있습니다.)
+    ```php
+    server.backlog = 1024
+    ```
+  5. mod_dirlisting 의 기능이 향상 되었습니다.
+    * dir-listing.gallery  
+      * listing시 image 파일이 존재하면 &lt;img&gt; tag로 출력
+      * 파일 이름이 cover 또는 preview-000 형식일 경우, cover mode로 출력
+    * dir-listing.encoding
+    * dir-listing.html-lang
+    * dir-listing.urlencode
+    * dir-listing.external-js
 
 ##5. PHP 연동
 
