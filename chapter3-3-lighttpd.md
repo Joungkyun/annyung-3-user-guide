@@ -121,7 +121,39 @@
 
 ##5. PHP 연동
 
+  ```php
+  server.module         += ("mod_fastcgi")
+  fastcgi.debug          = 0
+  fastcgi.map-extension  = ( ".kldp" => ".php" )
+  castcgi.server         = (
+      ".php" => (
+          (
+            "host" => "127.0.0.1",
+            "port" => 9000,
+            "broken-scriptfilename" => "enable",
+            "allow-x-send-file" => "enable"
+          )
+      ),
+      "/status" => (
+          (
+            "host" => "127.0.0.1",
+            "port" => 9000,
+            "broken-scriptfilename" => "enable",
+            "allow-x-send-file" => "disable"
+          )
+      ),
+      "/operate" => (
+          (
+            "host" => "127.0.0.1",
+            "port" => 9000,
+            "broken-scriptfilename" => "enable",
+            "allow-x-send-file" => "disable"
+          )
+      )
+  )
+  ```
 
+  lighttpd 문서상, TCP가 아닌 unix domain soecket으로도 fastcgi 연결이 가능하다고 되어 있으나, 실상은 동작하지 않는다. 그러므로 PHP-FPM을 lighttpd와 연동을 하려면 PHP-FPM의 listen을 TCP로 설정해야 한다.
 
 ##6. JAVA(tomcat)/Python/Perl 연동
 
