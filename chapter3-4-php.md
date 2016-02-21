@@ -302,6 +302,20 @@ foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
 PHP 5.4 부터는 ***short_open_tag***가 off 이더라도 ***&lt;?=$var&gt;*** 출력이 가능 합니다.
 
 
+###7. realpath_cache_force
+
+PHP는 open_basedir 이 설정 되어 있을 경우, soft link를 이용한 race condition을 이용하여 open_basedir을 무력화 시키는 버그 때문에, open_basedir이 설정 되어 있을 경우, realpath_cache를 하지 않도록 변경을 하였습니다. 또한, php의 opcache 특성상 항상 파일의 mtime 체크하기 때문에 open_basedir을 사용하면 성능이 굉장히 많이 저하 됩니다.
+
+안녕 리눅스에서는 이 성능 문제를 해결하기 위하여 ***realpath_cache_force*** 지시자를 제공 합니다.
+php.ini 에서
+
+```ini
+realpath_cache_force = On
+```
+
+설정을 해 주면, realpath_cache를 하는 대신, 보안적인 문제가 있는 ***link()*** fucntion과 ***symlink()*** function을 사용하지 못하도록 합니다.
+
+
 ##5. 3rd party extension build
 
 간혹, 안녕에서 제공하지 않는 php extension이나 pecl 또는 다른 3rd party extension이 필요한 경우가 있을 수 있습니다. 여기서는 안녕의 PHP에 다른 extension을 지원하도록 하는 방법을 기술 합니다.
@@ -356,5 +370,128 @@ PHP는 ***phpize*** (***php56*** package는 ***phpize56***) 명령을 이용하�
 
 
 ###2. 헤더 파일 위치
+
+***[php56](pkg-addon-php56.md)*** package의 header file들은 ***/usr/include/php56***에 있으며,
+이 파일들은 ***php56-devel*** package에 포함되어 있습니다.
+
 ###3. temporary 위치
-###4. 명령어 및 process name
+
+***[php56](pkg-addon-php56.md)*** package의 temporary directory 는 다음과 같습니다.
+
+```php
+sys_temp_dir      = /var/lib/php56/tmp
+exec_dir          = /var/lib/php56/bin
+session.save_path = /var/lib/php56/sessions
+```
+
+###4. 명령어 비교
+
+| php 7 | php56 | package |
+| :---: | :---: | :---: |
+| /usr/bin/php | /usr/bin/php56 | php-cli / php56-cli |
+| /usr/sbin/php-fpm | /usr/sbin/php56-fpm | php-fpm / php56-fpm |
+| /usr/bin/phpize | /usr/bin/phpize56 | php-devel / php56-devel |
+| /usr/bin/php-config | /usr/bin/php56-config | php-devel / php56-devel |
+
+###5. PHP53 comaptible mode
+
+안녕 리눅스의 ***[php56](pkg-addon-php56.md)*** package에는 PHP 5.4에서 제거 되었거나 _deprecated_ 되어진 기능들을 사용할 수 있도록 패치가 되어 있습니다. ***[php](pkg-base-php.md)*** package에서는 지원하지 않습니다.
+
+PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려운 경우에 이 mode를 사용해서 해결을 할 수 있습니다.
+
+  * /etc/php56.d/cli/php56comaptible.ini
+  * /etc/php56.d/fpm/php56compatible.ini
+```ini
+    ; PHP 5.3 호환 모드 지원
+    ;
+    ; On으로 설정시 php 5.4에서 제거되었거나 변경된 기능을 5.3과 같이 동작함
+    ;
+    ; . allow_call_time_pass_reference 지시자 사용 가능 (Default: Off)
+    ; . magic_quotes_gpc, magic_quotes_runtime, magic_quotes_sybase 지시자
+    ;   및 magic_quotes 관련 함수 사용 가능 (기본값: Off)
+    ; . NULL, false, 빈문자열의 값을 가진 변수에 object property를 추가할
+    ;   경우에도 E_WARNING 에러 메시지 발생 하지 않음
+    ; . TZ 환경 변수로 timezone 지정 가능
+    ; . array_combine() 함수에서 key array가 비었을 경우 false 반환
+    ; . 5.4에서 제거된 다음의 함수 사용 가능 (E_DEPRECATED level 에러 처리)
+    ;   session_is_registered(), session_register(), session_unregister()
+    ;   mysqli_bind_param(), mysqli_bind_result(), mysqli_client_encoding(),
+    ;   mysqli_fetch(), mysqli_param_count(), mysqli_get_metadata(),
+    ;   mysqli_send_long_data(), mysqli::client_encoding()
+    ;
+    ; Default Value: Off
+    ; Development Value: Off
+    ; Production Value: Off
+    ;
+    php53_compatible = Off
+
+    ; This directive allows you to enable and disable warnings which PHP will issue
+    ; if you pass a value by reference at function call time. Passing values by
+    ; reference at function call time is a deprecated feature which will be removed
+    ; from PHP at some point in the near future. The acceptable method for passing a
+    ; value by reference to a function is by declaring the reference in the functions
+    ; definition, not at call time. This directive does not disable this feature, it
+    ; only determines whether PHP will warn you about it or not. These warnings
+    ; should enabled in development environments only.
+    ; Default Value: On (Suppress warnings)
+    ; Development Value: Off (Issue warnings)
+    ; Production Value: Off (Issue warnings)
+    ; http://php.net/allow-call-time-pass-reference
+    ;
+    ; This directive has dependency with 'php53_compatible=On'
+    allow_call_time_pass_reference = Off
+
+    ; Magic quotes are a preprocessing feature of PHP where PHP will attempt to
+    ; escape any character sequences in GET, POST, COOKIE and ENV data which might
+    ; otherwise corrupt data being placed in resources such as databases before
+    ; making that data available to you. Because of character encoding issues and
+    ; non-standard SQL implementations across many databases, it's not currently
+    ; possible for this feature to be 100% accurate. PHP's default behavior is to
+    ; enable the feature. We strongly recommend you use the escaping mechanisms
+    ; designed specifically for the database your using instead of relying on this
+    ; feature. Also note, this feature has been deprecated as of PHP 5.3.0
+    ; Default Value: On
+    ; Development Value: Off
+    ; Production Value: Off
+    ; http://php.net/magic-quotes-gpc
+    ;
+    ; This directive has dependency with 'php53_compatible=On'
+    magic_quotes_gpc = Off
+
+    ; Magic quotes for runtime-generated data, e.g. data from SQL, from exec(), etc.
+    ; http://php.net/magic-quotes-runtime
+    ;
+    ; This directive has dependency with 'php53_compatible=On'
+    magic_quotes_runtime = Off
+
+    ; Use Sybase-style magic quotes (escape ' with '' instead of \').
+    ; http://php.net/magic-quotes-sybase
+    ;
+    ; This directive has dependency with 'php53_compatible=On'
+    magic_quotes_sybase = Off
+```
+  * 다음 사항은 지원하지 않습니다.
+    * preg_replace 사용시에, ***"e"*** modifier(PREG_REPLACE_EVAL)는 지원하지 않음
+     * preg_replace_callback 으로 변경
+    ```php
+        // e modifier sample
+        $html = preg_replace(
+            '(<h([1-6])>(.*?)</h\1>)e',
+            '"<h$1>" . strtoupper("$2") . "</h$1>"',
+            $html
+        );
+        
+        // replace 'e' modifier with preg_replace_callback
+        $html = preg_replace_callback(
+            '(<h([1-6])>(.*?)</h\1>)',
+            function ($m) {
+                return "<h$m[1]>" . strtoupper($m[2]) . "</h$m[1]>";
+            },
+            $html
+        );
+    ```
+     * ereg API  
+       ***ereg** API는 ***preg*** API로 변경 하시기 바랍니다. ***ereg***는 성능도 너무 않좋기 때문에 변경하는 것을 유도하기 위해서라도 지원하지 않습니다.
+
+
+
