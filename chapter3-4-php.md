@@ -545,3 +545,30 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 또한, site를 여러개를 운영할 경우 site별로 pool을 만들어서 resource를 배분할 수도 있습니다.
 
 ### 2. php-fpm 구동
+
+  간단한 php-fpm control 방법에 대하여 기술 합니다.
+
+  * 부팅시 php-fpm 시작하도록 설정
+  ```bash
+  [root@an3 ~]$ service php-fpm enable
+  ```
+  * 부팅시 php-fpm 시작 하지 않도록 설정
+  ```bash
+  [root@an3 ~]$ service php-fpm disable
+  ```
+  * php-fpm 시작
+  ```bash
+  [root@an3 ~]$ service php-fpm start
+  ```
+  * php-fpm 정지
+  ```bash
+  [root@an3 ~]$ service php-fpm stop
+  ```
+  * php-fpm 재시작
+  ```bash
+  [root@an3 ~]$ service php-fpm restart
+  ```
+  * php-fpm 상태 보기
+  ```bash
+  [root@an3 ~]$ service php-fpm status
+  ```
