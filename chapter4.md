@@ -2,6 +2,22 @@
 
 ## 1. 개요
 
+
+
+---
+
+
+!! 경고   
+ &lt;<u>6. CentOS JVM 환경으로 rollback</u>&gt; 항목 참고하여 CentOS JVM 환경으로 rollback 하십시오. JVM 환경에 대해서 설계를 다시해야 할 것 같습니다.
+ Release 조금 더 늦어질 수도 있을 것 같습니다. T.T
+
+ oracle-jre 지원을 하지 않을 예정이며, openjdk를 기준으로 X 의존성 제거된 버전으로 relelase 될 예정입니다.
+
+---
+
+
+
+
 안녕 리눅스의 JVM 환경은 ***oracle JRE 8***과 ***tomcat 8***을 지원합니다.
 
 안녕 리눅스에서 제공하는 ***oracle JRE 8***과 ***tomcat 8***은 oracle과 tomcat 에서 제공하는 ***binary package***들을 풀어서 경로만 재구성 한 다음 ***re-packaing*** 한 것이기 때문에, 다운로드 받은 binary package와 차이가 없습니다.
