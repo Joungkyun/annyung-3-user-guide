@@ -7,6 +7,7 @@
 4. 안녕 리눅스 Epoch
 5. 3rd party extension build
 6. php56 package
+7. php-fpm 구동
 
 ##1. 개요
 안녕 리눅스 3은 CentOS/RHEL과 달리 ***PHP 7***을 기본 제공 합니다. 또한 기존의 ***PHP 5***를 사용하는 환경의 호환을 위하여 ***php56*** package를 제공합니다.
