@@ -210,7 +210,7 @@ php.ini에서 이 기능에 대한 옵션은 다음과 같습니다.
 
 ```php
 <?php
-switch ( $_FILES['pic']['error'][0] ) {
+switch ( $_FILES['userfile']['error'][0] ) {
     case UPLOAD_ERR_INI_SIZE :
         $errmsg = 'The uploaded file exceeds the upload_max_filesize directive in php.ini.';
         break;
