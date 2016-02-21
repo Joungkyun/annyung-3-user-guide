@@ -281,4 +281,16 @@ foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
 ?>
 ```
 
+###5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
+
+  * 기본값 Off
+  * ***ini_set** 을 이용하여 php code에서 수정할 수 있음.
+
+***allow_url_fopen***과 ***allow_url_include***는 외부의 code를 injection 시키거나 또는 php shell에서 외부 코드를 실행하는데 많이 사용이 되어 집니다.
+
+안녕 리눅스에서는 이 옵션 값을 기본으로 off 시키고, php code에서 필요할 때만 호출을 하여 사용하면 됩니다.
+
+###6. short_open_tag
+
+
 다음 사항은 ***[php56](pkg-addon-php56.md)*** package 에만 해당되는 사항입니다.
