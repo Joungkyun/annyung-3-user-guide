@@ -546,7 +546,9 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 
 ### 2. php-fpm 구동
 
-  간단한 php-fpm control 방법에 대하여 기술 합니다.
+  간단한 ***php-fpm*** control 방법에 대하여 기술 합니다. ***php56-fpm*** package는 php-fpm 대신 php56-fpm을 사용하시면 됩니다.
+  
+  ***php-fpm***과 ***php56-fpm*** 은 동시에 운영이 가능 합니다.
 
   * 부팅시 php-fpm 시작하도록 설정
   ```bash
