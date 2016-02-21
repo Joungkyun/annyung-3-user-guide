@@ -185,7 +185,7 @@
 
 ##7. lighttpd 구동
 
-  간단한 apcahe control 방법에 대하여 기술 합니다.
+  간단한 lighttpd control 방법에 대하여 기술 합니다.
 
   * 부팅시 lighttpd 시작하도록 설정
   ```bash
