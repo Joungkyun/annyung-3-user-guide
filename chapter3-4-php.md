@@ -232,36 +232,52 @@ php.ini에서 이 기능에 대한 옵션은 다음과 같습니다.
     ?>
     ```
 
+안녕 리눅스의 PHP를 이용하여 파일 업로드시의 체크는 아래의 코드를 이용할 수 있다.
+
 ```php
 <?php
-switch ( $_FILES['userfile']['error'][0] ) {
-    case UPLOAD_ERR_INI_SIZE :
-        $errmsg = 'The uploaded file exceeds the upload_max_filesize directive in php.ini.';
-        break;
-    case UPLOAD_ERR_FORM_SIZE :
-        $errmsg = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.';
-        break;
-    case UPLOAD_ERR_PARTIAL :
-        $errmsg = 'The uploaded file was only partially uploaded.';
-        break;
-    case UPLOAD_ERR_NO_FILE :
-        $errmsg = 'No file was uploaded.';
-        break;
-    case UPLOAD_ERR_NO_TMP_DIR :
-        $errmsg = 'Missing a temporary folder.';
-        break;
-    case UPLOAD_ERR_CANT_WRITE :
-        $errmsg = 'Failed to write file to disk.';
-        break;
-    case UPLOAD_ERR_EXTENSION :
-        $errmsg = 'PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop';
-        break;
-    case UPLOAD_ERR_SEC :
-        $errmsg = 'Detection attacking code in image header';
-        break;
-    default :
-        $errmsg = null;
+function upload_error_check ($upload_error) {
+    switch ( $_FILES['userfile']['error'][0] ) {
+        case UPLOAD_ERR_INI_SIZE :
+            $errmsg = 'The uploaded file exceeds the upload_max_filesize directive in php.ini.';
+            break;
+        case UPLOAD_ERR_FORM_SIZE :
+            $errmsg = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified  in the HTML form.';
+            break;
+        case UPLOAD_ERR_PARTIAL :
+            $errmsg = 'The uploaded file was only partially uploaded.';
+            break;
+        case UPLOAD_ERR_NO_FILE :
+            $errmsg = 'No file was uploaded.';
+            break;
+        case UPLOAD_ERR_NO_TMP_DIR :
+            $errmsg = 'Missing a temporary folder.';
+            break;
+        case UPLOAD_ERR_CANT_WRITE :
+            $errmsg = 'Failed to write file to disk.';
+            break;
+        case UPLOAD_ERR_EXTENSION :
+            $errmsg = 'PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop';
+            break;
+        case UPLOAD_ERR_SEC :
+            $errmsg = 'Detection attacking code in image header';
+            break;
+        case UPLOAD_ERR_ILL :
+            $errmsg = 'Detection uploading PHP execution file';
+            break;
+        default :
+            $errmsg = null;
+    }
+    return $errmsg;
 }
+
+foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
+    if ( ($err = upload_error_cehck ($upload_error_code)) != null ) {
+        printf ("Upload Failed : %s\n", $msg);
+        exit;
+    }
+}
+
 ?>
 ```
 
