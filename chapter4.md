@@ -11,8 +11,6 @@
  &lt;<u>6. CentOS JVM 환경으로 rollback</u>&gt; 항목 참고하여 CentOS JVM 환경으로 rollback 하십시오. JVM 환경에 대해서 설계를 다시해야 할 것 같습니다.
  Release 조금 더 늦어질 수도 있을 것 같습니다. T.T
 
- oracle-jre 지원을 하지 않을 예정이며, openjdk를 기준으로 X 의존성 제거된 버전으로 relelase 될 예정입니다.
-
 ---
 
 
