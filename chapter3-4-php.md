@@ -395,7 +395,7 @@ session.save_path = /var/lib/php56/sessions
 
 ###5. PHP53 comaptible mode
 
-안녕 리눅스의 ***[php56](pkg-addon-php56.md)*** package에는 PHP 5.4에서 제거 되었거나 _deprecated_ 되어진 기능들을 사용할 수 있도록 패치가 되어 있습니다. ***[php](pkg-base-php.md)*** package에서는 지원하지 않습니다.
+안녕 리눅스의 ***[php56](pkg-addon-php56.md)*** package에는 PHP 5.4에서 제거 되었거나 _deprecated_ 되어진 기능들을 사용할 수 있도록 패치가 되어 있습니다. <u>***[php](pkg-base-php.md)*** package에서는 지원하지 않습니다.</u>
 
 PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려운 경우에 이 mode를 사용해서 해결을 할 수 있습니다.
 
