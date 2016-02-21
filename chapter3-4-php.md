@@ -205,8 +205,32 @@ php.ini에서 이 기능에 대한 옵션은 다음과 같습니다.
     * 기본값 On
     * 검사만 하고, 에러 레벨만 리턴(E_WARNING 발생 안함)
     * 검사 결과 감지가 되면 UPLOAD_ERR_SEC 반환
+    ```php
+    <?php
+    swtich ( $_FILES['userfile']['error'][0] ) {
+        ... 생략 ...
+        case UPLOAD_ERR_SEC :
+           $errmsg = 'Detection attacking code in image header';
+           break;
+        ... 생략 ...
+    }
+    ?>
+    ```
   * upload_image_check_whitelist
     * 이미지 헤더 문자열 white list
+
+  * allow_include_extension 에 등록된 확장자 파일을 업로드 할 경우 ***UPLOAD_ERR_ILL*** 에러 코드를 반환함.
+    ```php
+    <?php
+    swtich ( $_FILES['userfile']['error'][0] ) {
+        ... 생략 ...
+        case UPLOAD_ERR_ILL :
+           $errmsg = 'Detection uploading PHP execution file';
+           break;
+        ... 생략 ...
+    }
+    ?>
+    ```
 
 ```php
 <?php
