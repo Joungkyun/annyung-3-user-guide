@@ -496,3 +496,52 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 
 
 
+##7. php-fpm 구동
+
+***php-fpm*** 은 ***FastCGI Process Manager*** 이며 PHP FastCGI의 기능을 개선하고자 시작된 프로젝트 입니다.
+***daemon***으로 동작을 하며 다른 language보다 PHP에서 FastCGI 구현을 쉽게 해 줍니다.
+
+***php-fpm***을 사용하기 위해서는 ***php-fpm*** package 또는 ***php56-fpm*** package가 필요 합니다. 이 둘의 차이는 PHP version이 다르며 ***php-fpm*** package는 7, ***php56-fpm***은 PHP 5.6 기반에서 동작을 합니다.
+
+### 1. php-fpm 설정
+
+***php-fpm***의 설정은 다음의 위치에서 이루어 집니다.
+
+1. php7
+  * /etc/php.d/php-fpm-fcgi.ini
+  * /etc/php.d/fpm/*.ini
+  * /etc/php.d/php-fpm.conf
+  * /etc/php.d/fpm.d/*.conf
+2. php56
+  * /etc/php56.d/php-fpm-fcgi.ini
+  * /etc/php56.d/fpm/*.ini
+  * /etc/php56.d/php-fpm.conf
+  * /etc/php56.d/fpm.d/*.conf
+
+설정 파일 중, ___*.ini___ 파일들은 PHP language에 관련된 설정들이고, ___*.conf___ 파일들은 ***php-fpm*** daemon에 대한 설정 입니다.
+
+여기서는 ***php-fpm*** daemon 설정에 대해서 기술 합니다. php langunage측면 설정이나 특이점은 위에서 기술한 사항을 참조 하시면 됩니다.
+
+안녕 리눅스의 ***php-fpm***을 기본 상태로 구동을 하면 다음의 상태로 process가 뜨게 됩니다.
+
+
+1. pid file
+  * php7 : /var/run/php-fpm.pid
+  * php56 : /var/run/php56-fpm.pid
+2. error log
+  * php7 : /var/log/fpm/php-fpm.log
+  * php56: /var/log/fpm/php56-fpm.log
+3. process owner : nobody.nbody
+4. listen
+  * php7 : /var/run/php-fpm-default.sock
+  * php56 : /var/run/php56-fpm-default.sock
+5. listen backlog : 1024
+6. security.limit_extensions: .php
+
+매우 busy한 site가 아니라면 이 기본 설정만으로도 운영을 하는데 크게 문제가 없습니다. 신경을 써 줘야 할 정도는 ***"security.limit_extension"*** 의 경우 application 별로 다른 확장자를 php로 구동해야할 경우가 있기 때문에 수정이 필요할 듯 판단 됩니다.
+
+그 외에는 성능에 관련된 부분인 자세한 설정에 관해서는 [PHP-FPM 설정 문서](http://kr.php.net/manual/en/install.fpm.configuration.php)를 참고 하십시오.
+
+또한, site를 여러개를 운영할 경우 site별로 pool을 만들어서 resource를 배분할 수도 있습니다.
+
+### 2. php-fpm 구동
