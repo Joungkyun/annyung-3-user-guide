@@ -290,7 +290,17 @@ foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
 
 안녕 리눅스에서는 이 옵션 값을 기본으로 off 시키고, php code에서 필요할 때만 호출을 하여 사용하면 됩니다.
 
+참고:  
+***allow_url_fopen***과 ***allow_url_include***을 ***ini_set***으로 활성화 할 때 ***disable_function*** 때문에 ***ini_set***을 사용하지 못할 수 있습니다. 그러므로 ***___ini_set***을 이용하십시오.
+
 ###6. short_open_tag
+
+***/etc/php.d/php.ini***의 short_open_tag값이 Off 입니다. ***&lt;?*** 대신 ***&lt;?php***를 사용 하십시오.
+
+PHP 5.4 부터는 ***short_open_tag***가 off 이더라도 ***&lt;?=$var&gt;*** 출력이 가능 합니다.
+
+
+
 
 
 다음 사항은 ***[php56](pkg-addon-php56.md)*** package 에만 해당되는 사항입니다.
