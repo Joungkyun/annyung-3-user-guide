@@ -10,9 +10,9 @@
 
 현재 안녕 리눅스에서 제공하는 JVM 관련 패키지는 다음과 같으며, 이 외의 패키지들은 CentOS의 package를 그대로 사용합니다.
 
-  * oracle-jre 1.8
-  * tomcat 8
-  * javapackages-tool (X/GUI 관련 의존성 제거)
+  * [oracle-jre 1.8](pkg-addon-oracle-jre.md)
+  * [tomcat 8](pkg-base-tomcat.md)
+  * [javapackages-tools](pkg-base-javapackages-tools.md) (X/GUI 관련 의존성 제거)
 
 다음의 조건에 해당한다면, ***CentOS JVM 환경***을 이용하십시오. ***CentOS JVM 환경***을 이용하는 방법은 <u>***"6. CentOS JVM 환경으로 rollback"*** 섹션을 참고</u> 하십시오.
 
