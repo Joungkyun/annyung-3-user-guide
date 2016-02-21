@@ -5,6 +5,8 @@
 2. package 구성
 3. 설정 파일
 4. 안녕 리눅스 Epoch
+5. 3rd party extension build
+6. php56 package
 
 ##1. 개요
 안녕 리눅스 3은 CentOS/RHEL과 달리 ***PHP 7***을 기본 제공 합니다. 또한 기존의 ***PHP 5***를 사용하는 환경의 호환을 위하여 ***php56*** package를 제공합니다.
@@ -300,7 +302,59 @@ foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
 PHP 5.4 부터는 ***short_open_tag***가 off 이더라도 ***&lt;?=$var&gt;*** 출력이 가능 합니다.
 
 
+##5. 3rd party extension build
+
+간혹, 안녕에서 제공하지 않는 php extension이나 pecl 또는 다른 3rd party extension이 필요한 경우가 있을 수 있습니다. 여기서는 안녕의 PHP에 다른 extension을 지원하도록 하는 방법을 기술 합니다.
+
+PHP는 ***phpize*** (***php56*** package는 ***phpize56***) 명령을 이용하여 shared extension을 만들 수 있습니다.
+
+3rd party entension 또는 php 소스의 ext directorpy에 있는 extension 소스를 확보 합니다. 다음,
+  * phpize
+  * ./configure
+  * make insatll
+
+의 과정으로 설치를 합니다. 설치 후, ***/etc/php.d/{apache,cli,fpm}/SHARED.ini 에서 해당 모듈을 등록해 주면 됩니다.
+
+```bash
+[root@an3 ~]$ cd php-7.0.3/ext/pdo_firebird
+[root@an3 pdo_firebird]$ phpzie
+[root@an3 pdo_firebird]$ ./configure
+[root@an3 pdo_firebird]$ make install
+```
+
+설치를 한 후, ***/usr/lib64/php/extensions*** 에 해당 so file이 있는지 확인을 해 봅니다. (여기서는 pdo_firebird.so 입니다.) ***php56*** package의 경우에는 ***/usr/lib64/php56/extensions*** 에 설치가 됩니다.
+
+```bash
+[root@an3 pdo_firebird]$ echo "extension = pdo_firebird.so" >> /etc/php.d/{apache,cli,fpm}/SHARED.ini
+```
+
+파일이 설치된 것을 확인 했다면 위의 명령으로 module을 load 합니다.
 
 
+##6. php56 package
 
-다음 사항은 ***[php56](pkg-addon-php56.md)*** package 에만 해당되는 사항입니다.
+안녕 리눅스는 PHP 버전을 7로 올리면서 기존의 php5 사용자들의 코드 호환을 위하여 ***[php56](pkg-addon-php56.md)*** package를 제공합니다.
+
+***[php56](pkg-addon-php56.md)*** package는 apache module은 지원하지 않고 CLI와 FPM sapi만 제공을 합니다.
+
+***[php56](pkg-addon-php56.md)*** package는 구동 방법, 설정파일 위치, 헤더파일 위치, 명령어 이름, 프로세스 이름, temporary 위치만 제외하고는 모든 것이 ***[php 7](pkg-base-php.md)*** package와 동일한 특성을 가지고 있습니다.
+
+###1. 설정 파일 위치
+
+***[php56](pkg-addon-php56.md)*** package의 설정 파일은 ***/etc/php56.d*** 에 있으며, 다음 패키지에 포함되어 있습니다.
+
+  1. php56-common
+    * /etc/php56.d/php-cli.ini
+    * /etc/php56.d/cli/SHARED.ini
+  2. php56-fpm-conf
+    * /etc/php56.d/php-fpm-fcgi.ini
+    * /etc/php56.d/fpm/SHARED.ini
+    * /etc/php56.d/php-fpm.conf
+    * /etc/php56.d/fpm.d
+
+특성에 대해서는 ***"3. 설정 파일"*** 섹션을 참고 하십시오.
+
+
+###2. 헤더 파일 위치
+###3. temporary 위치
+###4. 명령어 및 process name
