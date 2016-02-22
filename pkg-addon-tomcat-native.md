@@ -17,7 +17,7 @@ provides support for using APR in Tomcat.
 
 
 ### Reference:
-* http://sqlrelay.sourceforge.net/
+* http://tomcat.apache.org/tomcat-8.0-doc/apr.html
 
 ### Dependencies:
 * None
