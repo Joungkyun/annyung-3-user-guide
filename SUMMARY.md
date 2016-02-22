@@ -78,6 +78,7 @@
        * [coreutils](pkg-base-coreutils.md)
        * [ctags](pkg-base-ctags.md)
        * [cvs](pkg-base-cvs.md)
+       * [ecj](pkg-base-ecj)
        * [filesystem](pkg-base-filesystem.md)
        * [GeoIP](pkg-base-geoip.md)
        * [gperftools](pkg-base-gperftools.md)
@@ -154,5 +155,6 @@
        * [splint](pkg-addon-splint.md)
        * [sqlite32](pkg-addon-sqlite32.md)
        * [sqlrelay](pkg-addon-sqlrelay.md)
+       * [tomcat-native](pkg-addon-tomcat-native)
    * [[AN:plus]](annyung3-plus-packages.md)
 
