@@ -50,3 +50,4 @@
  * [splint](pkg-addon-splint.md)
  * [sqlite32](pkg-addon-sqlite32.md)
  * [sqlrelay](pkg-addon-sqlrelay.md)
+ * [tomcat-native](pkg-addon-tomcat-native.md)
