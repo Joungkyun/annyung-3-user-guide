@@ -14,6 +14,7 @@
 * [coreutils](pkg-base-coreutils.md)
 * [ctags](pkg-base-ctags.md)
 * [cvs](pkg-base-cvs.md)
+* [ecj](pkg-base-ecj.md)
 * [filesystem](pkg-base-filesystem.md)
 * [GeoIP](pkg-base-geoip.md)
 * [gperftools](pkg-base-gperftools.md)
