@@ -241,7 +241,7 @@ exclude=tomcat*
 위와 같이 rpm package를 생성할 수 있도록 준비를 합니다. 이 작업은 1회만 하면 됩니다. 패키지는 일반 유저로도 만들 수 있지만, 여기서는 일단 root 권한으로 하는 것을 가정합니다. (버전은 달라질 수 있습니다.)
 
 ```bash
-[root@an3 ~]$ yumdownload --source java-1.8.0-oracle
+[root@an3 ~]$ yumdownloader --source java-1.8.0-oracle
 [root@an3 ~]$ rpmbuild --rebuild oracle-jdk-1.8.0.73-1.an3.src.rpm
 [root@an3 ~]$ cd /root/rpmbuild/RPMS/x86_64
 [root@an3 x86_64]$ ls -l
@@ -278,8 +278,15 @@ baseurl=http://domain.com/oracle-jdk/$basearch
 ### 3. 설치
 
 ```bash
-[root@an3 ~]$ yum install java       // install java-1.8.0-oracle-headless
-[root@an3 ~]$ yum install java-devel // install java-1.8.0-orcale-devel
+[root@an3 ~]$ yum install java       // install java-1.8.0-oracle-headless (JRE)
+[root@an3 ~]$ yum install java-devel // install java-1.8.0-orcale-devel (JDK)
+```
+
+X libaray나 audio, video API를 사용하기 위해서는 다음의 명령으로 설치 하셔야 합니다.
+
+```bash
+[root@an3 ~]$ yum install java-1.8.0-oracle           // install JRE
+[root@an3 ~]$ yum install java-1.8.0-oracle-devel-gui // install JDK
 ```
 
 ***java-1.7.0-openjdk***와 ***java-1.8.0-openjdk*** package와 같이 설치 할 수있습니다.
