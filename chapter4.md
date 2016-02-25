@@ -19,6 +19,8 @@
 
 안녕 리눅스는 기본으로 ***openJDK 8***과 ***tomcat 8***을 지원합니다. 또한, Oracle JRE/JDK 8 사용을 원하시는 분들을 위하여 Oracle JRE/JDK 8환경 구축에 대한 지원을 합니다. Oracle JDK/JRE에 대해서는 마지막에 별도의 섹션으로 기술 합니다.
 
+JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니다만, 권장 하지 않습니다. ***openjdk***는 1.7.0 부터 Oracle JDK와 대등한 수준의 API를 지원합니다. (대등한 성능을 의미하는 것이 아니라 API 대응을 의미하는 것입니다.) 그러므로 <u>JDK 6 환경은 Oracle JDK를 받아서 직접 구성하십시오.</u>
+
 
 ## 2. 변경 사항
 
@@ -39,7 +41,7 @@
 3. 안녕 리눅스의 ***openjdk-1.8.0*** package들은 CentOS에서 제공하는 ***openjdk-1.8.0*** rpm package를 풀어서 X dependency 의존성을 분리하고, 기본 패키지(java)를 headless package로 변경한 것입니다. <u>즉, binary와 jar 파일은 CentOS의 package와 동일 합니다.</u>
 4. ***tomcat*** version이 8로 업그레이드 되었습니다.
 5. 안녕 리눅스에서 지원하는 ***Oracle JRE/JDK*** rpm package에 대한 사항이 ***javapackages-tools*** package에 반영이 되었습니다.
-
+6. ***java-1.7.0*** package와 ***javav-1.6.0*** package는 변경 사항이 없습니다. (X 의존성이 그대로 있습니다.)
 
 
 현재 안녕 리눅스의 JVM환경(openjdk 7 + tomcat 8)으로 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU) 가 운영 중입니다.
@@ -51,12 +53,15 @@
   ```bash
   [root@an3 ~]$ yum install java               // X dependency가 필요 없을 경우
   [root@an3 ~]$ yum install java-1.8.0-openjdk // X dependency가 필요 할 경우
+  [root@an3 ~]$ yum install java-1.7.0-openjdk-headless // No X dependency
+  [root@an3 ~]$ yum install java-1.7.0-openjdk          // X dependency
   ```
 
 2. JDK 설치
   ```bash
   [root@an3 ~]$ yum install java-devel                   // X dependency가 필요 없을 경우
   [root@an3 ~]$ yum install java-1.8.0-openjdk-devel-gui // X dependency가 필요 할 경우
+  [root@an3 ~]$ yum install java-1.7.0-openjdk-devel     // 무조건 X dependency가 있음
   ```
 
 3. 설치 후 JAVA 환경 변수
@@ -119,7 +124,19 @@
 
   [root@an3 ~]$
   ```
+  
+##4TOMCAT
 
+안녕 리눅스의 TOMCAT은 버전만 8로 업그레이드 되었으며, 환경 구성은 CentOS와 동일 합니다.
+
+1. 설정 파일 : */etc/tomcat*
+2. _CATALINA_HOME_ : */usr/share/tomcat*
+3. 기본 DocumentROot : */var/lib/tomcat/webapps* 또는 */usr/share/tomcat/webapps*
+4. tomcat 구동
+```bash
+[root@an3 ~]$ service tomcat [eanble|disable]              // 부팅시 구동 여부
+[root@an3 ~]$ service tomcat [start|stop|restart|status]   // tomcat 구동
+```
 
 
 ## 3. Oracle JDK
