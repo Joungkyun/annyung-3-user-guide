@@ -130,9 +130,10 @@ JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니�
 안녕 리눅스의 TOMCAT은 버전만 8로 업그레이드 되었으며, 환경 구성은 CentOS와 동일 합니다.
 
 1. 설정 파일 : */etc/tomcat*
-2. _CATALINA_HOME_ : */usr/share/tomcat*
-3. 기본 DocumentROot : */var/lib/tomcat/webapps* 또는 */usr/share/tomcat/webapps*
-4. tomcat 구동
+2. 로그 파일 : */var/log/tomcat*
+3. _CATALINA_HOME_ : */usr/share/tomcat*
+4. 기본 DocumentRoot : */var/lib/tomcat/webapps* 또는 */usr/share/tomcat/webapps*
+5. tomcat 구동
 ```bash
 [root@an3 ~]$ service tomcat [eanble|disable]              // 부팅시 구동 여부
 [root@an3 ~]$ service tomcat [start|stop|restart|status]   // tomcat 구동
