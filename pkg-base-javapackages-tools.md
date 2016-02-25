@@ -4,9 +4,10 @@
 Macros and scripts for Java packaging support
 
 ### Changes on AnNyung:
-1. maven-local package 제거. (maven-local package는 CentOS의 것을 사용하도록..)
-2. oracle JDK/JRE package 관련 수정
-3. X 의존성 제거
+1. 안녕 리눅스 ***java-1.8.0-oracle*** 환경 지원
+
+### References:
+
 
 ### Sub packages:
 * **python-javapackages** - Module for handling various files for Java packaging
