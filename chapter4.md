@@ -44,6 +44,84 @@
 
 현재 안녕 리눅스의 JVM환경(openjdk 7 + tomcat 8)으로 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU) 가 운영 중입니다.
 
+
+## 3. JVM 설치
+
+1. JRE 설치
+  ```bash
+  [root@an3 ~]$ yum install java               // X dependency가 필요 없을 경우
+  [root@an3 ~]$ yum install java-1.8.0-openjdk // X dependency가 필요 할 경우
+  ```
+
+2. JDK 설치
+  ```bash
+  [root@an3 ~]$ yum install java-devel                   // X dependency가 필요 없을 경우
+  [root@an3 ~]$ yum install java-1.8.0-openjdk-devel-gui // X dependency가 필요 할 경우
+  ```
+
+3. 설치 후 JAVA 환경 변수
+  ```bash
+  [root@an3 ~]$ cat test.sh
+  #!/bin/bash
+
+  . /usr/share/java-utils/java-functions
+
+  set_jvm
+  set_javacmd
+  set_jvm_dirs
+
+  echo "JAVACMD     : $JAVACMD"
+  echo
+  echo "JAVA_HOME   : $JAVA_HOME"
+  echo "JAVA_BASE   : $JAVA_BASE"
+  echo
+  echo "JAVA_LIBDIR : $JAVA_LIBDIR"
+  echo "JAVA_LIB    : $JAVA_LIB"
+  echo
+  echo "JNI_LIBDIR  : $JNI_LIBDIR"
+  echo "JNI_LIB     : $JNI_LIB"
+  echo
+  echo "JVM_ROOT    : $JVM_ROOT"
+  echo "JVM_LIBDIR  : $JVM_LIBDIR"
+  echo
+  echo "CLASSPATH   : $CLASSPATH"
+  echo
+
+  #CLASSPATH=$(/usr/bin/build-classpath commons-logging.jar commons-collections.jar servlet-api.jar)
+  CLASSPATH+=":$(/usr/bin/build-classpath servlet-api.jar)"
+  if [ $? -ne 0 ]; then
+      echo "Can't find some jar files"
+      exit 1
+  fi
+
+  echo "CLASSPATH   : $CLASSPATH"
+  echo
+
+  exit 0
+  [root@an3 ~]$ bash test.sh
+  JAVACMD     : /usr/lib/jvm/jre/bin/java
+
+  JAVA_HOME   : /usr/lib/jvm/jre
+  JAVA_BASE   : /usr/lib/jvm
+
+  JAVA_LIBDIR : /usr/share/java
+  JAVA_LIB    : /usr/share/java
+
+  JNI_LIBDIR  : /usr/lib/java
+  JNI_LIB     : /usr/lib/java
+
+  JVM_ROOT    : /usr/lib/jvm
+  JVM_LIBDIR  : /usr/lib/jvm-exports/jre
+
+  CLASSPATH   : /usr/share/java:/usr/lib/java
+
+  CLASSPATH   : /usr/share/java:/usr/lib/java:/usr/share/java/servlet.jar
+
+  [root@an3 ~]$
+  ```
+
+
+
 ## 3. Oracle JDK
 
 Oracle JDK의 경우, 재배포 라이센스가 제한되어 있기 때문에 <u>binary package를 제공하지 않습니다.</u> 다만, 안녕 리눅스 3의 ***srpms repository***에 보시면 ***oracle-jdk*** source rpm을 제공 합니다. ***oracle-jdk*** source rpm은 재배포 제한 때문에 jdk binary를 포함하고 있지 않기 때문에 매우 사이즈가 작습니다. (binary package를 빌드시 직접 다운로드 받음)
