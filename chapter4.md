@@ -125,7 +125,7 @@ JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니�
   [root@an3 ~]$
   ```
   
-##4TOMCAT
+##4. TOMCAT
 
 안녕 리눅스의 TOMCAT은 버전만 8로 업그레이드 되었으며, 환경 구성은 CentOS와 동일 합니다.
 
@@ -137,6 +137,22 @@ JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니�
 ```bash
 [root@an3 ~]$ service tomcat [eanble|disable]              // 부팅시 구동 여부
 [root@an3 ~]$ service tomcat [start|stop|restart|status]   // tomcat 구동
+```
+
+***Tomcat 7***을 사용하기를 원한다면 ***/etc/yum.repos.d/AnNyung.repo***의 ***AN:base*** repository에 tomcat을 exclude 시키십시오.
+
+```bash
+[root@an3 ~]$ cat /etc/yum.repos.d/AnNyung.repo
+  .. 상략 ..
+[AN:base]
+name=AnNyung $annyungver Base Repository
+mirrorlist=http://annyung.oops.org/mirror.php?release=$annyungver&arch=$basearch&repo=base
+#baseurl=http://mirror.oops.org/pub/AnNyung/$annyungver/base/$basearch
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AnNyung-$annyungver
+exclude=tomcat*
+  .. 하략 ..
+[root@an3 ~]
 ```
 
 
