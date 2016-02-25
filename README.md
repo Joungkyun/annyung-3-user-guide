@@ -60,5 +60,5 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 ### 4) 안녕 리눅스 3
 
-  1. 2016.02.?? RHEL 7u2 / CentOS 7.2 기반으로 안녕 리눅스 3 출시
+  1. 2016.02.29 RHEL 7u2 / CentOS 7.2 기반으로 안녕 리눅스 3 출시
   2. 안녕 리눅스 2의 deploy 계승
