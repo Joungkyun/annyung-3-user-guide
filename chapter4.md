@@ -148,11 +148,48 @@ exclude=java-1.8.0*
 
 안녕 리눅스의 TOMCAT은 버전만 8로 업그레이드 되었으며, 환경 구성은 CentOS와 동일 합니다.
 
-1. 설정 파일 : */etc/tomcat*
-2. 로그 파일 : */var/log/tomcat*
-3. _CATALINA_HOME_ : */usr/share/tomcat*
-4. 기본 DocumentRoot : */var/lib/tomcat/webapps* 또는 */usr/share/tomcat/webapps*
-5. tomcat 구동
+1. tomcat 설치
+  ```bash
+  [root@an3 ~]$ yum install tomcat
+  ```
+2. 설정 파일 : */etc/tomcat*
+  ```bash
+  [root@an3 ~]$ ls -l /etc/tomcat
+  drwxrwxr-x 3 root   tomcat     22  2월 26 05:02 Catalina/
+  -rw-rw-r-- 1 tomcat tomcat  12374  2월 25 17:24 catalina.policy
+  -rw-rw-r-- 1 tomcat tomcat   7106  2월 25 17:24 catalina.properties
+  -rw-rw-r-- 1 tomcat tomcat   1577  2월 25 17:24 context.xml
+  -rw-rw-r-- 1 tomcat tomcat   3387  2월 25 17:24 logging.properties
+  -rw-rw-r-- 1 tomcat tomcat   6458  2월 25 17:24 server.xml
+  -rw-rw---- 1 tomcat tomcat   2212  2월 25 17:24 tomcat-users.xml
+  -rw-rw-r-- 1 tomcat tomcat    574  2월 25 17:25 tomcat.conf
+  -rw-rw-r-- 1 tomcat tomcat 168822  2월 25 17:24 web.xml
+  [root@an3 ~]$
+  ```
+3. 로그 파일 : */var/log/tomcat*
+  ```bash
+  [root@an3 ~]$ ls -l /var/log/tomcat/
+  -rw-r--r-- 1 tomcat tomcat 23916  2월 25 19:01 catalina.2016-02-25.log
+  -rw-r--r-- 1 tomcat tomcat     0  2월 25 17:56 host-manager.2016-02-25.log
+  -rw-r--r-- 1 tomcat tomcat     0  2월 25 17:56 localhost.2016-02-25.log
+  -rw-r--r-- 1 tomcat tomcat 14181  2월 25 19:00 localhost_access.2016-02-25.log
+  -rw-r--r-- 1 tomcat tomcat     0  2월 25 17:56 manager.2016-02-25.log
+  [root@an3 ~]$
+  ```
+4. _CATALINA_HOME_ : */usr/share/tomcat*
+  ```bash
+  [root@an3 ~]$ l /usr/share/tomcat/
+  drwxr-xr-x 2 root root   73  2월 26 05:02 bin
+  lrwxrwxrwx 1 root tomcat 11  2월 26 05:02 conf -> /etc/tomcat
+  lrwxrwxrwx 1 root tomcat 22  2월 26 05:02 lib -> /usr/share/java/tomcat
+  lrwxrwxrwx 1 root tomcat 15  2월 26 05:02 logs -> /var/log/tomcat
+  lrwxrwxrwx 1 root tomcat 22  2월 26 05:02 temp -> /var/cache/tomcat/temp
+  lrwxrwxrwx 1 root tomcat 23  2월 26 05:02 webapps -> /var/lib/tomcat/webapps
+  lrwxrwxrwx 1 root tomcat 22  2월 26 05:02 work -> /var/cache/tomcat/work
+  [root@an3 ~]$
+  ```
+5. 기본 DocumentRoot : */var/lib/tomcat/webapps* 또는 */usr/share/tomcat/webapps*
+6. tomcat 구동
 ```bash
 [root@an3 ~]$ service tomcat [eanble|disable]              // 부팅시 구동 여부
 [root@an3 ~]$ service tomcat [start|stop|restart|status]   // tomcat 구동
