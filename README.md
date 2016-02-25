@@ -5,7 +5,7 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 ## 1. 이력
 
-* 2016.02.11 초판 발행
+* 2016.02.29 초판 발행
 
 ## 2. 개요
 
