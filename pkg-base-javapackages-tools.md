@@ -10,3 +10,4 @@ Macros and scripts for Java packaging support
 
 ### Sub packages:
 * **python-javapackages** - Module for handling various files for Java packaging
+* **maven-local** - Macros and scripts for Maven packaging support
