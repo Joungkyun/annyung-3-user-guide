@@ -85,7 +85,7 @@
        * [httpd](pkg-base-httpd.md)
        * [initscrtips](pkg-base-initscripts.md)
        * [iptables](pkg-base-iptables.md)
-       * [java-1.8.0-oracle](pkg-base-java-1.8.0-oracle.md)
+       * [java-1.8.0-openjdk](pkg-base-java-1.8.0-openjdk.md)
        * [javapacakges-tools](pkg-base-javapackages-tools.md)
        * [linuxdoc-tools](pkg-base-linuxdoc-tools.md)
        * [mariadb](pkg-base-mariadb.md)
