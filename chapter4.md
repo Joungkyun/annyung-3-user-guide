@@ -10,34 +10,39 @@
 !! 경고   
  &lt;<u>6. CentOS JVM 환경으로 rollback</u>&gt; 항목 참고하여 CentOS JVM 환경으로 rollback 하십시오. JVM 환경에 대해서 설계를 다시해야 할 것 같습니다.
  Release 조금 더 늦어질 수도 있을 것 같습니다. T.T
+ 
+ 2016년 2월 26일 새벽 2:38 이전에 JVM 환경을 구성하신 분들은 @@@@를 꼭 확인 하십시오.
 
 ---
 
+이 문서는 안녕 리눅스의 ***JVM*** 환경에 대해서 기술을 합니다.
+
+안녕 리눅스는 기본으로 ***openJDK 8***과 ***tomcat 8***을 지원합니다. 또한, Oracle JRE/JDK 8 사용을 원하시는 분들을 위하여 Oracle JRE/JDK 8환경 구축에 대한 지원을 합니다. Oracle JDK/JRE에 대해서는 마지막에 별도의 섹션으로 기술 합니다.
 
 
-
-안녕 리눅스의 JVM 환경은 ***oracle JRE 8***과 ***tomcat 8***을 지원합니다.
-
-안녕 리눅스에서 제공하는 ***oracle JRE 8***과 ***tomcat 8***은 oracle과 tomcat 에서 제공하는 ***binary package***들을 풀어서 경로만 재구성 한 다음 ***re-packaing*** 한 것이기 때문에, 다운로드 받은 binary package와 차이가 없습니다.
-
-## 2. 권고 사항
+## 2. 변경 사항
 
 현재 안녕 리눅스에서 제공하는 JVM 관련 패키지는 다음과 같으며, 이 외의 패키지들은 CentOS의 package를 그대로 사용합니다.
 
-  * [oracle-jre 1.8](pkg-addon-oracle-jre.md)
-  * [tomcat 8](pkg-base-tomcat.md)
-  * [javapackages-tools](pkg-base-javapackages-tools.md) (X/GUI 관련 의존성 제거)
+  * [java-1.8.0-openjdk](pkg-base-java-1.8.0-openjdk.md)
+  * [tmocat 8](pkg_base-tomcat.md)
+  * [javapackages-tools](pkg-base-javapackages-tools.md) (java-1.8.0-oracle package 지원)
 
-다음의 조건에 해당한다면, ***CentOS JVM 환경***을 이용하십시오. ***CentOS JVM 환경***을 이용하는 방법은 <u>***"6. CentOS JVM 환경으로 rollback"*** 섹션을 참고</u> 하십시오.
+안녕 ***JVM*** 환경과 CentOS 환경의 차이는 다음과 같습니다.
 
-1. X 또는 GUI 관련 리소스가 필요한 경우  
-  안녕 리눅스의 JVM 환경은 X 의존성이 없고, 간단한 web service정도를 하기 위해 구성된 환경 입니다.
-2. 안녕/CentOS에서 제공하는 marven package를 사용하여 marven을 구성하려고 할 경우.
-3. 그냥 안녕의 JVM 환경은 못 믿겠다..
+1. X dependency가 분리 되었습니다.
+  1. ***java-1.8.0-openjdk-headless*** package가 기본 java package 입니다.
+    * "`yum install java`" 설치시에 기존 ***java-1.8.0-openjdk*** 가 설치되지 않고 ***java-1.8.0-openjdk-headless*** package가 설치 된다는 의미입니다.
+  2. ***java-1.8.0-devel-gui*** package가 새로 추가 되었습니다.
+2. ***SDK*** 환경이 기본 ***1.7.0***에서 ***1.8.0***으로 업데이트 되었습니다.
+  * "`yum install java-devel`" 설치시에, ***java-1.7.0-openjdk*** package가 설치 되던 것이 이제는 ***java-1.8.0-openjdk*** package들이 설치 됩니다.
+3. 안녕 리눅스의 ***openjdk-1.8.0*** package들은 CentOS에서 제공하는 ***openjdk-1.8.0*** rpm package를 풀어서 X dependency 의존성을 분리하고, 기본 패키지(java)를 headless package로 변경한 것입니다. <u>즉, binary와 jar 파일은 CentOS의 package와 동일 합니다.</u>
+4. ***tomcat*** version이 8로 업그레이드 되었습니다.
+5. 안녕 리눅스에서 지원하는 ***Oracle JRE/JDK*** rpm package에 대한 사항이 ***javapackages-tools*** package에 반영이 되었습니다.
 
-일단, JVM 환경은 워낙 다양한 경우가 많아서 일일이 대응을 하기가 힘이 듭니다. 그러므로, 무언가 문제가 있다고 판단이 되면, <u>CentOS JVM 환경으로 rollback</u> 하여 테스트 해 보시기 바랍니다.
 
-현재 안녕 리눅스의 JVM환경으로 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU) 가 운영 중입니다.
+
+현재 안녕 리눅스의 JVM환경(openjdk 7 + tomcat 8)으로 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU) 가 운영 중입니다.
 
 ## 3. Oracle JDK
 
