@@ -111,7 +111,8 @@ exclude=java-1.8.0-openjdk*
   echo "CLASSPATH   : $CLASSPATH"
   echo
 
-  JVM_LIBDIR+=":${JAVA_HOME}/lib" // for tools.jar
+  // for tools.jar. find_jar searches JVM_LIBDIR values.
+  JVM_LIBDIR+=":${JAVA_HOME}/lib"
   #CLASSPATH=$(find_jar commons-logging.jar commons-collections.jar servlet-api.jar tools.jar)
   CLASSPATH+=":$(find_jar servlet-api.jar)"
   if [ $? -ne 0 ]; then
