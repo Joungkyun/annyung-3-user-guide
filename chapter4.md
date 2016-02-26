@@ -31,7 +31,7 @@ JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니�
 현재 안녕 리눅스에서 제공하는 JVM 관련 패키지는 다음과 같으며, 이 외의 패키지들은 CentOS의 package를 그대로 사용합니다.
 
   * [java-1.8.0-openjdk](pkg-base-java-1.8.0-openjdk.md) (X 의존성 분리)
-  * [tmocat 8](pkg_base-tomcat.md)
+  * [tmocat 8](pkg-base-tomcat.md)
   * [javapackages-tools](pkg-base-javapackages-tools.md) (java-1.8.0-oracle package 지원)
 
 안녕 ***JVM*** 환경과 CentOS 환경의 차이는 다음과 같습니다.
