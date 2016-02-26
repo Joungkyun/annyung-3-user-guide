@@ -111,8 +111,9 @@ exclude=java-1.8.0-openjdk*
   echo "CLASSPATH   : $CLASSPATH"
   echo
 
-  #CLASSPATH=$(/usr/bin/build-classpath commons-logging.jar commons-collections.jar servlet-api.jar)
-  CLASSPATH+=":$(/usr/bin/build-classpath servlet-api.jar)"
+  JVM_LIBDIR+=":${JAVA_HOME}/lib" // for tools.jar
+  #CLASSPATH=$(find_jar commons-logging.jar commons-collections.jar servlet-api.jar tools.jar)
+  CLASSPATH+=":$(find_jar servlet-api.jar)"
   if [ $? -ne 0 ]; then
       echo "Can't find some jar files"
       exit 1
