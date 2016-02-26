@@ -227,7 +227,7 @@ exclude=tomcat*
 
 안녕 리눅스에서는 ***Oracle JDK***를 위하여 java-1.8.0-oracle source rpm을 제공합니다. 재배포를 허용하지 않기 때문에 source rpm으로 rebuild 시에 다운로드를 받아서 rpm을 제작 하며, 제작된 rpm들은 CentOS에서 제공하는 JVM환경과 호환이 됩니다.
 
-또한, 제작된 RPM은 Oracle에서 제공하는 JDK 8 rpm을 받아서 <u>file path및 Provides 정보</u>를 ***CentOS JVM*** 환경과 동일하게 re-packaing 한 것이므로, <u>binary level에서는 Oracle에서 제공하는 ***binary(rpm)***과 동일합니다.</u>
+또한, 제작된 RPM은 Oracle에서 제공하는 JDK 8 rpm을 받아서 <u>file path및 Provides 정보</u>를 ***CentOS JVM*** 환경과 동일하게 re-packaing 한 것이므로, <u>binary 수준에서는 Oracle에서 제공하는 ***binary(rpm)***와 동일합니다.</u>
 
 
 다음의 작업으로 oracle-jdk package를 생성할 수 있으며, build 시간은 대략 2~5분 정도 소요됩니다.
