@@ -63,7 +63,7 @@ exclude=java-1.8.0-openjdk*
 [root@an3 ~]
 ```
 
-현재 안녕 리눅스의 JVM환경(openjdk 7 + tomcat 8)으로 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU) 가 운영 중입니다.
+현재 http://css-validator.kldp.org/ 와 http://validator.kldp.org 의 HTML5 checker(NU)가 Oracle JDK 8 / tomcat 8 환경에서 안녕 리눅스 JVM 환경 (java-1.8.0-openjdk / tomcat 8) 으로 변경되어 운영 중입니다.
 
 
 ## 3. JVM 설치
