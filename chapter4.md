@@ -47,7 +47,7 @@ JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니�
 5. 안녕 리눅스에서 지원하는 ***Oracle JRE/JDK*** rpm package에 대한 사항이 ***javapackages-tools*** package에 반영이 되었습니다.
 6. ***java-1.7.0*** package와 ***javav-1.6.0*** package는 변경 사항이 없습니다. (X 의존성이 그대로 있습니다.)
 
-안녕 리눅스의 ***java-1.8.0-openjdk***을 사용을 원하지 않는다면 ***/etc/yum.repos.d/AnNyung.repo***의 ***AN:base*** repository에서 ***java-1.8.0***을 exclude 시키십시오.
+안녕 리눅스의 ***java-1.8.0-openjdk***을 사용을 원하지 않는다면 ***/etc/yum.repos.d/AnNyung.repo***의 ***AN:base*** repository에서 ***java-1.8.0-openjdk***를 exclude 시키십시오.
 
 ```bash
 [root@an3 ~]$ cat /etc/yum.repos.d/AnNyung.repo
@@ -58,7 +58,7 @@ mirrorlist=http://annyung.oops.org/mirror.php?release=$annyungver&arch=$basearch
 #baseurl=http://mirror.oops.org/pub/AnNyung/$annyungver/base/$basearch
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AnNyung-$annyungver
-exclude=java-1.8.0*
+exclude=java-1.8.0-openjdk*
   .. 하략 ..
 [root@an3 ~]
 ```
