@@ -54,9 +54,11 @@
 
 
 ## 4. 서비스 고도화
-  1. HTTP2 protocol 지원 (ALPN 지원)
+  1. HTTP/2 protocol 지원 (ALPN 지원)
     * http 2.4.18 mod_http2 (안녕 기본 지원)
-    * nginx 1.9.5 http2 module 가능 (안녕 3에서는 stables인 1.8 지원)
+    * nginx 1.8 spdy v3.1
+      * nginx 1.9.5를 설치하면 http2 모듈을 사용하여 지원 가능
+    * RHEL 7과 CentOS 7의 openssl 1.0.1e는 ALPN을 지원하지 않아 HTTP/2 지원에 애로가 있지만, 안녕 3에서는 1.0.2의 ALPN 기능을 backporting 하여 지원 가능
   2. PHP 고도화
     * PHP 7 support
     * PHP 5.6 compatible package 지원 (php-fpm)
