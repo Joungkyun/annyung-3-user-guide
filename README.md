@@ -6,6 +6,7 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 ## 1. 이력
 
 * 2016.02.29 초판 발행
+* 설치에 대해서는 [안녕 리눅스 3 설치 문서](https://joungkyun.gitbooks.io/annyung3-installation-guide/content/)를 참조 하십시오.
 * 모든 문서가 작성 완료 되지는 않았으며, 계속 작성 중입니다.
 
 ## 2. 개요
