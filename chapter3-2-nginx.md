@@ -1,5 +1,4 @@
-# Chapter 3. HTTP 운영
-##2. nginx
+#nginx
 
 > 목차
 1. 개요
@@ -10,13 +9,13 @@
 6. JAVA(tomcat)/Python/Perl 연동
 7. nginx 구동
 
-###1. 개요
+##1. 개요
 
   안녕 리눅스에서 제공하는 nginx는 1.8 ***stable*** branch를 제공합니다.
   
   참고로, 안녕 리눅스에서 제공하는 error page는 <u>공식적인 서비스에 활용하기에 적합하지 않은 표현을 사용</u>하고 있습니다. 공식적인 서비스 사용시에는 꼭 에러 페이지들을 별도로 만드는 것을 권고합니다.
 
-###2. ningx 설정 파일
+##2. ningx 설정 파일
 
 ```bash
 [root@an3 ~]$ tree /etc
@@ -66,7 +65,7 @@ server {
 ```
 6. ***/etc/nginx/common.d/core-secure.conf***에서 취약한 웹접근을 막는 설정이 있습니다. 운영에 문제가 될 수 있는 설정이니, 서비스 전에 꼭 확인 하십시오.
 
-###3. SSL 설정 및 HTTP2 protocol 지원
+##3. SSL 설정 및 HTTP2 protocol 지원
 
 ```nginx
 server {
@@ -110,7 +109,7 @@ server {
   
   안녕 리눅스의 ssl 설정 예제는 기본으로 spdy v3를 사용하도록 되어 있습니다.
 
-###4. 안녕에서 제공하는 추가 모듈
+##4. 안녕에서 제공하는 추가 모듈
 
  1. [URL module](https://github.com/vozlt/nginx-module-url)  
     apache mod_url 과 동일한 동작을 합니다.
@@ -130,7 +129,7 @@ server {
  5. [Headers more](https://www.nginx.com/resources/wiki/modules/headers_more/)
     Response header에 header를 추가 하거나 제거 합니다.
 
-###5. PHP 연동
+##5. PHP 연동
 
   Nginx에서의 PHP연동은 fastcgi protocol을 이용하여 PHP-FPM과 연동을 합니다. PHP-FPM 구동은 안녕 리눅스 사용자 가이드 [3.1.4 PHP](chapter3-4-php.md) 문서를 참조 하십시오.
   
@@ -172,11 +171,11 @@ server {
 
   ```
 
-###6. JAVA(tomcat)/Python/Perl 연동
+##6. JAVA(tomcat)/Python/Perl 연동
 
   안녕 리눅스에서 특별히 반영한 것이 없습니다. 기존에 하시던 방법이 있으면 그대로 하시면 무방 합니다. 또한, 인터넷 검색을 활용 하십시오. 
 
-###7. nginx 구동
+##7. nginx 구동
 
   간단한 nginx control 방법에 대하여 기술 합니다.
 
