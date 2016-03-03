@@ -1,5 +1,13 @@
 # Apache 2.4
 
+> 목차
+1. Deprecated mod_access
+2. 기본 syntax
+3. IP or Host based access control
+4. NIS 인증
+5. 국가/ISP based access control
+
+
 apahce 2.4의 access control은 apache 2.2의 새로운 인증 모듈을 사용합니다. 기존의 mod_access는 deprecated 되어 기본으로 사용을 할 수 없습니다.
 
 apache 2.4의 인증 관련 모듈은 인증(mod_authn_XXX)과 권한(mod_authz_XXX) 로 나뉘게 됩니다. 여기서는 기본적인 권한 설정과 안녕에서만 제공하는 권한 설정에 대해서 기술을 합니다.
@@ -167,7 +175,7 @@ SetEnvIf KRISP_COUNTRY_CODE IN BlockCountry
 <Directory "/some/path">
   RewriteConde    %{HTTP_HOST}          ^domain\.com$
   RewriteCond     %{ENV:KRISP_ISP_CODE} ^BORANET|KINXINC$
-  # KRISP_ISP_CODE가 BORANET이나 KINX면 접근 제한
+  # KRISP_ISP_CODE가 BORANET이나 KINXINC면 접근 제한
   RewriteRule     .*                    - [R=403]
 </Directory>
 ```
