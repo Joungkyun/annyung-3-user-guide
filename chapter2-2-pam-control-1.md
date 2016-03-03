@@ -1,6 +1,4 @@
-# Chapter 2. Access Control
-## 2. Shell login Control (with PAM)
-### 1. login 가능한 account 제한
+# login 가능한 account 제한
 
 LDAP이나 AD, NIS등으로 인증 통합을 했을 경우, login이 필요없는 account가 대부분 입니다. 또는 서버마다 경우가 틀릴 수 있습니다.
 
