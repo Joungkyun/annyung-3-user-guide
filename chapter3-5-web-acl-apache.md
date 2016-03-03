@@ -102,3 +102,5 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
  * 등록된 유저만 허가 합니다.
 
 ## 4. NIS 인증
+
+안녕 3의 apache에서 NIS를 이용한 인증및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 합니다.
