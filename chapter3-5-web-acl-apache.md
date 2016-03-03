@@ -95,6 +95,10 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
 
 ### 1. password list file 만들기
 
+google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 password list를 만들어 주는 tool들을 쉽게 찾을 수 있습니다.
+
+또는, https://httpd.apache.org/docs/2.2/ko/programs/htpasswd.html 문서를 참고 하십시오.
+
 ### 2. 설정
 
 사용자 방식의 authorization(권한)은 ***mod_auth_user*** 모듈에서 담당합니다. 자세한 사항은 [Apache 2.4 mod_authz_user](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_user.html) 모듈 문서를 참고 하십시오.
@@ -104,8 +108,16 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
 ***mod_authz_user*** 모듈은 *Require* 지시자에 *user* method와 *valid-user* method를 제공 합니다.
 
 > ```apache
+<Directory "/some/path">
+  AuthType Basic
+  AuthName "Protected Area"
+  AuthUserFile "/usr/local/apache/passwd/passwords"
+  AuthBasicProvider file
+  # permit access only john and david
   Require user john david
-  Require valid-user
+  # permit all granted user
+  #Require valid-user
+</Directory>
 ```
 
 * ***valid-user*** method (***Require valid-user***)
