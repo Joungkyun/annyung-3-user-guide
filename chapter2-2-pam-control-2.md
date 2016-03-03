@@ -1,6 +1,4 @@
-# Chapter 2. Access Control
-## 2. Shell login Control (with PAM)
-### 2. login account chroot
+# login account chroot
 
 ***pam_chroot PAM*** 모듈을 이용하여 ***Jail*** filesystem 구성하는 방법에 대하여 기술합니다.
 
