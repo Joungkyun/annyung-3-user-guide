@@ -169,7 +169,7 @@ SetEnvIf KRISP_COUNTRY_CODE IN BlockCountry
 </Directory>
 ```
 
-### 2. ***Rerite Rule*** 사용
+### 2. ***Rewrite Rule*** 사용
 
 ```apache
 <Directory "/some/path">
