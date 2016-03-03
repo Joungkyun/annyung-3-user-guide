@@ -1,6 +1,4 @@
-# Chapter 2. Access Control
-## 1. 안녕 리눅스 방화벽 설정
-### 5. User defined rule 제어
+# User defined rule 제어
 
 > 목차
 1. 개요
