@@ -337,10 +337,13 @@ PHP는 ***phpize*** (***php56*** package는 ***phpize56***) 명령을 이용하�
 [root@an3 pdo_firebird]$ make install
 ```
 
-설치를 한 후, ***/usr/lib64/php/extensions*** 에 해당 so file이 있는지 확인을 해 봅니다. (여기서는 pdo_firebird.so 입니다.) ***php56*** package의 경우에는 ***/usr/lib64/php56/extensions*** 에 설치가 됩니다.
+설치를 한 후, ***/usr/lib64/php/extensions*** 에 해당 so file이 있는지 확인을 해 봅니다. (여기서는 pdo_firebird.so 입니다.) ***php56*** package의 경우에는 ***phpize*** 대신 ***phpize56***을 이용하며,  ***/usr/lib64/php56/extensions*** 에 설치가 됩니다.
 
 ```bash
+# PHP 7 모듈의 경우 (phpize로 build)
 [root@an3 pdo_firebird]$ echo "extension = pdo_firebird.so" >> /etc/php.d/{apache,cli,fpm}/SHARED.ini
+# PHP 5.6 모듈의 경우 (phpize56 으로 build)
+[root@an3 pdo_firebird]$ echo "extension = pdo_firebird.so" >> /etc/php56.d/{apache,cli,fpm}/SHARED.ini
 ```
 
 파일이 설치된 것을 확인 했다면 위의 명령으로 module을 load 합니다.
@@ -385,7 +388,11 @@ exec_dir          = /var/lib/php56/bin
 session.save_path = /var/lib/php56/sessions
 ```
 
-###4. 명령어 비교
+###4. Share extension 위치
+
+***[php56](pkg-addon-php56.md)*** package의 shared extension은 ***/usr/lib64/php56/extensions***에 위치 합니다.
+
+###5. 명령어 비교
 
 | php 7 | php56 | package |
 | :---: | :---: | :---: |
@@ -394,7 +401,7 @@ session.save_path = /var/lib/php56/sessions
 | /usr/bin/phpize | /usr/bin/phpize56 | php-devel / php56-devel |
 | /usr/bin/php-config | /usr/bin/php56-config | php-devel / php56-devel |
 
-###5. PHP53 comaptible mode
+###6. PHP53 comaptible mode
 
 안녕 리눅스의 ***[php56](pkg-addon-php56.md)*** package에는 PHP 5.4에서 제거 되었거나 _deprecated_ 되어진 기능들을 사용할 수 있도록 패치가 되어 있습니다. <u>***[php](pkg-base-php.md)*** package에서는 지원하지 않습니다.</u>
 
