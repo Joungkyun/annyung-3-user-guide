@@ -1,5 +1,4 @@
-# Chapter 3. HTTP 운영
-##1. httpd
+#httpd
 
 >목차
 1. 주의 사항
@@ -12,7 +11,7 @@
 8. Python/Perl/tomcat 등의 연동
 9. apcahe 구동
 
-### 1. 주의 사항
+## 1. 주의 사항
 
 1. 안녕 리눅스의 httpd의 기본 MPM은 ***event*** 입니다.
   1. 안녕 리눅스는 ***event MPM을 사용***하는 것을 권장 합니다.  
@@ -26,7 +25,7 @@
   웹 공격에 취약한 접근에 대하여 미리 접근을 차단하고 있습니다. <u>이 설정은 서비스 운영 시에 꼭 확인</u>을 하시기 바랍니다. 이 설정 때문에 원하는 동작이 되지 않을 수 있습니다. 
 
 
-### 2. 설정 파일 환경
+## 2. 설정 파일 환경
 
 > 먼저, 종합적인 권고를 우선 말하자면, apache 설정을 추가/변경할 것이 있다면, ***/etc/httpd/user.d/Default.conf*** 에 하십시오! 절대 ***/etc/httpd/conf/httpd.conf***는 수정하지 마십시오! 모듈 설정은 ***/etc/httpd.conf.d***에서 운영에 관한 설정은 ***/etc/httpd/user.d*** 에서 하십시오.
 
@@ -70,7 +69,7 @@
  * ***/etc/httpd/httpd.conf*** 에서 ***/etc/httpd/conf.d/*.conf***를 include 한 다음 ***/etc/httpd/user.d/*.conf***를 include 하기 때문에 중복되는 지시자 중 ***/etc/httpd/user.d/***에 설정된 지시자가 최종 반영이 됩니다.
 
 
-### 3. HTTP2 protocol 지원
+## 3. HTTP2 protocol 지원
 
 안녕 리눅스의 apache는 ***http2*** protpcol을 지원하기 위해서 2.4.17 이상 버전으로 업그레이드 되었으며, 또한 openssl 1.0.1e에 ***ALPN*** patch를 추가 하였습니다.
 
@@ -92,7 +91,7 @@ LoadModule http2_module     modules/mod_http2.so
 
 ***h2c***(over SSL)은 [***mod_ssl***](pkg-base-httpd.md) package를 설치 하면 자동으로 동작 합니다.
 
-### 4. SSL 설정
+## 4. SSL 설정
 
 SSL을 설정 하기 위해서는 ***mod_ssl*** package 설치가 필요 합니다.
 
@@ -161,7 +160,7 @@ LoadModule  userdir_module      modules/mod_userdir.so
 ```
 
 
-### 6. CGI 설정
+## 6. CGI 설정
 
 안녕 리눅스에서 cgi를 사용하기 위해서는 ***/etc/httpd/conf.d/cgi.conf*** 에서 모듈을 load 해 주셔야 합니다. 기본으로 load 설정이 주석 처리 되어 있습니다.
 
@@ -214,18 +213,18 @@ LoadModule  userdir_module      modules/mod_userdir.so
 ```
 
 
-### 7. PHP 연동
+## 7. PHP 연동
 
 안녕 리눅스는 기본으로 PHP7을 지원 합니다. 그리고, PHP5의 호환성을 위하여 PHP56 compat package를 FPM으로 지원을 합니다. 그러므로, PHP7과 PHP56을 모두 사용하기 위해서는 mod_php를 사용하는 것 보다 php-fpm(FastCGI)로 구성 하는 것을 권고 합니다.
 
 자세한 사항은 [***PHP 섹션***](chapter3-4-php.md)을 참고 하십시오.
 
 
-### 8. Python/Perl/tomcat 등의 연동
+## 8. Python/Perl/tomcat 등의 연동
 
 이 환경에 대해서는 별개의 변경 사항이 없기 때문에 CentOS 기준과 Apache 2.4의 기준으로 설정 하시면 됩니다.
 
-### 9. apache 구동
+## 9. apache 구동
 
 간단한 apcahe control 방법에 대하여 기술 합니다.
 
