@@ -173,7 +173,7 @@ SetEnvIf KRISP_COUNTRY_CODE IN BlockCountry
 
 ```apache
 <Directory "/some/path">
-  RewriteConde    %{HTTP_HOST}          ^domain\.com$
+  RewriteCond     %{HTTP_HOST}          ^domain\.com$
   RewriteCond     %{ENV:KRISP_ISP_CODE} ^BORANET|KINXINC$
   # KRISP_ISP_CODE가 BORANET이나 KINXINC면 접근 제한
   RewriteRule     .*                    - [R=403]
