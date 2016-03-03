@@ -23,7 +23,7 @@
 
 안녕 리눅스는 기본으로 ***openJDK 8***과 ***tomcat 8***을 지원합니다. 또한, Oracle JRE/JDK 8 사용을 원하시는 분들을 위하여 Oracle JRE/JDK 8환경 구축에 대한 지원을 합니다. Oracle JDK/JRE에 대해서는 ***&lt;5. Oracle JDK&gt;*** 항목을 참고 하십시오.
 
-JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니다만, 권장 하지 않습니다. ***openjdk***는 1.7.0 부터 Oracle JDK와 대등한 수준의 API를 지원합니다. (대등한 성능을 의미하는 것이 아니라 API 대응을 의미하는 것입니다.) 그러므로 <u>JDK 6 환경은 Oracle JDK를 받아서 직접 구성하십시오.</u>
+JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니다만, 권장 하지 않습니다. ***openjdk***는 1.7.0 부터 Oracle JDK와 대등한 수준의 API를 지원합니다. (대등한 성능을 의미하는 것이 아니라 API 대응을 의미이며, 안녕 3에서 oracle JDK가 기본이 아니라 openJDK를 기본으로 한 이유 입니다.) 그러므로 <u>JDK 6 환경은 Oracle JDK를 받아서 직접 구성하십시오.</u>
 
 
 ## 2. 변경 사항
