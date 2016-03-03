@@ -1,6 +1,6 @@
 # Chapter 2. Access Control
 ## 1. 안녕 리눅스 방화벽 설정
-### 7. oops-firewall 실행 방법
+### oops-firewall 실행 방법
 
 1. booting 시 oops-firewall 이 구동 되도록 설정
   ```bash
