@@ -1,5 +1,5 @@
-# Chapter 3. HTTP 운영
-##3. lighttpd
+
+# lighttpd
 
 > 목차
 1. 개요
@@ -10,7 +10,7 @@
 6. JAVA(tomcat)/Python/Perl 연동
 7. lighttpd 구동
 
-###1. 개요
+##1. 개요
 
   안녕 리눅스의 [lighttpd](pkg-addon-lighttpd.md)는 1.4 branch를 제공 합니다.
   
@@ -18,7 +18,7 @@
   
   [lighttpd](pkg-addon-lighttpd.md)는 1.4 branch는 현재 7여년 동안 개발이 정체되어 있고 새로운 기술들이 반영되어진 2.0이 아직 출시 단계에도 이르지 못한 상황이므로, 동일하게 single thread model인 [nginx](chapter3-2-nginx.md)를 선택하는 것이 더 좋습니다.
 
-###2. lighttpd 설정 파일
+##2. lighttpd 설정 파일
 
   ```bash
   [root@an3 ~]$ tree /etc
@@ -45,7 +45,7 @@
   * ***/etc/sysconfig/lighttpd-monitor*** 는 ***/usr/sbin/lighttpd-monitor*** 명령을 실행하는데 필요한 옵션값들이 설정 되어 있습니다. 이에 관련해서는 [웹서버 모니터링](chapter3-6-web-monitor.md) 문서에서 기술 합니다.
 
 
-###3. SSL 설정 및 HTTP2 protocol 지원
+##3. SSL 설정 및 HTTP2 protocol 지원
 
   설정 파일의 예제는 다음과 같습니다.
   
@@ -81,7 +81,7 @@
   [lighttpd](pkg-addon-lighttpd.md) 1.4 branch는 spdy와 http2를 지원하지 않습니다.
 
 
-###4. 안녕에서 제공하는 기능 및 추가 모듈
+##4. 안녕에서 제공하는 기능 및 추가 모듈
 
   1. include 지시자에 astrik를 사용할 수 있습니다. 파일이 존재하지 않아도 error가 발생하지 않습니다.
     ```php
@@ -120,7 +120,7 @@
     * [mod_auth_nis](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README) - NIS 인증 모듈
     * [mod_krisp](http://svn.oops.org/wsvn/Lighttpd.mod_krisp/trunk/README) - IP 관련 Geo data를 환경 변수로 생성. 링크 문서 참조
 
-###5. PHP 연동
+##5. PHP 연동
 
   ```php
   server.module         += ("mod_fastcgi")
@@ -140,7 +140,7 @@
 
   lighttpd 문서상, TCP가 아닌 unix domain soecket으로도 fastcgi 연결이 가능하다고 되어 있으나, 실상은 동작하지 않는다. 그러므로 PHP-FPM을 lighttpd와 연동을 하려면 PHP-FPM의 listen을 TCP로 설정해야 한다.
 
-###6. JAVA(tomcat)/Python/Perl/CGI 연동
+##6. JAVA(tomcat)/Python/Perl/CGI 연동
 
   1. tomcat  
     * proxy module을 이용 (ajp 지원 안함)
@@ -184,7 +184,7 @@
     ```
     http://redmine.lighttpd.net/projects/1/wiki/docs_modcgi 참조
 
-###7. lighttpd 구동
+##7. lighttpd 구동
 
   간단한 lighttpd control 방법에 대하여 기술 합니다.
 
