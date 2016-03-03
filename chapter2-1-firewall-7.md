@@ -1,23 +1,21 @@
-# Chapter 2. Access Control
-## 1. 안녕 리눅스 방화벽 설정
-### oops-firewall 실행 방법
+# oops-firewall 실행 방법
 
-1. booting 시 oops-firewall 이 구동 되도록 설정
+##1. booting 시 oops-firewall 이 구동 되도록 설정
   ```bash
   [root@an3 ~]$ /sbin/service oops-firewall enable
   [root@an3 ~]$ systemctl enable oops-firewall
   ```
-2. booting 시 oops-firewall 이 구동되지 않도록 설정
+##2. booting 시 oops-firewall 이 구동되지 않도록 설정
   ```bash
   [root@an3 ~]$ /sbin/service oops-firewall disable
   [root@an3 ~]$ systemctl disable oops-firewall
   ```
-3. init(or systemd)를 이용한 oops-firewall 구동
+##3. init(or systemd)를 이용한 oops-firewall 구동
   ```bash
   [root@an3 ~]$ /sbin/service oops-firewall [start|stop|restart|status]
   [root@an3 ~]$ systemctl [start|stop|restart|status] oops-firewall
   ```
-4. 실행 명령을 이용한 oops-firewall 구동
+##4. 실행 명령을 이용한 oops-firewall 구동
 
   **_oops-firewall_** 구동 방법에 주의할 점이 있습니다. 일단, **_oops-firewlall_** 명령어에는 적용되어 있는 ruleset을 내릴 수 있는 방법이 없다 그렇기 때문에 rule set을 모두 내리기 위해서는 무조건 아래의 방법만이 가능합니다.
   
