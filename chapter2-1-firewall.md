@@ -1,5 +1,4 @@
-# Chapter 2. Access Control
-## 1. 안녕 리눅스 방화벽 설정
+#안녕 리눅스 방화벽 설정
 
 > 목차  
 1. [기본 설정](chapter2-1-firewall-1.md)  
