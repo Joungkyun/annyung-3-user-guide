@@ -156,9 +156,9 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
  * KRISP_ISP_CODE
  * KRISP_ISP_NAME
 
-***krisp*** module을 이용한 권한 제어는 mod_authz_core의 *env* method 또는 Rewrite rule을 이용하여 사용이 가능 합니다.
+***krisp*** module을 이용한 권한 제어는 mod_authz_core의 *env* method 또는 *Rewrite rule*을 이용하여 가능 합니다.
 
-### 1. ***env*** method 사용
+### 1. ***env*** method
 
 ```apache
 SetEnvIf KRISP_COUNTRY_CODE RU BlockCountry
@@ -169,7 +169,7 @@ SetEnvIf KRISP_COUNTRY_CODE IN BlockCountry
 </Directory>
 ```
 
-### 2. ***Rewrite Rule*** 사용
+### 2. ***Rewrite Rule***
 
 ```apache
 <Directory "/some/path">
