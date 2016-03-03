@@ -10,7 +10,7 @@
   2. Case study
 
 
-#### 1. 개요
+## 1. 개요
 **_oops-firewall_**은 일종의 iptables rule을 생성하는 template 같은 도구 이기 때문에, rule을 만들다 보면 의도하는 바가 제한이 될 수 있습니다.
 
 그렇게 때문에 사용자 rule을 등록 할 수 있도록 지원을 합니다.
@@ -112,8 +112,8 @@
   
   상단의 **_oops-firewall_** 룰 적용 순서를 보면, 4번째가 **_pre rule_**이 적용이 되고, 28번째에 **_post rule_**이 적용이 되는 것을 확인 하실 수 있습니다.
 
-#### 2. Pre user defined rule
-##### 1. Syntax
+## 2. Pre user defined rule
+### 1. Syntax
 
 user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일하게 설정이 됩니다.
 예를 들어
@@ -130,7 +130,7 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
 
 즉, shell에서 실행했던 commaind line중 실행 명령어(여기서는 iptables)를 **'%'**로 치환해 주면 됩니다. rule의 제일 처음이 **'%'**로 시작하면, **_pre rule_**로 처리가 되고, **'@'**으로 시작이 되면 **_post rule_**로 처리가 되는 것입니다.
 
-##### 2. Case study
+### 2. Case study
 
 **_pre rule_**을 자주 사용할 경우에 대해서 기술 합니다.
 
@@ -153,8 +153,8 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
 3. 특정 포트가 anywhere로 허가된 상태에서 특정 곳에서의 해당 포트로 접근을 막고 싶을 경우 **_pre rule_**에서 처리할 수 있습니다. 이 경우는 2번째 경우와 동일하게 처리할 수 있습니다.
 
 
-#### 3. Post user defined rule
-##### 1. Syntax
+## 3. Post user defined rule
+### 1. Syntax
 
 **_post rule_** 역시 **_pre rule_**의 문법과 동일하며, 처음의 **_'%'_** 대신 **_'@'_**을 사용해 주면 됩니다.
 예를 들어
@@ -171,7 +171,7 @@ user defined rule은 iptables 명령을 직접 실행하는 것과 거의 동일
 
 즉, shell에서 실행했던 commaind line중 실행 명령어(여기서는 iptables)를 **'@'**으로 치환해 주면 됩니다.
 
-##### 2. Case study
+### 2. Case study
 
 **_post rule_**을 사용하는 경우는 **_oops-firewall_**이 생성한 rule 중간에 rule 을 끼워 놓고 싶을 경우 외에는 사용할 일이 거의 없습니다.
 
