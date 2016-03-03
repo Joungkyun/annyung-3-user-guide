@@ -1,5 +1,4 @@
-# Chapter 2. Access Control
-## 2. Shell login Control (with PAM)
+# Shell login Control (with PAM)
 
 > 목차
 1. [login 가능한 account 제한](chapter2-2-pam-control-1.md)
