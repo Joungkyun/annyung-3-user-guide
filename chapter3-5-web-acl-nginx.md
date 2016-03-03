@@ -99,6 +99,8 @@ localtion / {
   auth_basic "Restricted Content";
   auth_basic_user_file /etc/nginx/.htpasswd;
   
-  if ( $remote_user ^~
+  if ( $remote_user !~ ^(john|smith|joe)$ ) {
+    return 403;
+  }
 }
 ```
