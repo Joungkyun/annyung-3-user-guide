@@ -78,7 +78,7 @@ krisp module을 사용하기 위한 자세한 설정은 [nginx ngx_http_krisp mo
 ```nginx
 location /ko/ {
   if ( $krisp_country_code = KR ) {
-    if ( $krisp_isp_code != KORNET ) {
+    if ( $krisp_isp_code = KORNET ) {
       return 403;
     }
   }
@@ -98,5 +98,7 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 localtion / {
   auth_basic "Restricted Content";
   auth_basic_user_file /etc/nginx/.htpasswd;
+  
+  if ( $remote_user ^~
 }
 ```
