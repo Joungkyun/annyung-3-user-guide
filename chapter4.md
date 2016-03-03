@@ -219,7 +219,7 @@ exclude=tomcat*
 ***oracle-jre***나 ***oracle-jdk***가 설치된 환경은 2016년 2월 26일 이전에 제공하던 환경입니다. 안녕 리눅스 3릴리즈 직전에 안녕 리눅스의 JVM환경이 변경이 되었으니, 이전에 환경을 구성했다면 초기화 하시기 바랍니다.
 
 ```bash
-[root@an3 ~]$ yum remove oracle-jre oracle-jdk tomcak
+[root@an3 ~]$ yum remove oracle-jre oracle-jdk tomcat
 ```
 
 
