@@ -1,6 +1,4 @@
-# Chapter 2. Access Control
-## 2. Shell login Control (with PAM)
-### 3. Google OTP를 이용한 2 factor 인증
+# Google OTP를 이용한 2 factor 인증
 
 이 문서는 ***Google-Authenticator***를 이용하여 2-factor 인증을 구현하는 방법에 대해서 기술 합니다. ***Google-Authenticator***는 ***HMAC-Based One-time Password (HOTP)*** 방식과 ***Time-based One-time Password (TOTP)*** 방식을 지원하며, 여기서는 ***TOTP***를 이용하여 구성을 합니다.
 
