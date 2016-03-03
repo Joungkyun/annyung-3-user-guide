@@ -104,3 +104,70 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
 ## 4. NIS 인증
 
 안녕 3의 apache에서 NIS를 이용한 인증및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 합니다.
+
+```bash
+[root@an3 ~]$ yum install httpd-nis
+```
+
+사용 방법은 다음과 같습니다.
+
+```apache
+<Directory "/some/path">
+  AuthType Basic
+  AuthName "Authentication With NIS"
+  AuthBasicProvider nis
+  
+  <IfModule nis_auth_module>
+    NisDomain NISDOMAINNAME
+    NisPwMap  passwd.byname
+  </IfModule>
+  
+  Require valid-user
+  #Require user john smith
+</Directory>
+```
+
+## 5. 국가/ISP based access control
+
+안녕 3에서는 ***libkrisp*** library를 이용하여 국가 또는 ISP로 권한 제어를 할 수 있습니다. 이를 위해서는 [httpd-krisp](pkg-core-httpd-krisp.md) 모듈이 필요 합니다.
+
+```bash
+[root@an3 ~]$ yum install httpd-krisp
+```
+
+자세한 사항에 대해서는 [Apache mod_krisp 문서](http://svn.oops.org/wsvn/Apache.mod_krisp/trunk/apache2/README)를 참고 하십시오.
+
+***/etc/httpd/conf.d/krisp.conf*** 에서 관련 설정을 보실 수 있습니다.
+
+이 모듈을 사용할 경우 apache에 다음의 환경 변수가 생성이 됩니다.
+
+ * KRISP_ORIGINAL_IP
+ * KRISP_CHECK_IP
+ * KRISP_COUNTRY_CODE
+ * KRISP_COUNTRY_NAME
+ * KRISP_ISP_CODE
+ * KRISP_ISP_NAME
+
+***krisp*** module을 이용한 권한 제어는 mod_authz_core의 *env* method 또는 Rewrite rule을 이용하여 사용이 가능 합니다.
+
+### 1. ***env*** method 사용
+
+```apache
+SetEnvIf KRISP_COUNTRY_CODE RU BlockCountry
+SetEnvIf KRISP_COUNTRY_CODE IN BlockCountry
+
+<Directory "/some/path">
+  Require not env BlockCountry
+</Directory>
+```
+
+### 2. ***Rerite Rule*** 사용
+
+```apache
+<Directory "/some/path">
+  RewriteConde    %{HTTP_HOST}          ^domain\.com$
+  RewriteCond     %{ENV:KRISP_ISP_CODE} ^BORANET|KINXINC$
+  # KRISP_ISP_CODE가 BORANET이나 KINX면 접근 제한
+  RewriteRule     .*                    - [R=403]
+</Directory>
+```
