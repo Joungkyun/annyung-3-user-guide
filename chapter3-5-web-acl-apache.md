@@ -4,8 +4,9 @@
 1. Deprecated mod_access
 2. 기본 syntax
 3. IP or Host based access control
-4. NIS 인증
-5. 국가/ISP based access control
+4. User based access control 
+5. NIS 인증
+6. 국가/ISP based access control
 
 
 apahce 2.4의 access control은 apache 2.2의 새로운 인증 모듈을 사용합니다. 기존의 mod_access는 deprecated 되어 기본으로 사용을 할 수 없습니다.
@@ -59,7 +60,7 @@ apache 2.4의 authorization(권한)은 기본을 ***mod_authz_core*** 모듈에�
 ```
 
 
-## 2. IP or Host based access control
+## 3. IP or Host based access control
 
 IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에서 담당을 합니다. 자세한 사항은 [Apache 2.4 mod_authz_host](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_host.html) 모듈 문서를 참고 하십시오.
 
@@ -90,7 +91,7 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
   * client와 host의 IP가 같을 경우
 
 
-## 3. User based access control
+## 4. User based access control
 
 사용자 방식의 authorization(권한)은 ***mod_auth_user*** 모듈에서 담당합니다. 자세한 사항은 [Apache 2.4 mod_authz_user](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_user.html) 모듈 문서를 참고 하십시오.
 
@@ -109,7 +110,7 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
 * ***user*** method (***Require user ...***)
  * 등록된 유저만 허가 합니다.
 
-## 4. NIS 인증
+## 5. NIS 인증
 
 안녕 3의 apache에서 NIS를 이용한 인증및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 합니다.
 
@@ -135,7 +136,7 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
 </Directory>
 ```
 
-## 5. 국가/ISP based access control
+## 6. 국가/ISP based access control
 
 안녕 3에서는 ***libkrisp*** library를 이용하여 국가 또는 ISP로 권한 제어를 할 수 있습니다. 이를 위해서는 [httpd-krisp](pkg-core-httpd-krisp.md) 모듈이 필요 합니다.
 
