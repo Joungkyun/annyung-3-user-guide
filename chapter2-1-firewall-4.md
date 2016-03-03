@@ -1,6 +1,4 @@
-# Chapter 2. Access Control
-## 1. 안녕 리눅스 방화벽 설정
-### 4. brute force attack 제어
+# brute force attack 제어
 
 [brute force attack](https://ko.wikipedia.org/wiki/%EB%AC%B4%EC%B0%A8%EB%B3%84_%EB%8C%80%EC%9E%85_%EA%B3%B5%EA%B2%A9)은 우리 말로 **_무차별 대입 공격_** 이라고 번역을 합니다.
 
