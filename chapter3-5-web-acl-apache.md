@@ -2,7 +2,7 @@
 
 apahce 2.4의 access control은 apache 2.2의 새로운 인증 모듈을 사용합니다. 기존의 mod_access는 deprecated 되어 기본으로 사용을 할 수 없습니다.
 
-apache 2.4의 인증 관련 모듈은 authentificate(mod_authn_XXX)과 authorization(mod_authz_XXX) 로 나뉘게 됩니다. 여기서는 authorization 관련 사항에 대하여 살펴 보도록 합니다.
+apache 2.4의 인증 관련 모듈은 인증(mod_authn_XXX)과 권한(mod_authz_XXX) 로 나뉘게 됩니다. 여기서는 권한(*authorization*) 관련 사항에 대하여 살펴 보도록 합니다.
 
 또한, 기존의 IP, Host 단위의 authorization보다 다양한 방법의 authorization을 할 수 있으니, apcahe 2.4의 access control에 대해서는 다음 문서를 참조 하시기 바랍니다.
 
@@ -32,7 +32,7 @@ apache 2.4에서 위의 문법을 사용하기 위해서는 mod_access_compat mo
 
 ## 2. 기본 syntax
 
-apache 2.4의 authorization은 기본을 ***mod_authz_core*** 모듈에서 담당을 합니다. 자세한 사항은 [Apache 2.4 mod_authz_core](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_core.html) 모듈 문서를 참고 하십시오.
+apache 2.4의 authorization(권한)은 기본을 ***mod_authz_core*** 모듈에서 담당을 합니다. 자세한 사항은 [Apache 2.4 mod_authz_core](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_core.html) 모듈 문서를 참고 하십시오.
 
 ***mod_authz_core*** 모듈은 안녕 3의 ***/etc/httpd/conf.d/LoadModules.conf***에서 기본으로 load 하고 있습니다.
 
@@ -53,7 +53,7 @@ apache 2.4의 authorization은 기본을 ***mod_authz_core*** 모듈에서 담�
 
 ## 2. IP or Host based access control
 
-IP 또는 Host 방식의 authorization은 ***mod_authz_host*** 모듈에서 담당을 합니다. 자세한 사항은 [Apache 2.4 mod_authz_host](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_host.html) 모듈 문서를 참고 하십시오.
+IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에서 담당을 합니다. 자세한 사항은 [Apache 2.4 mod_authz_host](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_host.html) 모듈 문서를 참고 하십시오.
 
 역시 안녕 3에서는 ***LoadModules.conf***에서 기본으로 load 하고 있습니다.
 
@@ -83,3 +83,7 @@ IP 또는 Host 방식의 authorization은 ***mod_authz_host*** 모듈에서 담�
   Require local
 </Directory>
 ```
+
+## 3. User based access control
+
+사용자 방식의 authorization(권한)은 ***mod_auth_user*** 모듈에서 담당합니다. 자세한 사항은 [Apache 2.4 mod_authz_user](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_user.html) 모듈 문서를 참고 하십시오.
