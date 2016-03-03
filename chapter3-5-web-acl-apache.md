@@ -93,6 +93,10 @@ IP 또는 Host 방식의 authorization(권한)은 ***mod_authz_host*** 모듈에
 
 ## 4. User based access control
 
+### 1. password list file 만들기
+
+### 2. 설정
+
 사용자 방식의 authorization(권한)은 ***mod_auth_user*** 모듈에서 담당합니다. 자세한 사항은 [Apache 2.4 mod_authz_user](http://httpd.apache.org/docs/2.4/en/mod/mod_authz_user.html) 모듈 문서를 참고 하십시오.
 
 역시 안녕 3에서는 ***LoadModules.conf***에서 기본으로 load 하고 있습니다.
