@@ -5,6 +5,8 @@
 2. referer based access control
 3. User Agent based access control
 4. Country/ISP based access control
+5. User based access control
+
 
 ## 1. IP based access control
 
@@ -80,5 +82,21 @@ location /ko/ {
       return 403;
     }
   }
+}
+```
+
+## 5. User based access control
+
+### 1. password list 생성
+
+google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 password list를 만들어 주는 tool들을 쉽게 찾을 수 있습니다.
+
+또는, http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic_user_file 문서를 참고 하십시오.
+
+### 2. 인증 설정
+```nginx
+localtion / {
+  auth_basic "Restricted Content";
+  auth_basic_user_file /etc/nginx/.htpasswd;
 }
 ```
