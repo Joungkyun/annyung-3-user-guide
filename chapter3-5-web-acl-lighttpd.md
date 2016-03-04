@@ -35,6 +35,18 @@ $HTTP["remoteip"] =~ "^192.168|121.33" {
 }
 ```
 
+위의 방법 외에, 안녕 리눅스는 ***mod_net_access*** 라는 3rd party module을 통하여 좀더 편한 방법을 제공 합니다.
+
+```php
+$HTTP["url"] =~ "/server-(status|config)" {
+    url.order               = "allow"
+    url.list                = ("127.0.0.1", "10.0.0.0/8")
+}
+```
+
+***mod_net_access*** 모듈에 대해서는 [mod_net_access 문서](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README)를 참고 하십시오.
+
+
 ## 2. referer based access control
 
 ```php
