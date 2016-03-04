@@ -137,6 +137,12 @@ $HTTP["url"] == "/req_auth" {
 
 자세한 사항에 대해서는 [***mod_auth_nis*** 모듈 문서](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README)를 참조 하십시오.
 
+이 기능을 사용하기 위해서는 ***"mod_auth"*** 모듈이 load 되어야 합니다.
+
+```php
+server.modules += ("mod_auth_nis")
+```
+
 ```php
 $HTTP["url"] == "/req_auth" {
   nis.domain  = "NISDOMAINNAME"
