@@ -62,3 +62,20 @@ gdbdump=no
 * * * * * root /usr/sbin/httpd-monitor >& /dev/null
 [root@an3 ~]$
 ```
+
+## 3. logging
+
+```bash
+[root@an3 ~]$ cat /var/log/httpd/httpwatch.log
+[2016.03.05 02:11:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:12:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:13:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:14:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:15:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:16:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:17:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:18:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:19:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[2016.03.05 02:20:01] http://localhost/robots.txt "Host: domain.org" return code 200
+[root@an3 ~]$
+```
