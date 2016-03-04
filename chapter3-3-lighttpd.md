@@ -1,5 +1,5 @@
 
-# lighttpd
+# lighttpd 운영
 
 > 목차
 1. 개요
