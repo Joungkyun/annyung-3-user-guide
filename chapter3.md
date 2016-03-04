@@ -10,6 +10,4 @@
 3. [Lighttpd](chapter3-3-lighttpd.md)
 4. [PHP](chapter3-4-php.md)
 5. [Web Access Control](chapter3-5-web-acl.md)
-  1. IP based GEO data
-  2. Google Authentificator(Google OTP)를 이용한 2-factor 인증
-6. Web server 모니터링
+6. [Web Monitor agent](chapter3-5-web-agent.md)
