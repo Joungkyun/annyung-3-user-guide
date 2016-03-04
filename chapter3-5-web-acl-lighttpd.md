@@ -55,41 +55,23 @@ $HTTP["useragent"] =~ "Bot" {
 
 ## 4. Country/ISP based access control
 
-Nginx에서의 국가 또는 ISP 제어는 GeoIP와 krisp를 이용하여 가능 합니다.
-
-둘 중, 어느 것을 사용하는냐는 사용자의 선택이지만, 국내의 IP 및 ISP 정보를 취급할 경우에는 krisp를 사용하는 것이 더 정확 합니다.
+안녕 3의 lighttpd에서는 ***$HTTP["country"]*** 와 ***$HTTP["isp"]*** conditional field를 이용하여 접속자의 country 또는 isp를 이용하여 access control이 가능 합니다.
 
 <strong style="color: red;">참고!</strong>  
-* GeoIP 모듈은 ISP 정보를 제공하지 않습니다.
 * 안녕에서 기본 제공하는 krisp database에는 국내의 ISP 정보만 있습니다. (해외 ISP 정보는 들어 있지 않습니다. GeoISP를 이용하여 custom database를 만들 수 있습니다.)
-* krisp database는 KISA의 한국 IP database를 기반으로 하여 제작 되어 국내 환경에는 GeoIP보다 정확도가 높습니다.
+* ***server-status*** 또는 ***server-config*** handler에서 사용하기 위해서는 mod_status 모듈 보다 mod_krisp 모듈이 먼저 load 되어야 합니다.
 
-### 1. GeoIP
-
-GeoIP module을 사용하기 위한 자세한 설정은 [nginx ngx_http_geoip_module 문서](http://nginx.org/en/docs/http/ngx_http_geoip_module.html)를 참고 하십시오.
-
-```nginx
-location = /ko/ {
-  if ( $geoip_country_code != KR ) {
-    return 403;
+```php
+$HTTP["url"] == "/kor" {
+  $HTTP["country"] != "KR" {
+      url.access-deny = ("")
   }
 }
-```
 
-### 2. krisp
-
-krisp module을 사용하기 위한 자세한 설정은 [nginx ngx_http_krisp module 문서](https://github.com/vozlt/nginx-module-krisp/blob/master/README.md)를 참고 하십시오.
-
-```nginx
-location /ko/ {
-  if ( $krisp_country_code = KR ) {
-    if ( $krisp_isp_code = KORNET ) {
-      return 403;
-    }
-  }
+$HTTP["isp"] != "boradNnet" {
+    url.access-deny = ("")
 }
 ```
-
 ## 5. User based access control
 
 ### 1. password list 생성
