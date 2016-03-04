@@ -7,7 +7,8 @@
 3. User Agent based access control
 4. Country/ISP based access control
 5. User based access control
-6. NIS access control
+  1. mod_auth
+  2. mod_auth_nis
 
 
 ***lighttpd***의 접근 정책은 기본적으로 *mod_access* 에서 제공하는 ***url.access-deny*** 설정을 이용하여, conditonal field를 이용하여 응용을 합니다.
@@ -47,7 +48,16 @@ $HTTP["url"] =~ "/server-(status|config)" {
 
 ***mod_net_access*** 모듈에 대해서는 [mod_net_access 문서](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README)를 참고 하십시오.
 
-위의 예제 처럼 */server-status* 와 */server-config* handler에 사용하기 위해서는, ***mod_net_access*** 모듈이 ***mod_status*** 모듈 보다 먼저 load 되어야 합니다.
+이 기능을 사용하기 위해서는 ***mod_net_access*** 모듈이 load되어야 하며, 위의 예제 처럼 */server-status* 와 */server-config* handler에 사용하기 위해서는, ***mod_net_access*** 모듈이 ***mod_status*** 모듈 보다 먼저 load 되어야 합니다.
+
+```php
+server.modules += (
+  ...
+  "mod_net_access",
+  "mod_status",
+   ...
+)
+```
 
 ## 2. referer based access control
 
@@ -90,21 +100,55 @@ $HTTP["isp"] != "boradNnet" {
 ```
 ## 5. User based access control
 
-### 1. password list 생성
+### 5.1. mod_auth
+
+***apache***의 *htpasswd* file을 사용하여 인증을 하는 방법과 유사합니다. 자세한 사항은 [***mod_auth*** 문서](https://redmine.lighttpd.net/projects/1/wiki/docs_modauth)를 참고 하십시오.
+
+이 기능을 사용하기 위해서는 ***"mod_auth"*** 모듈이 load 되어야 합니다.
+
+```php
+server.modules += ("mod_auth")
+```
+
+#### 5.1.1. password list 생성
 
 google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 password list를 만들어 주는 tool들을 쉽게 찾을 수 있습니다.
 
-또는, http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic_user_file 문서를 참고 하십시오.
+또는, https://redmine.lighttpd.net/projects/1/wiki/docs_modauth 문서를 참고 하십시오.
 
-### 2. 인증 설정
-```nginx
-localtion / {
-  auth_basic "Restricted Content";
-  auth_basic_user_file /etc/nginx/.htpasswd;
-  
-  if ( $remote_user !~ ^(john|smith|joe)$ ) {
-    return 403;
-  }
+#### 5.1.2. 인증 설정
+```php
+$HTTP["url"] == "/req_auth" {
+  auth.backend = "htpasswd"
+  auth.backend.htpasswd.userfile = "/full/path/to/lighttpd-htpasswd.user"
+  auth.require = (
+    "" => (
+      "method" => "basic",
+      "realm" => "Private Area",
+      "require" => "user=john|user=smith"
+    )
+  )
 }
 ```
+
+### 5.2. mod_auth_nis
+
+***mod_auth_nis*** 모듈을 이용하여 NIS 인증이 가능 합니다. ***mod_auth_nis***는 PAM을 이용하지 않고 시스템에 설정된 NIS entry에서 직접 인증을 하기 때문에 root권한이 필요 없습니다. 단, 이 경우 local system account는 인증에 사용할 수 없습니다.
+
+자세한 사항에 대해서는 [***mod_auth_nis*** 모듈 문서](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README)를 참조 하십시오.
+
+```php
+$HTTP["url"] == "/req_auth" {
+  auth.backend = "htpasswd"
+  auth.backend.htpasswd.userfile = "/full/path/to/lighttpd-htpasswd.user"
+  auth.require = (
+    "" => (
+      "method" => "basic",
+      "realm" => "Private Area",
+      "require" => "user=john|user=smith"
+    )
+  )
+}
+```
+
 
