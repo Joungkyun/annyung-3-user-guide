@@ -181,6 +181,8 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 <Directory "/some/path">
   # KRISP_COUNTRY_CODE 가 RU나 IN이 아니면 허가
   Require expr "!(%{ENV:KRISP_COUNTRY_CODE} =~ /^RU|IN$/)"
+  # KRISP_COUNTRY_CODE가 KR이 아니면 허가
+  Require expr "%{ENV:KRISP_COUNTRY_CODE} != 'KR'"
 </Directory>
 ```
 
