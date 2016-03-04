@@ -7,6 +7,7 @@
 4. User based access control 
 5. NIS 인증
 6. 국가/ISP based access control
+7. Google Authentificator(Google OTP)를 이용한 2-factor 인증
 
 
 apahce 2.4의 access control은 apache 2.2의 새로운 인증 모듈을 사용합니다. 기존의 mod_access는 deprecated 되어 기본으로 사용을 할 수 없습니다.
@@ -195,4 +196,14 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
   # KRISP_ISP_CODE가 BORANET이나 KINXINC면 접근 제한
   RewriteRule     .*                    - [R=403]
 </Directory>
+```
+
+## 7. Google Authentificator(Google OTP)를 이용한 2-factor 인증
+
+이 섹션은 현재 작업 중입니다. (package 제작 중이며, 곧 문서화 될 예정입니다.)
+
+Google OTP를 이용하기 위해서는 ***httpd-authn-google*** package를 설치해야 합니다.
+
+```bash
+[root@an3 ~]$ yum install httpd-authn-google
 ```
