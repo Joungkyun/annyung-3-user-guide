@@ -23,7 +23,7 @@
    * [Web Access Control](chapter3-5-web-acl.md)
        * [Apache 2.4](chapter3-5-web-acl-apache.md)
        * [Nginx](chapter3-5-web-acl-nginx.md)
-       * [lighttpd](chapter3-5-web-acl-lighttpd)
+       * [lighttpd](chapter3-5-web-acl-lighttpd.md)
    * [Web Monitor agent](chapter3-5-web-agent)
 * [Chapter 4. JVM 운영](chapter4.md)
 * Chapter 5. DNS 운영
