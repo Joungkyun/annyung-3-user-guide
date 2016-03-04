@@ -59,7 +59,7 @@ Nginx에서의 국가 또는 ISP 제어는 GeoIP와 krisp를 이용하여 가능
 * 안녕에서 기본 제공하는 krisp database에는 국내의 ISP 정보만 있습니다. (해외 ISP 정보는 들어 있지 않습니다. GeoISP를 이용하여 custom database를 만들 수 있습니다.)
 * krisp database는 KISA의 한국 IP database를 기반으로 하여 제작 되어 국내 환경에는 GeoIP보다 정확도가 높습니다.
 
-### 1. GeoIP
+### 4.1. GeoIP
 
 GeoIP module을 사용하기 위한 자세한 설정은 [nginx ngx_http_geoip_module 문서](http://nginx.org/en/docs/http/ngx_http_geoip_module.html)를 참고 하십시오.
 
@@ -71,7 +71,7 @@ location = /ko/ {
 }
 ```
 
-### 2. krisp
+### 4.2. krisp
 
 krisp module을 사용하기 위한 자세한 설정은 [nginx ngx_http_krisp module 문서](https://github.com/vozlt/nginx-module-krisp/blob/master/README.md)를 참고 하십시오.
 
@@ -87,13 +87,13 @@ location /ko/ {
 
 ## 5. User based access control
 
-### 1. password list 생성
+### 5.1. password list 생성
 
 google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 password list를 만들어 주는 tool들을 쉽게 찾을 수 있습니다.
 
 또는, http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic_user_file 문서를 참고 하십시오.
 
-### 2. 인증 설정
+### 5.2. 인증 설정
 ```nginx
 localtion / {
   auth_basic "Restricted Content";
