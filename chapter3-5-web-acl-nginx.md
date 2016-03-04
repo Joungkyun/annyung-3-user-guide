@@ -6,6 +6,7 @@
 3. User Agent based access control
 4. Country/ISP based access control
 5. User based access control
+6. Google Authentificator(Google OTP)를 이용한 2-factor 인증
 
 
 ## 1. IP based access control
@@ -104,3 +105,11 @@ localtion / {
   }
 }
 ```
+
+## 6. Google Authentificator(Google OTP)를 이용한 2-factor 인증
+
+이 섹션은 현재 미완 입니다. (nginx에서의 google opt 사용 여부에 대한 확신이 아직 없습니다. ^^)
+
+참조
+ * https://habrahabr.ru/post/210316/
+ * 
