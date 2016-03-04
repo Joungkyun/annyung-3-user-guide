@@ -119,12 +119,12 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 #### 5.1.2. 인증 설정
 ```php
 $HTTP["url"] == "/req_auth" {
-  auth.backend = "htpasswd"
+  auth.backend                   = "htpasswd"
   auth.backend.htpasswd.userfile = "/full/path/to/lighttpd-htpasswd.user"
-  auth.require = (
+  auth.require                   = (
     "" => (
-      "method" => "basic",
-      "realm" => "Private Area",
+      "method"  => "basic",
+      "realm"   => "Private Area",
       "require" => "user=john|user=smith"
     )
   )
@@ -133,19 +133,19 @@ $HTTP["url"] == "/req_auth" {
 
 ### 5.2. mod_auth_nis
 
-***mod_auth_nis*** 모듈을 이용하여 NIS 인증이 가능 합니다. ***mod_auth_nis***는 PAM을 이용하지 않고 시스템에 설정된 NIS entry에서 직접 인증을 하기 때문에 root권한이 필요 없습니다. 단, 이 경우 local system account는 인증에 사용할 수 없습니다.
+***mod_auth_nis*** 모듈을 이용하여 NIS 인증이 가능 합니다. ***mod_auth_nis***는 PAM을 이용하지 않고 설정된 NIS entry를 이용하기 때문에 local account는 인증할 수 없습니다.
 
 자세한 사항에 대해서는 [***mod_auth_nis*** 모듈 문서](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README)를 참조 하십시오.
 
 ```php
 $HTTP["url"] == "/req_auth" {
-  auth.backend = "htpasswd"
-  auth.backend.htpasswd.userfile = "/full/path/to/lighttpd-htpasswd.user"
-  auth.require = (
+  nis.domain  = "NISDOMAINNAME"
+  nis.usermap = "passwd.byname"
+  nis.require = (
     "" => (
-      "method" => "basic",
-      "realm" => "Private Area",
-      "require" => "user=john|user=smith"
+      "realm"    => "Private Area with NIS",
+      "require"  => "valid-user"
+      #"require" => "user=john|user=smith"
     )
   )
 }
