@@ -1,4 +1,4 @@
-#httpd
+#httpd (Apache 2.4) 운영
 
 >목차
 1. 주의 사항
