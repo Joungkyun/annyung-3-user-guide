@@ -46,6 +46,7 @@ $HTTP["url"] =~ "/server-(status|config)" {
 
 ***mod_net_access*** 모듈에 대해서는 [mod_net_access 문서](http://svn.oops.org/wsvn/Lighttpd.mod_net_access/trunk/README)를 참고 하십시오.
 
+위의 예제 처럼 */server-status* 와 */server-config* handler에 사용하기 위해서는, ***mod_net_access*** 모듈이 ***mod_status*** 모듈 보다 먼저 load 되어야 합니다.
 
 ## 2. referer based access control
 
