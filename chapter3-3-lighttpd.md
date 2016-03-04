@@ -78,7 +78,7 @@
   
   chain 인증서가 여러개 일 경우, 인증서 pem 파일(여기서는 annyung-sample.org.pem)에 합치면 됩니다.
 
-  [lighttpd](pkg-addon-lighttpd.md) 1.4 branch는 spdy와 http2를 지원하지 않습니다.
+  [lighttpd](pkg-addon-lighttpd.md) 1.4 branch는 <u>spdy와 http2를 지원하지 않습니다.</u>
 
 
 ##4. 안녕에서 제공하는 기능 및 추가 모듈
@@ -142,11 +142,11 @@
 
 ##6. JAVA(tomcat)/Python/Perl/CGI 연동
 
-  1. tomcat  
-    * proxy module을 이용 (ajp 지원 안함)
-    * http://annyung-sample.org/srv/ 를 tomcat 에 연동.
+### 6.1. tomcat  
+ * proxy module을 이용 (ajp 지원 안함)
+ * http://annyung-sample.org/srv/ 를 tomcat 에 연동.
 
-    ```php
+ ```php
       server.module         += ("mod_proxy")
     
       $HTTP["host"] == "annyung-sample.org" {
@@ -162,18 +162,22 @@
               )
           }
        }
-    ```
+ ```
 
-  2. python django
-    * PHP와 동일하게 fastcgi 로 연결합니다. 아래 dango fastcgi 문서에 lighttpd 연동 예제가 포함 되어 있습니다.
-    * [django를 fastcgi로 띄우는 구동](https://docs.djangoproject.com/en/1.8/howto/deployment/fastcgi/)
-  3. perl
-    1. fastcgi 연동
-       * http://nginxlibrary.com/perl-fastcgi/ 문서에서 perl fastcgi wrapper 부분을 참조 하십시오.
-       * lighttpd 설정은 PHP나 Python django와 동일하게 하면 됩니다.
-    2. CGI 연동 - ***4. CGI 연동***을 참조 하십시오.
-  4. CGI 연동
-    ```php
+### 6.2. python django
+ * PHP와 동일하게 fastcgi 로 연결합니다. 아래 dango fastcgi 문서에 lighttpd 연동 예제가 포함 되어 있습니다.
+ * [django를 fastcgi로 띄우는 구동](https://docs.djangoproject.com/en/1.8/howto/deployment/fastcgi/)
+
+### 6.3. perl
+### 6.3.1. fastcgi 연동
+* http://nginxlibrary.com/perl-fastcgi/ 문서에서 perl fastcgi wrapper 부분을 참조 하십시오.
+* lighttpd 설정은 PHP나 Python django와 동일하게 하면 됩니다.
+
+### 6.3.2. CGI 연동
+* ***6.4. CGI 연동***을 참조 하십시오.
+
+### 6.4. CGI 연동
+ ```php
     server.module      += ("mod_cgi")
     server.breakagelog  = "/var/log/lighttpd/breakage.log"
     cgi.assign = (
@@ -181,8 +185,8 @@
         ".py"  => "/usr/bin/python",
         ".cgi" => "/usr/bin/perl"
     )
-    ```
-    http://redmine.lighttpd.net/projects/1/wiki/docs_modcgi 참조
+ ```
+ http://redmine.lighttpd.net/projects/1/wiki/docs_modcgi 참조
 
 ##7. lighttpd 구동
 
