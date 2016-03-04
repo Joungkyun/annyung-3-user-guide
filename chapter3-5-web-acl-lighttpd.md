@@ -57,6 +57,8 @@ $HTTP["useragent"] =~ "Bot" {
 
 안녕 3의 lighttpd에서는 ***$HTTP["country"]*** 와 ***$HTTP["isp"]*** conditional field를 이용하여 접속자의 country 또는 isp를 이용하여 access control이 가능 합니다.
 
+이 기능은 안녕 리눅스 3에서만 지원을 합니다.
+
 <strong style="color: red;">참고!</strong>  
 * 안녕에서 기본 제공하는 krisp database에는 국내의 ISP 정보만 있습니다. (해외 ISP 정보는 들어 있지 않습니다. GeoISP를 이용하여 custom database를 만들 수 있습니다.)
 * ***server-status*** 또는 ***server-config*** handler에서 사용하기 위해서는 mod_status 모듈 보다 mod_krisp 모듈이 먼저 load 되어야 합니다.
