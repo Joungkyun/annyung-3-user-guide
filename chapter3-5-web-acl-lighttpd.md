@@ -7,6 +7,7 @@
 3. User Agent based access control
 4. Country/ISP based access control
 5. User based access control
+6. NIS access control
 
 
 ***lighttpd***의 접근 정책은 기본적으로 *mod_access* 에서 제공하는 ***url.access-deny*** 설정을 이용하여, conditonal field를 이용하여 응용을 합니다.
