@@ -145,9 +145,10 @@ server.modules += ("mod_auth_nis")
 
 ```php
 $HTTP["url"] == "/req_auth" {
-  nis.domain  = "NISDOMAINNAME"
-  nis.usermap = "passwd.byname"
-  nis.require = (
+  auth.backend = "nis"
+  nis.domain   = "NISDOMAINNAME"
+  nis.usermap  = "passwd.byname"
+  nis.require  = (
     "" => (
       "realm"    => "Private Area with NIS",
       "require"  => "valid-user"
