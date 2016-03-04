@@ -1,4 +1,112 @@
 # lighttpd Access Control
 
 
+> **목차**
+1. IP based access control
+2. referer based access control
+3. User Agent based access control
+4. Country/ISP based access control
+5. User based access control
+
+
+***lighttpd***의 접근 정책은 기본적으로 *mod_access* 에서 제공하는 ***url.access-deny*** 설정을 이용하여, conditonal field를 이용하여 응용을 합니다.
+
+*conditional field*의 종류에 대해서는 [lighty 운영 문서의 *Conditional Configuration* 섹션](http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_Configuration)을 참조 하십시오.
+
+
+## 1. IP based access control
+
+$HTTP["remoteip"] block을 이용하여 제어
+
+```php
+# allow only 192.168.0.1
+$HTTP["remoteip"] == "192.168.0.1" {
+  url.access-deny = ("")
+}
+
+# allow all ip except 192.168.0.1
+$HTTP["remoteip"] != "192.168.0.1" {
+  url.access-deny = ("")
+}
+
+# allow 192.168.*.* and 121.33.*.*
+$HTTP["remoteip"] =~ "^192.168|121.33" {
+  url.access-deny = ("")
+}
+```
+
+## 2. referer based access control
+
+```php
+# access.allow.com 에서의 접근이 아니면 불허
+$HTTP["referer"] !~ "^http[s]?://access.allow.com" {
+  url.access-deny = ("")
+}
+```
+
+## 3. User Agent based access control
+
+```php
+# Bot 접근 불허
+$HTTP["useragent"] =~ "Bot" {
+  url.access-deny = ("")
+}
+```
+
+## 4. Country/ISP based access control
+
+Nginx에서의 국가 또는 ISP 제어는 GeoIP와 krisp를 이용하여 가능 합니다.
+
+둘 중, 어느 것을 사용하는냐는 사용자의 선택이지만, 국내의 IP 및 ISP 정보를 취급할 경우에는 krisp를 사용하는 것이 더 정확 합니다.
+
+<strong style="color: red;">참고!</strong>  
+* GeoIP 모듈은 ISP 정보를 제공하지 않습니다.
+* 안녕에서 기본 제공하는 krisp database에는 국내의 ISP 정보만 있습니다. (해외 ISP 정보는 들어 있지 않습니다. GeoISP를 이용하여 custom database를 만들 수 있습니다.)
+* krisp database는 KISA의 한국 IP database를 기반으로 하여 제작 되어 국내 환경에는 GeoIP보다 정확도가 높습니다.
+
+### 1. GeoIP
+
+GeoIP module을 사용하기 위한 자세한 설정은 [nginx ngx_http_geoip_module 문서](http://nginx.org/en/docs/http/ngx_http_geoip_module.html)를 참고 하십시오.
+
+```nginx
+location = /ko/ {
+  if ( $geoip_country_code != KR ) {
+    return 403;
+  }
+}
+```
+
+### 2. krisp
+
+krisp module을 사용하기 위한 자세한 설정은 [nginx ngx_http_krisp module 문서](https://github.com/vozlt/nginx-module-krisp/blob/master/README.md)를 참고 하십시오.
+
+```nginx
+location /ko/ {
+  if ( $krisp_country_code = KR ) {
+    if ( $krisp_isp_code = KORNET ) {
+      return 403;
+    }
+  }
+}
+```
+
+## 5. User based access control
+
+### 1. password list 생성
+
+google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 password list를 만들어 주는 tool들을 쉽게 찾을 수 있습니다.
+
+또는, http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic_user_file 문서를 참고 하십시오.
+
+### 2. 인증 설정
+```nginx
+localtion / {
+  auth_basic "Restricted Content";
+  auth_basic_user_file /etc/nginx/.htpasswd;
+  
+  if ( $remote_user !~ ^(john|smith|joe)$ ) {
+    return 403;
+  }
+}
+```
 
