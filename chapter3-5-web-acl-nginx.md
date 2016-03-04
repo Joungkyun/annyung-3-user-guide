@@ -1,4 +1,4 @@
-# Nginx
+# Nginx Access Control
 
 > **목차**
 1. IP based access control
