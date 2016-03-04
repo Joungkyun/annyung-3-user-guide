@@ -78,7 +78,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
 
 다음 사항은 ***[php](pkg-base-php.md)***와 ***[php56](pkg-addon-php56.md)*** package 공통 사항 입니다.
 
-###1. exec_dir (PHP_INI_SYSTEM) 기능
+###4.1. exec_dir (PHP_INI_SYSTEM) 기능
 
 이 기능은 php 5.4 이전의 safe_mode_exec_dir 기능을 safe_mode가 아닌 경우에도 사용할 수 있도록  그리고 기능을 확장해서 만들어진 기능입니다. 현재 PHP의 경우 5.4 부터 safe_mode가 없어지면서 이 기능도 같이 없어졌지만, 안녕 리눅스이 PHP에서는 exec_dir으로 이름을 수정하여 제공 합니다.
 
@@ -138,7 +138,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
       system ('/var/lib/php/bin/find . -type -f -exec rm -f {} \;'); // PHP 내부에서 치환되어 수행되는 코드
     ```
 
-###2. disable_functions 기본 적용
+###4.2. disable_functions 기본 적용
 
   * ***phpinfo***, ***php_uname***, ***sys_get_temp_dir***, ***phpversion***, ***ini_get***, ***ini_set***, ***ini_get_all***, ***get_cfg_var***
   * 이 function들은 php shell들이 사용하는 필수 function드로서 이 function들을 막아서 php shell이 정상 작동하지 못하도록 합니다.
@@ -167,7 +167,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
   ?>
   ```
   
-###3. allow_include_extension 기능 추가
+###4.3. allow_include_extension 기능 추가
 
   ***php-fpm***의 security.limit_extensions 와 동일한 기능입니다. PHP가 opcode compile 전에 여기에 지정된 확장자가 아니면 compile을 하지 않도록 합니다.
   
@@ -192,7 +192,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
   PHP Fatal error:  require_once(): Failed opening required '/path/ss.jpg' security issues in /path/z.php on line 2
   ```
 
-###4. file upload시 image header의 injection code 여부 검사 기능 추가
+###4.4. file upload시 image header의 injection code 여부 검사 기능 추가
 
 php.ini에서 이 기능에 대한 옵션은 다음과 같습니다.
 
@@ -284,7 +284,7 @@ foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
 ?>
 ```
 
-###5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
+###4.5. allow_url_fopen과 allow_url_include를 PHP_INI_ALL로 수정
 
   * 기본값 Off
   * ***ini_set** 을 이용하여 php code에서 수정할 수 있음.
@@ -296,14 +296,14 @@ foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
 참고:  
 ***allow_url_fopen***과 ***allow_url_include***을 ***ini_set***으로 활성화 할 때 ***disable_function*** 때문에 ***ini_set***을 사용하지 못할 수 있습니다. 그러므로 ***___ini_set***을 이용하십시오.
 
-###6. short_open_tag
+###4.6. short_open_tag
 
 ***/etc/php.d/php.ini***의 short_open_tag값이 Off 입니다. ***&lt;?*** 대신 ***&lt;?php***를 사용 하십시오.
 
 PHP 5.4 부터는 ***short_open_tag***가 off 이더라도 ***&lt;?=$var&gt;*** 출력이 가능 합니다.
 
 
-###7. realpath_cache_force
+###4.7. realpath_cache_force
 
 PHP는 open_basedir 이 설정 되어 있을 경우, soft link를 이용한 race condition을 이용하여 open_basedir을 무력화 시키는 버그 때문에, open_basedir이 설정 되어 있을 경우, realpath_cache를 하지 않도록 변경을 하였습니다. 또한, php의 opcache 특성상 항상 파일의 mtime 체크하기 때문에 open_basedir을 사용하면 성능이 굉장히 많이 저하 됩니다.
 
@@ -357,7 +357,7 @@ PHP는 ***phpize*** (***php56*** package는 ***phpize56***) 명령을 이용하�
 
 ***[php56](pkg-addon-php56.md)*** package는 구동 방법, 설정파일 위치, 헤더파일 위치, 명령어 이름, 프로세스 이름, temporary 위치만 제외하고는 모든 것이 ***[php 7](pkg-base-php.md)*** package와 동일한 특성을 가지고 있습니다.
 
-###1. 설정 파일 위치
+###6.1. 설정 파일 위치
 
 ***[php56](pkg-addon-php56.md)*** package의 설정 파일은 ***/etc/php56.d*** 에 있으며, 다음 패키지에 포함되어 있습니다.
 
@@ -373,12 +373,12 @@ PHP는 ***phpize*** (***php56*** package는 ***phpize56***) 명령을 이용하�
 특성에 대해서는 ***"3. 설정 파일"*** 섹션을 참고 하십시오.
 
 
-###2. 헤더 파일 위치
+###6.2. 헤더 파일 위치
 
 ***[php56](pkg-addon-php56.md)*** package의 header file들은 ***/usr/include/php56***에 있으며,
 이 파일들은 ***php56-devel*** package에 포함되어 있습니다.
 
-###3. temporary 위치
+###6.3. temporary 위치
 
 ***[php56](pkg-addon-php56.md)*** package의 temporary directory 는 다음과 같습니다.
 
@@ -388,11 +388,11 @@ exec_dir          = /var/lib/php56/bin
 session.save_path = /var/lib/php56/sessions
 ```
 
-###4. Share extension 위치
+###6.4. Share extension 위치
 
 ***[php56](pkg-addon-php56.md)*** package의 shared extension은 ***/usr/lib64/php56/extensions***에 위치 합니다.
 
-###5. 명령어 비교
+###6.5. 명령어 비교
 
 | php 7 | php56 | package |
 | :---: | :---: | :---: |
@@ -401,7 +401,7 @@ session.save_path = /var/lib/php56/sessions
 | /usr/bin/phpize | /usr/bin/phpize56 | php-devel / php56-devel |
 | /usr/bin/php-config | /usr/bin/php56-config | php-devel / php56-devel |
 
-###6. PHP53 comaptible mode
+###6.6. PHP53 comaptible mode
 
 안녕 리눅스의 ***[php56](pkg-addon-php56.md)*** package에는 PHP 5.4에서 제거 되었거나 _deprecated_ 되어진 기능들을 사용할 수 있도록 패치가 되어 있습니다. <u>***[php](pkg-base-php.md)*** package에서는 지원하지 않습니다.</u>
 
@@ -510,7 +510,7 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 
 ***php-fpm***을 사용하기 위해서는 ***php-fpm*** package 또는 ***php56-fpm*** package가 필요 합니다. 이 둘의 차이는 PHP version이 다르며 ***php-fpm*** package는 7, ***php56-fpm***은 PHP 5.6 기반에서 동작을 합니다.
 
-### 1. php-fpm 설정
+### 7.1. php-fpm 설정
 
 ***php-fpm***의 설정은 다음의 위치에서 이루어 집니다.
 
@@ -551,7 +551,7 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 
 또한, site를 여러개를 운영할 경우 site별로 pool을 만들어서 resource를 배분할 수도 있습니다.
 
-### 2. php-fpm 구동
+### 7.2. php-fpm 구동
 
   간단한 ***php-fpm*** control 방법에 대하여 기술 합니다. ***php56-fpm*** package는 php-fpm 대신 php56-fpm을 사용하시면 됩니다.
   
