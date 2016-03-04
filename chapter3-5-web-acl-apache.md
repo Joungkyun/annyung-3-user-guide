@@ -191,7 +191,7 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 ```apache
 <Directory "/some/path">
   RewriteCond     %{HTTP_HOST}          ^domain\.com$
-  RewriteCond     %{ENV:KRISP_ISP_CODE} ^BORANET|KINXINC$
+  RewriteCond     %{ENV:KRISP_ISP_CODE} ^BORANET|KINXINC$ [NC]
   # KRISP_ISP_CODE가 BORANET이나 KINXINC면 접근 제한
   RewriteRule     .*                    - [R=403]
 </Directory>
