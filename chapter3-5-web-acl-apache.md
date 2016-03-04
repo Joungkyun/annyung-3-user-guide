@@ -173,9 +173,9 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
  * KRISP_ISP_CODE
  * KRISP_ISP_NAME
 
-***krisp*** module을 이용한 권한 제어는 mod_authz_core의 *env* method 또는 *Rewrite rule*을 이용하여 가능 합니다.
+***krisp*** module을 이용한 권한 제어는 mod_authz_core의 *expr* method 또는 *Rewrite rule*을 이용하여 가능 합니다.
 
-### 1. ***env*** method
+### 1. ***expr*** method
 
 ```apache
 <Directory "/some/path">
