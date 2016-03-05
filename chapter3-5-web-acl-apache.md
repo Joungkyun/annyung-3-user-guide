@@ -200,10 +200,68 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 
 ## 7. Google Authentificator(Google OTP)를 이용한 2-factor 인증
 
-이 섹션은 현재 작업 중입니다. (package 제작 중이며, 곧 문서화 될 예정입니다.)
+
+이 모듈에 대한 자세한 설명은 [공식 홈페이지 문서](https://code.google.com/archive/p/google-authenticator-apache-module/wikis/GoogleAuthenticatorApacheModule.wiki)를 참고 하십시오.
+
+### 7.1 module dependency
 
 Google OTP를 이용하기 위해서는 ***httpd-authn-google*** package를 설치해야 합니다.
 
 ```bash
 [root@an3 ~]$ yum install httpd-authn-google
 ```
+
+또한, apache에 google opt설정을 하기 위해서는 다음 모듈들에 의존성이 있습니다. (일단 안녕 3에서는 기본적으로 load가 되고 있으니 신경 쓸 일은 없습니다.)
+
+  * mod_auth_basic
+  * mod_authn_core
+  * mod_authz_core
+  * mod_authz_user
+
+### 7.2 configuration file
+
+설정 파일은 */etc/httpd/conf.d/authn-google.conf* 에서 Module을 load하고 있으며, 인증 설정은 */etc/httpd/user.d* 에서 적당한 위치에 하면 됩니다.
+
+secret file 위치는 */etc/httpd/ga_auth* 에 username으로 저장하면 됩니다.
+
+```bash
+[root@an3 ~]$ cat /etc/httpd/conf.d/authn-google.conf
+#
+# Google Authentificator for Apache
+#
+# Dependent modules:
+#     mod_auth_basic
+#     mod_authn_core
+#     mod_authz_core
+#     mod_authz_user
+#
+# <Directory /some/path>
+#     AuthType Basic
+#     AuthName "Private area"
+#     AuthBasicProvider "google_authenticator"
+#     Require valid-user
+#
+#     GoogleAuthUserPath ga_auth
+#     GoogleAuthCookieLife 3600
+#     GoogleAuthEntryWindow 2
+# </Directory>
+#
+
+Loadmodule authn_google_module modules/mod_authn_google.so
+
+# Local variables:
+# tab-width: 4
+# c-basic-offset: 4
+# End:
+# vim: set filetype=apache syntax=apache noet sw=4 ts=4 fdm=marker:
+# vim<600: noet sw=4 ts=4:
+[root@an3 ~]$
+```
+
+### 7.3 secret 파일 생성
+
+### 7.4 인증 설정
+
+Google Authentificator Apache module은 ***AuthType***으로 *Basic*과 *Digest*를 모두 지원합니다만, 현재 버전에서 Digest 방식은 segfault를 발생시키고 있습니다. 그러니 *Basic* type으로 사용하시기 바랍니다.
+
+
