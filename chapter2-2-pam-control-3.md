@@ -143,6 +143,9 @@ auth       include      postlogin
 
 실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 잘 관리해야 하며, 생성된 *secret file*의 첫라인이 key이니 참고 하십시오.
 
+### 4.3 Client 인증 테스트
+
+#### 4.3.1 openssh client or putty
 ```bash
   [root@an2 ~]$ ssh bbuwoo@an3test.oops.org
   AnNyung LInux 3 (Labas)
@@ -157,6 +160,22 @@ auth       include      postlogin
   [bbuwoo@an3test ~]$ 
 ```
 
-### 4.3 참고
+#### 4.3.2 filezilla
+
+2 factor 인증을 구현했을 경우, intractive login으로 진행해야 하므로 ***filezilla***의 *빠른연결*은 사용할 수가 없습니다.
+
+***filezilla***의 site manager를 실행 시켜 다음과 같이 login 유형을 *인터렉티브*로 설정을 하십시오.
+
+![filezilla Site manager](fileziall_site_manager.jpg)
+
+
+*site manager*를 이용하여 로그인을 하면, 다음과 같이 verication code를 먼저 입력한 후에, password를 입력하게 됩니다.
+
+![filezilla ask verication code](filezilla_ask_verication_code.jpg)
+![filezilla ask password](filezilla_ask_password.jpg)
+
+### 4.3.3 예외
+
+### 4.4 참고
 
 보너스로, 안녕 리눅스의 경우, Google authenticator 설정을 해 놓으면, passowrd expire 체크를 하지 않도록 패치가 되어 있습니다. 즉, 꽁수를 좀 부려 보자면 ***Google Authentifator 설정을 하지 않은 서버에서, 계정에 ~/.ssh/google-authenticator 파일이 존재할 경우, password expire를 피해갈 수 있습니다.
