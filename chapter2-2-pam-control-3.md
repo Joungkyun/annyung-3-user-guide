@@ -2,7 +2,7 @@
 
 이 문서는 ***Google-Authenticator***를 이용하여 2-factor 인증을 구현하는 방법에 대해서 기술 합니다. ***Google-Authenticator***는 ***HMAC-Based One-time Password (HOTP)*** 방식과 ***Time-based One-time Password (TOTP)*** 방식을 지원하며, 여기서는 ***TOTP***를 이용하여 구성을 합니다.
 
-2-factor 인증은, password 유출이나 brute force attack 대응에 훌륭한 방어 수단이 될 수 있습니다. 이를 위하여
+2-factor 인증은, password 유출이나 brute force attack 대응에 훌륭한 방어 수단이 될 수 있습니다.
 
 현재 안녕 리눅스에서 google OTP를 이용한 인증은 ssh와 apache에만 국한이 됩니다. 여기서는 ssh login에 대해서만 다루고, apache 인증에 대해서는 [Chapter 3.5.1.7 Apache 2.4 Google Authentificator(Google OTP) 인증](chapter3-5-web-acl-apache.md)를 참고 하십시오.
 
