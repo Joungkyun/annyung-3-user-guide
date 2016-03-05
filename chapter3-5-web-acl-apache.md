@@ -7,7 +7,7 @@
 4. User based access control 
 5. NIS 인증
 6. 국가/ISP based access control
-7. Google Authentificator(Google OTP)를 이용한 2-factor 인증
+7. Google Authentificator(Google OTP) 인증
 
 
 apahce 2.4의 access control은 apache 2.2의 새로운 인증 모듈을 사용합니다. 기존의 mod_access는 deprecated 되어 기본으로 사용을 할 수 없습니다.
@@ -198,7 +198,7 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 </Directory>
 ```
 
-## 7. Google Authentificator(Google OTP)를 이용한 2-factor 인증
+## 7. Google Authentificator(Google OTP) 인증
 
 
 이 모듈에 대한 자세한 설명은 [공식 홈페이지 문서](https://code.google.com/archive/p/google-authenticator-apache-module/wikis/GoogleAuthenticatorApacheModule.wiki)를 참고 하십시오.
@@ -305,6 +305,10 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 
 ### 7.4 Client 설정
 
+사용자들에게 우선 OPT program 설치에 대해서 안내를 합니다.
+
+  * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
+  * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
 
 
 
