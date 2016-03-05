@@ -47,9 +47,9 @@ session     required      pam_unix.so
 [root@an3 ~]$
 ```
 
-문법은 다음과 같습니다.
+문법은 다음과 같이 3개의 field로 구성 됩니다.
 
-    CONDITION:USER or GROUP:ORIGIN
+    [CONDITION]:[USER or GROUP]:[ORIGIN]
 
 문법에 대한 자세한 예제는 ***/etc/security/access.conf***를 참고 하십시오.
 
