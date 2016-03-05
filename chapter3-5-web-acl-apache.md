@@ -296,6 +296,14 @@ Loadmodule authn_google_module modules/mod_authn_google.so
   [root@an3 ~]$ 
   ```
 
+이렇게 생성을 하면, id와 OPT로 생성된 6자리 valid code만으로 인증이 됩니다. 만약 password 어구까지 해서 2 factor 인증을 하고 싶다면, *secret file*에 다음의 라인을 추가해 주면 됩니다. 라인 시작이 따옴표(")로 시작해야 합니다.
+
+```bash
+" PASSWORD = @PLAIN_PASSWORD@
+```
+
+
+
 다음, 이 파일을 apache가 읽을 수 있도록 권한을 부여 합니다.
 
 ```bash
@@ -322,11 +330,39 @@ Loadmodule authn_google_module modules/mod_authn_google.so
   * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
   * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
 
-설치 안내와 함께, OTP 등록을 위해서, 위에서 secret 파일을 생성할 때 나온 메시지 중, ***secret key***를 같이 알려 주도록 합니다. 이 메시지를 확인할 수 없다면 생성된 ***secret file***의 첫번째 라인이 ***secret key***이니 이를 알려 주시면 됩니다.
+설치 안내와 함께, OTP 등록을 위해서, 위에서 secret 파일을 생성할 때 나온 메시지 중, ***secret key***를 같이 알려 주도록 합니다. 이 메시지를 확인할 수 없다면 생성된 ***secret file***의 첫번째 라인이 ***secret key***이니 이를 알려 주시면 됩니다. 또한 PASSWORD를 추가 했다면 *password*와 *secret key*를 모두 알려 주어야 합니다.
+
+password를 지정하여 2 factor 인증을 하게 할 경우, 암호는 *password + valid code* 입니다. 예를 들어:
+
+* password ehfhtl&vlxj
+* valid code 123 456
+
+일 경우, 암호는 ***"ehfhtl&vlxj123456"*** 입니다. 공백 문자 없이 암호와 valid code를 붙여서 입력 하면 됩니다.
 
 
 ### 7.4 인증 설정
 
 Google Authentificator Apache module은 ***AuthType***으로 *Basic*과 *Digest*를 모두 지원합니다만, 현재 버전에서 Digest 방식은 segfault를 발생시키고 있습니다. 그러니 *Basic* type으로 사용하시기 바랍니다.
 
+현재 이 모듈이 공식 사이트에서 2013년 이후 관리되고 있지 않으므로, 이 문제가 해결되기는 쉽지 않을 것으로 보이며, 시간이 나는 데로 문제 해결을 해 볼 예정입니다.
+
+```apache
+<Directory /some/path>
+     AuthType Basic
+     # AuthName은 원하는 대로 수정
+     AuthName "Private area"
+     AuthBasicProvider "google_authenticator"
+     # 인증 성공한 모든 유저 login
+     # 인증을 성공 하였더라고 특정 유저만 허가하고 싶다면 Requires user를 이용할 것.
+     Require valid-user
+
+     # secret file location (/etc/httpd/ga_auth)
+     GoogleAuthUserPath ga_auth
+     # 인증 유지 기간(초)
+     GoogleAuthCookieLife 3600
+     GoogleAuthEntryWindow 2
+</Directory>
+```
+
+*/etc/httpd/user.d/* 아래에 위와 같이 설정을 한 후에, apache 재시작을 하시면 됩니다. ***.htaccess*** 에서도 설정이 가능 합니다.
 
