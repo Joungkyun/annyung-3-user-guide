@@ -176,6 +176,17 @@ auth       include      postlogin
 
 ### 4.3.3 예외
 
+***filezilla*** 처럼 interactive process가 불가능한 program들을 위해서는 PAM에서 forward_pass option을 사용하여 암호 입력시에 암호와 verication code를 같이 입력하도록 하는 수 밖에 없습니다. 이 경우, openssh client나 putty, filezilla 등 모두 이렇게 입력을 하는 수 밖에 없습니다.
+
+```bash
+[root@an3 ~]$ cat /etc/pam.d/sshd
+#%PAM-1.0
+auth       required     pam_google_authenticator.so nullok forward_pass try_first_pass no_increment_hotp
+auth       required     pam_sepermit.so
+  ** 하략 **
+[root@an3 ~]$
+```
+
 ### 4.4 참고
 
 보너스로, 안녕 리눅스의 경우, Google authenticator 설정을 해 놓으면, passowrd expire 체크를 하지 않도록 패치가 되어 있습니다. 즉, 꽁수를 좀 부려 보자면 ***Google Authentifator 설정을 하지 않은 서버에서, 계정에 ~/.ssh/google-authenticator 파일이 존재할 경우, password expire를 피해갈 수 있습니다.
