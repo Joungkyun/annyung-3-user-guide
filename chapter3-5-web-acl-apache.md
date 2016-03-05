@@ -272,14 +272,14 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 
                   [QR-CODE-IAMGE]
 
-  Your new secret key is: 65SANAUX4QX7OM5F
-  Your verification code is 424981
+  Your new secret key is: 65SANAUX4QU7OM5F
+  Your verification code is 424982
   Your emergency scratch codes are:
-    77133341
-    84939993
-    94216211
-    47785086
-    28719987
+    77133342
+    84939994
+    94216212
+    47785087
+    28719988
 
   Do you want me to update your "/etc/httpd/ga_auth/@USERNAME@" file (y/n) y
 
@@ -301,6 +301,19 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 ```bash
 [root@an3 ~]$ chown root.nobody /etc/httpd/ga_auth/*
 [root@an3 ~]$ chmod 440 /etc/httpd/ga_auth/*
+[root@an3 ~]$ cat /etc/httpd/ga_auth/bbuwoo
+65SYBUUX4QU7OM5F
+" RATE_LIMIT 3 30 1455873786
+" WINDOW_SIZE 17
+" DISALLOW_REUSE 48529126
+" TOTP_AUTH
+" PASSWORD = QkdrnEhdrn
+77133342
+84939994
+94216212
+47785087
+28719988
+[root@ane ~]$
 ```
 
 ### 7.4 Client 설정
@@ -310,6 +323,7 @@ Loadmodule authn_google_module modules/mod_authn_google.so
   * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
   * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
 
+설치 안내와 함께, OTP 등록을 위해서, 위에서 secret 파일을 생성할 때 나온 메시지 중, ***secret key***를 같이 알려 주도록 합니다. 이 메시지를 확인할 수 없다면 생성된 ***secret file***의 첫번째 라인이 ***secret key***이니 이를 알려 주시면 됩니다.
 
 
 ### 7.4 인증 설정
