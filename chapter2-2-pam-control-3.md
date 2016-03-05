@@ -54,8 +54,8 @@ auth       include      postlogin
 
     * nullok            - ~/.ssh/google-authenticator 가 없으면 1-factor 인증 진행
                           이 옵션이 없으면 무조건 2-factor 인증을 진행 함
-    * try_first_pass    - client에서 2-factor 인증을 하지 못할 경우 암호 입력시에 
-                          "PasswordVeri_code" 형식으로 처리 가능 (확인 못함)
+    * forward_pass      - client에서 2-factor 인증을 하지 못할 경우 암호 입력시에 
+                          "PasswordVeri_code" 형식으로 처리 가능
     * no_increment_htop - vefication code 확인 실패시에 count를 올리지 않음
     
 다른 옵션들에 대해서는 [google-authenticator README](https://github.com/google/google-authenticator/tree/master/libpam)를 참고 하십시오.
