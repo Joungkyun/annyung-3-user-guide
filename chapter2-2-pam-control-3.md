@@ -160,7 +160,7 @@ auth       include      postlogin
   [bbuwoo@an3test ~]$ 
 ```
 
-#### 4.3.2 filezilla
+#### 4.3.2 sftp with filezilla
 
 2 factor 인증을 구현했을 경우, intractive login으로 진행해야 하므로 ***filezilla***의 *빠른연결*은 사용할 수가 없습니다.
 
