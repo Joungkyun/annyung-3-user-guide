@@ -75,20 +75,20 @@ auth       include      postlogin
 
 ```bash
 [root@an3 ~]$ cat /etc/ssh/sshd_config
-  ** 상략 **
+    ** 상략 **
 
-# Change to no to disable s/key passwords
-#ChallengeResponseAuthentication no
-ChallengeResponseAuthentication yes
+  # Change to no to disable s/key passwords
+  #ChallengeResponseAuthentication no
+  ChallengeResponseAuthentication yes
 
-  ** 하략 **
-[root@an3 ~]$
+    ** 하략 **
+  [root@an3 ~]$
 ```
 
 설정 파일 변경 후, sshd를 재시작 해 줍니다.
 
 ```bash
-[root@an3 ~]$ service sshd restart
+  [root@an3 ~]$ service sshd restart
 ```
 
 ##4. Client 설정
@@ -102,13 +102,13 @@ ChallengeResponseAuthentication yes
   * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
   * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
 
-  ### 4.2 Secret file 생성
+### 4.2 Secret file 생성
 
-  일단, 서버 설정이 완료 되었더라도, 각 계정에서 google-authenticator secret file을 생성하지 않으면 PAM 설정에서 nullok를 설정했기 때문에 기존의 1-factor 인증(그냥 ID/PW로만) 으로 login이 됩니다. secert file을 생성하기 위해서는 다음의 작업을 합니다.
+일단, 서버 설정이 완료 되었더라도, 각 계정에서 google-authenticator secret file을 생성하지 않으면 PAM 설정에서 nullok를 설정했기 때문에 기존의 1-factor 인증(그냥 ID/PW로만) 으로 login이 됩니다. secert file을 생성하기 위해서는 다음의 작업을 합니다.
 
-  이 작업을 하기 위해서는 ***~/.ssh*** 디렉토리가 있어야 하니, 없으면 먼저 생성을 해 주기 바랍니다. (퍼미션은 700으로)
+이 작업을 하기 위해서는 ***~/.ssh*** 디렉토리가 있어야 하니, 없으면 먼저 생성을 해 주기 바랍니다. (퍼미션은 700으로)
 
-  ```bash
+```bash
   [root@an3 ~]$ su - bbuwoo
   [bbuwoo@an3 ~]$ mkdir ~/.ssh
   [bbuwoo@an3 ~]$ chmod 700 ~/.ssh
@@ -139,25 +139,25 @@ ChallengeResponseAuthentication yes
   size of 1:30min to about 4min. Do you want to do so (y/n) y
 
   [bbuwoo@an3 ~]$ 
-  ```
+```
 
-  실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 ***~/.ssh/google-authenficator.info*** 라는 파일을 만들어(파일 이름은 중요하지 않습니다.) 남들이 보지 못하게(***chmod 600 filename***) 저장해 두시기 바랍니다.
+실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 ***~/.ssh/google-authenficator.info*** 라는 파일을 만들어(파일 이름은 중요하지 않습니다.) 남들이 보지 못하게(***chmod 600 filename***) 저장해 두시기 바랍니다.
 
   > ***다시 한번 강조***  
   위의 결과에서 secret key를 잘 보존하십시오!
 
 ```bash
-[root@an2 ~]$ ssh bbuwoo@an3test.oops.org
-AnNyung LInux 3 (Labas)
-Login an3test.oops.org on an 18:23 on Friday, 19 February 2016
+  [root@an2 ~]$ ssh bbuwoo@an3test.oops.org
+  AnNyung LInux 3 (Labas)
+  Login an3test.oops.org on an 18:23 on Friday, 19 February 2016
 
-Warning!! Authorized users only.
-All activity may be monitored and reported
+  Warning!! Authorized users only.
+  All activity may be monitored and reported
 
-Verification code: ******
-Password: ******************
-Last login: Fri Feb 19 18:09:09 2016 from 1.116.49.24
-[bbuwoo@an3test ~]$ 
+  Verification code: ******
+  Password: ******************
+  Last login: Fri Feb 19 18:09:09 2016 from 1.116.49.24
+  [bbuwoo@an3test ~]$ 
 ```
 
 ### 4.3 참고
