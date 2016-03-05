@@ -258,7 +258,55 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 [root@an3 ~]$
 ```
 
-### 7.3 secret 파일 생성
+### 7.3 Secret file 생성
+
+다음 작업은 root 권한으로 하는 것을 가정으로 설명 합니다.
+
+***google-authenticator*** 를 --seret 옵션으로 */etc/httpd/ga_auth/@USERNAME@* 에 저장하도록 실행합니다.
+
+파일 이름이 login ID가 되므로, ***@USERNAME@***을 사용할 ID로 치환해 주시면 됩니다.
+
+  ```bash
+  [root@an3 ~]$ google-authenticator --secret=/etc/httpd/ga_auth/@USERNAME@ -t -d --label=an3.oops.org --issuer=oops.org -r 3 -R 30
+  https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/an3.oops.org%3Fsecret%3D65SANAUX4QX7OM5F%26issuer%3Doops.org
+
+                  [QR-CODE-IAMGE]
+
+  Your new secret key is: 65SANAUX4QX7OM5F
+  Your verification code is 424981
+  Your emergency scratch codes are:
+    77133341
+    84939993
+    94216211
+    47785086
+    28719987
+
+  Do you want me to update your "/etc/httpd/ga_auth/@USERNAME@" file (y/n) y
+
+  By default, tokens are good for 30 seconds and in order to compensate for
+  possible time-skew between the client and the server, we allow an extra
+  token before and after the current time. If you experience problems with poor
+  time synchronization, you can increase the window from its default
+  size of 1:30min to about 4min. Do you want to do so (y/n) By default, tokens are good for 30 seconds and in order to compensate for
+  possible time-skew between the client and the server, we allow an extra
+  token before and after the current time. If you experience problems with poor
+  time synchronization, you can increase the window from its default
+  size of 1:30min to about 4min. Do you want to do so (y/n) y
+
+  [root@an3 ~]$ 
+  ```
+
+다음, 이 파일을 apache가 읽을 수 있도록 권한을 부여 합니다.
+
+```bash
+[root@an3 ~]$ chown root.nobody /etc/httpd/ga_auth/*
+[root@an3 ~]$ chmod 440 /etc/httpd/ga_auth/*
+```
+
+### 7.4 Client 설정
+
+
+
 
 ### 7.4 인증 설정
 
