@@ -117,14 +117,14 @@ auth       include      postlogin
 
                   [QR-CODE-IAMGE]
 
-  Your new secret key is: 65SANAUX4QX7OM5F
-  Your verification code is 424981
+  Your new secret key is: 65SANAUX4QU7OM5F
+  Your verification code is 424982
   Your emergency scratch codes are:
-    77133341
-    84939993
-    94216211
-    47785086
-    28719987
+    77133342
+    84939994
+    94216212
+    47785087
+    28719988
 
   Do you want me to update your "/home/bbuwoo/.ssh/google_authenticator" file (y/n) y
 
@@ -141,10 +141,7 @@ auth       include      postlogin
   [bbuwoo@an3 ~]$ 
 ```
 
-실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 ***~/.ssh/google-authenficator.info*** 라는 파일을 만들어(파일 이름은 중요하지 않습니다.) 남들이 보지 못하게(***chmod 600 filename***) 저장해 두시기 바랍니다.
-
-  > ***다시 한번 강조***  
-  위의 결과에서 secret key를 잘 보존하십시오!
+실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 잘 관리해야 하며, 생성된 *secret file*의 첫라인이 key이니 참고 하십시오.
 
 ```bash
   [root@an2 ~]$ ssh bbuwoo@an3test.oops.org
