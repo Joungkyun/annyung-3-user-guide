@@ -102,49 +102,49 @@ ChallengeResponseAuthentication yes
   * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
   * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
 
-### 4.2 Secret file 생성
+  ### 4.2 Secret file 생성
 
-일단, 서버 설정이 완료 되었더라도, 각 계정에서 google-authenticator secret file을 생성하지 않으면 PAM 설정에서 nullok를 설정했기 때문에 기존의 1-factor 인증(그냥 ID/PW로만) 으로 login이 됩니다. secert file을 생성하기 위해서는 다음의 작업을 합니다.
+  일단, 서버 설정이 완료 되었더라도, 각 계정에서 google-authenticator secret file을 생성하지 않으면 PAM 설정에서 nullok를 설정했기 때문에 기존의 1-factor 인증(그냥 ID/PW로만) 으로 login이 됩니다. secert file을 생성하기 위해서는 다음의 작업을 합니다.
 
-이 작업을 하기 위해서는 ***~/.ssh*** 디렉토리가 있어야 하니, 없으면 먼저 생성을 해 주기 바랍니다. (퍼미션은 700으로)
+  이 작업을 하기 위해서는 ***~/.ssh*** 디렉토리가 있어야 하니, 없으면 먼저 생성을 해 주기 바랍니다. (퍼미션은 700으로)
 
-```bash
-[root@an3 ~]$ su - bbuwoo
-[bbuwoo@an3 ~]$ mkdir ~/.ssh
-[bbuwoo@an3 ~]$ chmod 700 ~/.ssh
-[bbuwoo@an3 ~]$ google-authenticator -t -d --label=an3.oops.org --issuer=oops.org -r 3 -R 30
-https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/an3.oops.org%3Fsecret%3D65SANAUX4QX7OM5F%26issuer%3Doops.org
+  ```bash
+  [root@an3 ~]$ su - bbuwoo
+  [bbuwoo@an3 ~]$ mkdir ~/.ssh
+  [bbuwoo@an3 ~]$ chmod 700 ~/.ssh
+  [bbuwoo@an3 ~]$ google-authenticator -t -d --label=an3.oops.org --issuer=oops.org -r 3 -R 30
+  https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth://totp/an3.oops.org%3Fsecret%3D65SANAUX4QX7OM5F%26issuer%3Doops.org
 
-                [QR-CODE-IAMGE]
+                  [QR-CODE-IAMGE]
 
-Your new secret key is: 65SANAUX4QX7OM5F
-Your verification code is 424981
-Your emergency scratch codes are:
-  77133341
-  84939993
-  94216211
-  47785086
-  28719987
+  Your new secret key is: 65SANAUX4QX7OM5F
+  Your verification code is 424981
+  Your emergency scratch codes are:
+    77133341
+    84939993
+    94216211
+    47785086
+    28719987
 
-Do you want me to update your "/home/bbuwoo/.ssh/google_authenticator" file (y/n) y
+  Do you want me to update your "/home/bbuwoo/.ssh/google_authenticator" file (y/n) y
 
-By default, tokens are good for 30 seconds and in order to compensate for
-possible time-skew between the client and the server, we allow an extra
-token before and after the current time. If you experience problems with poor
-time synchronization, you can increase the window from its default
-size of 1:30min to about 4min. Do you want to do so (y/n) By default, tokens are good for 30 seconds and in order to compensate for
-possible time-skew between the client and the server, we allow an extra
-token before and after the current time. If you experience problems with poor
-time synchronization, you can increase the window from its default
-size of 1:30min to about 4min. Do you want to do so (y/n) y
+  By default, tokens are good for 30 seconds and in order to compensate for
+  possible time-skew between the client and the server, we allow an extra
+  token before and after the current time. If you experience problems with poor
+  time synchronization, you can increase the window from its default
+  size of 1:30min to about 4min. Do you want to do so (y/n) By default, tokens are good for 30 seconds and in order to compensate for
+  possible time-skew between the client and the server, we allow an extra
+  token before and after the current time. If you experience problems with poor
+  time synchronization, you can increase the window from its default
+  size of 1:30min to about 4min. Do you want to do so (y/n) y
 
-[bbuwoo@an3 ~]$ 
-```
+  [bbuwoo@an3 ~]$ 
+  ```
 
-실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 ***~/.ssh/google-authenficator.info*** 라는 파일을 만들어(파일 이름은 중요하지 않습니다.) 남들이 보지 못하게(***chmod 600 filename***) 저장해 두시기 바랍니다.
+  실행을 하면 위와 같이 진행이 되는데, 콘솔에서 image 출력이 가능하면 QR code가 출력이 됩니다. 만약 출력이 되지 않는다면, 제일 상단의 URL로 접근을 하면 QRcode를 확인할 수 있습니다. 물론 QRcode가 없을 경우, ***"Your new scret key is: ....."*** 부분에 있는 ***Secret Key***를 이용하여 등록을 하면 됩니다. Client 설정에 대해서는 "***Google Authenticator***"로 검색을 하시면 많이 나오니 자세한 사항은 인터넷 검색을 해 보시기 바랍니다. ***중요한것***은, 위의 결과에서 secret key를 ***~/.ssh/google-authenficator.info*** 라는 파일을 만들어(파일 이름은 중요하지 않습니다.) 남들이 보지 못하게(***chmod 600 filename***) 저장해 두시기 바랍니다.
 
-> ***다시 한번 강조***  
-위의 결과에서 secret key를 잘 보존하십시오!
+  > ***다시 한번 강조***  
+  위의 결과에서 secret key를 잘 보존하십시오!
 
 ```bash
 [root@an2 ~]$ ssh bbuwoo@an3test.oops.org
