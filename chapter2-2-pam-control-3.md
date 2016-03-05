@@ -6,6 +6,14 @@
 
 현재 안녕 리눅스에서 google OTP를 이용한 인증은 ssh와 apache에만 국한이 됩니다. 여기서는 ssh login에 대해서만 다루고, apache 인증에 대해서는 [Chapter 3.5.1.7 Apache 2.4 Google Authentificator(Google OTP)를 이용한 2-factor 인증](chapter3-5-web-acl-apache.md)를 참고 하십시오.
 
+> 목차
+1. Installation
+2. PAM 설정
+3. openssh 설정
+4. client 설정
+
+##1. Installation
+
 먼저 google OPT를 사용하기 위해서는 ***google-authenticator package***가 필요 합니다.
 
 ```bash
@@ -22,6 +30,8 @@ Installed:
 Complete!
 [root@an3 ~]
 ```
+
+##2. PAM 설정
 
 설치가 완료 되었으면, ***PAM*** 설정을 합니다.
 
@@ -52,7 +62,10 @@ auth       include      postlogin
 
 여기서 ***nullok*** 옵션을 지정하면, account에 google-authenticator secret 파일이 있을 경우에만 2-factor 인증이 진행 됩니다. 없을 경우에는 기존의 1-factor 인증으로 진행이 되게 됩니다. 일단 ***nullok**** 옵션이 없으면 login을 하지 못하므로 지정하도록 합니다.
 
-다음, openssh 서버 설정 파일에서 Verication code를 사용할 수 있도록 설정해 줍니다.
+
+##3. SSH 설정
+
+다음, openssh 서버 설정 파일(*/etc/ssh/sshd_config*)에서 Verication code를 사용할 수 있도록 설정해 줍니다.
 
 1. PasswordAuthentication yes
 2. ChallengeResponseAuthentication yes
@@ -78,12 +91,20 @@ ChallengeResponseAuthentication yes
 [root@an3 ~]$ service sshd restart
 ```
 
+##4. Client 설정
+
 여기까지 서버 설정은 완료 되었으며, 다음은 client 설정에 대해 기술 합니다.
 
-먼저, OTP program을 설치 합니다. iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다. Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
+### 4.1 OPT program 설치
 
+먼저, OTP program을 설치 합니다. 
 
-일단, 서버 설정이 완료 되었더라도, 각 계정에서 google-authenticator secret file을 생성하지 않으면 기존의 1-factor 인증으로 login이 됩니다. secert file을 생성하기 위해서는 다음의 작업을 합니다.
+  * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
+  * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
+
+### 4.2 Secret file 생성
+
+일단, 서버 설정이 완료 되었더라도, 각 계정에서 google-authenticator secret file을 생성하지 않으면 PAM 설정에서 nullok를 설정했기 때문에 기존의 1-factor 인증(그냥 ID/PW로만) 으로 login이 됩니다. secert file을 생성하기 위해서는 다음의 작업을 합니다.
 
 이 작업을 하기 위해서는 ***~/.ssh*** 디렉토리가 있어야 하니, 없으면 먼저 생성을 해 주기 바랍니다. (퍼미션은 700으로)
 
