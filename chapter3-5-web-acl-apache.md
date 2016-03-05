@@ -211,7 +211,7 @@ Google OTP를 이용하기 위해서는 ***httpd-authn-google*** package를 설�
 [root@an3 ~]$ yum install httpd-authn-google
 ```
 
-또한, apache에 google opt설정을 하기 위해서는 다음 모듈들에 의존성이 있습니다. (일단 안녕 3에서는 기본적으로 load가 되고 있으니 신경 쓸 일은 없습니다.)
+또한, apache에 google OTP설정을 하기 위해서는 다음 모듈들에 의존성이 있습니다. (일단 안녕 3에서는 기본적으로 load가 되고 있으니 신경 쓸 일은 없습니다.)
 
   * mod_auth_basic
   * mod_authn_core
@@ -262,7 +262,7 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 
 다음 작업은 root 권한으로 하는 것을 가정으로 설명 합니다.
 
-***google-authenticator*** 를 --seret 옵션으로 */etc/httpd/ga_auth/@USERNAME@* 에 저장하도록 실행합니다.
+***google-authenticator*** 를 *--secret* 옵션으로 */etc/httpd/ga_auth/@USERNAME@* 에 저장하도록 실행합니다.
 
 파일 이름이 login ID가 되므로, ***@USERNAME@***을 사용할 ID로 치환해 주시면 됩니다.
 
@@ -296,7 +296,7 @@ Loadmodule authn_google_module modules/mod_authn_google.so
   [root@an3 ~]$ 
   ```
 
-이렇게 생성을 하면, id와 OPT로 생성된 6자리 valid code만으로 인증이 됩니다. 만약 password 어구까지 해서 2 factor 인증을 하고 싶다면, *secret file*에 다음의 라인을 추가해 주면 됩니다. 라인 시작이 따옴표(")로 시작해야 합니다.
+이렇게 생성을 하면, id와 OPT로 생성된 6자리 verication code만으로 인증이 됩니다. 만약 password 어구까지 해서 2 factor 인증을 하고 싶다면, *secret file*에 다음의 라인을 추가해 주면 됩니다. 라인 시작이 따옴표(")로 시작해야 합니다.
 
 ```bash
 " PASSWORD = @PLAIN_PASSWORD@
@@ -315,6 +315,8 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 " WINDOW_SIZE 17
 " DISALLOW_REUSE 48529126
 " TOTP_AUTH
+" PASSWORD = @PLAIN_PASSWORD@
+"
 77133342
 84939994
 94216212
@@ -330,19 +332,19 @@ Loadmodule authn_google_module modules/mod_authn_google.so
   * iPhone이나 Android의 경우에는 App Store에서 ***Google OTP***를 설치 합니다.
   * Smart Phone 이 없거나 PC에서 사용하고 싶은 경우에는 [WinAuth](https://winauth.com/download/)를 이용합니다.
 
-설치 안내와 함께, OTP 등록을 위해서, 위에서 secret 파일을 생성할 때 나온 메시지 중, ***secret key***를 같이 알려 주도록 합니다. 이 메시지를 확인할 수 없다면 생성된 ***secret file***의 첫번째 라인이 ***secret key***이니 이를 알려 주시면 됩니다. 또한 PASSWORD를 추가 했다면 *password*와 *secret key*를 모두 알려 주어야 합니다.
+설치 안내와 함께, OTP 등록을 위해서, 위에서 secret 파일을 생성할 때 나온 메시지 중, ***secret key***를 같이 알려 주도록 합니다. 이 메시지를 확인할 수 없다면 생성된 ***secret file***의 첫 번째 라인이 ***secret key***이니 이를 알려 주시면 됩니다. 또한 PASSWORD를 추가 했다면 *password*와 *secret key*를 모두 알려 주어야 합니다.
 
-password를 지정하여 2 factor 인증을 하게 할 경우, 암호는 *password + valid code* 입니다. 예를 들어:
+password를 지정하여 2 factor 인증을 하게 할 경우, 암호는 *password + verication code* 입니다. 예를 들어:
 
-* password ehfhtl&vlxj
-* valid code 123 456
+* password : ehfhtl&vlxj
+* valid code : 123 456
 
-일 경우, 암호는 ***"ehfhtl&vlxj123456"*** 입니다. 공백 문자 없이 암호와 valid code를 붙여서 입력 하면 됩니다.
+일 경우, 암호는 ***"ehfhtl&vlxj123456"*** 입니다. 공백 문자 없이 암호와 verication code를 붙여서 입력 하면 됩니다.
 
 
 ### 7.4 인증 설정
 
-Google Authentificator Apache module은 ***AuthType***으로 *Basic*과 *Digest*를 모두 지원합니다만, 현재 버전에서 Digest 방식은 segfault를 발생시키고 있습니다. 그러니 *Basic* type으로 사용하시기 바랍니다.
+Google Authentificator Apache module은 ***AuthType***으로 *Basic*과 *Digest*를 모두 지원 합니다만, 현재 버전에서 Digest 방식은 segfault를 발생 시키고 있습니다. 그러니 *Basic* type으로 사용하시기 바랍니다.
 
 현재 이 모듈이 공식 사이트에서 2013년 이후 관리되고 있지 않으므로, 이 문제가 해결되기는 쉽지 않을 것으로 보이며, 시간이 나는 데로 문제 해결을 해 볼 예정입니다.
 
