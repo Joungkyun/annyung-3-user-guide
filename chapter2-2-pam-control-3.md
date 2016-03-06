@@ -193,4 +193,4 @@ auth       required     pam_sepermit.so
 
 ### 4.4 참고
 
-보너스로, 안녕 리눅스의 경우, Google authenticator 설정을 해 놓으면, passowrd expire 체크를 하지 않도록 패치가 되어 있습니다. 즉, 꽁수를 좀 부려 보자면 ***Google Authentifator 설정을 하지 않은 서버에서, 계정에 ~/.ssh/google-authenticator 파일이 존재할 경우, password expire를 피해갈 수 있습니다.
+보너스로, 안녕 리눅스의 경우, Google authenticator 설정을 해 놓으면, passowrd expire 체크를 하지 않도록 패치가 되어 있습니다. 즉, 꽁수를 좀 부려 보자면 ***Google Authentifator*** 설정을 하지 않은 서버에서, 계정에 ~/.ssh/google-authenticator 파일이 존재할 경우, password expire를 피해갈 수 있습니다.
