@@ -178,7 +178,9 @@ auth       include      postlogin
 
 ***filezilla*** 처럼 interactive process가 불가능한 program들을 위해서는 PAM에서 forward_pass option을 사용하여 암호 입력시에 암호와 verication code를 같이 입력하도록 하는 수 밖에 없습니다. 이 경우, openssh client나 putty, filezilla 등 모두 이렇게 입력을 하는 수 밖에 없습니다.
 
-forward_pass를 이용하여 암호 입력창에 암호화 같이 verication code를 입력할 경우, 암호를 먼저 입력하고 공백 없이 이어서 verication code를 입력하면 됩니다. 예를 들어 암호가 ***"abcd"*** 이고 verication code가 "***123 456***" 이라면 ***"abcd123456"***으로 입력하면 됩니다.
+***forward_pass***를 이용하여 암호 입력창에 암호화 같이 verication code를 입력할 경우, 암호를 먼저 입력하고 공백 없이 이어서 verication code를 입력하면 됩니다. 예를 들어 암호가 ***"abcd"*** 이고 verication code가 "***123 456***" 이라면 ***"abcd123456"***으로 입력하면 됩니다.
+
+***forward_pass***를 이용하면 인증을 필요로 하는 대부분의 서비스에 <u>2 factor 인증</u>을 가능하게 할 수 있습니다.
 
 ```bash
 [root@an3 ~]$ cat /etc/pam.d/sshd
