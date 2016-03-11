@@ -71,7 +71,7 @@ server 3.centos.pool.ntp.org iburst
 
 ##3. Time server 구성
 
-많은 수의 서버를 관리할 경우, 모든 서버를 외부의 Time server를 이용하거나 또는 *CentOS NTP Pool*의 Time server를 이요할 경우, 서버마다 시간 차가 발생할 수 있습니다.
+많은 수의 서버를 관리할 경우, 모든 서버를 외부의 Time server를 이용하거나 또는 *CentOS NTP Pool*의 Time server를 이용할 경우, 서버마다 시간 차가 발생할 수 있습니다.
 
 이럴 경우에는 local network에 Time server를 구성을 하고, 서버들이 이 Time server를 바라보게 하여 운영을 하는 것이 훨씬 더 좋습니다.
 
