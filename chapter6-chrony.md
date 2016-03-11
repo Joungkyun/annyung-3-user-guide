@@ -33,12 +33,13 @@ NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 
 
 안녕 리눅스 3은 설치시에 기본적으로 *Stratum 2* 또는 *Stratum 3*으로 구성된 *CentOS NTP pool*에 등록되어 있는 외부 Time server로 부터 시간을 동기화 하도록 되어 있습니다. 즉, 단순히 서버의 시간 동기화를 위해서라면, 별도의 설정을 건드릴 필요 없이 ***chronyd***만 실행을 시켜 주면 된다는 의미입니다.
 
-만약, ***chrony***가 설치 되어 있지 않은 상태에서, 설치 후 시간 동기화를 하고 싶다면 다음 명령을 이용할 수 있습니다.
+만약, ***chrony***가 설치 되어 있지 않은 상태에서, ***chrony*** 설치 후 시간 동기화를 하고 싶다면 다음 명령을 이용할 수 있습니다.
 
 ```bash
-[root@an3 ~]$ yum install chrony     # ntp package가 설치 되어 있다면 삭제하고 설치해야 함
-[root@an3 ~]$ service chronyd enable # booting 시에 구동
-[root@an3 ~]$ service chronyd restart  # chronyd 시작
+[root@an3 ~]$ yum remove ntp          # ntp package가 설치 되어 있다면 삭제해야 함
+[root@an3 ~]$ yum install chrony
+[root@an3 ~]$ service chronyd enable  # booting 시에 구동
+[root@an3 ~]$ service chronyd restart # chronyd 시작
 ```
 
 또한, 기본으로 설정이 되어 있는 *CentOS NTP pool*의 time server가 아니라 다른 Time server에서 동기화를 하고 싶다면 ***/etc/chrony/chrony.conf*** 에서 ***server*** 지시자에 원하는 Time server를 등록하면 됩니다.
