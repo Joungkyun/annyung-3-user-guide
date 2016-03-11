@@ -88,7 +88,7 @@ server 3.centos.pool.ntp.org iburst
 
 * local network : 10.0.0.0/8
 * Time Server 1 IP: 10.10.0.1
-* Time Server 2 IP: 10.10.0.2
+* Time Server 2 IP: 10.10.10.1
 * Time Server 1과 2는 Stratum 3로 구성
 
 Time server를 운영하는 데 있어 사용되는 resource는 극히 적습니다. 실제로 Stratum 2 서버들 중에는 현재 486 machine으로 동작하는 경우도 있습니다. 그러므로, DNS나 DHCP 서버에 Time server 설정을 하는 것을 권장 합니다.
@@ -128,6 +128,57 @@ server  127.127.1.0 # local clock
 fudge   127.127.1.0 stratum 3
 ```
 
+전체적으로 보면 ***/etc/ntp/ntp.conf***는 다음과 같이 되게 됩니다.
+
+```bash
+[root@an3 ~]$ cat /etc/ntp/ntp.conf
+# For more information about this file, see the man pages
+# ntp.conf(5), ntp_acc(5), ntp_auth(5), ntp_clock(5), ntp_misc(5), ntp_mon(5).
+
+driftfile /var/lib/ntp/drift
+
+# Permit time synchronization with our time source, but do not
+# permit the source to query or modify the service on this system.
+# 기본적으로 모든 권한을 불허 한다.
+restrict default ignore
+
+# Permit all access over the loopback interface.  This could
+# be tightened as well, but to do so would effect some of
+# the administrative functions.
+# localhost 에서의 모든 권한을 허가 한다.
+restrict 127.0.0.1
+restrict ::1
+
+# Hosts on local network are less restricted.
+# 10.0.0.0/255.0.0.0 에서 nomodify notrap 권한을 허가한다.
+restrict 10.0.0.0 mask 255.0.0.0 nomodify notrap
+
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+server 0.centos.pool.ntp.org iburst
+server 1.centos.pool.ntp.org iburst
+server 2.centos.pool.ntp.org iburst
+server 3.centos.pool.ntp.org iburst
+
+# Undisciplined Local Clock. This is a fake driver intended for backup
+# and when no outside source of synchronized time is available.
+server  127.127.1.0 # local clock
+fudge   127.127.1.0 stratum 3
+
+includefile /etc/ntp/crypto/pw
+
+# Key file containing the keys and key identifiers used when operating
+# with symmetric key cryptography.
+keys /etc/ntp/keys
+
+# Disable the monitoring facility to prevent amplification attacks using ntpdc
+# monlist command when default restrict does not include the noquery flag. See
+# CVE-2013-5211 for more details.
+# Note: Monitoring will not be disabled with the limited restriction flag.
+disable monitor
+[root@an3 ~]$
+```
+
 
 ###3.2 방화벽 설정
 
@@ -165,32 +216,20 @@ time server에 ***firewalld***가 실행이 되고 있다면 다음과 같이 �
 ###3.3 daemon 구동 및 서비스 확인
 
 ```bash
-[root@an3 ~]$ service chronyd restart
+[root@an3 ~]$ service ntpd restart
 [root@an3 ~]$ netstat -anp | grep ":123"
-udp    0  0 0.0.0.0:123       0.0.0.0:*          16137/chronyd
-[root@an3 ~]$ chronyc sources -v
-210 Number of sources = 4
-
-  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
- / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
-| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
-||                                                 .- xxxx [ yyyy ] +/- zzzz
-||      Reachability register (octal) -.           |  xxxx = adjusted offset,
-||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
-||                                \     |          |  zzzz = estimated error.
-||                                 |    |           \
-MS Name/IP address         Stratum Poll Reach LastRx Last sample
-===============================================================================
-^- mail.funix.net                3   6    77    12  +6281us[+6281us] +/-  156ms
-^+ dadns.cdnetworks.co.kr        2   6    77    12  -2475us[-2475us] +/-   61ms
-^- send.mx.cdnetworks.com        2   6    77    13  -6073us[-6073us] +/-  113ms
-^* 114.207.245.166               2   6    77    14  +1656us[+1597us] +/-   41ms
+udp    0  0 0.0.0.0:123       0.0.0.0:*          16137/ntpd
+[root@an3 ~]$ ntpq -p
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ send.mx.cdnetwo 131.107.13.100   2 u   17   64    1   35.047   25.632  11.802
+*dadns.cdnetwork 133.100.8.2      2 u   17   64    1    0.401    5.476   0.089
+ mail.funix.net  211.233.40.78    3 u   17   64    1    1.341   -4.687   0.113
 ```
 
 
-
 ###3.4 client 설정
-####3.4.1 /etc/chrony/chrony.conf
+####3.4.1 /etc/ntp/ntp.conf
 
 client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 time server 2를 지정해 주면 되며, 그 외에는 수정할 필요가 없습니다.
 
@@ -200,7 +239,7 @@ client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 
 #server 2.centos.pool.ntp.org iburst
 #server 3.centos.pool.ntp.org iburst
 server 10.10.0.1 iburst
-server 10.10.0.2 iburst
+server 10.10.10.1 iburst
 ```
 
 ####3.4.2 방화벽 설정
@@ -228,31 +267,22 @@ OUT_UDP_ALLOWPORT = 53
 # RULE:
 #       DESTINATION_IP[:DESTINATION_PORT[:STATE]]
 #
-OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.0.2:123
+OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.10.1:123
 
 [root@an3 ~]$ oops-firewall -v  # oops-firewall 재구동
 [root@an3 ~]$
 
 
-####3.4.3 chrony 재시작 및 확인
+####3.4.3 ntpd 재시작 및 확인
 
-***chrony***를 재시작 한 후, ***chronyc***를 이용하여 확인을 합니다.
+***ntpd***를 재시작 한 후, ***ntpq***를 이용하여 확인을 합니다.
 
 ```bash
-[root@an3 ~]$ service chronyd restart
-[root@an3 ~]$ chronyc sources -v
-210 Number of sources = 4
-
-  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
- / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
-| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
-||                                                 .- xxxx [ yyyy ] +/- zzzz
-||      Reachability register (octal) -.           |  xxxx = adjusted offset,
-||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
-||                                \     |          |  zzzz = estimated error.
-||                                 |    |           \
-MS Name/IP address         Stratum Poll Reach LastRx Last sample
-===============================================================================
-^* 10.0.0.1                      3   6    77    14  +1656us[+1597us] +/-   3ms
-^+ 10.10.0.2                     2   6    77    12  -2475us[-2475us] +/-   3ms
+[root@an3 ~]$ service ntpd restart
+[root@an3 ~]$ ntpq -p
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ 10.5.22.145     .INIT.          16 u    -   64    0    0.000    0.000   0.000
+*10.10.0.1       141.223.182.106  2 u    2   64    1    0.173   -1.231   0.001
+ 10.10.10.1      211.237.1.226    3 u    1   64    1    1.099   -0.758   0.001
 ```
