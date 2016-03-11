@@ -1,13 +1,25 @@
 # Chrony
 
 
-##1. 개요
+#1. 개요
 
 ***chrony***는 RHEL 7에서 기본으로 제공하는 NTP daemon/client 입니다. RHEL 7 부터 NTP 대신에 chrony를 제공하고 있으며, 안녕 리눅스 3에서도 ***chrony***를 기본 NTP daemon/client로 제공하고 있습니다.
 
 물론, 기존의 NTP도 제공하고 있으므로, ***chrony***에 익숙하지 않아서 NTP를 사용하고 싶다면, ***chrony***를 제고하고 NTP를 설치할 수 있습니다. 다만, ***NTP***보다 ***chorny***가 설정이 더 간결하고 ***NTP***의 단점을 개선하고자 시작된 project 이기 때문에 ***chrony*** 사용을 권장 합니다. (물론 protocol이 호환이기 때문에 혼합해서 사용이 가능 합니다.)
 
 이 문서에서는 chrony daemon을 이용하여 서버의 시간을 동기화 하는 방법과, chrony daemon을 이용하여 Time service를 하는 방법에 대해서만 기술하며, chronyc를 이용하여 chronyd를 관리하는 것에 대해서는 다루지 않습니다. chronyc를 이용한 chrony daemon 관리에 대해서는 Redhat Enterprise Linux 7 [System Administrator Guide 15.3 Using Chrony](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Using_chrony.html)를 참고 하십시오.
+
+Time server 설정 전에 우선 알아야 할 것이 Stratum 이라는 의미입니다. Stratum은 지층이라는 의미로, NTP protocol은 피라미드 형식의 구성으로 이루어져 있기 때문에, Stratum 0은 피라미드의 꼭대기라고 비유할 수 있습니다.
+
+Stratum 0은 primary reference clock 이라고 부르며, NTP protocol과는 상관이 없습니다. 즉 직접적으로 시간 서비스를 하는 것은 아니며, Stratum 1로 시간을 전송하는 장비들을 말하며 primary reference clock 장비에는 GPS, 세슘 원자 시계 등이 있습니다.
+
+보통 Stratum 1 level의 서버들은 primary reference clock에서 시간을 동기화 하여 서비스를 하며, NTP에서 최상위층이라고 생각하면 됩니다.
+
+다만, Stratum 1 level의 서버들은 client들이 Stratum 1 서버에서 동기화를 하면 시간이 더욱 정확할 것이라는 생각으로 Stratum 1 서버들을 설정하여 서비스 부하가 높아져서 Stratum 2 서버들에만 접근을 허가하고 open access를 막아 놓은 경우가 대부분 입니다.
+
+또한, NTP 구성 목적이 대부분 정확한 시간 보다는 시간의 동기화에 있기 때문에 꼭 최상위 stratum에 동기화를 할 이유가 별로 없기 때문에 Stratum 2 정도에 sync를 하는 것을 권장 합니다.
+
+NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 을 참조 하십시오.
 
 ##2. Chrony를 이용한 시간 동기화
 
@@ -62,3 +74,21 @@ server 3.centos.pool.ntp.org iburst
 
 이럴 경우에는 local network에 Time server를 구성을 하고, 서버들이 이 Time server를 바라보게 하여 운영을 하는 것이 훨씬 더 좋습니다.
 
+구성도를 보자면 다음과 같은 구성을 하는 것이 일반적 입니다.
+
+![로컬 Time server 구성](stratum.jpg)
+
+
+내부에 fail over를 위해 Stratum 3 level의 Time server 2대를 구성하고, private network 안에 있는 server/client 들이 이 time server를 통해서 시간 동기화를 하도록 구성을 하도록 합니다.
+
+그리고, 2대의 Time server 간에는 peer 구성을 하여 서로 동기화를 하게 할 수 있지만, 제 개인적인 견해로는 Time service 특성상 peer 구성 보다는 그냥 master 2대로 구성하는 것이 관리상 더 편했던 것 같습니다. 그래서 여기서는 peer 구성은 하지 않고 그냥 time server 2대를 독립적으로 구성하되, sync할 stratum 2 level의 서버를 동일하게 지정하여 peer 설정을 한 것과 비슷하게 구성을 할 것입니다.
+
+###3.1 Chrony.conf
+
+
+
+
+
+
+
+안녕 리눅스 3(또는 CentOS7/RHEL7)의 chrony는 기본 설정으로 구동할 경우, UDP port 123을 bind 하지 않기 때문에 외부에서 접근이 불가능 합니다.
