@@ -90,6 +90,8 @@ server 3.centos.pool.ntp.org iburst
 * Time Server 2 IP: 10.10.0.2
 * Time Server 1과 2는 Stratum 3로 구성
 
+Time server를 운영하는 데 있어 사용되는 resource는 극히 적습니다. 실제로 Stratum 2 서버들 중에는 현재 486 machine으로 동작하는 경우도 있습니다. 그러므로, DNS나 DHCP 서버에 Time server 설정을 하는 것을 권장 합니다.
+
 ###3.1 /etc/chrony/chrony.conf
 
 상단의 구성 처럼 2대의 Time server를 구성할 경우, 두대의 Time server간의 동기화를 위해서 peer 설정을 하게 됩니다. 하지만, Time server의 source stratum이 동일할 경우 굳이 peer 설정이 의미가 별로 없기 때문에 그냥 독립적인 time server 2대를 구성하는 것도 문제가 없습니다.
