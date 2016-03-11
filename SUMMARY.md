@@ -29,6 +29,7 @@
 * [Chapter 5. DNS 운영](chapter5)
 * [Chapter 6. Time Server 운영](chapter6.md)
    * [Chrony](chapter6-chrony)
+   * NTP
 * [Chapter 7. VPN 운영](chapter7)
 * [Chapter 8. SMTP 운영](chapter8)
 * [안녕 리눅스 알려진 버그](annyung3-known-bugsmd.md)
