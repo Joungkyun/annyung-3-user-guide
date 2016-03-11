@@ -190,7 +190,7 @@ disable monitor
 
 ###3.2 방화벽 설정
 
-방화벽이나 subnet 구간에 switch ACL이 있다면 time server 1(10.10.0.1)과 time server 2(10.10.0.2)의 UDP 123번 포트를 open 해 주어야 합니다.
+방화벽이나 subnet 구간에 switch ACL이 있다면 time server 1(10.10.0.1)과 time server 2(10.10.10.1)의 UDP 123번 포트를 open 해 주어야 합니다.
 
 다음은 time server 자체에서 방화벽(oops-firewall 또는 firewalld)이 운영중일 경우 입니다. private network이라서 방화벽을 구동하고 있지 않다면 무시 하십시오.
 
