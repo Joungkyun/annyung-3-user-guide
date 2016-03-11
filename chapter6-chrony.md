@@ -142,6 +142,13 @@ UDP_ALLOWPORT = 123
 [root@an3 ~]$
 ```
 
+time server에 firewalld가 실행이 되고 있다면 다음과 같이 하십시오.
+
+```bash
+[root@an3 ~]$ firewall-cmd --permanent --zone=public --add-port=123/udp
+```
+
+
 ###3.3 daemon 구동 및 서비스 확인
 
 ```bash
