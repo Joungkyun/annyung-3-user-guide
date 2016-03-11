@@ -122,7 +122,9 @@ local stratum 3
 
 방화벽이나 subnet 구간에 switch ACL이 있다면 time server 1(10.10.0.1)과 time server 2(10.10.0.2)의 UDP 123번 포트를 open 해 주어야 합니다.
 
-time server에 oops-firewall이 실행 되고 있다면 ***/etc/oops-firewall/filter.conf***의 ***UDP_ALLOWPORT***에 *123*을 추가해 주십시오.
+다음은 time server 자체에서 방화벽(oops-firewall 또는 firewalld)이 운영중일 경우 입니다. private network이라서 방화벽을 구동하고 있지 않다면 무시 하십시오.
+
+time server에 ***oops-firewall***이 실행 되고 있다면 ***/etc/oops-firewall/filter.conf***의 ***UDP_ALLOWPORT***에 *123*을 추가해 주십시오.
 
 ```bash
 [root@an3 ~]$ cat /etc/oops-firewall/filter.conf
@@ -142,7 +144,7 @@ UDP_ALLOWPORT = 123
 [root@an3 ~]$
 ```
 
-time server에 firewalld가 실행이 되고 있다면 다음과 같이 하십시오.
+time server에 ***firewalld***가 실행이 되고 있다면 다음과 같이 하십시오.
 
 ```bash
 [root@an3 ~]$ firewall-cmd --permanent --zone=public --add-port=123/udp
@@ -190,7 +192,38 @@ server 10.10.0.1 iburst
 server 10.10.0.2 iburst
 ```
 
-####3.3.2 chrony 재시작 및 확인
+####3.4.2 방화벽 설정
+
+client에 ***oops-firewall***이 실행되고 있다면 ***OUT_UDP_HOSTPERPORT***에 time server의 123번 포트를 설정해 주십시오. private network이라서 ***oops-firewall***을 구동하고 있지 않다면 무시 하십시오.
+
+```bash
+[root@an3 ~]$ cat /etc/oops-firewall/filter.conf
+  ** 상략 **
+##########################################################################
+# UDP configuration
+##########################################################################
+#
+# Configuration of the Port
+# Designate the ports of the services from teh internal point to the
+# external point.
+#
+# RULE:
+#       DESTINATION_PORT[:STATE]
+#
+OUT_UDP_ALLOWPORT = 53
+
+# To open specific port on specific host
+#
+# RULE:
+#       DESTINATION_IP[:DESTINATION_PORT[:STATE]]
+#
+OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.0.2:123
+
+[root@an3 ~]$ oops-firewall -v  # oops-firewall 재구동
+[root@an3 ~]$
+
+
+####3.4.3 chrony 재시작 및 확인
 
 ***chrony***를 재시작 한 후, ***chronyc***를 이용하여 확인을 합니다.
 
