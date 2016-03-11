@@ -112,6 +112,7 @@ server 3.centos.pool.ntp.org iburst
 allow 10.0.0.0/8
 
 # announce this server as Stratum 3
+#local stratum 10
 local stratum 3
 ```
 
@@ -140,4 +141,18 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^+ dadns.cdnetworks.co.kr        2   6    77    12  -2475us[-2475us] +/-   61ms
 ^- send.mx.cdnetworks.com        2   6    77    13  -6073us[-6073us] +/-  113ms
 ^* 114.207.245.166               2   6    77    14  +1656us[+1597us] +/-   41ms
+```
+
+###3.3 client 설정
+####3.3.1 /etc/chrony/chrony.conf
+
+client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 time server 2를 지정해 주면 되며, 그 외에는 수정할 필요가 없습니다.
+
+```nginx
+#server 0.centos.pool.ntp.org iburst
+#server 1.centos.pool.ntp.org iburst
+#server 2.centos.pool.ntp.org iburst
+#server 3.centos.pool.ntp.org iburst
+server 10.10.0.1 iburst
+server 10.10.0.2 iburst
 ```
