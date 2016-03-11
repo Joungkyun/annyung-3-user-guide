@@ -138,7 +138,7 @@ time server에 oops-firewall이 실행 되고 있다면 ***/etc/oops-firewall/fi
 #
 UDP_ALLOWPORT = 123
   ** 하략 **
-[root@an3 ~]$ oops-frewall -v
+[root@an3 ~]$ oops-frewall -v  # oops-firewall 재구동
 [root@an3 ~]$
 ```
 
