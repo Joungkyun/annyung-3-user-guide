@@ -7,17 +7,17 @@
 
 물론, 기존의 NTP도 제공하고 있으므로, ***chrony***에 익숙하지 않아서 NTP를 사용하고 싶다면, ***chrony***를 제고하고 NTP를 설치할 수 있습니다. 다만, ***NTP***보다 ***chorny***가 설정이 더 간결하고 ***NTP***의 단점을 개선하고자 시작된 project 이기 때문에 ***chrony*** 사용을 권장 합니다. (물론 protocol이 호환이기 때문에 혼합해서 사용이 가능 합니다.)
 
-이 문서에서는 chrony daemon을 이용하여 서버의 시간을 동기화 하는 방법과, chrony daemon을 이용하여 Time service를 하는 방법에 대해서만 기술하며, chronyc를 이용하여 chronyd를 관리하는 것에 대해서는 다루지 않습니다. chronyc를 이용한 chrony daemon 관리에 대해서는 Redhat Enterprise Linux 7 [System Administrator Guide 15.3 Using Chrony](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Using_chrony.html)를 참고 하십시오.
+이 문서에서는 ***chrony*** daemon을 이용하여 서버의 시간을 동기화 하는 방법과, ***chrony*** daemon을 이용하여 Time service를 하는 방법에 대해서만 기술하며, ***chronyc***를 이용하여 ***chronyd***를 관리하는 것에 대해서는 다루지 않습니다. ***chronyc***를 이용한 ***chrony*** daemon 관리에 대해서는 Redhat Enterprise Linux 7 [System Administrator Guide 15.3 Using Chrony](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/sect-Using_chrony.html)를 참고 하십시오.
 
-Time server 설정 전에 우선 알아야 할 것이 Stratum 이라는 의미입니다. Stratum은 지층이라는 의미로, NTP protocol은 피라미드 형식의 구성으로 이루어져 있기 때문에, Stratum 0은 피라미드의 꼭대기라고 비유할 수 있습니다.
+Time server 설정 전에 우선 알아야 할 것이 ***Stratum*** 이라는 의미입니다. ***Stratum***은 지층이라는 의미로, NTP protocol은 피라미드 형식의 구성으로 이루어져 있기 때문에, ***Stratum*** 0은 피라미드의 꼭대기라고 비유할 수 있습니다.
 
-Stratum 0은 primary reference clock 이라고 부르며, NTP protocol과는 상관이 없습니다. 즉 직접적으로 시간 서비스를 하는 것은 아니며, Stratum 1로 시간을 전송하는 장비들을 말하며 primary reference clock 장비에는 GPS, 세슘 원자 시계 등이 있습니다.
+***Stratum*** 0은 ***primary reference clock*** 이라고 부르며, NTP protocol과는 상관이 없습니다. 즉 직접적으로 시간 서비스를 하는 것은 아니며, ***Stratum*** 1로 시간을 전송하는 장비들을 말하며 ***primary reference clock*** 장비에는 *GPS*, *세슘 원자 시계* 등이 있습니다.
 
-보통 Stratum 1 level의 서버들은 primary reference clock에서 시간을 동기화 하여 서비스를 하며, NTP에서 최상위층이라고 생각하면 됩니다.
+보통 ***Stratum*** 1 level의 서버들은 ***primary reference clock***에서 시간을 동기화 하여 서비스를 하며, NTP에서 최상위층이라고 생각하면 됩니다.
 
-다만, Stratum 1 level의 서버들은 client들이 Stratum 1 서버에서 동기화를 하면 시간이 더욱 정확할 것이라는 생각으로 Stratum 1 서버들을 설정하여 서비스 부하가 높아져서 Stratum 2 서버들에만 접근을 허가하고 open access를 막아 놓은 경우가 대부분 입니다.
+다만, ***Stratum*** 1 level의 서버들은 client들이 ***Stratum*** 1 서버에서 동기화를 하면 시간이 더욱 정확할 것이라는 생각으로 ***Stratum*** 1 서버들을 설정하여 서비스 부하가 높아져서 ***Stratum*** 2 서버들에만 접근을 허가하고 access를 막아 놓은 경우가 대부분 입니다.
 
-또한, NTP 구성 목적이 대부분 정확한 시간 보다는 시간의 동기화에 있기 때문에 꼭 최상위 stratum에 동기화를 할 이유가 별로 없기 때문에 Stratum 2 정도에 sync를 하는 것을 권장 합니다.
+또한, NTP 구성 목적이 대부분 정확한 시간 보다는 시간의 동기화에 있기 때문에 꼭 최상위 ***stratum***에 동기화를 할 이유가 별로 없기 때문에 ***Stratum*** 2 정도에 sync를 하는 것을 권장 합니다.
 
 NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 을 참조 하십시오.
 
