@@ -93,7 +93,7 @@ server 3.centos.pool.ntp.org iburst
 
 * local network : 10.0.0.0/8
 * Time Server 1 IP: 10.10.0.1
-* Time Server 2 IP: 10.10.0.2
+* Time Server 2 IP: 10.10.10.1
 * Time Server 1과 2는 Stratum 3로 구성
 
 Time server를 운영하는 데 있어 사용되는 resource는 극히 적습니다. 실제로 Stratum 2 서버들 중에는 현재 486 machine으로 동작하는 경우도 있습니다. 그러므로, DNS나 DHCP 서버에 Time server 설정을 하는 것을 권장 합니다.
@@ -197,7 +197,7 @@ client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 
 #server 2.centos.pool.ntp.org iburst
 #server 3.centos.pool.ntp.org iburst
 server 10.10.0.1 iburst
-server 10.10.0.2 iburst
+server 10.10.10.1 iburst
 ```
 
 ####3.4.2 방화벽 설정
@@ -225,7 +225,7 @@ OUT_UDP_ALLOWPORT = 53
 # RULE:
 #       DESTINATION_IP[:DESTINATION_PORT[:STATE]]
 #
-OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.0.2:123
+OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.10.1:123
 
 [root@an3 ~]$ oops-firewall -v  # oops-firewall 재구동
 [root@an3 ~]$
@@ -250,6 +250,6 @@ OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.0.2:123
 ||                                 |    |           \
 MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ===============================================================================
-^* 10.0.0.1                      3   6    77    14  +1656us[+1597us] +/-   3ms
-^+ 10.10.0.2                     2   6    77    12  -2475us[-2475us] +/-   3ms
+^* 10.0.0.1                      3   6    77    14  +1656us[+1597us] +/-   1ms
+^+ 10.10.10.1                    3   6    77    12  -2475us[-2475us] +/-   1ms
 ```
