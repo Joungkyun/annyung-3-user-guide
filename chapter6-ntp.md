@@ -237,6 +237,9 @@ udp    0  0 0.0.0.0:123       0.0.0.0:*          16137/ntpd
 
 
 ###3.4 client 설정
+
+Time server가 ***chrony***로 구축이 되었더라도, client에서 ***NTP***를 사용해도 무방 합니다.
+
 ####3.4.1 /etc/ntp/ntp.conf
 
 client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 time server 2를 지정해 주면 되며, 그 외에는 수정할 필요가 없습니다.
