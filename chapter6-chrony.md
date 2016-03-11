@@ -33,7 +33,7 @@ NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 
 ```bash
 [root@an3 ~]$ yum install chrony     # ntp package가 설치 되어 있다면 삭제하고 설치해야 함
 [root@an3 ~]$ service chronyd enable # booting 시에 구동
-[root@an3 ~]$ service chronyd start  # chronyd 시작
+[root@an3 ~]$ service chronyd restart  # chronyd 시작
 ```
 
 또한, 기본으로 설정이 되어 있는 *CentOS NTP pool*의 time server가 아니라 다른 Time server에서 동기화를 하고 싶다면 ***/etc/chrony/chrony.conf*** 에서 ***server*** 지시자에 원하는 Time server를 등록하면 됩니다.
@@ -83,12 +83,61 @@ server 3.centos.pool.ntp.org iburst
 
 그리고, 2대의 Time server 간에는 peer 구성을 하여 서로 동기화를 하게 할 수 있지만, 제 개인적인 견해로는 Time service 특성상 peer 구성 보다는 그냥 master 2대로 구성하는 것이 관리상 더 편했던 것 같습니다. 그래서 여기서는 peer 구성은 하지 않고 그냥 time server 2대를 독립적으로 구성하되, sync할 stratum 2 level의 서버를 동일하게 지정하여 peer 설정을 한 것과 비슷하게 구성을 할 것입니다.
 
-###3.1 Chrony.conf
+여기서는 다음의 환경으로 Time Server 1과 Time Server 2를 구성하는 예로 설명을 합니다.
 
+* local network : 10.0.0.0/8
+* Time Server 1 IP: 10.10.0.1
+* Time Server 2 IP: 10.10.0.2
+* Time Server 1과 2는 Stratum 3로 구성
 
+###3.1 /etc/chrony/chrony.conf
 
+상단의 구성 처럼 2대의 Time server를 구성할 경우, 두대의 Time server간의 동기화를 위해서 peer 설정을 하게 됩니다. 하지만, Time server의 source stratum이 동일할 경우 굳이 peer 설정이 의미가 별로 없기 때문에 그냥 독립적인 time server 2대를 구성하는 것도 문제가 없습니다.
 
+일단 안녕 리눅스 3의 chrony.conf에 등록이 되어 있는 Time server들은 대부분 Stratum 2 level 입니다. 그러므로 굳이 이를 변경할 필요는 없습니다. 굳이 원하는 time server가 있다면 찾아서 변경해 주시면 됩니다.
 
+http://time.ewha.or.kr/domestic.html 를 참고 하여 Stratum 2 3개 정도, Stratum 3 1개 정도를 선택 합니다.
 
+***chrony***는 ***NTP***와는 달리 기본 설정에서 *access* 설정을 하지 않으면 UDP 123번 port를 listen 하지 않습니다. 즉, client mode로만 동작을 한다는 의미입니다. 그러므로 ***chrony.conf***에 ***allow*** 설정을 해 주어야 Time service가 가능합니다.
 
-안녕 리눅스 3(또는 CentOS7/RHEL7)의 chrony는 기본 설정으로 구동할 경우, UDP port 123을 bind 하지 않기 때문에 외부에서 접근이 불가능 합니다.
+그리고 ***local*** 지시자로 이 서버가 Stratum 3임을 announce 하도록 설정 합니다.
+
+```nginx
+server 0.centos.pool.ntp.org iburst
+server 1.centos.pool.ntp.org iburst
+server 2.centos.pool.ntp.org iburst
+server 3.centos.pool.ntp.org iburst
+
+# permit access from 10.0.0.0/8 network
+allow 10.0.0.0/8
+
+# announce this server as Stratum 3
+local stratum 3
+```
+
+위와 같이 설정이 되어 있으면 됩니다. (기본 설정 파일에서 ***allow***와 ***local***만 추가가 됩니다.)
+
+###3.2 daemon 구동 및 서비스 확인
+
+```bash
+[root@an3 ~]$ service chronyd restart
+[root@an3 ~]$ netstat -anp | grep ":123"
+udp    0  0 0.0.0.0:123       0.0.0.0:*          16137/chronyd
+[root@an3 ~]$ chronyc sources -v
+210 Number of sources = 4
+
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
+| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+||                                \     |          |  zzzz = estimated error.
+||                                 |    |           \
+MS Name/IP address         Stratum Poll Reach LastRx Last sample
+===============================================================================
+^- mail.funix.net                3   6    77    12  +6281us[+6281us] +/-  156ms
+^+ dadns.cdnetworks.co.kr        2   6    77    12  -2475us[-2475us] +/-   61ms
+^- send.mx.cdnetworks.com        2   6    77    13  -6073us[-6073us] +/-  113ms
+^* 114.207.245.166               2   6    77    14  +1656us[+1597us] +/-   41ms
+```
