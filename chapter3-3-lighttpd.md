@@ -42,7 +42,7 @@
   * ***/etc/lighttpd/conf.d***에 사용자 설정을 추가/변경 하도록 합니다. ***lighttpd.conf***의 설정을 변경하고자 한다면, 이곳에서 설정을 하면 overwrite가 됩니다.
   * ***/etc/logroate.d/lighttpd***파일에 log rotate 설정이 있습니다.
   * ***/etc/sysconfig/lighttpd*** 파일에 lighttpd 구동을 위한 설정이 있습니다.
-  * ***/etc/sysconfig/lighttpd-monitor*** 는 ***/usr/sbin/lighttpd-monitor*** 명령을 실행하는데 필요한 옵션값들이 설정 되어 있습니다. 이에 관련해서는 [웹서버 모니터링](chapter3-6-web-monitor.md) 문서에서 기술 합니다.
+  * ***/etc/sysconfig/lighttpd-monitor*** 는 ***/usr/sbin/lighttpd-monitor*** 명령을 실행하는데 필요한 옵션값들이 설정 되어 있습니다. 이에 관련해서는 [3.5 Web Monitor agent](chapter3-5-web-agent.md) 문서에서 기술 합니다.
 
 
 ##3. SSL 설정 및 HTTP2 protocol 지원
