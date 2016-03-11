@@ -29,7 +29,7 @@ NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 
 
 안녕 리눅스 3은 설치시에 기본적으로 *Stratum 2* 또는 *Stratum 3*으로 구성된 *CentOS NTP pool*에 등록되어 있는 외부 Time server로 부터 시간을 동기화 하도록 되어 있습니다. 즉, 단순히 서버의 시간 동기화를 위해서라면, 별도의 설정을 건드릴 필요 없이 ***ntpd***만 실행을 시켜 주면 된다는 의미입니다.
 
-만약, ***ntpd***가 설치 되어 있지 않은 상태에서, 설치 후 시간 동기화를 하고 싶다면 다음 명령을 이용할 수 있습니다.
+안녕 리눅스 3은 시간 동기화를 위하여 기본으로 ***chrony***를 제공합니다. 그러므로 ***NTP***를 사용하기 위해서는 ***chrony***를 제거한 후, ***NTP***를 설치해 주어야 합니다.
 
 ```bash
 [root@an3 ~]$ yum remove chrony     # chrony package가 설치 되어 있다면 삭제하고 설치해야 함
@@ -92,6 +92,14 @@ server 3.centos.pool.ntp.org iburst
 * Time Server 1과 2는 Stratum 3로 구성
 
 Time server를 운영하는 데 있어 사용되는 resource는 극히 적습니다. 실제로 Stratum 2 서버들 중에는 현재 486 machine으로 동작하는 경우도 있습니다. 그러므로, DNS나 DHCP 서버에 Time server 설정을 하는 것을 권장 합니다.
+
+안녕 리눅스 3은 시간 동기화를 위하여 기본으로 ***chrony***를 제공합니다. 그러므로 ***NTP***를 사용하기 위해서는 ***chrony***를 제거한 후, ***NTP***를 설치해 주어야 합니다.
+
+```bash
+[root@an3 ~]$ yum remove chrony     # chrony package가 설치 되어 있다면 삭제하고 설치해야 함
+[root@an3 ~]$ service ntpd enable   # booting 시에 구동
+[root@an3 ~]$ service ntpd restart  # ntpd 시작
+```
 
 ###3.1 /etc/ntp/ntp.conf
 
