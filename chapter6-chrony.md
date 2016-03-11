@@ -118,7 +118,31 @@ local stratum 3
 
 위와 같이 설정이 되어 있으면 됩니다. (기본 설정 파일에서 ***allow***와 ***local***만 추가가 됩니다.)
 
-###3.2 daemon 구동 및 서비스 확인
+###3.2 방화벽 설정
+
+방화벽이나 subnet 구간에 switch ACL이 있다면 time server 1(10.10.0.1)과 time server 2(10.10.0.2)의 UDP 123번 포트를 open 해 주어야 합니다.
+
+time server에 oops-firewall이 실행 되고 있다면 ***/etc/oops-firewall/filter.conf***의 ***UDP_ALLOWPORT***에 *123*을 추가해 주십시오.
+
+```bash
+[root@an3 ~]$ cat /etc/oops-firewall/filter.conf
+  ** 상략 **
+###########################################################################
+# UDP configuration
+###########################################################################
+#
+# Port configuration to open for all connections
+#
+# RULE:
+#       DESTINATION_PORT[:STATE]
+#
+UDP_ALLOWPORT = 123
+  ** 하략 **
+[root@an3 ~]$ oops-frewall -v
+[root@an3 ~]$
+```
+
+###3.3 daemon 구동 및 서비스 확인
 
 ```bash
 [root@an3 ~]$ service chronyd restart
@@ -143,8 +167,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^* 114.207.245.166               2   6    77    14  +1656us[+1597us] +/-   41ms
 ```
 
-###3.3 client 설정
-####3.3.1 /etc/chrony/chrony.conf
+
+
+###3.4 client 설정
+####3.4.1 /etc/chrony/chrony.conf
 
 client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 time server 2를 지정해 주면 되며, 그 외에는 수정할 필요가 없습니다.
 
@@ -155,4 +181,27 @@ client 설정에서는 ***server*** 지시자만 새로 만든 time server 1과 
 #server 3.centos.pool.ntp.org iburst
 server 10.10.0.1 iburst
 server 10.10.0.2 iburst
+```
+
+####3.3.2 chrony 재시작 및 확인
+
+***chrony***를 재시작 한 후, ***chronyc***를 이용하여 확인을 합니다.
+
+```bash
+[root@an3 ~]$ service chronyd restart
+[root@an3 ~]$ chronyc sources -v
+210 Number of sources = 4
+
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
+| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+||                                \     |          |  zzzz = estimated error.
+||                                 |    |           \
+MS Name/IP address         Stratum Poll Reach LastRx Last sample
+===============================================================================
+^* 10.0.0.1                      3   6    77    14  +1656us[+1597us] +/-   3ms
+^+ 10.10.0.2                     2   6    77    12  -2475us[-2475us] +/-   3ms
 ```
