@@ -10,5 +10,5 @@
 
 이 섹션에서는 *ntp*와 *chrony* 모두에 대해서 기술을 합니다.
 
-1. [Chonry 설정](chapter6-chrony)
-1. [NTP 설정](chapter6-ntp)
+1. [Chonry 설정](chapter6-chrony.md)
+1. [NTP 설정](chapter6-ntp.md)
