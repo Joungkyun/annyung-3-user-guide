@@ -231,8 +231,8 @@ exclude=tomcat*
 
 또한, 제작된 RPM은 Oracle에서 제공하는 JDK 8 rpm을 받아서 <u>file path및 Provides 정보</u>를 ***CentOS JVM*** 환경과 동일하게 re-packaing 한 것이므로, <u>binary 수준에서는 Oracle에서 제공하는 ***binary(rpm)***와 동일합니다.</u>
 
-> Warning!! 
-이 방법을 사용하는 것은 <u>[Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) 에 동의</u> 한 것으로 간주 합니다. Oracle JDK를 사용함으로서 발생할 수 있는 어떠한 문제에 대해서도 안녕 리눅스에서는 책임을 지지 않으니, 문제가 될 소지를 피하기 위하여 License를 꼭 읽어 보신 후, 진행하십시오.
+> ***Warning!!***<br>
+> 이 방법을 사용하는 것은 <u>[Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) 에 동의</u> 한 것으로 간주 합니다. Oracle JDK를 사용함으로서 발생할 수 있는 어떠한 문제에 대해서도 안녕 리눅스에서는 책임을 지지 않으니, 문제가 될 소지를 피하기 위하여 License를 꼭 읽어 보신 후, 진행하십시오.
 
 다음의 작업으로 oracle-jdk package를 생성할 수 있으며, build 시간은 대략 2~5분 정도 소요됩니다.
 
