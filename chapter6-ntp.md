@@ -33,7 +33,7 @@ NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 
 
 ```bash
 [root@an3 ~]$ yum remove chrony     # chrony package가 설치 되어 있다면 삭제하고 설치해야 함
-[root@an3 ~]$ service ntpd enable   # booting 시에 구동
+[root@an3 ~]$ service ntpd enable   # booting 시에 구동 또는 'ntsysv-systemd' 명령을 실행해서 ntpd 체크
 [root@an3 ~]$ service ntpd restart  # ntpd 시작
 ```
 
