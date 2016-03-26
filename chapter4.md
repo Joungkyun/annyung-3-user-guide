@@ -193,10 +193,8 @@ exclude=java-1.8.0-openjdk*
 5. 기본 DocumentRoot : */var/lib/tomcat/webapps* 또는 */usr/share/tomcat/webapps*
 6. tomcat 구동
 ```bash
-[root@an3 ~]$ service tomcat [eanble|disable]              // 부팅시 구동 여부
-[root@an3 ~]$ # 또는
-[root@an3 ~]$ ntsysv-systemd
-[root@an3 ~]$ service tomcat [start|stop|restart|status]   // tomcat 구동
+[root@an3 ~]$ service tomcat [eanble|disable]            // 부팅시 구동 여부. 또는 ntsysv-systemd 명령 이용
+[root@an3 ~]$ service tomcat [start|stop|restart|status] // tomcat 구동
 ```
 
 ***Tomcat 7***을 사용하기를 원한다면 ***/etc/yum.repos.d/AnNyung.repo***의 ***AN:base*** repository에 tomcat을 exclude 시키십시오.
