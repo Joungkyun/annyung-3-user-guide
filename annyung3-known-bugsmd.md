@@ -12,3 +12,9 @@
   * ***AuthType***을 *digest*로 설정했을 경우 setfault 발생
   * 역시 우선 순위가 낮아서 추후 살펴볼 예정
   * ***AuthType***을 *Basic*으로 사용할 것!
+
+## 3. php-fpm, php56-fpm
+
+  * reload(-USR2 signual) 시에 process가 죽어 버림.
+    * ```service php-fpm reload```
+    * ```systemctl reload php-fpm```
