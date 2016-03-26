@@ -38,9 +38,7 @@ NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 
 ```bash
 [root@an3 ~]$ yum remove ntp          # ntp package가 설치 되어 있다면 삭제해야 함
 [root@an3 ~]$ yum install chrony
-[root@an3 ~]$ service chronyd enable  # booting 시에 구동
-[root@an3 ~]$ # 또는
-[root@an3 ~]$ ntsysv-systemd
+[root@an3 ~]$ service chronyd enable  # booting 시에 구동. 또는 'ntsysv-systemd' 명령을 실행해서 chronyd 체크
 [root@an3 ~]$ service chronyd restart # chronyd 시작
 ```
 
