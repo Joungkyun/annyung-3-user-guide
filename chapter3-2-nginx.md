@@ -182,10 +182,14 @@ server {
   * 부팅시 nginx 시작하도록 설정
   ```bash
   [root@an3 ~]$ service nginx enable
+  [root@an3 ~]$ # 또는
+  [root@an3 ~]$ ntsysv-systemd
   ```
   * 부팅시 nginx 시작 하지 않도록 설정
   ```bash
   [root@an3 ~]$ service nginx disable
+  [root@an3 ~]$ # 또는
+  [root@an3 ~]$ ntsysv-systemd
   ```
   * nginx 시작
   ```bash
