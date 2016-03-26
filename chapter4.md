@@ -194,6 +194,8 @@ exclude=java-1.8.0-openjdk*
 6. tomcat 구동
 ```bash
 [root@an3 ~]$ service tomcat [eanble|disable]              // 부팅시 구동 여부
+[root@an3 ~]$ # 또는
+[root@an3 ~]$ ntsysv-systemd
 [root@an3 ~]$ service tomcat [start|stop|restart|status]   // tomcat 구동
 ```
 
