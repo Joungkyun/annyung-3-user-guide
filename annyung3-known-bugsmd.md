@@ -15,6 +15,6 @@
 
 ## 3. php-fpm, php56-fpm
 
-  * reload(-USR2 signual) 시에 process가 죽어 버림.
+  * reload(-USR2 signal) 시에 process가 죽어 버림.
     * ```service php-fpm reload```
     * ```systemctl reload php-fpm```
