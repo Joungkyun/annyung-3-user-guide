@@ -39,6 +39,8 @@ NTP protocol과 서비스에 대한 자세한 설명은 http://time.ewha.or.kr/ 
 [root@an3 ~]$ yum remove ntp          # ntp package가 설치 되어 있다면 삭제해야 함
 [root@an3 ~]$ yum install chrony
 [root@an3 ~]$ service chronyd enable  # booting 시에 구동
+[root@an3 ~]$ # 또는
+[root@an3 ~]$ ntsysv-systemd
 [root@an3 ~]$ service chronyd restart # chronyd 시작
 ```
 
@@ -60,6 +62,8 @@ server 3.centos.pool.ntp.org iburst
 [root@an3 ~]$ service chronyd disable
 [root@an3 ~]$ yum install ntpdate
 [root@ane ~]$ service ntpdate enable
+[root@an3 ~]$ # 또는
+[root@an3 ~]$ ntsysv-systemd
 ```
 
 위와 같이 명령을 실행을 하면, chronyd는 구동하지 않으며, booting 시에 ***ntpdate***로 시간 동기화를 하게 됩니다. 주의할 점은 부팅시에 ntpdate는 /etc/chrony/chrony.conf 또는 /etc/ntp/ntp.conf의 ***server***로 등록되어진 time server로 부터 동기화를 하기 때문에 chonry.conf 또는 ntp.conf에 time server가 설정 되어 있어야 합니다. (chrony.conf가 ntp.conf보다 우선 합니다.)
