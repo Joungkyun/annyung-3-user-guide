@@ -561,13 +561,13 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
   ```bash
   [root@an3 ~]$ service php-fpm enable
   [root@an3 ~]$ # 또는
-  [root@an3 ~]$ ntsysv-system
+  [root@an3 ~]$ ntsysv-systemd
   ```
   * 부팅시 php-fpm 시작 하지 않도록 설정
   ```bash
   [root@an3 ~]$ service php-fpm disable
   [root@an3 ~]$ # 또는
-  [root@an3 ~]$ ntsysv-system
+  [root@an3 ~]$ ntsysv-systemd
   ```
   * php-fpm 시작
   ```bash
