@@ -231,10 +231,14 @@ LoadModule  userdir_module      modules/mod_userdir.so
 * 부팅시 apache 시작하도록 설정
   ```bash
   [root@an3 ~]$ service httpd enable
+  [root@an3 ~]$ # 또는
+  [root@an3 ~]$ ntsysv-systemd
   ```
 * 부팅시 apache 시작 하지 않도록 설정
   ```bash
   [root@an3 ~]$ service httpd disable
+  [root@an3 ~]$ # 또는
+  [root@an3 ~]$ ntsysv-systemd
   ```
 * apache 시작
   ```bash
