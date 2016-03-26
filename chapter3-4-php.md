@@ -276,7 +276,7 @@ function upload_error_check ($upload_error) {
 
 foreach ( $_FILES['userfile'['error'] => $upload_error_code ) {
     if ( ($err = upload_error_cehck ($upload_error_code)) != null ) {
-        printf ("Upload Failed : %s\n", $msg);
+        printf ("Upload Failed : %s\n", $err);
         exit;
     }
 }
