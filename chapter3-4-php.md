@@ -84,7 +84,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
 
 이 기능이 만들어진 이유는 2004년 경 phpBB highlight bug로 KLDP system이 shell injection을 당하여 서버 전체의 데이터가 삭제된 사건이 있었으며, 그 이후로 방치하기 쉬운 시스템의 보안을 어떻게 향상시킬수 있을까 고민하면서 만들어진 기능 입니다. (https://kldp.org/node/45576 참조)
 
-즉, 이 기능이 만들어진 이유는 PHP의 shell injection 공격을 원천적으로 방지하기 위한 목적입니다. 대부분의 shell injectiondl 이제는 무지가 아니라 코딩 실수에 의하여 발생합니다. 이 패치는 이런 코딩 실수에 의한 injectioin hole을 원천적으로 방지해 줍니다.
+즉, 이 기능이 만들어진 이유는 PHP의 shell injection 공격을 원천적으로 방지하기 위한 목적입니다. 대부분의 shell injection hole은 이제는 무지가 아니라 거의 코딩 실수에 의하여 발생합니다. 이 패치는 이런 코딩 실수에 의한 injection hole을 원천적으로 방지해 줍니다.
 
 또한, 이 기능 때문에 코드가 수정될 필요도 없습니다. 단지 system 계열 함수에서 사용하는 명령어만 exec_dir에 soft link 해 주시면 됩니다.
 
@@ -134,7 +134,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
       ***find*** 명령처럼 argument option에서 command를 수행하는 경우는 처리하지 못함.
     
     ```bash
-      system ('find . -type -f -exec rm -f {} \;`);                  // 실제 코드
+      system ('find . -type -f -exec rm -f {} \;');                  // 실제 코드
       system ('/var/lib/php/bin/find . -type -f -exec rm -f {} \;'); // PHP 내부에서 치환되어 수행되는 코드
     ```
 
@@ -175,7 +175,7 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
   
   ```php
   <?php
-  system ('/path/upload/attack-sample.jpg');
+  include '/path/upload/attack-sample.jpg';
   ?>
   ```
   
