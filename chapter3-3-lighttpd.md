@@ -195,10 +195,14 @@
   * 부팅시 lighttpd 시작하도록 설정
   ```bash
   [root@an3 ~]$ service lighttpd enable
+  [root@an3 ~]$ # 또는
+  [root@an3 ~]$ ntsysv-systemd
   ```
   * 부팅시 lighttpd 시작 하지 않도록 설정
   ```bash
   [root@an3 ~]$ service lighttpd disable
+  [root@an3 ~]$ # 또는
+  [root@an3 ~]$ ntsysv-systemd
   ```
   * lighttpd 시작
   ```bash
