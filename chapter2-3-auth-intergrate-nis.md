@@ -400,7 +400,7 @@ have just created will be used, instead of the /etc ASCII files.
 
 ###4.6 map 동기화 crontabe 설정
 
-NIS databse MAP 동기화를 위하여 다음의 설정을 합니다.
+NIS databse MAP 동기화를 위하여 다음의 설정을 합니다. 이 cronjob은 master에서 업데이트가 된 시점에서 slave가 다운이 되어서 업데이트가 안된 경우라도 대부분의 NIS map들이 최근 것으로 update 되는 것을 보장 합니다.
 
 ```bash
 [root@an3 ~]$ cat > /etc/cron.d/yp-slave <<EOF
