@@ -15,4 +15,8 @@
   1. [login 가능한 account 제한](chapter2-2-pam-control-1.md)
   2. [login account chroot](chapter2-2-pam-control-2.md)
   3. [Google OPT를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
+3. [인증 통합 (Authentification/Authorization Intergrate)](chapter2-2-pam-control.md)
+  1. Openldap
+  2. NIS
+  3. Active Directory
 
