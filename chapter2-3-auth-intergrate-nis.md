@@ -49,9 +49,87 @@ NIS domain이라는 것은 NIS database 이름 정도라고 생각을 하면 됩
 
 ###3.3.1 passwd/group list 파일 준비
 
+NIS에서 관리할 passwd/group 파일은 */etc/passwd*와 */etc/group* 과 동일한 format 을 사용합니다.
+
 ```bash
 [root@an3 ~]$ mkdir -p /var/yp/etc
+[root@an3 ~]$ getpasswd -m md5
+New Password:
+Retype New Password:
+$1$p93nsknZ$WRwO/47kxt7dheszvNliy.
+[root@an3 ~]$ echo "USERID:$1$p93nsknZ$WRwO/47kxt7dheszvNliy.:10000:10000:REAL USER NAME:/home/admin/oops:/bin/bash" >> /var/yp/etc/passwd
+[[root@an3 ~]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
 ```
+
+연동할 시스템 중에 오래된 OS가 있다면 암호는 ***md5*** 방식으로 선택 합니다. 최신의 OS들로만 구성되어 있다면 sha512를 선택하는 것을 권장합니다.
+
+안녕 리눅스에서 제공하는 ***genpasswd*** 프로그램은 md5, sha256, sha512 방식의 암호 문자열을 생성할 수 있습니다.
+
+###3.3.2 /var/yp/Makefile 설정
+
+***/var/yp/Makefile*** 중에서 다음의 설정들을 수정합니다.
+
+```bash
+# slave NIS를 구성할 것이라면 값을 true로 변경 합니다. 기본값은 false 입니다.
+# slave NIS를 구성할 것이 아니라면 false로 나두십시오.
+NOPUSH=true
+
+# 인증 통합시에 system uid/gid와 충돌할 경우가 발생할 수 있습니다. 그러므로
+# 충분한 값을 주도록 합니다. 대략 10000번 이상대를 사용하면 거의 충돌할 일이
+# 없습니다.
+MINUID=10000
+MINGID=10000
+
+# system의 passwd/group 을 사용하지 않을 것이기 때문에, false 로 설정 합니다.
+MERGE_PASSWD=false
+MERGE_GROUP=false
+
+# system의 passswd/group을 사용하지 않을 것이기 때문에, 위에서 작업한 디렉토리로
+# passwd/group file이 위치한 경로를 변경해 줍니다.
+YPPWDDIR = /var/yp/etc
+
+# If you don't want some of these maps built, feel free to comment
+# them out from this list.
+# passwd/group 만 다루기 때문에 생성할 DB를 제한 합니다. (제한하지 않으면 설정
+# 누락으로 DB 생성 실패 되는 경우가 있습니다.) 여기서는 기존의 설정에서
+# ***netid*** 만 제거 하였습니다.
+all:  passwd group hosts rpc services protocols mail \
+    # netgrp shadow publickey networks ethers bootparams printcap netid \
+    # amd.home auto.master auto.home auto.local passwd.adjunct \
+    # timezone locale netmasks
+```
+###3.3.3 보안 설정
+
+NIS 질의를 할 수 있는 네트워크 대역을 제한 합니다. 형식은 ***NETMASK NETWORK*** 형식으로 설정 합니다. 다음의 설정은 127.0.0.0/8 과 192.168.0.0/24 네트워크에서 NIS 질의에 응답하도록 설정한 것입니다.
+
+```bash
+[root@an3 ~]$ cat > /var/yp/securenets <<EOF
+255.0.0.0 127.0.0.0
+255.255.255.0 192.168.0.0
+EOF
+[root@an3 ~]$
+```
+
+방화벽을 사용한다면 ypserv와 ypxfrd의 포트를 고정 시키고 port를 열어주어야 합니다.
+
+```bash
+[root@an3 ~]$ cat >> /etc/sysconfig/network <<EOF
+YPSERV_ARGS="-p 834"
+YPXFRD_ARGS="-p 835"
+EOF
+[root@an3 ~]$ 
+[root@an3 ~]$ cat /etc/oops-firewall/filter.conf
+  ... 상략 ...
+# RPCBIND tcp/udp 111
+# YPSERV tcp/udp 834
+# YPXFRD tcp/udp 835
+TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
+UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
+  ... 하략 ...
+```
+
+
+
 
 
 
