@@ -15,7 +15,10 @@
        * [login 가능한 account 제한](chapter2-2-pam-control-1.md)
        * [login account chroot](chapter2-2-pam-control-2.md)
        * [Google OTP를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
-   * 인증 통합 (Authentificate/Authorization Ingertrate)
+   * [인증 통합 (Authentification/Authorization Intergrate)](chapter2-3-auth-intergrate.md)
+     * Openldap
+     * NIS
+     * Active Directory
 * [Chapter 3. Web control](chapter3.md)
    * [httpd](chapter3-1-httpd.md)
    * [nginx](chapter3-2-nginx.md)
