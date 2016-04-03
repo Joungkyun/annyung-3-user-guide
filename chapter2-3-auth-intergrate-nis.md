@@ -98,6 +98,9 @@ EOFF
 [root@an3 ~]$ chmod 700 /var/yp/etc/adduser
 ```
 
+***adduser*** script는 기본을 MD5 방식의 암호를 생성합니다. 만약 연동할 시스템들이 sha512를 지원하는 버전으로만 구성이 되어 있다면 (예를 들어 CentOS/RHEL 5는 sha512를 지원하지 않습니다.), adduser script의 METHOD 변수 값을 ***sha512***로 수정 하는 것을 권장 합니다.
+
+
 다음 passwd, group, shadow 파일을 생성 합니다.
 
 ```bash
@@ -113,9 +116,6 @@ USERID:$1$pAhn0Osq$hY4yCJs4mvBOTg6sxmmjM/:16894:0:99999:7:::
 [root@an3 etc]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
 ```
 
-연동할 시스템 중에 오래된 OS가 있다면 암호는 ***md5*** 방식으로 선택 합니다. 최신의 OS들로만 구성되어 있다면 sha512를 선택하는 것을 권장합니다. (adduser script의 METHOD 변수를 수정합니다.)
-
-안녕 리눅스에서 제공하는 ***genpasswd*** 프로그램은 md5, sha256, sha512 방식의 암호 문자열을 생성할 수 있습니다.
 
 ###3.3.2 /var/yp/Makefile 설정
 
