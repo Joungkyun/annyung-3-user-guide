@@ -307,33 +307,31 @@ EOF
 [root@an3 ~]$
 ```
 
-방화벽을 사용한다면 ypserv와 ypxfrd, yppasswdd의 포트를 고정 시키고 port를 열어주어야 합니다.
+방화벽을 사용한다면 ypserv의 포트를 고정 시키고 port를 열어주어야 합니다.
 
 ```bash
 [root@an3 ~]$ cat >> /etc/sysconfig/network <<EOF
 YPSERV_ARGS="-p 834"
-YPXFRD_ARGS="-p 835"
 EOF
 [root@an3 ~]$ 
 [root@an3 ~]$ cat /etc/oops-firewall/filter.conf
   ... 상략 ...
 # RPCBIND tcp/udp 111
 # YPSERV tcp/udp 834
-# YPXFRD tcp/udp 835
-# YPPASSWDD udp/836
-TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
-UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
+TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834
+UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834
   ... 하략 ...
 ```
 
 ###4.4 Daemon 실행
 
+slave server에서는 ***ypxfrd***와 ***yppasswdd***는 구동하지 않습니다.
+
 ```bash
 [root@an3 ~]$ service rpcbind start
 [root@an3 ~]$ service ypserv start
-[root@an3 ~]$ service ypxfrd start
 [root@an3 ~]$ # booting 시에 시작 되도록 설정
-[root@an3 ~]$ systemctl enable rpcbind ypbind ypxfrd
+[root@an3 ~]$ systemctl enable rpcbind ypbind
 ```
 
 ###4.5 Slave database 초기화
