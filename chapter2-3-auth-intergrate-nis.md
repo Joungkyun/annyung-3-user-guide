@@ -226,7 +226,7 @@ At this point, we have to construct a list of the hosts which will run NIS
 servers.  fork.kldp.org is in the list of NIS server hosts.  Please continue to add
 the names for the other hosts, one per line.  When you are done with the
 list, type a <control D>.
-        next host to add:  nis.domain.com
+        next host to add:  nis1.domain.com
         next host to add:  <종료를 하기 위하여 CTRL-D 를 누릅니다.>
 The current list of NIS servers looks like this:
 
@@ -254,7 +254,7 @@ gmake[1]: Leaving directory `/var/yp/OOPS-NIS'
 
 fork.kldp.org has been set up as a NIS master server.
 
-Now you can run ypinit -s fork.kldp.org on all slave server.
+Now you can run ypinit -s nis1.domain.com on all slave server.
 [root@an3 ~]$
 ```
 
@@ -278,6 +278,8 @@ gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
 
 ##4. NIS slave 설정
 
+master server는 ***nis1.domain.com***, slave server는 ***nis2.domain.com***으로 가정을 합니다.
+
 ###4.1 package 설치
 
 ```bash
@@ -286,7 +288,7 @@ gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
 
 ###4.2 NIS domain 설정
 
-NIS master에서 설정했던 NIS DOMIN을 동일하게 설정을 합니다.
+NIS master에서 설정했던 NIS DOMAIN을 동일하게 설정을 합니다.
 
 ```bash
 [root@an3 ~]$ ypdomainname OOPS-NIS
@@ -330,9 +332,8 @@ UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
 [root@an3 ~]$ service rpcbind start
 [root@an3 ~]$ service ypserv start
 [root@an3 ~]$ service ypxfrd start
-[root@an3 ~]$ service yppasswdd start
 [root@an3 ~]$ # booting 시에 시작 되도록 설정
-[root@an3 ~]$ systemctl enable rpcbind ypbind ypxfrd yppasswdd
+[root@an3 ~]$ systemctl enable rpcbind ypbind ypxfrd
 ```
 
 ###4.5 Slave database 초기화
@@ -340,8 +341,8 @@ UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
 ***/usr/lib64/yp/ypinit***를 이용하여 초기화를 합니다.
 
 ```bash
-[root@an3 ~]$ /usr/lib64/yp/ypinit -s nis.domain.com
-We will need a few minutes to copy the data from nis.domain.com.
+[root@an3 ~]$ /usr/lib64/yp/ypinit -s nis1.domain.com
+We will need a few minutes to copy the data from nis1.domain.com.
 Transferring rpc.bynumber...
 Trying ypxfrd ... success
 
@@ -394,6 +395,22 @@ If there were warnings, please figure out what went wrong, and fix it.
 At this point, make sure that /etc/passwd and /etc/group have
 been edited so that when the NIS is activated, the data bases you
 have just created will be used, instead of the /etc ASCII files.
+[root@an3 ~]$
+```
+
+
+###4.6 Slave server 등록
+
+master server (nis1.domain.com)에서 slave server를 등록합니다.
+
+```bash
+[root@an3 ~]$ hostname
+nis1.domain.com
+[root@an3 ~]$ echo "nis2.domain.com" >> /var/yp/ypservers
+[root@an3 ~]$ cat /var/yp/ypservers
+nis1.domain.com
+nis2.domain.com
+[root@an3 ~]$ service ypserv restart
 [root@an3 ~]$
 ```
 
