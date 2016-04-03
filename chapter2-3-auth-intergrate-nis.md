@@ -80,11 +80,13 @@ accname="\$2"
 pass=\$(genpasswd -m \${METHOD})
 [ \$? -eq 1 ] && exit 1
 
-maxuid=\$(cat \${ETCDIR}/passwd | awk -F':' '{print \$3}' | sort -r | head -n1)
+maxuid=\$(cat \${ETCDIR}/passwd | grep -v "^#" | awk -F':' '{print \$3}' | sort -r | head -n1)
 uid=\$[ \${maxuid} + 1 ]
+# passwd entry가 한개도 없을 경우 초기화
+[ $uid -eq 1 ] && uid=10000
 
 cat >> \${ETCDIR}/passwd <<EOF
-\${account}:x:\${uid}:10000:\${accname}:/home/staff/\${account}:/bin/bash
+\${account}:x:\${uid}:10000:\${accname}:/home/\${account}:/bin/bash
 EOF
 
 chgdate="\$[ \$(date +"%s") / 86400 ]"; echo \$a
@@ -96,16 +98,22 @@ EOFF
 [root@an3 ~]$ chmod 700 /var/yp/etc/adduser
 ```
 
+다음 passwd, group, shadow 파일을 생성 합니다.
+
 ```bash
-[root@an3 ~]$ mkdir -p /var/yp/etc
 [root@an3 ~]$ cd /var/yp/etc
 [root@an3 etc]$ ./adduser USERID "USER NAME"
 New Password:
 Retype New Password:
-[[root@an3 ~]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
+
+[root@an3 etc]$ cat /var/yp/etc/passwd
+USERID:x:10000:10000:USER NAME:/home/USERID:/bin/bash
+[root@an3 etc]$ cat /var/yp/etc/shadow
+USERID:$1$pAhn0Osq$hY4yCJs4mvBOTg6sxmmjM/:16894:0:99999:7:::
+[root@an3 etc]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
 ```
 
-연동할 시스템 중에 오래된 OS가 있다면 암호는 ***md5*** 방식으로 선택 합니다. 최신의 OS들로만 구성되어 있다면 sha512를 선택하는 것을 권장합니다.
+연동할 시스템 중에 오래된 OS가 있다면 암호는 ***md5*** 방식으로 선택 합니다. 최신의 OS들로만 구성되어 있다면 sha512를 선택하는 것을 권장합니다. (adduser script의 METHOD 변수를 수정합니다.)
 
 안녕 리눅스에서 제공하는 ***genpasswd*** 프로그램은 md5, sha256, sha512 방식의 암호 문자열을 생성할 수 있습니다.
 
