@@ -65,7 +65,7 @@ $1$p93nsknZ$WRwO/47kxt7dheszvNliy.
 
 안녕 리눅스에서 제공하는 ***genpasswd*** 프로그램은 md5, sha256, sha512 방식의 암호 문자열을 생성할 수 있습니다.
 
-###3.3.2 /var/yp/Makefile 및 /etc/sysconfig/yppasswdd 설정
+###3.3.2 /var/yp/Makefile 설정
 
 ***/var/yp/Makefile*** 중에서 다음의 설정들을 수정합니다.
 
@@ -99,7 +99,9 @@ all:  passwd group hosts rpc services protocols mail \
     # timezone locale netmasks
 ```
 
-다음, ***/etc/sysconfig/yppasswd*** 를 다음과 같이 수정 합니다.
+###3.3.3 /etc/sysconfig/yppasswdd 설정
+
+***/etc/sysconfig/yppasswd*** 를 다음과 같이 수정 합니다.
 
 ```bash
 [root@an3 ~]$ cat /etc/sysconfig/yppasswd
@@ -117,7 +119,7 @@ YPPASSWDD_ARGS="--port 836"
 ```
 
 
-###3.3.3 보안 설정
+###3.4 보안 설정
 
 NIS 질의를 할 수 있는 네트워크 대역을 제한 합니다. 형식은 ***NETMASK NETWORK*** 형식으로 설정 합니다. 다음의 설정은 127.0.0.0/8 과 192.168.0.0/24 네트워크에서 NIS 질의에 응답하도록 설정한 것입니다.
 
@@ -148,21 +150,18 @@ UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
   ... 하략 ...
 ```
 
-###3.3.3.4 Daemon 실행
+###3.5 Daemon 실행
 
 ```bash
 [root@an3 ~]$ service rpcbind start
-[root@an3 ~]$ service ypbind start
+[root@an3 ~]$ service ypserv start
 [root@an3 ~]$ service ypxfrd start
 [root@an3 ~]$ service yppasswdd start
 [root@an3 ~]$ # booting 시에 시작 되도록 설정
-[root@an3 ~]$ systemctl enable rpcbind
-[root@an3 ~]$ systemctl enable ypbind
-[root@an3 ~]$ systemctl enable ypxfrd
-[root@an3 ~]$ systemctl enable yppasswdd
+[root@an3 ~]$ systemctl enable rpcbind ypbind ypxfrd yppasswdd
 ```
 
-###3.3.3.5 Database 초기화
+###3.6 Database 초기화
 
 daemon을 실행 했으면 database를 초기화 합니다.
 
@@ -205,6 +204,8 @@ Now you can run ypinit -s fork.kldp.org on all slave server.
 [root@an3 ~]$
 ```
 
+##3.7 database update
+
 ***ypinit*** 명령은, 최초에 한번만 실행을 해 주면 됩니다. 그 이후, passwd (/var/yp/etc/passwd)나 group (/var/yp/etc/group) 파일을 수정 한 후에는 ***/var/yp*** 에서 *make* 명령을 실행하면 database가 갱신이 됩니다.
 
 ```bash
@@ -221,6 +222,8 @@ gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
 ```
 
 ##4. NIS slave 설정
+
+###4.1
 
 ##5. NIS client 설정
 
