@@ -142,6 +142,7 @@ EOF
 # RPCBIND tcp/udp 111
 # YPSERV tcp/udp 834
 # YPXFRD tcp/udp 835
+# YPPASSWDD udp/836
 TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
 UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
   ... 하략 ...
@@ -161,8 +162,63 @@ UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
 [root@an3 ~]$ systemctl enable yppasswdd
 ```
 
+###3.3.3.5 Database 초기화
 
+daemon을 실행 했으면 database를 초기화 합니다.
 
+```bash
+[root@fork yp]# /usr/lib64/yp/ypinit -m
+
+At this point, we have to construct a list of the hosts which will run NIS
+servers.  fork.kldp.org is in the list of NIS server hosts.  Please continue to add
+the names for the other hosts, one per line.  When you are done with the
+list, type a <control D>.
+        next host to add:  nis.domain.com
+        next host to add:  <종료를 하기 위하여 CTRL-D 를 누릅니다.>
+The current list of NIS servers looks like this:
+
+nisdomain.com
+
+Is this correct?  [y/n: y]  y
+We need a few minutes to build the databases...
+Building /var/yp/OOPS-NIS/ypservers...
+Running /var/yp/Makefile...
+gmake[1]: Entering directory `/var/yp/OOPS-NIS'
+Updating passwd.byname...
+Updating passwd.byuid...
+Updating group.byname...
+Updating group.bygid...
+Updating hosts.byname...
+Updating hosts.byaddr...
+Updating rpc.byname...
+Updating rpc.bynumber...
+Updating services.byname...
+Updating services.byservicename...
+Updating protocols.bynumber...
+Updating protocols.byname...
+Updating mail.aliases...
+gmake[1]: Leaving directory `/var/yp/OOPS-NIS'
+
+fork.kldp.org has been set up as a NIS master server.
+
+Now you can run ypinit -s fork.kldp.org on all slave server.
+[root@an3 ~]$
+```
+
+***ypinit*** 명령은, 최초에 한번만 실행을 해 주면 됩니다. 그 이후, passwd (/var/yp/etc/passwd)나 group (/var/yp/etc/group) 파일을 수정 한 후에는 ***/var/yp*** 에서 *make* 명령을 실행하면 database가 갱신이 됩니다.
+
+```bash
+[root@an3 ~]$ cd /var/yp
+[root@an3 ~]$ make
+gmake[1]: Entering directory `/var/yp/KLDP-NIS'
+gmake[1]: `ypservers'는 이미 갱신되었습니다.
+gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
+gmake[1]: Entering directory `/var/yp/KLDP-NIS'
+Updating passwd.byname...
+Updating passwd.byuid...
+gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
+[root@an3 ~]$
+```
 
 
 ##4. NIS slave 설정
