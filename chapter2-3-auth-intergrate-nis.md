@@ -151,9 +151,14 @@ UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
 
 ```bash
 [root@an3 ~]$ service rpcbind start
+[root@an3 ~]$ service ypbind start
 [root@an3 ~]$ service ypxfrd start
 [root@an3 ~]$ service yppasswdd start
-[root@an3 ~]$
+[root@an3 ~]$ # booting 시에 시작 되도록 설정
+[root@an3 ~]$ systemctl enable rpcbind
+[root@an3 ~]$ systemctl enable ypbind
+[root@an3 ~]$ systemctl enable ypxfrd
+[root@an3 ~]$ systemctl enable yppasswdd
 ```
 
 
