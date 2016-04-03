@@ -220,7 +220,6 @@ gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
 [root@an3 ~]$
 ```
 
-
 ##4. NIS slave 설정
 
 ##5. NIS client 설정
