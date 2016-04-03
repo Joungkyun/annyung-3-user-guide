@@ -84,7 +84,7 @@ maxuid=\$(cat \${ETCDIR}/passwd | awk -F':' '{print \$3}' | sort -r | head -n1)
 uid=\$[ \${maxuid} + 1 ]
 
 cat >> \${ETCDIR}/passwd <<EOF
-\${account}:x:\${uid}:1000:\${accname}:/home/staff/\${account}:/bin/bash
+\${account}:x:\${uid}:10000:\${accname}:/home/staff/\${account}:/bin/bash
 EOF
 
 chgdate="\$[ \$(date +"%s") / 86400 ]"; echo \$a
@@ -94,6 +94,7 @@ cat >> \${ETCDIR}/shadow <<EOF
 EOF
 EOFF
 [root@an3 ~]$ chmod 700 /var/yp/etc/adduser
+```
 
 ```bash
 [root@an3 ~]$ mkdir -p /var/yp/etc
