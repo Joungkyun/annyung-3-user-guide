@@ -135,6 +135,8 @@ $HTTP["url"] == "/req_auth" {
 
 ***mod_auth_nis*** 모듈을 이용하여 NIS 인증이 가능 합니다. ***mod_auth_nis***는 PAM을 이용하지 않고 설정된 NIS entry를 이용하기 때문에 local account는 인증할 수 없습니다.
 
+lighttpd nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.byname MAP을 사용하지 않아야 합니다. 이는 passwd 리스트의 password entry의 값이 'x'로 되어 있으면 안된다는 의미입니다. 보안상 상당히 좋지 않기 때문에 사용을 권장하지 않습니다.
+
 자세한 사항에 대해서는 [***mod_auth_nis*** 모듈 문서](http://svn.oops.org/wsvn/Lighttpd.mod_auth_nis/trunk/README)를 참조 하십시오.
 
 이 기능을 사용하기 위해서는 ***"mod_auth"*** 모듈이 load 되어야 합니다.
