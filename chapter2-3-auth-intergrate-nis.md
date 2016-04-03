@@ -265,13 +265,13 @@ Now you can run ypinit -s nis1.domain.com on all slave server.
 ```bash
 [root@an3 ~]$ cd /var/yp
 [root@an3 ~]$ make
-gmake[1]: Entering directory `/var/yp/KLDP-NIS'
-gmake[1]: `ypservers'는 이미 갱신되었습니다.
-gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
-gmake[1]: Entering directory `/var/yp/KLDP-NIS'
+gmake[1]: Entering directory '/var/yp/KLDP-NIS'
+gmake[1]: 'ypservers'는 이미 갱신되었습니다.
+gmake[1]: Leaving directory '/var/yp/KLDP-NIS'
+gmake[1]: Entering directory '/var/yp/KLDP-NIS'
 Updating passwd.byname...
 Updating passwd.byuid...
-gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
+gmake[1]: Leaving directory '/var/yp/KLDP-NIS'
 [root@an3 ~]$
 ```
 
@@ -387,7 +387,7 @@ Transferring rpc.byname...
 Trying ypxfrd ... success
 
 
-nis2.domain.com's NIS data base has been set up.
+nis2.domain.com''s NIS data base has been set up.
 If there were warnings, please figure out what went wrong, and fix it.
 
 At this point, make sure that /etc/passwd and /etc/group have
@@ -395,6 +395,9 @@ been edited so that when the NIS is activated, the data bases you
 have just created will be used, instead of the /etc ASCII files.
 [root@an3 ~]$
 ```
+
+master와 client의 architecure가 다를 경우에는 ypxfrd 관련 에러가 발생합니다만, slave 초기화에는 문제는 없으니 참고 하십시오.
+
 
 ###4.6 map 동기화 crontabe 설정
 
