@@ -129,6 +129,8 @@ NOPUSH=true
 # 인증 통합시에 system uid/gid와 충돌할 경우가 발생할 수 있습니다. 그러므로
 # 충분한 값을 주도록 합니다. 대략 10000번 이상대를 사용하면 거의 충돌할 일이
 # 없습니다.
+# 이 값은 passwd나 group 파일에 지정한 uid나 gid보다 작으면 database에 포함시키지
+# 않음을 의미합니다.
 MINUID=10000
 MINGID=10000
 
@@ -144,8 +146,8 @@ YPPWDDIR = /var/yp/etc
 # them out from this list.
 # passwd/group 만 다루기 때문에 생성할 DB를 제한 합니다. (제한하지 않으면 설정
 # 누락으로 DB 생성 실패 되는 경우가 있습니다.) 여기서는 기존의 설정에서
-# ***netid*** 만 제거 하였습니다.
-all:  passwd group hosts rpc services protocols mail \
+# ***shadow*** 추가하고, ***netid***를 제거 하였습니다.
+all:  passwd shadow group hosts rpc services protocols mail \
     # netgrp shadow publickey networks ethers bootparams printcap netid \
     # amd.home auto.master auto.home auto.local passwd.adjunct \
     # timezone locale netmasks
