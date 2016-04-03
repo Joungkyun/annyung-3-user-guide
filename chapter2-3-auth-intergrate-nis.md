@@ -398,8 +398,24 @@ have just created will be used, instead of the /etc ASCII files.
 [root@an3 ~]$
 ```
 
+###4.6 map 동기화 crontabe 설정
 
-###4.6 Slave server 등록
+NIS databse MAP 동기화를 위하여 다음의 설정을 합니다.
+
+```bash
+[root@an3 ~]$ cat > /etc/cron.d/yp-slave <<EOF
+# YP slave cron 작업 설정
+#
+# 필드 설명
+# Minutes Hour Date Month Week User Command
+
+20 *    * * * root /usr/lib64/yp/ypxfr_1perhour >& /dev/null
+40 6    * * * root /usr/lib64/yp/ypxfr_1perday >& /dev/null
+55 6,18 * * * root /usr/lib64/yp/ypxfr_2perday >& /dev/null
+EOF
+```
+
+###4.7 Slave server 등록
 
 master server (nis1.domain.com)에서 slave server를 등록합니다.
 
