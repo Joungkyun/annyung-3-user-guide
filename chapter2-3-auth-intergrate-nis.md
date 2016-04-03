@@ -51,13 +51,56 @@ NIS domain이라는 것은 NIS database 이름 정도라고 생각을 하면 됩
 
 NIS에서 관리할 passwd/group 파일은 */etc/passwd*와 */etc/group* 과 동일한 format 을 사용합니다.
 
+passwd와 shadow 파일을 관리하기 위해서는 다음의 script를 생성합니다.
+
 ```bash
 [root@an3 ~]$ mkdir -p /var/yp/etc
-[root@an3 ~]$ getpasswd -m md5
+[root@an3 ~]$ cat > /var/yp/etc/adduser <<EOFF
+#!/bin/bash
+
+# NIS config directory
+ETCDIR=/var/yp/etc
+
+# crypt method (md5|sha256|sha512)
+METHOD="md5"
+
+usage() {
+    echo "Usage  : \$0 USER_ID [ACCOUNT_NAME]"
+    echo "Example: \$0 john \"John smith\""
+    exit
+}
+
+if [ \$# -lt 1 -o \$# -gt 2 ]; then
+    usage
+fi
+
+account="\$1"
+accname="\$2"
+
+pass=\$(genpasswd -m \${METHOD})
+[ \$? -eq 1 ] && exit 1
+
+maxuid=\$(cat \${ETCDIR}/passwd | awk -F':' '{print \$3}' | sort -r | head -n1)
+uid=\$[ \${maxuid} + 1 ]
+
+cat >> \${ETCDIR}/passwd <<EOF
+\${account}:x:\${uid}:1000:\${accname}:/home/staff/\${account}:/bin/bash
+EOF
+
+chgdate="\$[ \$(date +"%s") / 86400 ]"; echo \$a
+
+cat >> \${ETCDIR}/shadow <<EOF
+\${account}:\${pass}:\${chgdate}:0:99999:7:::
+EOF
+EOFF
+[root@an3 ~]$ chmod 700 /var/yp/etc/adduser
+
+```bash
+[root@an3 ~]$ mkdir -p /var/yp/etc
+[root@an3 ~]$ cd /var/yp/etc
+[root@an3 etc]$ ./adduser USERID "USER NAME"
 New Password:
 Retype New Password:
-$1$p93nsknZ$WRwO/47kxt7dheszvNliy.
-[root@an3 ~]$ echo "USERID:$1$p93nsknZ$WRwO/47kxt7dheszvNliy.:10000:10000:REAL USER NAME:/home/admin/oops:/bin/bash" >> /var/yp/etc/passwd
 [[root@an3 ~]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
 ```
 
