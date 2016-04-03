@@ -58,6 +58,9 @@ passwd와 shadow 파일을 관리하기 위해서는 다음의 script를 생성�
 [root@an3 ~]$ cat > /var/yp/etc/adduser <<EOFF
 #!/bin/bash
 
+# whether use SHADOW system
+USE_SHADOW=1
+
 # NIS config directory
 ETCDIR=/var/yp/etc
 
@@ -85,15 +88,23 @@ uid=\$[ \${maxuid} + 1 ]
 # passwd entry가 한개도 없을 경우 초기화
 [ $uid -eq 1 ] && uid=10000
 
+if [ $USE_SHADOW -eq 1 ]; then
+    pent="x"
+else
+    pent="${pass}"
+fi
+
 cat >> \${ETCDIR}/passwd <<EOF
-\${account}:x:\${uid}:10000:\${accname}:/home/\${account}:/bin/bash
+\${account}:${pent}:\${uid}:10000:\${accname}:/home/\${account}:/bin/bash
 EOF
 
-chgdate="\$[ \$(date +"%s") / 86400 ]"; echo \$a
+if [ $USE_SHADOW -eq 1 ]; then
+  chgdate="\$[ \$(date +"%s") / 86400 ]"; echo \$a
 
-cat >> \${ETCDIR}/shadow <<EOF
+  cat >> \${ETCDIR}/shadow <<EOF
 \${account}:\${pass}:\${chgdate}:0:99999:7:::
 EOF
+endif
 EOFF
 [root@an3 ~]$ chmod 700 /var/yp/etc/adduser
 ```
@@ -399,7 +410,7 @@ have just created will be used, instead of the /etc ASCII files.
 master와 client의 architecure가 다를 경우에는 ypxfrd 관련 에러가 발생합니다만, slave 초기화에는 문제는 없으니 참고 하십시오.
 
 
-###4.6 map 동기화 crontabe 설정
+###4.6 map 동기화 crontab 설정
 
 NIS databse MAP 동기화를 위하여 다음의 설정을 합니다. 이 cronjob은 master에서 업데이트가 된 시점에서 slave가 다운이 되어서 업데이트가 안된 경우라도 대부분의 NIS map들이 최근 것으로 update 되는 것을 보장 합니다.
 
