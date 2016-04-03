@@ -65,7 +65,7 @@ $1$p93nsknZ$WRwO/47kxt7dheszvNliy.
 
 안녕 리눅스에서 제공하는 ***genpasswd*** 프로그램은 md5, sha256, sha512 방식의 암호 문자열을 생성할 수 있습니다.
 
-###3.3.2 /var/yp/Makefile 설정
+###3.3.2 /var/yp/Makefile 및 /etc/sysconfig/yppasswdd 설정
 
 ***/var/yp/Makefile*** 중에서 다음의 설정들을 수정합니다.
 
@@ -98,6 +98,25 @@ all:  passwd group hosts rpc services protocols mail \
     # amd.home auto.master auto.home auto.local passwd.adjunct \
     # timezone locale netmasks
 ```
+
+다음, ***/etc/sysconfig/yppasswd*** 를 다음과 같이 수정 합니다.
+
+```bash
+[root@an3 ~]$ cat /etc/sysconfig/yppasswd
+# The passwd and shadow files are located under the specified
+# directory path. rpc.yppasswdd will use these files, not /etc/passwd
+# and /etc/shadow.
+ETCDIR=/var/yp/etc
+
+  .. 중략 ..
+
+# Additional arguments passed to yppasswd
+# 방화벽 설정을 위해 port를 static 하게 설정 합니다.
+YPPASSWDD_ARGS="--port 836"
+[root@an3 ~]$
+```
+
+
 ###3.3.3 보안 설정
 
 NIS 질의를 할 수 있는 네트워크 대역을 제한 합니다. 형식은 ***NETMASK NETWORK*** 형식으로 설정 합니다. 다음의 설정은 127.0.0.0/8 과 192.168.0.0/24 네트워크에서 NIS 질의에 응답하도록 설정한 것입니다.
@@ -110,7 +129,7 @@ EOF
 [root@an3 ~]$
 ```
 
-방화벽을 사용한다면 ypserv와 ypxfrd의 포트를 고정 시키고 port를 열어주어야 합니다.
+방화벽을 사용한다면 ypserv와 ypxfrd, yppasswdd의 포트를 고정 시키고 port를 열어주어야 합니다.
 
 ```bash
 [root@an3 ~]$ cat >> /etc/sysconfig/network <<EOF
@@ -123,12 +142,19 @@ EOF
 # RPCBIND tcp/udp 111
 # YPSERV tcp/udp 834
 # YPXFRD tcp/udp 835
-TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
-UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
+TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
+UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
   ... 하략 ...
 ```
 
+###3.3.3.4 Daemon 실행
 
+```bash
+[root@an3 ~]$ service rpcbind start
+[root@an3 ~]$ service ypxfrd start
+[root@an3 ~]$ service yppasswdd start
+[root@an3 ~]$
+```
 
 
 
