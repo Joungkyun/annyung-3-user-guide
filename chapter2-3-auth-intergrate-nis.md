@@ -221,9 +221,128 @@ gmake[1]: Leaving directory `/var/yp/KLDP-NIS'
 [root@an3 ~]$
 ```
 
+
 ##4. NIS slave 설정
 
-###4.1
+###4.1 package 설치
+
+```bash
+[root@an3 ~]$ yum install ypserv rpcbind
+```
+
+###4.2 NIS domain 설정
+
+NIS master에서 설정했던 NIS DOMIN을 동일하게 설정을 합니다.
+
+```bash
+[root@an3 ~]$ ypdomainname OOPS-NIS
+[root@an3 ~]$ echo "NISDOMAIN=\"OOPS-NIS\"" >> /etc/sysconfig/network
+```
+
+###4.3 보안 설정
+
+NIS 질의를 할 수 있는 네트워크 대역을 제한 합니다. 형식은 ***NETMASK NETWORK*** 형식으로 설정 합니다. 다음의 설정은 127.0.0.0/8 과 192.168.0.0/24 네트워크에서 NIS 질의에 응답하도록 설정한 것입니다.
+
+```bash
+[root@an3 ~]$ cat > /var/yp/securenets <<EOF
+255.0.0.0 127.0.0.0
+255.255.255.0 192.168.0.0
+EOF
+[root@an3 ~]$
+```
+
+방화벽을 사용한다면 ypserv와 ypxfrd, yppasswdd의 포트를 고정 시키고 port를 열어주어야 합니다.
+
+```bash
+[root@an3 ~]$ cat >> /etc/sysconfig/network <<EOF
+YPSERV_ARGS="-p 834"
+YPXFRD_ARGS="-p 835"
+EOF
+[root@an3 ~]$ 
+[root@an3 ~]$ cat /etc/oops-firewall/filter.conf
+  ... 상략 ...
+# RPCBIND tcp/udp 111
+# YPSERV tcp/udp 834
+# YPXFRD tcp/udp 835
+# YPPASSWDD udp/836
+TCP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-835
+UDP_HOSTPERPORT = 192.168.0.0/24:111 192.168.0.0/24:834-836
+  ... 하략 ...
+```
+
+###4.4 Daemon 실행
+
+```bash
+[root@an3 ~]$ service rpcbind start
+[root@an3 ~]$ service ypserv start
+[root@an3 ~]$ service ypxfrd start
+[root@an3 ~]$ service yppasswdd start
+[root@an3 ~]$ # booting 시에 시작 되도록 설정
+[root@an3 ~]$ systemctl enable rpcbind ypbind ypxfrd yppasswdd
+```
+
+###4.5 Slave database 초기화
+
+***/usr/lib64/yp/ypinit***를 이용하여 초기화를 합니다.
+
+```bash
+[root@an3 ~]$ /usr/lib64/yp/ypinit -s nis.domain.com
+We will need a few minutes to copy the data from nis.domain.com.
+Transferring rpc.bynumber...
+Trying ypxfrd ... success
+
+Transferring passwd.byname...
+Trying ypxfrd ... success
+
+Transferring protocols.bynumber...
+Trying ypxfrd ... success
+
+Transferring mail.aliases...
+Trying ypxfrd ... success
+
+Transferring ypservers...
+Trying ypxfrd ... success
+
+Transferring shadow.byname...
+Trying ypxfrd ... success
+
+Transferring services.byservicename...
+Trying ypxfrd ... success
+
+Transferring hosts.byname...
+Trying ypxfrd ... success
+
+Transferring hosts.byaddr...
+Trying ypxfrd ... success
+
+Transferring group.byname...
+Trying ypxfrd ... success
+
+Transferring protocols.byname...
+Trying ypxfrd ... success
+
+Transferring services.byname...
+Trying ypxfrd ... success
+
+Transferring passwd.byuid...
+Trying ypxfrd ... success
+
+Transferring group.bygid...
+Trying ypxfrd ... success
+
+Transferring rpc.byname...
+Trying ypxfrd ... success
+
+
+nis2.domain.com's NIS data base has been set up.
+If there were warnings, please figure out what went wrong, and fix it.
+
+At this point, make sure that /etc/passwd and /etc/group have
+been edited so that when the NIS is activated, the data bases you
+have just created will be used, instead of the /etc ASCII files.
+[root@an3 ~]$
+```
+
 
 ##5. NIS client 설정
 
