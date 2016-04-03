@@ -88,17 +88,17 @@ uid=\$[ \${maxuid} + 1 ]
 # passwd entry가 한개도 없을 경우 초기화
 [ $uid -eq 1 ] && uid=10000
 
-if [ $USE_SHADOW -eq 1 ]; then
+if [ \$USE_SHADOW -eq 1 ]; then
     pent="x"
 else
-    pent="${pass}"
+    pent="\${pass}"
 fi
 
 cat >> \${ETCDIR}/passwd <<EOF
-\${account}:${pent}:\${uid}:10000:\${accname}:/home/\${account}:/bin/bash
+\${account}:\${pent}:\${uid}:10000:\${accname}:/home/\${account}:/bin/bash
 EOF
 
-if [ $USE_SHADOW -eq 1 ]; then
+if [ \$USE_SHADOW -eq 1 ]; then
   chgdate="\$[ \$(date +"%s") / 86400 ]"; echo \$a
 
   cat >> \${ETCDIR}/shadow <<EOF
