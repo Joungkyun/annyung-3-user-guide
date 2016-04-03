@@ -20,7 +20,7 @@
 
 1. Private network 상에서 구성할 것
 2. 서로 다른 Network 구간에서 연동이 필요할 경우, VPN tunnel을 이용할 것
-3. data를 text 파일로 관리해야 하기 때문에 많은 account를 관리해야 할 경우 권장하지 않음.
+3. data를 text 파일로 관리해야 하기 때문에 많은 account를 관리해야 할 경우 권장하지 않음. 꼭 해야 한다면 별도의 관리 프로그램을 만들기를 권장
 4. Multi master 구성이 안됨
 
 
