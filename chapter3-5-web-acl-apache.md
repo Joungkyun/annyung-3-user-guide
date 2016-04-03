@@ -131,7 +131,9 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 
 안녕 3의 apache에서 NIS를 이용한 인증 및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 합니다.
 
-apache nis module을 사용하기 위해서는, NIS 구성시에 shadow.byname MAP을 사용하지 않아야 합니다. 이는 passwd 리스트의 password entry의 값이 'x'로 되어 있으면 안된다는 의미입니다.
+apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.byname MAP을 사용하지 않아야 합니다. 이는 passwd 리스트의 password entry의 값이 'x'로 되어 있으면 안된다는 의미입니다. 보안상 상당히 좋지 않기 때문에 사용을 권장하지 않습니다.
+
+만약 ***NIS*** 구성 하에서 웹 인증이 필요하다면, ***NIS***를 ***shadow***로 구성을 하시고, cronjob script를 이용하여 ***.htpasswd*** 파일을 생성하시는 것을 권장 합니다.
 
 ```bash
 [root@an3 ~]$ yum install httpd-nis
