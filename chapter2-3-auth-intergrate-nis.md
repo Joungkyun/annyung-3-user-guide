@@ -127,6 +127,9 @@ USERID:$1$pAhn0Osq$hY4yCJs4mvBOTg6sxmmjM/:16894:0:99999:7:::
 [root@an3 etc]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
 ```
 
+> ***!참고***   
+> Web server에서도 NIS 인증을 사용하기 위하여 apache 또는 lighttpd, nginx의 nis 모듈을 사용할 계획이라면, shadow system을 사용할 수 없습니다. yp_match call이 non-root 권한에서는 빈 값을 return 하기 때문에 웹서버를 root 권한으로 실행을 해야 하기 때문에, shadow system을 사용하지 말고 구성을 하십시오. (물론 보안이 
+
 
 ###3.3.2 /var/yp/Makefile 설정
 
