@@ -17,6 +17,6 @@ Utilities for managing accounts and shadow password files
   [root@an3 ~]$ pwunconv -l /var/tmp/etc
   [root@an3 ~]$ pwconv -l /var/tmp/etc
   ```
- * *-l* 옵션이 지원하지 않는다는 메시지가 나오면, ***yum update***를 해 주십시오.
+ * *-l* 옵션을 지원하지 않는다는 메시지가 나오면, ***yum update***를 해 주십시오.
 
 ### Sub packages:
