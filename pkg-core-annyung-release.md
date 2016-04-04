@@ -24,6 +24,8 @@ annyung-release 패키지는 안녕 리눅스 3의 릴리즈 정보를 가지고
   5. fstab에 disk 장치에 대해서 noatime을 유지
   6. wheel 그룹에 root 추가
 
+3. ntsysv-systemd (systemctl용 ntsysv) 제공
+
 ### Reference:
 * None
 
