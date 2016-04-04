@@ -45,7 +45,7 @@ NIS domain이라는 것은 NIS database 이름 정도라고 생각을 하면 됩
 
 안녕 리눅스의 NIS 설정 파일은 */var/yp* 디렉토리에 존재 합니다.
 
-보통 NIS 설정을 할때 시스템 상의 */etc/passwd*와 */etc/group*을 이용하여 database를 만드는 것을 권장하는데, 여기서는 이 파일들을 사용하지 않고 별도의 파일로 관리하도록 기술 합니다.
+보통 NIS 설정을 할때 시스템 상의 */etc/passwd*와 */etc/group*을 이용하여 database를 만드는 것을 권장하는데, 여기서는 이 파일들을 사용하지 않고 */var/yp/etc*에 별도의 파일로 관리하도록 기술 합니다.
 
 ###3.3.1 passwd/group list 파일 준비
 
@@ -109,7 +109,7 @@ EOFF
 [root@an3 ~]$ chmod 700 /var/yp/etc/adduser
 ```
 
-***adduser*** script는 기본을 MD5 방식의 암호를 생성합니다. 만약 연동할 시스템들이 sha512를 지원하는 버전으로만 구성이 되어 있다면 (예를 들어 CentOS/RHEL 5는 sha512를 지원하지 않습니다.), adduser script의 METHOD 변수 값을 ***sha512***로 수정 하는 것을 권장 합니다.
+***adduser*** script는 기본으로 MD5 방식의 암호를 생성합니다. 만약 연동할 시스템들이 sha512를 지원하는 버전으로만 구성이 되어 있다면 (예를 들어 CentOS/RHEL 5는 sha512를 지원하지 않습니다.), adduser script의 ***METHOD*** 변수 값을 ***sha512***로 수정 하는 것을 권장 합니다.
 
 
 다음 passwd, group, shadow 파일을 생성 합니다.
@@ -127,8 +127,24 @@ USERID:$1$pAhn0Osq$hY4yCJs4mvBOTg6sxmmjM/:16894:0:99999:7:::
 [root@an3 etc]$ echo "nisusers:x:10000:" >> /var/yp/etc/group
 ```
 
+/etc/shadow를 해제하는 것 처럼 /var/yp/etc/shadow는 ***pwunconv***의 *-l* 옵션을 사용할 수 있습니다. 이 옵션은 안녕 리눅스의 pwconv/pwunconv 에만 patch가 되어 있습니다.
+
+```bash
+[root@an3 ~]$ pwunconv -l /var/yp/etc
+[root@an3 ~]$ ls
+passwd    passwd-
+[root@an3 ~]$ pwconv -l /var/yp/etc
+passwd    passwd-    shadow
+```
+
+만약 동작을 하지 않거나 에러 메시지가 나온다면, yum update 명령을 이용하여 ***shadow-tuils*** package를 최신 버전으로 업그레이드 하십시오.
+
+
+
 > ***!참고***   
-> Web server에서도 ***NIS*** 인증을 사용하기 위하여 apache 또는 lighttpd, nginx의 nis 모듈을 사용할 계획이라면, ***shadow system***을 사용할 수 없습니다. ***yp_match*** call이 non-root 권한에서는 빈 값을 return 하기 때문에 웹서버를 root 권한으로 실행을 해야합니다. 그러므로 shadow system을 사용하지 말고 구성을 하십시오. (물론 보안이 상당히 좋지 않습니다.) 보안을 고려 한다면 ***NIS*** 보다는 ***ldap***을 이용하여 구성하는 것을 고려 하십시오.
+> Web server에서도 ***NIS*** 인증을 사용하기 위하여 apache 또는 lighttpd, nginx의 nis 모듈을 사용할 계획이라면, ***shadow system***을 사용할 수 없습니다. ***yp_match*** call이 non-root 권한에서는 빈 값을 return 하기 때문에 웹서버를 root 권한으로 실행을 해야합니다. 그러므로 shadow system을 사용하지 말고 구성을 하십시오. 또는, 웹서버의 nis 모듈을 사용하지 말고, cronjob으로 ypcat 명령을 이용하여 .htaccess file을 주기적으로 갱신하여 사용하도록 하십시오.
+> 
+>또한, 보안을 고려 한다면 ***NIS*** 보다는 ***ldap***을 이용하여 구성하는 것을 고려 하십시오.
 
 
 ###3.3.2 /var/yp/Makefile 설정
