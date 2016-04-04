@@ -25,6 +25,8 @@
 
 JDK 6 사용시, CentOS에서 ***java-1.6.0-openjdk*** package를 지원합니다만, 권장 하지 않습니다. ***openjdk***는 1.7.0 부터 Oracle JDK와 대등한 수준의 API를 지원합니다. (대등한 성능을 의미하는 것이 아니라 API 대응을 의미이며, 안녕 3에서 oracle JDK가 기본이 아니라 openJDK를 기본으로 한 이유 입니다.) 그러므로 <u>JDK 6 환경은 Oracle JDK를 받아서 직접 구성하십시오.</u>
 
+***Oracle JDK/JRE*** 의 경우 6/7 버전은 lifetime이 종료 되었으므로, JDK 8로의 이전을 고려하시는 것을 권장 합니다.
+
 
 ## 2. 변경 사항
 
