@@ -42,7 +42,7 @@ BAD PASSWORD: The password is shorter than 8 characters
 [root@an3 ~]$
 ```
 
-STDIN 으로도 가능 합니다.
+STDIN 으로도 가능 합니다. STDIN으로 생성할 경우에는 암호화 강도를 체크하지 않습니다.
 
 ```bash
 [root@an3 ~]$ echo "asdf" | genpasswd -m md5 -i
