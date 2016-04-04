@@ -10,6 +10,7 @@
 * [annyung-release](pkg-core-annyung-release.md)
 * [byspam](pkg-core-byspam.md)
 * [check-utils](pkg-core-check-utils.md)
+* [genpasswd](pkg-core-genpasswd.md)
 * [httpd-conf](pkg-core-httpd-conf.md)
 * [httpd-krisp](pkg-core-httpd-krisp.md)
 * [httpd-nis](pkg-core-httpd-nis.md)
