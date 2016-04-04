@@ -56,7 +56,7 @@ $1$KSoP78Zr$teF7WRd2Azz0svaUXTkIZ0
 * None
 
 ### Dependencies:
-* libolibc
+* [libolibc](pkg-core-olibc.md)
 * crypt
 
 ### Sub Packages:
