@@ -464,3 +464,172 @@ nis2.domain.com
 
 ##5. NIS client 설정
 
+###5.1 package 설치
+
+```bash
+[root@an3 ~]$ yum install ypbind rpcbind
+```
+
+###5.2 NIS domain 설정
+
+NIS master에서 설정했던 NIS DOMAIN을 동일하게 설정을 합니다.
+
+```bash
+[root@an3 ~]$ ypdomainname OOPS-NIS
+[root@an3 ~]$ echo "NISDOMAIN=\"OOPS-NIS\"" >> /etc/sysconfig/network
+```
+
+###5.3 NIS 설정
+
+####5.3.1 authconfig 를 이용한 방법
+
+***authconfig***를 이용하여 ***NIS*** 설정을 *enable* 시킵니다.
+
+```bash
+[root@an3 ~]$ authconfig --enablenis \
+                       --nisdomain=OOPS-NIS \
+                       --nisserver=nis1.domain.com \
+                       --enablemkhomedir \
+                       --update
+```
+
+*** NIS slave***를 구성했다면 */etc/yp.conf* 에 추가해 줍니다.
+
+[root@an3 ~]$ echo "server nis2.domain.com" >> /etc/yp.conf
+[root@an3 ~]$ cat /etc/yp.conf
+  .. 상략 ..
+domain OOPS-NIS server nis1.domain.com
+server nis2.domain.com
+[root@an3 ~]$
+```
+
+다음 ypbind를 재시작 해 줍니다.
+
+```bash
+[root@an3 ~]$ service ypbind restart
+NIS 서비스 종료 중:                                        [  OK  ]
+NIS 서비스 시작 중:                                        [  OK  ]
+NIS 서비스를 바인딩하는 중:                                 [  OK  ]
+[root@an3 ~]
+```
+
+####5.3.2 수동으로 설정
+
+수동 설정은 다음의 
+
+  1. ypbind 설정
+  2. login 시에 자동으로 home directory 생성 (PAM)
+  3. nsswitch 설정
+  4. authconfig 설정
+
+
+#####5.3.2.1 ypbind 설정
+
+```bash
+[root@an3 ~]$ cat >> /etc/yp.conf <<EOF
+domain OOPS-NIS
+server nis1.domain.com
+server nis2.domain.com
+EOF
+[root@an3 ~]$
+```
+
+####5.3.2.2 PAM 설정
+
+NIS account 계정으로 로그인 시에, home directory가 존재하지 않을 경우 자동으로 생성하도록 합니다.
+
+/etc/pam.d/{system-auth,password-auth,fingerprint-auth,smartcard-auth}-sc 의 session 설정에 아래와 같이 pam_mkhomedir 설정을 해 주십시오.
+
+```bash
+[root@an3 ~]$ cat /etc/pam.d/password-auth-ac
+  .. 상략..
+session     [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
+session     required      pam_mkhomedir.so umask=0077
+session     required      pam_unix.so
+[root@an3 ~]$
+```
+
+home directory 생성 실패 시 login을 불허 할 것이라면 ***required***로 설정을 하고, home directory 생성 실패를 하더라도 login을 허락할 것이라면 ***optional***로 설정 하십시오. 위의 예제는 4개의 파일 설정이 모두 동일함으로 password-auth-sc 만 예시를 보여 줍니다.
+
+####5.3.2.3 nsswitch.conf 설정
+
+passwd, shadow, group 항목에 nis를 추가해 줍니다.
+
+```bash
+[root@an3 ~]$ cat /etc/nsswitch.conf
+  .. 상략
+passwd:     files nis
+shadow:     files nis
+group:      files nis
+  .. 하략 ..
+[root@an3 ~]$
+```
+
+####5.3.2.4 authconfig 설정 반영
+
+***/etc/sysconfig/authconfig***의 다음 값들을 변경해 줍니다. 다른 설정을 지우라는 것이 아니라 아래에 보여진 변수의 값을 ***no***에서 ***yes***로 변경 하십시오.
+
+```bash
+[root@an3 ~]$ cat /etc/sysconfig/authconfig
+USEMKHOMEDIR=yes
+USENIS=yes
+[root@an3 ~]$
+```
+
+####5.3.3 NIS 연동 확인
+
+***ypbind*** daemon을 재시작 합니다.
+
+```bash
+[root@an3 ~]$ service ypbind restart
+NIS 서비스 종료 중:                                        [  OK  ]
+NIS 서비스 시작 중:                                        [  OK  ]
+NIS 서비스를 바인딩하는 중:                                 [  OK  ]
+[root@an3 ~]
+```
+
+NIS password entry와 shadow entry를 받아오는지 확인을 해 봅니다.
+
+```bash
+[root@an3 ~]$ ypcat passwd.byname
+USERID:x:10000:10000:USER NAME:/home/USERID:/bin/bash
+[root@an3 ~]$ ypcat shadow.byname
+USERID:$1$pAhn0Osq$hY4yCJs4mvBOTg6sxmmjM/:16894:0:99999:7:::
+[root@an3 ~]$ ypcat group.byname
+nisusers:x:10000:
+[root@an3 etc]$
+```
+
+system 에 연동이 잘 되었는지 ***getent*** 명령으로 확인을 해 봅니다. /etc/passwd 내용 아라애 NIS passwd entry가 추가로 나와야 합니다. NIS에서는 10000 이상의 UID를 사용하므로, 10000대의 UID가 있는지 확인해 보시면 됩니다.
+
+UID 확인을 쉽게 하기 위하여 ***pwck*** 명령으로 passwd file을 UID 순서대로 정렬한 후에 ***getent***를 실행 합니다.
+
+```bash
+[root@an3 ~]$ pwck -s && grpck -s
+[root@an3 ~]$ getent passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nscd:x:28:28:NSCD Daemon:/:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+tss:x:59:59:Account used by the trousers package to sandbox the tcsd daemon:/dev/null:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+avahi-autoipd:x:170:170:Avahi IPv4LL Stack:/var/lib/avahi-autoipd:/sbin/nologin
+vboxadd:x:996:1::/var/run/vboxadd:/bin/false
+polkitd:x:997:995:User for polkitd:/:/sbin/nologin
+systemd-network:x:998:996:systemd Network Management:/:/sbin/nologin
+systemd-bus-proxy:x:999:997:systemd Bus Proxy:/:/sbin/nologin
+USERID:x:10000:10000:USER NAME:/home/USERID:/bin/bash
+[root@an3 ~]$
+```
