@@ -626,7 +626,6 @@ dbus:x:81:81:System message bus:/:/sbin/nologin
 postfix:x:89:89::/var/spool/postfix:/sbin/nologin
 nobody:x:99:99:Nobody:/:/sbin/nologin
 avahi-autoipd:x:170:170:Avahi IPv4LL Stack:/var/lib/avahi-autoipd:/sbin/nologin
-vboxadd:x:996:1::/var/run/vboxadd:/bin/false
 polkitd:x:997:995:User for polkitd:/:/sbin/nologin
 systemd-network:x:998:996:systemd Network Management:/:/sbin/nologin
 systemd-bus-proxy:x:999:997:systemd Bus Proxy:/:/sbin/nologin
