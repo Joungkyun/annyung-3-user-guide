@@ -556,7 +556,7 @@ home directory 생성 실패 시 login을 불허 할 것이라면 ***required***
 
 ####5.3.2.3 nsswitch.conf 설정
 
-passwd, shadow, group 항목에 nis를 추가해 줍니다.
+passwd, shadow, group 항목에 nis를 추가해 줍니다. nsswitch.conf 에 nis가 등록이 되어야 NIS와 system 인증이 연동이 됩니다.
 
 ```bash
 [root@an3 ~]$ cat /etc/nsswitch.conf
