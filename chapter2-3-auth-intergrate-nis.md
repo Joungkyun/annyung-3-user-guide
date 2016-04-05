@@ -554,6 +554,21 @@ session     required      pam_unix.so
 
 home directory 생성 실패 시 login을 불허 할 것이라면 ***required***로 설정을 하고, home directory 생성 실패를 하더라도 login을 허락할 것이라면 ***optional***로 설정 하십시오. 위의 예제는 4개의 파일 설정이 모두 동일함으로 password-auth-sc 만 예시를 보여 줍니다.
 
+또한, 인증과 암호 변경을 위하여 ***password*** entry에 nis 설정을 추가 합니다. 역시 모든 파일 공통 사항입니다.
+
+```bash
+[root@an3 ~]$ cat /etc/pam.d/password-auth-ac
+  ... 상략 ...
+password    requisite     pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= difok=1 minlen=8 minclass=3
+password    sufficient    pam_unix.so sha512 shadow nis nullok try_first_pass use_authtok remember=4
+password    required      pam_deny.so
+  ... 하략 ...
+[root@an3 ~]$
+```
+
+***shdow*** 뒤에 ***nis***를 추가해 주십시오. pam 설정 변경은 따로 ypbind 재시작이나 서버 rebooting 등의 작업이 필요없이 실시간으로 반영이 됩니다.
+
+
 ####5.3.2.3 nsswitch.conf 설정
 
 passwd, shadow, group 항목에 nis를 추가해 줍니다. nsswitch.conf 에 nis가 등록이 되어야 NIS와 system 인증이 연동이 됩니다.
@@ -633,5 +648,32 @@ polkitd:x:997:995:User for polkitd:/:/sbin/nologin
 systemd-network:x:998:996:systemd Network Management:/:/sbin/nologin
 systemd-bus-proxy:x:999:997:systemd Bus Proxy:/:/sbin/nologin
 USERID:x:10000:10000:USER NAME:/home/USERID:/bin/bash
+[root@an3 ~]$
+```
+
+### 5.3.4 계정 암호 변경
+
+***NIS master*** server에 *yppasswdd* daemon이 동작하고 있다면 NIS client에서 암호 변경이 가능 합니다.
+
+NIS account들의 암호 변경은 일반 account의 암호를 변경하는 것과 같이 ***passwd*** 명령을 이용하여 변경을 하면 됩니다.
+
+root account를 이용하여 다른 NIS account의 암호를 변경하는 경우에는, ***passwd*** 명령으로 변경이 불가능 합니다. 이 때에는 yppasswd 명령을 이용하여 변경을 할 수 있습니다.
+
+```bash
+[root@an3 ~]$ passwd joungkyun
+joungkyun 사용자의 비밀 번호 변경 중
+새  암호:
+새  암호 재입력:
+NIS 암호는 변경할 수 없습니다.
+passwd: 인증 토근 수정 오류
+[root@an3 ~]$ yppasswd joungkyun
+Changing NIS account information for joungkyun on cnt1.domain.com.
+Please enter root password:
+Changing NIS password for joungkyun on cnt1.domain.com.
+Please enter new password:
+Please retype new password:
+
+The NIS password has been changed on cnt1.domain.com.
+
 [root@an3 ~]$
 ```
