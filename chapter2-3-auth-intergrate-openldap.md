@@ -223,7 +223,6 @@ objectclass: organizationalUnit
 EOF
 [root@an3 ~]$ ldapadd -a -c -H ldapi:/// -D "cn=Manager,dc=oops,dc=org" -W -f addtree.ldif
 Enter LDAP Password: # input admin password
-adding new entry "dc=oops,dc=org"
 adding new entry "ou=Admin,dc=oops,dc=org"
 adding new entry "ou=Users,dc=oops,dc=org"
 adding new entry "ou=Groups,dc=oops,dc=org"
