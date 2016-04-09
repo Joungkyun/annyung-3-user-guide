@@ -525,6 +525,8 @@ NIS 서비스를 바인딩하는 중:                                 [  OK  ]
   3. nsswitch 설정
   4. authconfig 설정
 
+작업들을 진행 합니다.
+
 
 #####5.3.2.1 ypbind 설정
 
