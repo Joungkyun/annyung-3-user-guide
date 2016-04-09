@@ -113,6 +113,8 @@ slapd (을)를 시작 중:                                      [  OK  ]
 
 이 에러 메시지를 없애기 위해서 다음과 처리를 합니다.
 
+아래 명령은 cat부터 EOF열까지를 복사해서 실행 시키시면 됩니다.
+
 ```bash
 [root@an3 ~]$ cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:///
 dn: olcDatabase={-1}frontend,cn=config
@@ -153,19 +155,43 @@ slapd (을)를 시작 중:                                      [  OK  ]
 
 ###1.2.4 Admin password 설정
 
-***slappasswd*** 명령을 이용하여 사용할 암호의 hash 문자열을 생성합니다.
+***slappasswd*** 명령을 이용하여 사용할 암호의 hash 문자열을 생성합니다. (여기서는 "***asdf!2345***"의 hash 문자열로 진행을 합니다.)
 
 ```bash
 [root@an3 ~]$ slappasswd
 New password:
 Re-enter new password:
-{SSHA}E3XuZmbZgD4YLUxykg7udnI9zzZav6f/
+{SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
 [root@an3 ~]$
 ```
 
 만약, system의 passwd entry에 있는 문자열을 그대로 사용하고 싶으시다면, 
 
-> ***{CRYPT}$1$v4h7GmHE$ws13QenhgY4WVyo1ulaLr0***
+> ***{CRYPT}$1$ggRKVU3b$TZduI8fIrxZ9LpJ9NqAJZ1***
 
 와 같이 사용을 해도 됩니다. 위의 hash 문자열은 sha512방식의 crypt 암호화된 hash로, md5 방식의 암호화 입니다. 즉, /etc/shadow의 암호화 문자열 앞에 ***{CRYPT}*** 만 prefix로 붙여 주시면 됩니다.
+
+그리고, 다음의 명령으로 Admin 암호를 설정 합니다.
+
+```bash
+[root@an3 ~]$ cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:///
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
+EOF  # 여기까지 실행명령
+
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "olcDatabase={0}config,cn=config"
+modifying entry "olcDatabase={2}bdb,cn=config"
+[root@an3 ~]$
+```
+
 
