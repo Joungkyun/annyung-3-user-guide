@@ -188,7 +188,7 @@ EOF
 [root@an3 ~]$
 ```
 
-변경한 LDAP 관리자의 DN은 "***cn=manager,dc=oops,dc=org***"이며, 다음의 방법으로 확인을 합니다.
+변경한 LDAP 관리자의 DN은 "***cn=manager,{BASE_DN}***"이며, 여기서는 ***cn=manager,dc=oops,dc=org***"가 되며, 다음의 방법으로 확인을 합니다.
 
 ```bash
 [root@an3 ~]$ # "-W" 옵션으로 암호 입력을 하지 않을 경우 에러 발생
