@@ -512,6 +512,8 @@ Enter LDAP Password:    # 기존의 ssoadmin 암호 입력
 [root@an3 ~]$
 ```
 
+***ladppasswd*** 명령에 ***-A*** 옵션을 주면 현재의 암호를 물어보게 할 수 있습니다.
+
 변경한 암호로 로그인이 되는지 확인해 봅니다.
 
 ```bash
