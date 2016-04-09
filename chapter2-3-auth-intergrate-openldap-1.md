@@ -496,8 +496,40 @@ Enter LDAP Password:   # ldap 관리자 암호 입력
 [root@an3 ~]$
 ```
 
+### 3.2.2 특정 DN의 암호 변경
 
+***2.7 LDAP Access 정책 설정***의 작업에 의하여, 다른 account의 암호를 변경 하는 것은 LDAP 관리자 와 ssoadmin 유저의 권한(uid=ssoadmin,ou=admin,dc=oops,dc=org)으로 밖에 할 수 없습니다.
 
+그러므로, 여기서는 자신의 계정의 암호를 변경하는 경우가 되겠습니다. 예를 들어 ssoadmin이 자신의 LDAP 암호를 변경하는 경우 입니다.
+
+```bash
+[root@an3 ~]$ ldappasswd -H ldapi:/// -D "uid=ssoadmin,ou=admin,dc=kldp,dc=org" -W -S
+New password:           # 변경할 암호 입력
+Re-enter new password:  # 변경할 암호 재입력
+Enter LDAP Password:    # 기존의 ssoadmin 암호 입력
+[root@an3 ~]$
+```
+
+변경한 암호로 로그인이 되는지 확인해 봅니다.
+
+```bash
+[root@an3 ~]$ ldapsearch -H ldapi:/// -D uid=ssoadmin,ou=admin,dc=kldp,dc=org" -W
+Enter LDAP Password: # 변경한 암호 입력
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 32 No such object
+
+# numResponses: 1
+[root@an3 ~]$
+```
 
 
 
