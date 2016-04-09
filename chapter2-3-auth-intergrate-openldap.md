@@ -394,3 +394,406 @@ olcAccess: to * by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid"
 EOF
 [root@an3 ~]$
 ```
+
+1.2.8. LDAP database init script
+
+여기 까지 작업을 하시면, 인증 통합을 위한 Master server의 기본 설정이 완료된 상태 입니다. 상당히 복잡한 작업인데, 이 항목에서는 위의 작업들을 간단히 할 수 있는 script 예제를 제공 합니다.
+
+이 스크립트를 이용하면, 1.2.7 까지의 작업을 수행하게 됩니다.
+
+```bash
+[root@an3 ~]$ cat /etc/openldap/ldap-data-init.sh
+#!/bin/bash
+
+passwd_prompt() {
+    local prompt="$* : "
+    prompt_value=""
+    while IFS= read -p "$prompt" -r -s -n 1 char
+    do
+        if [[ $char == $'\0' ]]
+        then
+            break
+        fi
+        prompt='*'
+        prompt_value+="$char"
+    done
+    echo
+}
+
+success() {
+    echo -en "\\033[1;32m"
+    [ -n "$1" ] && echo -n "$*" || echo "OK"
+    echo -en "\\033[0;39m"
+}
+
+failure() {
+    echo -en "\\033[1;31m"
+    [ -n "$1" ] && echo -n "$*" || echo "Failure"
+    echo -en "\\033[0;39m"
+}
+
+upper() {
+    echo "$*" | tr '[:lower:]' '[:upper:]'
+}
+
+echo "1. Installation ldap packages"
+echo
+echo
+
+yum install openldap-servers openldap-clients
+
+rm -rf /etc/openldap/slapd.d/
+if [ ! -d /etc/openldap/slapd.d -a ! -f /etc/openldap/slapd.conf ]; then
+    # convert from old style config slapd.conf
+    mkdir -p /etc/openldap/slapd.d/
+    slaptest -f /usr/share/openldap-servers/slapd.conf.obsolete -F /etc/openldap/slapd.d &>/dev/null
+    chown -R ldap:ldap /etc/openldap/slapd.d
+    chmod -R 000 /etc/openldap/slapd.d
+    chmod -R u+rwX /etc/openldap/slapd.d
+    rm -f /var/lib/ldap/*
+
+    cp -af /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+    chown ldap.ldap /var/lib/ldap/DB_CONFIG
+fi
+echo
+echo
+
+
+echo
+echo "2. syslog configuration"
+
+FNAME="/etc/rsyslog.d/slapd.conf"
+printf "   . %-60s ... " "${FNAME}"
+
+mkdir -p /var/log/slapd >& /dev/null
+chown -R ldap:ldap /var/log/slapd >& /dev/null
+
+if [ ! -f "${FNAME}" ]; then
+    cat > ${FNAME} <<EOF
+local4.* /var/log/slapd/slapd.log
+EOF
+    if [ $? -eq 0 ]; then
+        success "Done"
+        echo
+        /sbin/service rsyslog restart | sed 's/^/     /g'
+    fi
+else
+    success "Pass"
+    echo
+fi
+
+FNAME="/etc/logrotate.d/openldap"
+printf "   . %-60s ... " "${FNAME}"
+
+if [ ! -f "${FNAME}" ]; then
+    cat > ${FNAME} <<EOF
+/var/log/slapd/*.log {
+    copytruncate
+    rotate 4
+    monthly
+    notifempty
+    missingok
+    compress
+    create 0644 ldap ldap
+}
+EOF
+    [ $? -eq 0 ] && success "Done" || failure
+else
+    success "Pass"
+fi
+echo
+echo
+
+
+echo
+echo "3. SLAPD configuration and start"
+
+FNAME="/etc/sysconfig/ldap"
+printf "   . %-60s ... " "${FNAME}"
+perl -pi -e 's/#SLAPD_/SLAPD_/g' ${FNAME}
+
+if [ $? -eq 0 ]; then
+    success "Done"
+    echo
+    /sbin/service slapd restart | sed 's/^/     /g'
+    /sbin/chkconfig slapd on
+else
+    failure
+    echo
+fi
+echo
+
+
+echo "4. Order your BASE Information"
+
+while [ -z "${opt}" ]
+do
+    echo -n "   Input your BASE DN : "
+    read opt
+
+    if [ -n "${opt}" ]; then
+        echo "${opt}" | grep "dc=" >& /dev/null
+        [ $? -ne 0 ] && opt=
+    fi
+done
+
+BASEDN="${opt}"
+BASEDN=$(echo ${BASEDN} | sed 's/ //g')
+BASE=$(echo "$BASEDN" | perl -pe 's/,\s*dc=.*//g' | perl -pe 's/dc=/BASE=/g')
+eval "${BASE}"
+BASEUP="$(upper ${BASE})"
+
+opt=""
+while [ -z "${opt}" ]
+do
+    passwd_prompt "   Input your ldap administrator password   "
+    opt=$prompt_value
+    passwd_prompt "   Re-input your ldap administrator password"
+    opt1=$prompt_value
+
+    if [ -n "${opt}" -a -n "${opt1}" ]; then
+        if [ "${opt}" != "${opt1}" ]; then
+            echo "     .. passwords doesn't match!"
+            opt=""
+        fi
+    else
+        echo "     .. passwords doesn't match!"
+        opt=""
+    fi
+done
+
+ROOTPPW=${opt}
+ROOTPW=$(slappasswd -s "${opt}")
+
+
+echo
+echo "   Reault:"
+echo "           BASE           => ${BASE}"
+echo "           BASE DN        => ${BASEDN}"
+echo "           ADMIN Password => ${ROOTPPW}"
+echo "           ADMIN Password => ${ROOTPW}"
+echo
+
+
+
+echo
+echo "5. Settings BASE DN"
+
+for file in /etc/openldap/slapd.d/cn\=config/olcDatabase*
+do
+    printf "   . %-60s ... " "${file}"
+    perl -pi -e "s/dc=my-domain,dc=com/${BASEDN}/g" "$file"
+    [ $? -eq 0 ] && success "Done" || failure
+    echo
+done
+
+cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:/// >& /dev/null
+dn: olcDatabase={-1}frontend,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+EOF
+echo
+
+
+
+echo
+echo "6. Settings Admin password"
+
+cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:/// >& /dev/stdout | sed 's/^/   /g' | grep -v "^[ ]*$"
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: ${ROOTPW}
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: ${ROOTPW}
+EOF
+
+/sbin/service slapd restart | sed 's/^/     /g'
+echo
+
+echo
+echo "7. Initial Directory Information Tree"
+
+cat <<EOF | ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -w ${ROOTPPW} | sed 's/^/   /g' | grep -v "^[ ]*$"
+dn: ${BASEDN}
+dc: ${BASE}
+o: ${BASEUP} LDAP
+objectclass: dcObject
+objectclass: organization
+objectclass: top
+
+dn: ou=Admin,${BASEDN}
+ou: Users
+objectclass: organizationalUnit
+
+dn: ou=Users,${BASEDN}
+ou: Users
+objectclass: organizationalUnit
+
+dn: ou=Groups,${BASEDN}
+ou: Groups
+objectclass: organizationalUnit
+EOF
+
+[ $? -eq 0 ] && success "Done" || failure
+echo
+echo
+
+
+
+echo
+echo "8. Create default groups"
+
+cat <<EOF | ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -w ${ROOTPPW} | sed 's/^/   /g' | grep -v "^[ ]*$"
+# extended LDIF
+#
+# LDAPv3
+# base <${BASEDN}> with scope subtree
+# filter: (cn=*)
+# requesting: ALL
+#
+
+# ldapadmins, Admin
+dn: cn=ldapadmins,ou=Admin,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapadmins
+description: LDAP Management group
+gidNumber: 9999
+memberUid: ssoadmin
+
+# ldapROusers, Admin
+dn: cn=ldapROusers,ou=Admin,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapROusers
+description: LDAP Read only group
+gidNumber: 9998
+memberUid: replica
+memberUid: ssomanager
+
+# ldapusers, Groups
+dn: cn=ldapusers,ou=Groups,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapusers
+description: LDAP account groups
+gidNumber: 10000
+
+# ssoadmin, Admin
+dn: uid=ssoadmin,ou=Admin,${BASEDN}
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+gidNumber: 9997
+givenName: SSO
+sn: Admin
+displayName: SSO Admin
+uid: ssoadmin
+homeDirectory: /
+gecos: SSO Aadmin
+loginShell: /sbin/nologin
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowLastChange: 12011
+shadowExpire: 99999
+cn: SSO Admin
+uidNumber: 9999
+
+dn: uid=ssomanager,ou=Admin,${BASEDN}
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+gidNumber: 9997
+givenName: SSO
+sn: Manager
+displayName: SSO Manager
+uid: ssomanager
+homeDirectory: /
+gecos: SSO Manager
+loginShell: /sbin/nologin
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowLastChange: 12011
+shadowExpire: 99999
+cn: SSO manager
+uidNumber: 9998
+
+dn: uid=replica,ou=Admin,${BASEDN}
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+gidNumber: 9997
+givenName: Replica
+sn: User
+displayName: Replica User
+uid: replica
+homeDirectory: /
+gecos: Replica User
+loginShell: /sbin/nologin
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowLastChange: 12011
+shadowExpire: 99999
+cn: Replica User
+uidNumber: 9997
+EOF
+
+[ $? -eq 0 ] && success "Done" || failure
+echo
+echo
+
+echo
+echo "9. LDAP default Settings"
+
+cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:/// | sed 's/^/   /g' | grep -v "^[ ]*$"
+dn: olcDatabase={-1}frontend,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: to dn.base="" by * read
+olcAccess: to dn.base="cn=subschema" by * read
+olcAccess: to dn.subtree="ou=Users,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
+olcAccess: to dn.subtree="ou=Groups,${BASEDN}" by users read by anonymous auth
+olcAccess: to dn.subtree="ou=Users,${BASEDN}" by users read by anonymous auth
+olcAccess: to * by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
+EOF
+
+[ $? -eq 0 ] && success "Done" || failure
+echo
+echo
+
+exit 0
+[root@an3 ~]$
+```
