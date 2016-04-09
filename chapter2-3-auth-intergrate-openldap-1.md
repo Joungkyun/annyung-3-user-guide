@@ -415,13 +415,13 @@ Enter LDAP Password: # LDAP 관리자 암호(여기서의 예는 "asdf!2345") �
 # requesting: ALL
 #
 
-# Groups, kldp.org
-dn: ou=Groups,dc=kldp,dc=org
+# Groups, oops.org
+dn: ou=Groups,dc=oops,dc=org
 ou: Groups
 objectClass: organizationalUnit
 
-# ldapusers, Groups, kldp.org
-dn: cn=ldapusers,ou=Groups,dc=kldp,dc=org
+# ldapusers, Groups, oops.org
+dn: cn=ldapusers,ou=Groups,dc=oops,dc=org
 objectClass: posixGroup
 objectClass: top
 cn: ldapusers
