@@ -543,8 +543,7 @@ result: 32 No such object
 [root@an3 ~]$
 ```
 
-여기까지 작업을 하면 Master server의 준비가 완료 되었습니다.
-다음은 Slave 서버 설정을 보도록 하겠습니다.
+여기까지 작업을 하면, Master 서버의 설정은 SSL 설정을 마치고는 대략 다 되었습니다.
 
 ##4. LDAP database init script
 
