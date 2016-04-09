@@ -7,7 +7,7 @@
 
 StartCOM의 인증서를 예로 드는 이유는, 일단 공인 인증서 이면서 가격이 가장 싸기 때문입니다. 59$로 2년짜리 인증서를 발급 받을 수 있으며, *.domain.com 과 같은 astrik 인증서를 생성할 수 있으며, 도메인도 여러개를 추가할 수 있기 때문 입니다.
 
-다른 공인 인증서도 크게 다르지는 않으니 응용해 보십시오.
+다른 공인 인증서도 크게 다르지는 않으니 응용해 보십시오. Chain 인증서가 없는 경우에는 CA 인증서(PEM 방식)으로 등록 하시면 됩니다.
 
 CA chain 인증서는 [https://startssl.com/root](https://startssl.com/root)에서 받을 수 있으며, PEM 방식으로 받으셔야 하며, 인증서 타입을 잘 살펴 보셔야 합니다. 저는 발급 받은지가 꽤 되어서 ***Deprecated Intermediate CA Certificates*** 섹션의 [***StartCom Class 2 Primary Intermediate Server CA(pem)(SHA-2)***](https://startssl.com/certs/class2/sha2/pem/sub.class2.server.sha2.ca.crt)을 사용합니다.
 
