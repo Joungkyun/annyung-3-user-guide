@@ -398,7 +398,24 @@ EOF
 [root@an3 ~]$
 ```
 
-##3. LDAP database init script
+#3 account 암호 설정
+
+##3.1 LDAP 관리자 암호 변경
+
+LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다. ***2.4 Admin password 설정***에서 설정한 암호 "***asdf!2345***"는 이 LDAP 관리자의 암호 입니다.
+
+위의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 같습니다.
+
+> ***관리자 DN*** : cn=manager,dc=oops,dc=org  
+> ***관리자 PW*** : asdf!2345
+
+***BASE DN***에 설정한 account의 경우에는 ***ldappasswd*** 명령을 이용하여 변경을 할 수 있지만, LDAP 관리자의 암호는 ***slapd*** 설정 파일에 포함되어 있기 때문에 ***ldapmodify*** 명령을 이용해야 합니다.
+
+***2.4 Admin password 설정*** 항목을 참고 하셔서 변경을 하시면 됩니다.
+
+
+
+##4. LDAP database init script
 
 여기 까지 작업을 하시면, 인증 통합을 위한 Master server의 기본 설정이 완료된 상태 입니다. 상당히 복잡한 작업인데, 이 항목에서는 위의 작업들을 간단히 할 수 있는 script 예제를 제공 합니다.
 
@@ -800,19 +817,4 @@ echo
 exit 0
 [root@an3 ~]$
 ```
-
-#4 account 암호 설정
-
-##4.1 LDAP 관리자 암호 변경
-
-LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다. ***2.4 Admin password 설정***에서 설정한 암호 "***asdf!2345***"는 이 LDAP 관리자의 암호 입니다.
-
-위의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 같습니다.
-
-> ***관리자 DN*** : cn=manager,dc=oops,dc=org  
-> ***관리자 PW*** : asdf!2345
-
-***BASE DN***에 설정한 account의 경우에는 ***ldappasswd*** 명령을 이용하여 변경을 할 수 있지만, LDAP 관리자의 암호는 ***slapd*** 설정 파일에 포함되어 있기 때문에 ***ldapmodify*** 명령을 이용해야 합니다.
-
-***2.4 Admin password 설정*** 항목을 참고 하셔서 변경을 하시면 됩니다.
 
