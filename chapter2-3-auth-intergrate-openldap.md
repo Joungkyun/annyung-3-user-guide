@@ -117,7 +117,7 @@ slapd (을)를 시작 중:                                      [  OK  ]
 
 이 에러 메시지를 없애기 위해서 다음과 처리를 합니다.
 
-아래 명령은 cat부터 EOF열까지를 복사해서 실행 시키시면 됩니다.
+아래 명령은 cat 라인부터 마지막 EOF 까지를 copy 한 후, paste 하고 실행하면 됩니다.
 
 ```bash
 [root@an3 ~]$ cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:///
@@ -369,7 +369,7 @@ Enter LDAP Password: # input admin password
 [root@an3 ~]$
 ```
 
-아직 해당 account에 대한 암호가 설정이 되지 않은 상태 이므로, 생성한 account를 사용할 수 있는 단계는 아닙니다. 암호는 ***replication*** 설정 후에, 설정할 예정입니다.
+아직 해당 account에 대한 암호가 설정이 되지 않은 상태 이며, 아래에서 passwd 설정 하는 방법을 따로 설명 합니다.
 
 ###1.2.7 LDAP Access 정책 설정
 
@@ -801,3 +801,19 @@ echo
 exit 0
 [root@an3 ~]$
 ```
+
+#1.4 account 암호 설정
+
+##1.4.1 LDAP 관리자 암호 변경
+
+LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다. 처음 slapd 설정 시에 설정한 암호 "asdf!2345"는 이 LDAP 관리자의 암호 입니다.
+
+위의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 같습니다.
+
+> ***관리자 DN*** : cn=manager,dc=oops,dc=org  
+> ***관리자 PW*** : asdf!2345
+
+***BASE DN***에 설정한 account의 경우에는 ***ldappasswd*** 명령을 이용하여 변경을 할 수 있지만, LDAP 관리자의 암호는 ***slapd*** 설정 파일에 포함되어 있기 때문에 ***ldapmodify*** 명령을 이용해야 합니다.
+
+***1.2.4 Admin password 설정*** 항목을 참고 하셔서 작업을 하시면 됩니다.
+
