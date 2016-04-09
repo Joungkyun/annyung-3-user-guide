@@ -401,6 +401,42 @@ Enter LDAP Password: # input admin password
 
 아직 해당 account에 대한 암호가 설정이 되지 않은 상태 이며, 아래에서 passwd 설정 하는 방법을 따로 설명 합니다.
 
+다음은, Groups OU에 ldapusers group이 잘 생성이 되었는지 확인하여 봅니다.
+
+```bash
+[root@an3 ~]$ # cn=manager,dc=oops,dc=org 권한으로 ou=Groups,dc=oops,dc=org 의 entry 탐색
+[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org" -W -b "ou=Groups,dc=oops,dc=org"
+Enter LDAP Password: # LDAP 관리자 암호(여기서의 예는 "asdf!2345") 입력
+# extended LDIF
+#
+# LDAPv3
+# base <ou=Groups,dc=kldp,dc=org> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# Groups, kldp.org
+dn: ou=Groups,dc=kldp,dc=org
+ou: Groups
+objectClass: organizationalUnit
+
+# ldapusers, Groups, kldp.org
+dn: cn=ldapusers,ou=Groups,dc=kldp,dc=org
+objectClass: posixGroup
+objectClass: top
+cn: ldapusers
+description: LDAP account groups
+gidNumber: 10000
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 3
+# numEntries: 2
+[root@an3 ~]$
+```
+
 ###2.7 LDAP Access 정책 설정
 
 이 부분은 각 account/group의 정책 및 LDAP의 기본 보안을 수립하게 됩니다.
