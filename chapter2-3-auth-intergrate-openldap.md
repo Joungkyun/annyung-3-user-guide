@@ -35,7 +35,7 @@ openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으�
                      -F /etc/openldap/slapd.d
 [root@an3 ~]$ # slapd.d 의 디렉토리 파일의 권한에서 group/extra 권한을 모두 제거 합니다.
 [root@an3 ~]$ chown -R ldap:ldap /etc/openldap/slapd.d
-[root@an3 ~]$ chown -R 000 /etc/openldap/slapd.d
+[root@an3 ~]$ chmod -R 000 /etc/openldap/slapd.d
 [root@an3 ~]$ chmod -R u+rwX /etc/openldap/slapd.d
 [root@an3 ~]$ #  기존의 openldap data를 모두 초기화 시킵니다.
 [root@an3 ~]$ rm -rf /var/lib/ldap/*
