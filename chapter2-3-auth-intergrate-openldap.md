@@ -7,7 +7,7 @@ openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으�
 ##1. Master server 설정
 
 > 참고!  
-> 1.2.8 항목에서 1.2.7 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 1.2.7 까지는 어떠한 작접이 필요한지 참고 하시고, 1.2.8 의 script sample을 이용하여 설정 하십시오.
+> 1.2.8 항목에서 1.2 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 1.2.7 까지는 어떠한 작접이 필요한지 참고 하시고, 1.2.8 의 script sample을 이용하여 설정 하십시오.
 
 ##1.1 package 설치
 
@@ -102,6 +102,7 @@ EOF
 다음, ***slapd***를 시작 시킵니다. 이는 ***slapd***가 ***OLC(OnLineConfiguration)*** 이기 때문에 설정이 초기화 상태에서 시작을 먼저 시켜 주는 것입니다.
 
 ```bash
+[root@an3 ~]$ perl -pi -e 's/#SLAPD_/SLAPD_/g' /etc/sysconfig/ldap
 [root@an3 ~]$ service slapd start
 slapd 설정 파일 확인 중:                                   [주의]
 5708bfb7 ldif_read_file: checksum error on "/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif"
