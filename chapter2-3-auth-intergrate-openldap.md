@@ -245,6 +245,7 @@ Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 
   2. **ssomanager**
     * tree 전체의 데이터에 접근 가능한 readonly account
     * ***ldapROusers*** group member
+    * 인증 통합시에, 각 client 서버에서 ldap에 연결하기 위한 account
   3. **replica**
     * replication에 사용하기 위한 account (readonly account)
     * * ***ldapROusers*** group member
@@ -364,4 +365,13 @@ Enter LDAP Password: # input admin password
 [root@an3 ~]$
 ```
 
+아직 해당 account에 대한 암호가 설정이 되지 않은 상태 이므로, 생성한 account를 사용할 수 있는 단계는 아닙니다. 암호는 ***replication*** 설정 후에, 설정할 예정입니다.
 
+###1.2.7 LDAP Access 정책 설정
+
+이 부분은 각 account/group의 정책 및 LDAP의 기본 보안을 수립하게 됩니다.
+
+정책의 모티브는 다음과 같습니다.
+
+1. ldapadmins group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 권한을 가진다.
+2. ldapROusers group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 읽기 권한을 가진다.
