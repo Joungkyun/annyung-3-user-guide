@@ -513,7 +513,7 @@ Enter LDAP Password:    # 기존의 ssoadmin 암호 입력
 변경한 암호로 로그인이 되는지 확인해 봅니다.
 
 ```bash
-[root@an3 ~]$ ldapsearch -H ldapi:/// -D uid=ssoadmin,ou=admin,dc=kldp,dc=org" -W
+[root@an3 ~]$ ldapsearch -H ldapi:/// -D "uid=ssoadmin,ou=admin,dc=kldp,dc=org" -W
 Enter LDAP Password: # 변경한 암호 입력
 # extended LDIF
 #
