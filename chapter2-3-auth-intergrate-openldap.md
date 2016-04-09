@@ -616,7 +616,6 @@ EOF
 echo
 
 
-
 echo
 echo "6. Settings Admin password"
 
