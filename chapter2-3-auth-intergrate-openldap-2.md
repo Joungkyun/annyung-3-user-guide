@@ -53,7 +53,29 @@ olcTLSCertificateKeyFile: /etc/openldap/certs/pki/oops.org.decrypt.key
 [root@an3 ~]$ rm -f ssl-conf.ldif # ldif 파일은 굳이 보관할 필요 없습니다.
 ```
 
-##3. 설정 확인
+##3. OpenLDAP 재시작
+
+***OLC***를 이용하면 굳이 재시작 할 필요가 없지만, ***slapd*** 시작시에 기본으로 ***ldaps*** 프로토콜을 사용하지 않도록 실행이 되었기 때문에, 이를 수정해서 재시작 합니다.
+
+***/etc/sysconfig/ldap*** 에서 ***SLAPD_LDAPS*** 의 값을 ***yes***로 수정 합니다.
+
+```bash
+[root@an3 ~]$ perl -pi -e 's/^SLAPD_LDAPS=.*/SLAPD_LDAPS=yes/g' /etc/sysconfig/ldap
+[root@an3 ~]$ cat /etc/sysconfig/ldap | grep "^SLAPD_LDAPS="
+SLAPD_LDAPS=yes
+[root@an3 ~]$
+```
+
+설정을 완료 했으면, ***slapd***를 재시작 합니다.
+
+```bash
+[root@an3 ~]$ service slapd restart
+slapd 를 정지 중:                                          [  OK  ]
+slapd (을)를 시작 중:                                      [  OK  ]
+[root@an3 ~]$
+```
+
+##4. 설정 확인
 
 LDAP 매니저 권한으로 ***ldaps*** 프로토콜을 이용하여 로그인 테스트를 합니다. 어떤 권한으로 하여도 상관은 없습니다.
 
