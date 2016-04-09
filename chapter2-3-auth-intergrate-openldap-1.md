@@ -3,7 +3,7 @@
 > 참고!  
 > 3 항목에서 2 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 2 까지는 어떠한 작접이 필요한지 참고 하시고, 3 의 script sample을 이용하여 설정 하십시오.
 
-##1 package 설치
+##1. package 설치
 
 ```bash
 [root@an3 ~]$ yum install openldap-servers openldap-clients genpasswd
@@ -11,7 +11,9 @@
 
 ***genpasswd*** package는 안녕 리눅스에서만 제공 합니다. RHEL이나 CentOS에서는 안녕 리눅스의 repository 에 있는 getpasswd rpm package를 수동으로 받아서 설치 하시면 사용이 가능 합니다. RHEL/CentOS 6과 7용이 제공 됩니다. RHEL 6/7(CentOS 6/7) 외의 버전이나 다른 배포본에서는 srpm을 받아서 빌드 하여 사용하십시오.
 
-##2 Openldap 초기화
+***genpasswd*** 는 꼭 필요한 package가 아니기 때문에 굳이 없어도 상관은 없습니다.
+
+##2. Openldap 초기화
 
 ***openldap***은 ***splapd*** daemon을 이용하여 구동이 됩니다. 또한, 2.4.23 버전 부터는 ***slapd.conf*** 대신에 ***OLC(OnLineConfiguration, cn=config 구조)***로 변경이 되었습니다.
 
@@ -538,12 +540,14 @@ result: 32 No such object
 [root@an3 ~]$
 ```
 
+여기까지 작업을 하면 Master server의 준비가 완료 되었습니다.
+다음은 Slave 서버 설정을 보도록 하겠습니다.
 
 ##4. LDAP database init script
 
 여기 까지 작업을 하시면, 인증 통합을 위한 Master server의 기본 설정이 완료된 상태 입니다. 상당히 복잡한 작업인데, 이 항목에서는 위의 작업들을 간단히 할 수 있는 script 예제를 제공 합니다.
 
-이 스크립트를 이용하면, 1.2.7 까지의 작업을 수행하게 됩니다.
+이 스크립트를 이용하면, 2.7 까지의 작업을 수행하게 됩니다.
 
 ```bash
 [root@an3 ~]$ cat /etc/openldap/ldap-data-init.sh
