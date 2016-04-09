@@ -375,3 +375,22 @@ Enter LDAP Password: # input admin password
 
 1. ldapadmins group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 권한을 가진다.
 2. ldapROusers group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 읽기 권한을 가진다.
+3. 일반 account는 password entry만 제외하고 읽기 권한을 가진다.
+4. 일반 account는 자신의 password entry를 변경할 수 있다.
+5. anonymous account는 접근을 불허 한다.
+
+```bash
+[root@an3 ~]$ export BASEDN="dc=oops,dc=org"
+[root@an3 ~]$cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:/// | sed 's/^/   /g' | grep -v "^[ ]*$"
+dn: olcDatabase={-1}frontend,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: to dn.base="" by * read
+olcAccess: to dn.base="cn=subschema" by * read
+olcAccess: to dn.subtree="ou=Users,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
+olcAccess: to dn.subtree="ou=Groups,${BASEDN}" by users read by anonymous auth
+olcAccess: to dn.subtree="ou=Users,${BASEDN}" by users read by anonymous auth
+olcAccess: to * by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
+EOF
+[root@an3 ~]$
+```
