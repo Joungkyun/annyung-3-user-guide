@@ -1,7 +1,6 @@
 # OpenLDAP Master Server 설정
 
-> 참고!  
-> 3 항목에서 2 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 2 까지는 어떠한 작접이 필요한지 참고 하시고, 3 의 script sample을 이용하여 설정 하십시오.
+
 
 ##1. package 설치
 
@@ -14,6 +13,10 @@
 ***genpasswd*** 는 꼭 필요한 package가 아니기 때문에 굳이 없어도 상관은 없습니다.
 
 ##2. Openldap 초기화
+
+> 참고!  
+> Openldap 초기화는 "***4. LDAP database init script***" 에서 이 작업을 한방에 할 수 있는 script를 제공하고 있습니다. 어떤 작업을 하는지만 참고 하시고, 스크립트를 이용하여 처리 하시면 간편하게 할 수 있습니다.
+
 
 ***openldap***은 ***splapd*** daemon을 이용하여 구동이 됩니다. 또한, 2.4.23 버전 부터는 ***slapd.conf*** 대신에 ***OLC(OnLineConfiguration, cn=config 구조)***로 변경이 되었습니다.
 
