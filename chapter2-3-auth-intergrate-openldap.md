@@ -232,7 +232,7 @@ adding new entry "ou=Groups,dc=oops,dc=org"
 
 ###1.2.6 LDAP 기본 유저 생성
 
-Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 권한을 가집니다.
+Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 권한을 가집니다. 이 account, group들은 아래의 ACL에 의해서 자동으로 권한을 가지게 됩니다.
 
 1. Manager Group
   1. **ldapadmins** : ldap 관리를 할 수 있는 group
@@ -251,7 +251,117 @@ Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 
 3. System Group
   1. **ldapusers**
 
+```bash
+[root@an3 ~]$ export BASEDN="dc=oops,dc=org"
+[root@an3 ~]$ cat adduser.ldif <<EOF
+# extended LDIF
+#
+# LDAPv3
+# base <${BASEDN}> with scope subtree
+# filter: (cn=*)
+# requesting: ALL
+#
 
-이 account, group들은 아래의 ACL에 의해서 자동으로 권한을 가지게 됩니다.
+# ldapadmins, Admin
+dn: cn=ldapadmins,ou=Admin,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapadmins
+description: LDAP Management group
+gidNumber: 9999
+memberUid: ssoadmin
+
+# ldapROusers, Admin
+dn: cn=ldapROusers,ou=Admin,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapROusers
+description: LDAP Read only group
+gidNumber: 9998
+memberUid: replica
+memberUid: ssomanager
+
+# ldapusers, Groups
+dn: cn=ldapusers,ou=Groups,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapusers
+description: LDAP account groups
+gidNumber: 10000
+
+# ssoadmin, Admin
+dn: uid=ssoadmin,ou=Admin,${BASEDN}
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+gidNumber: 9997
+givenName: SSO
+sn: Admin
+displayName: SSO Admin
+uid: ssoadmin
+homeDirectory: /
+gecos: SSO Aadmin
+loginShell: /sbin/nologin
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowLastChange: 12011
+shadowExpire: 99999
+cn: SSO Admin
+uidNumber: 9999
+
+dn: uid=ssomanager,ou=Admin,${BASEDN}
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+gidNumber: 9997
+givenName: SSO
+sn: Manager
+displayName: SSO Manager
+uid: ssomanager
+homeDirectory: /
+gecos: SSO Manager
+loginShell: /sbin/nologin
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowLastChange: 12011
+shadowExpire: 99999
+cn: SSO manager
+uidNumber: 9998
+
+dn: uid=replica,ou=Admin,${BASEDN}
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+gidNumber: 9997
+givenName: Replica
+sn: User
+displayName: Replica User
+uid: replica
+homeDirectory: /
+gecos: Replica User
+loginShell: /sbin/nologin
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowLastChange: 12011
+shadowExpire: 99999
+cn: Replica User
+uidNumber: 9997
+EOF
+[root@an3 ~]$ ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -W -f adduser.ldip
+Enter LDAP Password: # input admin password
+[root@an3 ~]$
+```
 
 
