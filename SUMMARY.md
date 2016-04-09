@@ -18,7 +18,7 @@
    * [인증 통합 (Authentification/Authorization Intergrate)](chapter2-3-auth-intergrate.md)
        * [Openldap](chapter2-3-auth-intergrate-openldap.md)
            * [Master Server 설정](chapter2-3-auth-intergrate-openldap-1.md)
-           * [SSL 설정](chapter2-3-auth-intergrate-openldap-2)
+           * [SSL 설정](chapter2-3-auth-intergrate-openldap-2.md)
            * [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3)
            * [Replication 설정](chapter2-3-auth-intergrate-openldap-4)
        * [NIS](chapter2-3-auth-intergrate-nis.md)
