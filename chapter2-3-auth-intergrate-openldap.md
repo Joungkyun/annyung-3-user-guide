@@ -100,9 +100,57 @@ EOF
 
 ```bash
 [root@an3 ~]$ service slapd start
+slapd 설정 파일 확인 중:                                   [주의]
+5708bfb7 ldif_read_file: checksum error on "/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif"
+5708bfb7 ldif_read_file: checksum error on "/etc/openldap/slapd.d/cn=config/olcDatabase={2}bdb.ldif"
+config file testing succeeded
+slapd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$ # 부팅시에 slapd가 시작되도록 해 줍니다.
 [root@an3 ~]$ systemctl enable slapd
 ```
+
+위에서 slapd를 시작할 때 checksum error가 발생하는 이유는, ***openldap***이 ***OCL***로 변경된 이후 설정 파일은 ***ladpadd***, 또는 ***ldapmodify*** 등으로 설정을 변경해야 하는데, 위에서 ***DN*** 설정을 수동으로 변경을 했기 때문에 발생하는 것입니다. (물론 운영에 문제가 있지는 않습니다.)
+
+이 에러 메시지를 없애기 위해서 다음과 처리를 합니다.
+
+```bash
+[root@an3 ~]$ cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:///
+dn: olcDatabase={-1}frontend,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+replace: olcReadOnly
+olcReadOnly: FALSE
+EOF
+[root@an3 ~]$
+```
+
+***ldapmodify*** 명령으로 변경된 설정 파일들의 ***checksum***을 갱신합니다. 물론 위의 설정값들은 이 작업을 하는 목적이 ***checksum*** 갱신이기 때문에, 동일한 값으로 변경을 하는 것입니다. (이 작업은 1회만 하면 됩니다. 다음 부터는 직접 설정 파일을 수정하지 않기 때문입니다.)
+
+다시 ***slapd***를 재시작 해서 checksum 에러가 발생하는지 확인 합니다.
+
+```bash
+[root@an3 ~]$ service slapd restart
+slapd 설정 파일 확인 중:                                   [주의]
+config file testing succeeded
+slapd (을)를 시작 중:                                      [  OK  ]
+[root@an3 ~]$
+```
+
+
 
 
 
