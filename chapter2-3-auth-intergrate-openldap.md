@@ -519,7 +519,8 @@ if [ $? -eq 0 ]; then
     success "Done"
     echo
     /sbin/service slapd restart | sed 's/^/     /g'
-    /sbin/chkconfig slapd on
+    [ -f /usr/bin/systemctl ] && \
+        systemctl enable slapd || /sbin/chkconfig slapd on
 else
     failure
     echo
