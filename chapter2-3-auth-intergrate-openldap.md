@@ -7,7 +7,7 @@ openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으�
 ##1. Master server 설정
 
 > 참고!  
-> 1.2.8 항목에서 1.2 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 1.2.7 까지는 어떠한 작접이 필요한지 참고 하시고, 1.2.8 의 script sample을 이용하여 설정 하십시오.
+> 1.3 항목에서 1.2 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 1.2 까지는 어떠한 작접이 필요한지 참고 하시고, 1.3 의 script sample을 이용하여 설정 하십시오.
 
 ##1.1 package 설치
 
@@ -399,7 +399,7 @@ EOF
 [root@an3 ~]$
 ```
 
-###1.2.8. LDAP database init script
+###1.3 LDAP database init script
 
 여기 까지 작업을 하시면, 인증 통합을 위한 Master server의 기본 설정이 완료된 상태 입니다. 상당히 복잡한 작업인데, 이 항목에서는 위의 작업들을 간단히 할 수 있는 script 예제를 제공 합니다.
 
