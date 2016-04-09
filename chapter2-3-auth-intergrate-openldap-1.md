@@ -490,9 +490,9 @@ LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다. ***2.4 Ad
 [root@an3 ~]$ export BASEDN="dc=oops,dc=org"
 [root@an3 ~]$ # Manager 권한으로 ssoadmin 의 암호 변경
 [root@an3 ~]$ ldappasswd -H ldapi:/// -x -D "cn=manager,${BASEDN}" -S "uid=ssoadmin,ou=admin,${BASEDN}" -W
-New password: # 지정할 ssoadmin 의 압호 입력
+New password:          # 지정할 ssoadmin 의 압호 입력
 Re-enter new password: # 지정할 ssoadmin의 압호 재입력
-Enter LDAP Password: # ldap 관리자 암호 입력
+Enter LDAP Password:   # ldap 관리자 암호 입력
 [root@an3 ~]$
 ```
 
