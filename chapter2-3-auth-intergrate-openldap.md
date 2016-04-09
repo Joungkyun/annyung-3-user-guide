@@ -184,14 +184,51 @@ dn: olcDatabase={2}bdb,cn=config
 changetype: modify
 add: olcRootPW
 olcRootPW: {SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
-EOF  # 여기까지 실행명령
-
-SASL/EXTERNAL authentication started
-SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
-SASL SSF: 0
-modifying entry "olcDatabase={0}config,cn=config"
-modifying entry "olcDatabase={2}bdb,cn=config"
+EOF
 [root@an3 ~]$
 ```
+
+###1.2.5 LDAP Tree 생성
+
+인증에 필요한 Ldap database tree(***OU- Organiztion Unit***)를 생성합니다. 여기서는 Admin, Users, Groups database를 생성할 예정이며, 다음의 용도로 사용합니다.
+
+> ***Aadmin*** : Ldap 관리를 위한 user와 group entryp 저장  
+> ***Users***  : system account entry 저장  
+> ***Groups*** : system group entry 저장
+
+LDAP tree에서 ***DN***을 mysql의 database에 비유했다면, ***OU***는 table 정도라고 생각하면 됩니다. 위의 Admin, Users, Groups 는 ***OU***에 해당이 됩니다. 이 ***OU***안에 passwd, group entry가 들어가게 되며, mysql가 다른 점은 ***OU*** 밑에 또 ***OU***가 있을 수 있다는 점입니다. file system과 비유를 하면 ***Directory***로 생각하는 것이 더 맞을지도 모르겠습니다. 이 부분에 대해서 정확하게 알고 싶다면, LDAP 문서들을 읽어 보시는 것을 권장 합니다. 
+
+***DN*** 설정은 *설정하신 **DN***으로 수정을 하셔야 합니다.
+
+```bash
+[root@an3 ~]$ cat > addtree.ldif <<EOF
+dn: dc=oops,dc=org
+dc: oops
+o: OOPS LDAP
+objectclass: dcObject
+objectclass: organization
+objectclass: top
+
+dn: ou=Admin,dc=oops,dc=org
+ou: Users
+objectclass: organizationalUnit
+
+dn: ou=Users,dc=oops,dc=org
+ou: Users
+objectclass: organizationalUnit
+
+dn: ou=Groups,dc=oops,dc=org
+ou: Groups
+objectclass: organizationalUnit
+EOF
+[root@an3 ~]$ ldapadd -a -c -H ldapi:/// -D "cn=Manager,dc=oops,dc=org" -W -f addtree.ldif
+Enter LDAP Password: # input admin password
+adding new entry "dc=oops,dc=org"
+adding new entry "cn=Admin,dc=oops,dc=org"
+adding new entry "ou=Users,dc=oops,dc=org"
+adding new entry "ou=Groups,dc=oops,dc=org"
+[root@an3 ~]$
+```
+
 
 
