@@ -17,6 +17,7 @@
        * [Google OTP를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
    * [인증 통합 (Authentification/Authorization Intergrate)](chapter2-3-auth-intergrate.md)
        * [Openldap](chapter2-3-auth-intergrate-openldap.md)
+           * Master Server 설정
        * [NIS](chapter2-3-auth-intergrate-nis.md)
        * [Active Directory](chapter2-3-auth-intergrate-ad)
 * [Chapter 3. Web control](chapter3.md)
