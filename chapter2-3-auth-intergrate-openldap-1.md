@@ -261,7 +261,7 @@ adding new entry "ou=Groups,dc=oops,dc=org"
 [root@an3 ~]$
 ```
 
-###2.6 LDAP 기본 유저 생성
+###2.6 LDAP 기본 유저/그룹 생성
 
 Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 권한을 가집니다. 이 account, group들은 아래의 ACL에 의해서 자동으로 권한을 가지게 됩니다.
 
@@ -479,6 +479,26 @@ LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다. ***2.4 Ad
 ***BASE DN***에 설정한 account의 경우에는 ***ldappasswd*** 명령을 이용하여 변경을 할 수 있지만, LDAP 관리자의 암호는 ***slapd*** 설정 파일에 포함되어 있기 때문에 ***ldapmodify*** 명령을 이용해야 합니다.
 
 ***2.4 Admin password 설정*** 항목을 참고 하셔서 변경을 하시면 됩니다.
+
+##3.2 Account 암호 변경
+
+다음은 ***2.6 LDAP 기본 유저 생성***에서 생성한 account들의 암호를 변경하는 방법입니다. 생성된 account들은 ***ldappasswd*** 명령을 이용하여 변경을 합니다.
+
+###3.2.1 관리자가 다른 account의 암호를 변경
+
+```bash
+[root@an3 ~]$ export BASEDN="dc=oops,dc=org"
+[root@an3 ~]$ # Manager 권한으로 ssoadmin 의 암호 변경
+[root@an3 ~]$ ldappasswd -H ldapi:/// -x -D "cn=manager,${BASEDN}" -S "uid=ssoadmin,ou=admin,${BASEDN}" -W
+New password: # 지정할 ssoadmin 의 압호 입력
+Re-enter new password: # 지정할 ssoadmin의 압호 재입력
+Enter LDAP Password: # ldap 관리자 암호 입력
+[root@an3 ~]$
+```
+
+
+
+
 
 
 
