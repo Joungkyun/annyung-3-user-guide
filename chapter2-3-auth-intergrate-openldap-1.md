@@ -545,9 +545,7 @@ result: 32 No such object
 
 ##4. LDAP database init script
 
-여기 까지 작업을 하시면, 인증 통합을 위한 Master server의 기본 설정이 완료된 상태 입니다. 상당히 복잡한 작업인데, 이 항목에서는 위의 작업들을 간단히 할 수 있는 script 예제를 제공 합니다.
-
-이 스크립트를 이용하면, 2.7 까지의 작업을 수행하게 됩니다.
+다음은 "***2. Openldap 초기화***" 에서 한 작업을 해 주는 script 예제 입니다.
 
 ```bash
 [root@an3 ~]$ cat /etc/openldap/ldap-data-init.sh
