@@ -188,6 +188,37 @@ EOF
 [root@an3 ~]$
 ```
 
+변경한 LDAP 관리자의 DN은 "***cn=manager,dc=oops,dc=org***"이며, 다음의 방법으로 확인을 합니다.
+
+```bash
+[root@an3 ~]$ # "-W" 옵션으로 암호 입력을 하지 않을 경우 에러 발생
+[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org"
+ldap_bind: Server is unwilling to perform (53)
+        additional info: unauthenticated bind (DN with no password) disallowed
+[root@an3 ~]$ # 잘못된 암호를 입력했을 경우
+[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org" -W
+Enter LDAP Password:  # 틀린 암호 입력
+ldap_bind: Invalid credentials (49)
+[root@an3 ~]$ # 암호 입력이 제대로 되었을 경우
+[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=kldp,dc=org" -W
+Enter LDAP Password:
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 32 No such object
+
+# numResponses: 1
+[root@an3 ~]$
+```
+
+
 ###2.5 LDAP Tree 생성
 
 인증에 필요한 Ldap database tree(***OU- Organiztion Unit***)를 생성합니다. 여기서는 Admin, Users, Groups database를 생성할 예정이며, 다음의 용도로 사용합니다.
