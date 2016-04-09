@@ -5,9 +5,9 @@
 > 목차
 > 1. NIS
 > 2. NIS 구성 시 고려 사항
-> 1. NIS server 설정
-> 2. NIS slave 설정
-> 3. NIS client 설정
+> 3. NIS server 설정
+> 4. NIS slave 설정
+> 5. NIS client 설정
 
 ##1. NIS(Network Information Service)
 
