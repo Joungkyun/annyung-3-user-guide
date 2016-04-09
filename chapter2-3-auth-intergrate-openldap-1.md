@@ -174,7 +174,7 @@ Re-enter new password:
 
 > ***{CRYPT}$1$ggRKVU3b$TZduI8fIrxZ9LpJ9NqAJZ1***
 
-와 같이 사용을 해도 됩니다. 위의 hash 문자열은 sha512방식의 crypt 암호화된 hash로, md5 방식의 암호화 입니다. 즉, /etc/shadow의 암호화 문자열 앞에 ***{CRYPT}*** 만 prefix로 붙여 주시면 됩니다.
+와 같이 사용을 해도 됩니다. 위의 hash 문자열은 md5방식의 crypt 암호화된 hash로, md5 방식의 암호화 입니다. 즉, /etc/shadow의 암호화 문자열 앞에 ***{CRYPT}*** 만 prefix로 붙여 주시면 됩니다.
 
 그리고, 다음의 명령으로 Admin 암호를 설정 합니다.
 
