@@ -6,6 +6,9 @@ openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으�
 
 ##1. Master server 설정
 
+> 참고!  
+> 1.2.8 항목에서 1.2.7 까지의 작업을 수행하는 script 예제를 제시하고 있습니다. 1.2.7 까지는 어떠한 작접이 필요한지 참고 하시고, 1.2.8 의 script sample을 이용하여 설정 하십시오.
+
 ##1.1 package 설치
 
 ```bash
