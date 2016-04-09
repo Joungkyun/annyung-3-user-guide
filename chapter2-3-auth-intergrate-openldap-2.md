@@ -35,5 +35,43 @@ writing RSA key
 
 ##2. LDAP 설정
 
+다음과 같이 ssl-conf.ldif 파일을 생성하여, ***ldapmodify*** 명령을 이용하여 ***OLC***에 반영 합니다.
+
 ```bash
-[root@an3 ~]$ cat
+[root@an3 ~]$ cat ssl-conf.ldif
+dn: cn=config
+changetype: modify
+add: olcTLSCACertificateFile
+olcTLSCACertificateFile: /etc/openldap/certs/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+-
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/openldap/certs/pki/oops.org.crt
+-
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/openldap/certs/pki/oops.org.decrypt.key
+[root@an3 ~]$ ldapmodify -Y EXTERNAL -H ldapi:/// -f ssl-conf.ldif
+[root@an3 ~]$ rm -f ssl-conf.ldif # ldif 파일은 굳이 보관할 필요 없습니다.
+```
+
+##3. 설정 확인
+
+LDAP 매니저 권한으로 ***ldaps*** 프로토콜을 이용하여 로그인 테스트를 합니다. 어떤 권한으로 하여도 상관은 없습니다.
+
+```bash
+[root@an3 ~]$ ldapsearch -H ldaps://localhost -D "cn=manager,dc=oops,dc=org" -W
+Enter LDAP Password:
+# extended LDIF
+#
+# LDAPv3
+# base <> (default) with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 32 No such object
+
+# numResponses: 1
+[root@an3 ~]$
+```
