@@ -230,5 +230,5 @@ adding new entry "ou=Groups,dc=oops,dc=org"
 [root@an3 ~]$
 ```
 
-
+###1.2.6 LDAP Tree 생성
 
