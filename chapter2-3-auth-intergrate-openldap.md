@@ -151,6 +151,21 @@ slapd (을)를 시작 중:                                      [  OK  ]
 ```
 
 
+###1.2.4 Admin password 설정
 
+***slappasswd*** 명령을 이용하여 사용할 암호의 hash 문자열을 생성합니다.
 
+```bash
+[root@an3 ~]$ slappasswd
+New password:
+Re-enter new password:
+{SSHA}E3XuZmbZgD4YLUxykg7udnI9zzZav6f/
+[root@an3 ~]$
+```
+
+만약, system의 passwd entry에 있는 문자열을 그대로 사용하고 싶으시다면, 
+
+> ***{CRYPT}$1$v4h7GmHE$ws13QenhgY4WVyo1ulaLr0***
+
+와 같이 사용을 해도 됩니다. 위의 hash 문자열은 sha512방식의 crypt 암호화된 hash로, md5 방식의 암호화 입니다. 즉, /etc/shadow의 암호화 문자열 앞에 ***{CRYPT}*** 만 prefix로 붙여 주시면 됩니다.
 
