@@ -230,5 +230,28 @@ adding new entry "ou=Groups,dc=oops,dc=org"
 [root@an3 ~]$
 ```
 
-###1.2.6 LDAP Tree 생성
+###1.2.6 LDAP 기본 유저 생성
+
+Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 권한을 가집니다.
+
+1. Manager Group
+  1. **ldapadmins** : ldap 관리를 할 수 있는 group
+  2. **ldapROusers** : ldap 전체 data에 접근할 수 있는 readonly gruop
+2. Manager User
+  1. **ssoadmin**
+    * ldap 관리를 할 수 있는 account
+    * ***ldapadmins*** gruop member
+    * ***DN***: uid=ssoadmin,ou=Admin,dc=oops,dc=org
+  2. **ssomanager**
+    * tree 전체의 데이터에 접근 가능한 readonly account
+    * ***ldapROusers*** group member
+  3. **replica**
+    * replication에 사용하기 위한 account (readonly account)
+    * * ***ldapROusers*** group member
+3. System Group
+  1. **ldapusers**
+
+
+이 account, group들은 아래의 ACL에 의해서 자동으로 권한을 가지게 됩니다.
+
 
