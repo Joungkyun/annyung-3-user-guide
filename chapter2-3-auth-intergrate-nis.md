@@ -429,7 +429,7 @@ have just created will be used, instead of the /etc ASCII files.
 [root@an3 ~]$
 ```
 
-master와 client의 architecure가 다를 경우에는 ypxfrd 관련 에러가 발생합니다만, slave 초기화에는 문제는 없으니 참고 하십시오.
+master와 slave의 architecure가 다를 경우에는 ypxfrd 관련 에러가 발생합니다만, slave 초기화에는 문제는 없으니 참고 하십시오. (예를 들어, master는 x86_64 machine, slave는 x86 machine 일 경우)
 
 
 ###4.6 map 동기화 crontab 설정
