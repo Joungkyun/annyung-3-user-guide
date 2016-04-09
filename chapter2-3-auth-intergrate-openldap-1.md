@@ -539,8 +539,6 @@ result: 32 No such object
 ```
 
 
-
-
 ##4. LDAP database init script
 
 여기 까지 작업을 하시면, 인증 통합을 위한 Master server의 기본 설정이 완료된 상태 입니다. 상당히 복잡한 작업인데, 이 항목에서는 위의 작업들을 간단히 할 수 있는 script 예제를 제공 합니다.
