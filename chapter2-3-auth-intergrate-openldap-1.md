@@ -849,6 +849,14 @@ gidNumber: 9998
 memberUid: replica
 memberUid: ssomanager
 
+# ldapmanagers, Admin
+dn: cn=ldapmanagers,ou=Admin,${BASEDN}
+objectClass: posixGroup
+objectClass: top
+cn: ldapmanagers
+description: LDAP Manager group
+gidNumber: 9997
+
 # ldapusers, Groups
 dn: cn=ldapusers,ou=Groups,${BASEDN}
 objectClass: posixGroup
