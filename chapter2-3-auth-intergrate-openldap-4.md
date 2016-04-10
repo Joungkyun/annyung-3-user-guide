@@ -1,5 +1,11 @@
 # Replication 설정
 
+> ***목차***
+> 1. Relication user 설정
+> 2. Replication 설정
+> 3. replication 확인
+> 4. Multi-Msater Replication 유의 사항
+
 여기서의 replication 설정은 multi master 설정을 하게 됩니다. 즉, replication으로 구성된 모든 서버가 master이자 slave가 된다는 의미 입니다.
 
 그러므로, 설정 자체는 동일하게 되면, target server만 달라지게 됩니다.
@@ -115,7 +121,7 @@ adding new entry "olcOverlay=syncprov,olcDatabase={2}bdb,cn=config"
 
 ***slave*** 에서는 ***master***에서 사용한 ldif 파일 중, replica-modify.ldif에서 ***provider*** 설정만 ***master*** 서버로 등록을 해 주면 됩니다.
 
-##4. replication 확인
+##3. replication 확인
 
 ***ssoadmin*** account의 암호를 변경해 보도록 합니다.
 
@@ -185,7 +191,7 @@ userPassword:: e1NTSEF9SE16ZlQ5c0RFMEh4NGZadnRKbTNtYjBEWktTM1VTaww=
 
 역시 변경된 것을 확인할 수 있습니다.
 
-##5. Multi-Msater Replication 유의 사항
+##4. Multi-Msater Replication 유의 사항
 
 openldap의 replication에서 주의할 점은, network 단절이나 server down이 발생할 경우, 이 동안 업데이트 된 것에 대한 양측 데이터의 정합성을 보장하지 못합니다.
 
