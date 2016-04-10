@@ -114,3 +114,79 @@ adding new entry "olcOverlay=syncprov,olcDatabase={2}bdb,cn=config"
 ```
 
 ***slave*** 에서는 ***master***에서 사용한 ldif 파일 중, replica-modify.ldif에서 ***provider*** 설정만 ***master*** 서버로 등록을 해 주면 됩니다.
+
+##4. replication 확인
+
+***ssoadmin*** account의 암호를 변경해 보도록 합니다.
+
+먼저 master와 slave의 ssoadmin account의 현재 userPassword object를 확인 합니다.
+
+자신의 암호 외에 다른 account의 암호 변경은 LDAP 관리자와 ssoadmin에게만 있으며, 현재 ssoadmin의 암호가 없는 상태이기 때문에 LDAP 관리자의 권한으로 실행을 하도록 합니다.
+
+```bash
+[root@an3 ~]$ # master(an3) 계정 확인
+[root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
+Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
+[root@an3 ~]$ # slave(an3-s) 계정 확인
+[root@an3 ~]$ ldapsearch -H ldaps://an3-s.oops.org/ -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
+Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
+[root@an3 ~]$
+```
+
+***Master(an3.oops.org)***와 ***Slave(an3-s.oops.org)*** 모두 현재 ***userPassword*** object가 존재하지 않는 상태 입니다.
+
+먼저 ***Master***에서 ***ssoadmin*** account의 암호를 변경 합니다.
+
+```bash
+[root@an3 ~]$ ldappasswd -H ldaps:/// -x -D "cn=manager,dc=oops,dc=org" -S "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W
+New password:            # 변경할 암호 입력
+Re-enter new password:   # 변경할 암호 재 입력
+Enter LDAP Password:     # cn=manager(LDAP 관리자)의 암호 입력
+[root@an3 ~]$
+```
+
+암호가 변경이 되었는지, 그리고 ***Slave***로 replication이 되었는지 ***Master***와 ***Slave***의 ssoadmin account entry를 확인해 봅니다.
+
+```bash
+[root@an3 ~]$ # master(an3) 계정 확인
+[root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
+Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
+userPassword:: e1NTSEF9RW80NE4KZ2NLbXNyNDdmeFTNN3RvRVRmbUNrdlFFZTc=
+[root@an3 ~]$ # slave(an3-s) 계정 확인
+[root@an3 ~]$ ldapsearch -H ldaps://an3-s.oops.org/ -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
+Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
+userPassword:: e1NTSEF9RW80NE4KZ2NLbXNyNDdmeFTNN3RvRVRmbUNrdlFFZTc=
+[root@an3 ~]$
+```
+
+***Slave(an3-s.oops.org)***에도 ***userPassword*** object가 생성이 된 것이 확인이 됩니다. 그럼 반대로 ***Slave(an3-s.oops.org)***에서 변경을 했을 경우, ***master(an3.oops.org)***에서도 변경이 되는 지 확인 해 봅니다.
+
+```bash
+[root@an3 ~]$ ldappasswd -H ldaps://an3-s.oops.org/ -x -D "cn=manager,dc=oops,dc=org" -S "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W
+New password:            # 변경할 암호 입력
+Re-enter new password:   # 변경할 암호 재 입력
+Enter LDAP Password:     # cn=manager(LDAP 관리자)의 암호 입력
+[root@an3 ~]$
+```
+
+암호가 변경이 되었는지, 그리고 ***Master***로 replication이 되었는지 ***Master***와 ***Slave***의 ssoadmin account entry를 확인해 봅니다.
+
+```bash
+[root@an3 ~]$ # master(an3) 계정 확인
+[root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
+Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
+userPassword:: e1NTSEF9SE16ZlQ5c0RFMEh4NGZadnRKbTNtYjBEWktTM1VTaww=
+[root@an3 ~]$ # slave(an3-s) 계정 확인
+[root@an3 ~]$ ldapsearch -H ldaps://an3-s.oops.org/ -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
+Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
+userPassword:: e1NTSEF9SE16ZlQ5c0RFMEh4NGZadnRKbTNtYjBEWktTM1VTaww=
+[root@an3 ~]$
+```
+
+역시 변경된 것을 확인할 수 있습니다.
+
+##5. Multi-Msater Replication 유의 사항
+
+openldap의 replication에서 주의할 점은, network 단절이나 server down이 발생할 경우, 이 동안 업데이트 된 것에 대한 양측 데이터의 정합성을 보장하지 못합니다.
+
+즉, network 단절이나 server down이 발생할 경우, 수동으로 data를 맞추어 주든지 또는 한쪽을 기준으로 slave 설정을 다시 해야 한다는 의미 입니다.
