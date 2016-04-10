@@ -19,7 +19,7 @@
        * [Openldap](chapter2-3-auth-intergrate-openldap.md)
            * [Master Server 설정](chapter2-3-auth-intergrate-openldap-1.md)
            * [SSL 설정](chapter2-3-auth-intergrate-openldap-2.md)
-           * [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3)
+           * [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3.md)
            * [Replication 설정](chapter2-3-auth-intergrate-openldap-4)
        * [NIS](chapter2-3-auth-intergrate-nis.md)
        * [Active Directory](chapter2-3-auth-intergrate-ad)
