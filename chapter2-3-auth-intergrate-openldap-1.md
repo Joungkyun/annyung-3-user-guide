@@ -272,6 +272,7 @@ Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 
 1. Manager Group
   1. **ldapadmins** : ldap 관리를 할 수 있는 group
   2. **ldapROusers** : ldap 전체 data에 접근할 수 있는 readonly gruop
+  3. **ldapmanagers** : ldap을 관리하기 위한 account들의 default group
 2. Manager User
   1. **ssoadmin**
     * ldap 관리를 할 수 있는 account
@@ -286,7 +287,7 @@ Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 
     * ***ldapROusers*** group member
 3. System Group
   1. **ldapusers**
-    * 생성할 LDAP account들의 기본 Group
+    * 생성할 LDAP account들의 default Group
 
 아래의 명령으로 user/group을 생성 합니다.
 
