@@ -59,6 +59,9 @@ objectClass: olcSyncProvConfig
 olcOverlay: syncprov
 olcSpSessionLog: 100
 [root@an3 ~]$
+[root@an3 ~]$
+[root@an3 ~]$
+[root@an3 ~]$
 [root@an3 ~]$ cat replica-modify.ldif
 dn: cn=config
 changetype: modify
