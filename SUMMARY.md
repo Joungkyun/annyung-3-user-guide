@@ -22,7 +22,7 @@
            * [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3.md)
            * [Replication 설정](chapter2-3-auth-intergrate-openldap-4.md)
            * [Client 설정](chapter2-3-auth-intergrate-openldap-5.md)
-           * [LDAP data 관리](chapter2-3-auth-intergrate-openldap-6)
+           * [LDAP data 관리](chapter2-3-auth-intergrate-openldap-6.md)
        * [NIS](chapter2-3-auth-intergrate-nis.md)
        * [Active Directory](chapter2-3-auth-intergrate-ad)
 * [Chapter 3. Web control](chapter3.md)
