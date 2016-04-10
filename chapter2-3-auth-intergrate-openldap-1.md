@@ -782,7 +782,9 @@ echo
 echo
 echo "7. Initial Directory Information Tree"
 
-cat <<EOF | ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -w ${ROOTPPW} | sed 's/^/   /g' | grep -v "^[ ]*$"
+if [ "$1" != "slave" ]; then
+
+    cat <<EOF | ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -w ${ROOTPPW} | sed 's/^/   /g' | grep -v "^[ ]*$"
 dn: ${BASEDN}
 dc: ${BASE}
 o: ${BASEUP} LDAP
@@ -803,16 +805,24 @@ ou: Groups
 objectclass: organizationalUnit
 EOF
 
-[ $? -eq 0 ] && success "Done" || failure
-echo
-echo
-
+    [ $? -eq 0 ] && success "Done" || failure
+    echo
+    echo
+else
+    echo -n "    "
+    failure "Skip"
+    echo " this process on slave initialize"
+    echo
+    echo
+fi
 
 
 echo
 echo "8. Create default groups"
 
-cat <<EOF | ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -w ${ROOTPPW} | sed 's/^/   /g' | grep -v "^[ ]*$"
+if [ "$1" != "slave" ]; then
+
+    cat <<EOF | ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -w ${ROOTPPW} | sed 's/^/   /g' | grep -v "^[ ]*$"
 # extended LDIF
 #
 # LDAPv3
@@ -919,9 +929,17 @@ cn: Replica User
 uidNumber: 9997
 EOF
 
-[ $? -eq 0 ] && success "Done" || failure
-echo
-echo
+    [ $? -eq 0 ] && success "Done" || failure
+    echo
+    echo
+else
+    echo -n "    "
+    failure "Skip"
+    echo " this process on slave initialize"
+    echo
+    echo
+fi
+
 
 echo
 echo "9. LDAP default Settings"
