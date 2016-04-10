@@ -8,7 +8,7 @@
 
 일단, [***Master*** Server 설정](chapter2-3-auth-intergrate-openldap-1.md)문서를 참고 하여 동일하게 설정을 합니다. (SSL 설정 까지 하였다면, SSL 설정 까지 동일하게 하십시오.)
 
-설정 시의 <u>***Base DN***은 동일</u>해야 하며, LDAP manager의 암호는 관리상의 문제이므로 동일하게 할지, 다르게 할지는 알아서 결정 하십시오.
+설정 시의 <u>***Base DN***은 동일</u>해야 하며, LDAP manager의 암호는 관리 상의 문제이므로 동일하게 할지, 다르게 할지는 알아서 결정 하십시오.
 
 
 ##2. Master data 준비
