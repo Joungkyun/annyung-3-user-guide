@@ -8,7 +8,7 @@
 
 여기서의 replication 설정은 multi master 설정을 하게 됩니다. 즉, replication으로 구성된 모든 서버가 master이자 slave가 된다는 의미 입니다.
 
-그러므로, 설정 자체는 동일하게 되면, target server만 달라지게 됩니다.
+그러므로, 설정 자체는 동일하게 되며, target server만 달라지게 됩니다.
 
 ##1. Relication user 설정
 
