@@ -1,7 +1,28 @@
 # OpenLDAP Master Server 설정
 
 
-> 참고!  
+> ***목차***
+> 1. package 설치
+2. Openldap 초기화
+  1. OLC 초기화
+  2. syslog 설정
+  3. slapd 설정
+  4. Admin password 설정
+  5. LDAP Tree 생성
+  6. LDAP 기본 유저/그룹 생성
+  7. LDAP Access 정책 설정
+3. account 암호 설정
+  1. LDAP 관리자 암호 변경
+  2. Account 암호 변경
+    1. 관리자가 다른 account의 암호를 변경
+    2. 특정 DN의 암호 변경
+4. LDAP database init script
+
+<br><br>
+
+
+
+***참고!***
 > "***1. package 설치***" 과 "***2. Openldap 초기화***" 과정은 "***4. LDAP database init script***" 에서 이 작업을 한방에 할 수 있는 script를 제공하고 있습니다. 어떤 작업을 하는지만 참고 하시고, 스크립트를 이용하여 처리 하시면 간편하게 할 수 있습니다.
 > 
 
