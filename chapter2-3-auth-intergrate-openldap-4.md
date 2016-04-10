@@ -35,3 +35,82 @@ Enter LDAP Password:  # slave의 LDAP 관리자 암호 입력
 [root@an3-s ~]$ 
 ```
 
+##2. Replication 설정
+
+적당한 디렉토리에 replica-add.ldif와 replica-modify.ldif라는 2개의 ldif 파일을 아래와 생성 합니다. (변경이 필요한 부분에는 주석을 달아 놓았습니다. ldapadd와 ldapmodify로 등록을 할 때는 주석이 있으면 안되니, 제거하십시오.)
+
+```bash
+[root@an3 ~]$ cat replica-add.ldif
+dn: cn=module,cn=config
+objectClass: olcModuleList
+cn: module
+olcModulePath: /usr/lib64/openldap
+olcModuleLoad: syncprov.la
+
+dn: olcOverlay=syncprov,olcDatabase={2}bdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+olcSpSessionLog: 100
+[root@an3 ~]$
+[root@an3 ~]$ cat replica-modify.ldif
+dn: cn=config
+changetype: modify
+replace: olcServerID
+olcServerID: 0
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+add: olcSyncRepl
+olcSyncRepl: rid=001
+  # 동기화 시킬 서버를 지정합니다.
+  provider=ldaps://an3-s.oops.org/
+  bindmethod=simple
+  # dc=oops,dc=org 부분은 설정한 Base DN으로 변경
+  binddn="uid=replica,ou=Admin,dc=oops,dc=org"
+  # replica account의 암호를 평문으로 등록
+  credentials=6dGU6sD/
+  # dc=oops,dc=org 부분은 설정한 Base DN으로 변경
+  searchbase="dc=oops,dc=org"
+  scope=sub
+  schemachecking=on
+  type=refreshAndPersist
+  retry="30 5 300 3"
+  interval=00:00:05:00
+-
+add: olcMirrorMode
+olcMirrorMode: TRUE
+
+dn: olcOverlay=syncprov,olcDatabase={2}bdb,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+[root@an3 ~]$
+```
+
+ldif 파일이 준비가 되었으며, master와 slave 모두 등록을 합니다. ***replica-add.ldif***는 ***ldapadd*** 명령으로 등록을 하고, ***replica-modify.ldif***는 ***ldapmodify*** 명령을 이용하여 등록 합니다.
+
+```bash
+[root@an3 ~]$ ldapadd -Y EXTERNAL -H ldapi:/// -f ./replica-add.ldif
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+adding new entry "cn=module,cn=config"
+
+adding new entry "olcOverlay=syncprov,olcDatabase={2}bdb,cn=config"
+
+[root@an3 ~]$ ldapmodify -Y EXTERNAL -H ldapi:/// -f ./replica-modify.ldif
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "cn=config"
+
+modifying entry "olcDatabase={2}bdb,cn=config"
+
+adding new entry "olcOverlay=syncprov,olcDatabase={2}bdb,cn=config"
+
+[root@an3 ~]$
+```
+
+***slave*** 에서는 ***master***에서 사용한 ldif 파일 중, replica-modify.ldif에서 ***provider*** 설정만 ***master*** 서버로 등록을 해 주면 됩니다.
