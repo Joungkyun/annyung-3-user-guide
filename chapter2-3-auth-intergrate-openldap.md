@@ -9,3 +9,4 @@ openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으�
 3. [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3.md)
 4. [Replication 설정](chapter2-3-auth-intergrate-openldap-4.md)
 5. [Client 설정](chapter2-3-auth-intergrate-openldap-5.md)
+6. [LDAP Data 관리](chapter2-3-auth-intergrate-openldap-6.md)
