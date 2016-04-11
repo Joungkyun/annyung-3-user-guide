@@ -16,7 +16,7 @@
   2. [login account chroot](chapter2-2-pam-control-2.md)
   3. [Google OPT를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
 3. [인증 통합 (Authentification/Authorization Intergrate)](chapter2-3-auth-intergrate.md)
-  1. Openldap
+  1. [Openldap](chapter2-3-auth-intergrate-openldap.md)
   2. [NIS](chapter2-3-auth-intergrate-nis.md)
   3. Active Directory
 
