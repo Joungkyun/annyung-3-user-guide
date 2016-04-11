@@ -364,7 +364,7 @@ slave server에서는 ***ypxfrd***와 ***yppasswdd***는 구동하지 않습니�
 [root@an3 ~]$ service rpcbind start
 [root@an3 ~]$ service ypserv start
 [root@an3 ~]$ # booting 시에 시작 되도록 설정
-[root@an3 ~]$ systemctl enable rpcbind ypbind
+[root@an3 ~]$ systemctl enable rpcbind ypserv
 ```
 
 ###4.5 Slave database 초기화
