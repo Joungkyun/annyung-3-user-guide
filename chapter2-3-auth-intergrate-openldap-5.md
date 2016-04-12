@@ -173,7 +173,7 @@ shadowWarning: 0
 shadowInactive: 99999
 shadowExpire: 99999
 cn: ldapuser1
-userPassword: {CRYPT}$1$uhJ4s1Ui$NWnkenGG4ym.YsUDSc5SX.
+userPassword: {CRYPT}$1$ORDoH6WC$b5T.3AUpf1eICJVTRIPzO1
 shadowLastChange: 16903
 EOF
 [root@ldap1 ~]$ ldapadd -x -D cn=manager,dc=oops,dc=org -W -f ldapuser1.ldif
@@ -193,5 +193,12 @@ ldapuser1:x:10001:10000:"LDAP user 1":/home/staff/ldapuser1:/bin/bash
 [root@an3 ~]$ # shadow entry 를 확인 합니다.
 [root@an3 ~]$ getent shadow | grep ldapuser1
 ldapuser1:$1$uhJ4s1Ui$NWnkenGG4ym.YsUDSc5SX.:16903:0:99999:0:99999:99999:0
+[root@an3 ~]$
+```
+
+마지막으로 login 을 테스트 해 봅니다.
+
+```bash
+[root@an3 ~]$ ssh ldapuser1@localhost
 [root@an3 ~]$
 ```
