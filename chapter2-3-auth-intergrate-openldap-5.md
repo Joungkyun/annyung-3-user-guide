@@ -4,7 +4,8 @@
 >1. 연동에 필요한 인증 설정
 >2. 필요 package 설치
 >3. 인증 연동 설정
->3. nslcd 설정
+>4. 연동 확인
+>
 
 <br><br>
 
@@ -98,8 +99,13 @@ base   shadow ou=Users,dc=oops,dc=org
 EOF
 [root@an3 ~]$ chmod 600 /etc/nslcd.conf
 [root@an3 ~]$
+[root@an3 ~]$ # nslcd 재시작
+[root@an3 ~]$ service nslcd restart
+nslcd 를 정지 중:                                          [실패]
+nslcd (을)를 시작 중:                                      [  OK  ]
+[root@an3 ~]$ systemctl enable nslcd
+[root@an3 ~]$
 ```
-
 
 다음의 명령으로 시스템을 LDAP에 연동 합니다.
 
@@ -107,5 +113,86 @@ EOF
 [root@an3 ~]$ authconfig --enableldap \
                        --enableldapauth \
                        --enablemkhomedir \
-                       --update 
+                       --update
+[root@an3 ~]$
+```
+
+여기까지 하면, 기본적으로 연동이 완료 되었습니다. 
+
+## 4. 연동 확인
+
+먼저, ***pwck***와 ***grpck*** 명령으로 /etc/passwd 와 /etc/group, /etc/shadow를 정리 합니다. (uid, gid 순서로 sort를 합니다.)
+
+```
+[root@an3 ~]$ pwck -s && grpck -s
+[root@an3 ~]$
+```
+
+다음 시스템 계정 정보를 확인 합니다.
+
+```bash
+[root@an3 ~]$ getent passwd
+root:x:0:0:root:/root:/bin/bash
+   ... 중략 ...
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+saslauth:x:499:76:"Saslauthd user":/var/empty/saslauth:/sbin/nologin
+[root@an3 ~]$ getent group
+root:x:0:
+  ... 중략 ...
+nobody:x:99:
+users:x:100:
+ldapusers:*:10000:
+[root@an3 ~]$
+```
+
+***OU=Users***에 추가된 account가 없기 때문에 passwd list에서는 ldap account가 보이지 않지만, group list에서는 ***OU=Groups***에 생성한 ***ldapusers*** group을 확인할 수 있습니다.
+
+그럼, master server에서 ***ldapuser1*** 이라는 account를 추가해 보도록 하겠습니다.
+
+```bash
+[root@ladp1 ~]$ cat > ldapuser1.ldif <<EOF
+dn: uid=ldapuser1,ou=Users,dc=oops,dc=org
+objectClass: posixAccount
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: shadowAccount
+uidNumber: 10002
+gidNumber: 10000
+givenName: 이름
+sn: 성
+uid: ldapuser1
+homeDirectory: /home/staff/ldapuser1
+gecos: LDAP user 1
+loginShell: /bin/bash
+shadowFlag: 0
+shadowMin: 0
+shadowMax: 99999
+shadowWarning: 0
+shadowInactive: 99999
+shadowExpire: 99999
+cn: ldapuser1
+userPassword: {CRYPT}$1$uhJ4s1Ui$NWnkenGG4ym.YsUDSc5SX.
+shadowLastChange: 16903
+EOF
+[root@ldap1 ~]$ ldapadd -x -D cn=manager,dc=oops,dc=org -W -f ldapuser1.ldif
+Enter LDAP Password: # LDAP 관리자 암호 입력
+adding new entry "uid=ldapuser1,ou=Users,dc=oops,dc=org"
+[root@ldap1 ~]$
+```
+
+일단, 위의 정보를 그대로 입력해서 테스트 유저를 만듭니다. 위의 예제의 암호는 "***asdf***"를 md5 crypt 한 것입니다. 유저 생성에 대해서는 뒤에서 따로 다룰 예정 입니다.
+
+다음, 연동한 client에서 다시 확인을 해 봅니다.
+
+```bash
+[root@an3 ~]$ getent passwd
+root:x:0:0:root:/root:/bin/bash
+   ... 중략 ...
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+saslauth:x:499:76:"Saslauthd user":/var/empty/saslauth:/sbin/nologin
+[root@an3 ~]$
 ```
