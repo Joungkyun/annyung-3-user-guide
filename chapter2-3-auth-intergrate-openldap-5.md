@@ -150,9 +150,8 @@ nss_base_shadow    ou=Users,dc=example,dc=com?one
 nss_base_group     ou=Groups,dc=example,dc=com?one
 
 # password hashing
-# slappasswd에서 사용하는 {SSHA}를 사용하기 위해서는 exop로 변경을 해야 하지만,
-# 호환성상 md5를 사용하는 것을 권장. md5로 지정을 하면 md5 crypt, sha512 crypt
-# 로 로그인이 가능 합니다.
+# md5로 지정을 하면 md5 crypt, sha512 crypt를 이용하여 로그인이 가능 합니다.
+# {SSHA}는 로그인이 안됩니다.
 pam_password md5
 [root@an2 ~]
 ```
