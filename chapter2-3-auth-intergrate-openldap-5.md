@@ -44,7 +44,7 @@ Enter LDAP Password:     # cn=manager(LDAP 관리자)의 암호 입력
 LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니다.)에서 ***nss-pam-ldapd*** package와 ***pam_ldap*** package를 설치합니다.
 
 ```bash
-[root@an3 ~]$ yum install openldap-clients nss-pam-ldapd pam_ldap
+[root@an3 ~]$ yum install openldap-clients nss-pam-ldapd
 ```
 
 ## 3. 인증 연동 설정
