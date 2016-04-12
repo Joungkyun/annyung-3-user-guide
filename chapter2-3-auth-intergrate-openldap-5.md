@@ -163,7 +163,7 @@ gidNumber: 10000
 givenName: 이름
 sn: 성
 uid: ldapuser1
-homeDirectory: /home/ldapuser1
+homeDirectory: /home/ldapuser/ldapuser1
 gecos: LDAP user 1
 loginShell: /bin/bash
 shadowFlag: 0
@@ -189,7 +189,7 @@ adding new entry "uid=ldapuser1,ou=Users,dc=oops,dc=org"
 ```bash
 [root@an3 ~]$ # password entry 를 확인 합니다.
 [root@an3 ~]$ getent passwd | grep ldapuser1
-ldapuser1:x:10001:10000:"LDAP user 1":/home/staff/ldapuser1:/bin/bash
+ldapuser1:x:10001:10000:"LDAP user 1":/home/ldapuser/ldapuser1:/bin/bash
 [root@an3 ~]$ # shadow entry 를 확인 합니다.
 [root@an3 ~]$ getent shadow | grep ldapuser1
 ldapuser1:$1$ORDoH6WC$b5T.3AUpf1eICJVTRIPzO1:16903:0:99999:0:99999:99999:0
@@ -207,6 +207,6 @@ Warning!! Authorized users only.
 All activity may be monitored and reported
 
 ldapuser1@localhost's password:
-Creating directory '/home/ldapuser1'.
+Creating directory '/home/ldapuser/ldapuser1'.
 [ldapuser1@an3 ~]$
 ```
