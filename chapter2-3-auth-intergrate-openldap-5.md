@@ -187,12 +187,11 @@ adding new entry "uid=ldapuser1,ou=Users,dc=oops,dc=org"
 다음, 연동한 client에서 다시 확인을 해 봅니다.
 
 ```bash
-[root@an3 ~]$ getent passwd
-root:x:0:0:root:/root:/bin/bash
-   ... 중략 ...
-sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
-postfix:x:89:89::/var/spool/postfix:/sbin/nologin
-nobody:x:99:99:Nobody:/:/sbin/nologin
-saslauth:x:499:76:"Saslauthd user":/var/empty/saslauth:/sbin/nologin
+[root@an3 ~]$ # password entry 를 확인 합니다.
+[root@an3 ~]$ getent passwd | grep ldapuser1
+ldapuser1:x:10001:10000:"LDAP user 1":/home/staff/ldapuser1:/bin/bash
+[root@an3 ~]$ # shadow entry 를 확인 합니다.
+[root@an3 ~]$ getent shadow | grep ldapuser1
+ldapuser1:$1$uhJ4s1Ui$NWnkenGG4ym.YsUDSc5SX.:16903:0:99999:0:99999:99999:0
 [root@an3 ~]$
 ```
