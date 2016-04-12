@@ -163,7 +163,7 @@ gidNumber: 10000
 givenName: 이름
 sn: 성
 uid: ldapuser1
-homeDirectory: /home/staff/ldapuser1
+homeDirectory: /home/ldapuser1
 gecos: LDAP user 1
 loginShell: /bin/bash
 shadowFlag: 0
@@ -207,6 +207,6 @@ Warning!! Authorized users only.
 All activity may be monitored and reported
 
 ldapuser1@localhost's password:
-Creating directory '/home/staff/ldapuser1'.
+Creating directory '/home/ldapuser1'.
 [ldapuser1@an3 ~]$
 ```
