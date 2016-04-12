@@ -206,7 +206,7 @@ Login an3.oops.org on an 01:32 on Wednesday, 13 April 2016
 Warning!! Authorized users only.
 All activity may be monitored and reported
 
-ldapuser1@localhost's password:
+ldapuser1@localhost''s password:
 Creating directory '/home/ldapuser/ldapuser1'.
 [ldapuser1@an3 ~]$
 ```
