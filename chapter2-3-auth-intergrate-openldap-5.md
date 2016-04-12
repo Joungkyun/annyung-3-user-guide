@@ -192,7 +192,7 @@ adding new entry "uid=ldapuser1,ou=Users,dc=oops,dc=org"
 ldapuser1:x:10001:10000:"LDAP user 1":/home/staff/ldapuser1:/bin/bash
 [root@an3 ~]$ # shadow entry 를 확인 합니다.
 [root@an3 ~]$ getent shadow | grep ldapuser1
-ldapuser1:$1$uhJ4s1Ui$NWnkenGG4ym.YsUDSc5SX.:16903:0:99999:0:99999:99999:0
+ldapuser1:$1$ORDoH6WC$b5T.3AUpf1eICJVTRIPzO1:16903:0:99999:0:99999:99999:0
 [root@an3 ~]$
 ```
 
