@@ -49,7 +49,7 @@ writing RSA key
 dn: cn=config
 changetype: modify
 add: olcTLSCACertificateFile
-olcTLSCACertificateFile: /etc/openldap/certs/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+olcTLSCACertificateFile: /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
 -
 replace: olcTLSCertificateFile
 olcTLSCertificateFile: /etc/openldap/certs/pki/oops.org.crt
