@@ -48,13 +48,56 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 
 ## 3. 인증 연동 설정
 
-먼저, LDAP 서버 구성시에 SSL을 가능하도록 하였다면, 인증서의 CA 인증서를 클라이언트에 복사 합니다.
+먼저, LDAP 서버 구성시에 SSL을 가능하도록 하였다면, 인증서의 CA 인증서를 클라이언트에 복사 합니다. CA 인증서는 앞에서 예로 든 ***startssl***의 공인 인증서를 예로 듭니다. self sign을 하셨거나 다른 공인 인증서를 사용하신다면, 사용하는 인증서의 CA 인증서를 복사 하시면 됩니다.
 
 ```bash
-[root@an3 ~] rsync -av ldap1:/etc/openldap/certs/pki
+[root@an3 ~]$ rsync -av \
+     ldap1:/etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem \
+     /etc/openldap/certs/
+[root@an3 ~]$ chmod 644 /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
+[root@an3 ~]$
+```
 
+다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 에 LDAP 기본 설정을 하도록 합니다.
 
-***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 에 인증 설정을 하도록 합니다.
+```bash
+[root@an3 ~]$ # 먼저 /etc/openldap/ldap.conf 를 먼저 설정 합니다.
+[root@an3 ~]$ cat >> /etc/openldap/ldap.conf <<EOF
+TLS_CACERT /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
+URI ldaps://ldap1.oops.org/
+URI ldaps://ldap2.oops.org/
+BASE dc=oops,dc=org
+EOF
+[root@an3 ~]$
+[root@an3 ~]$ # 다음은, /etc/nslcd.conf 를 설정 합니다.
+[root@an3 ~]$
+[root@ane ~]$ # 기본 설정을 제거 합니다.
+[root@an3 ~]$ perl -pi -e 's/^(uid|gid|uri|base)[\s]+/#$1 /g' /etc/nslcd.conf
+[root@an3 ~]$ # 필요한 설정을 추가 합니다.
+[root@an3 ~]$ cat >> /etc/nslcd.conf <<EOF
+# SSL 설정
+ssl no
+tls_cacertdir /etc/openldap/cacerts
+tls_cacertfile /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
+
+# LDAP servers
+uri ldaps://ldap1.oops.org/
+uri ldaps://ldap2.oops.org/
+
+# 인증 정보
+binddn uid=ssomanager,ou=admin,dc=oops,dc=org
+# LDAP 서버에서 설정한 ssomanager의 암호를 평문으로 작성
+bindpw 평문암호
+
+# database biding
+base dc=oops,dc=org
+base   group  ou=Groups,dc=oops,dc=org
+base   passwd ou=Users,dc=oops,dc=org
+base   shadow ou=Users,dc=oops,dc=org
+EOF
+[root@an3 ~]$ chmod 600 /etc/nslcd.conf
+[root@an3 ~]$
+```
 
 
 다음의 명령으로 시스템을 LDAP에 연동 합니다.
