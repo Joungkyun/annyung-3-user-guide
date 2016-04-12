@@ -90,7 +90,7 @@ slapd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$ cat >> /etc/openldap/ldap.conf << EOF
 
 TLS_CACERTDIR   /etc/openldap/certs
-TLS_CACERT      /etc/openldap/certs/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+TLS_CACERT      /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
 EOF
 [root@an3 ~]$
 ```
