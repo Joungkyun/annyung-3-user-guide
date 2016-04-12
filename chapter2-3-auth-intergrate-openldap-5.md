@@ -200,5 +200,13 @@ ldapuser1:$1$ORDoH6WC$b5T.3AUpf1eICJVTRIPzO1:16903:0:99999:0:99999:99999:0
 
 ```bash
 [root@an3 ~]$ ssh ldapuser1@localhost
-[root@an3 ~]$
+AnNyung LInux 3 (Labas)
+Login an3.oops.org on an 01:32 on Wednesday, 13 April 2016
+
+Warning!! Authorized users only.
+All activity may be monitored and reported
+
+ldapuser1@localhost's password:
+Creating directory '/home/staff/ldapuser1'.
+[ldapuser1@an3 ~]$
 ```
