@@ -116,6 +116,47 @@ nslcd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$
 ```
 
+RHEL 6/CentOS 6/안녕 2에서는 ***/etc/pam_ldap.conf***의 내용을 다음과 같이 수정해야 합니다.
+
+```bash
+[root@an2 ~]$ cat /etc/pam_ldap.conf
+# The distinguished name of the search base.
+base dc=kldp,dc=org
+
+# Another way to specify your LDAP server is to provide an
+# uri with the server name. This allows to use
+# Unix Domain Sockets to connect to a local LDAP Server.
+uri ldaps://ldap1.oops.org/
+uri ldaps://ldap2.oops.org/
+
+# OpenLDAP SSL mechanism
+# start_tls mechanism uses the normal LDAP port, LDAPS typically 636
+ssl no
+tls_cacertdir /etc/openldap/cacerts
+tls_cacertfile /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+
+# RFC2307bis naming contexts
+# Syntax:
+# nss_base_XXX      base?scope?filter
+# where scope is {base,one,sub}
+# and filter is a filter to be &'d with the
+# default filter.
+# You can omit the suffix eg:
+# nss_base_passwd   ou=People,
+# to append the default base DN but this
+# may incur a small performance impact.
+nss_base_passwd    ou=Users,dc=example,dc=com?one
+nss_base_shadow    ou=Users,dc=example,dc=com?one
+nss_base_group     ou=Groups,dc=example,dc=com?one
+
+# password hashing
+# slappasswd에서 사용하는 {SSHA}를 사용하기 위해서는 exop로 변경을 해야 하지만,
+# 호환성상 md5를 사용하는 것을 권장. md5로 지정을 하면 md5 crypt, sha512 crypt
+# 로 로그인이 가능 합니다.
+pam_password md5
+[root@an2 ~]
+```
+
 
 여기까지 하면, 기본적으로 연동이 완료 되었습니다. 
 
