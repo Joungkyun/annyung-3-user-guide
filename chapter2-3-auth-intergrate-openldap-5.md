@@ -91,6 +91,7 @@ bindpw 평문암호
 
 # database biding
 base dc=oops,dc=org
+# Admin database를 출력하지 않도록 제한을 함
 base   group  ou=Groups,dc=oops,dc=org
 base   passwd ou=Users,dc=oops,dc=org
 base   shadow ou=Users,dc=oops,dc=org
