@@ -59,23 +59,33 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 [root@an3 ~]$
 ```
 
-다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 에 LDAP 기본 설정을 하도록 합니다.
+다음의 명령으로 시스템을 LDAP에 연동 합니다.
+
+```bash
+[root@an3 ~]$ authconfig --enableldap \
+                       --enableldapauth \
+                       --enablemkhomedir \
+                       --update
+[root@an3 ~]$
+```
+
+다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 의 내용을 다음과 같이 수정 합니다.
 
 ```bash
 [root@an3 ~]$ # 먼저 /etc/openldap/ldap.conf 를 먼저 설정 합니다.
-[root@an3 ~]$ cat >> /etc/openldap/ldap.conf <<EOF
+[root@an3 ~]$ cat /etc/openldap/ldap.conf
+TLS_CACERTDIR /etc/openldap/cacerts
 TLS_CACERT /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
 URI ldaps://ldap1.oops.org/
 URI ldaps://ldap2.oops.org/
 BASE dc=oops,dc=org
-EOF
 [root@an3 ~]$
 [root@an3 ~]$ # 다음은, /etc/nslcd.conf 를 설정 합니다.
 [root@an3 ~]$
-[root@ane ~]$ # 기본 설정을 제거 합니다.
-[root@an3 ~]$ perl -pi -e 's/^(uid|gid|uri|base)[\s]+/#$1 /g' /etc/nslcd.conf
-[root@an3 ~]$ # 필요한 설정을 추가 합니다.
-[root@an3 ~]$ cat >> /etc/nslcd.conf <<EOF
+[root@an3 ~]$ cat /etc/nslcd.conf
+uid nslcd
+gid ldap
+
 # SSL 설정
 ssl no
 tls_cacertdir /etc/openldap/cacerts
@@ -96,7 +106,6 @@ base dc=oops,dc=org
 base   group  ou=Groups,dc=oops,dc=org
 base   passwd ou=Users,dc=oops,dc=org
 base   shadow ou=Users,dc=oops,dc=org
-EOF
 [root@an3 ~]$ chmod 600 /etc/nslcd.conf
 [root@an3 ~]$
 [root@an3 ~]$ # nslcd 재시작
@@ -107,15 +116,6 @@ nslcd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$
 ```
 
-다음의 명령으로 시스템을 LDAP에 연동 합니다.
-
-```bash
-[root@an3 ~]$ authconfig --enableldap \
-                       --enableldapauth \
-                       --enablemkhomedir \
-                       --update
-[root@an3 ~]$
-```
 
 여기까지 하면, 기본적으로 연동이 완료 되었습니다. 
 
