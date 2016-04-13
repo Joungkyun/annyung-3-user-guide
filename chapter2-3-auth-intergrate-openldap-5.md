@@ -64,20 +64,21 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 ```bash
 [root@an3 ~]$ authconfig --enableldap \
                        --enableldapauth \
+                       --ldapserver="ldaps://ldap1.oops.org ldaps://ldap2.oops.org" \
+                       --ldapbasedn="dc=oops,dc=org" \
                        --enablemkhomedir \
                        --update
 [root@an3 ~]$
 ```
 
-다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 의 내용을 다음과 같이 수정 합니다.
+다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 에서 다음의 값을들 확인 합니다. 다르면 수정을 하고, 설정이 안되어 있으면 추가해 주도록 합니다.
 
 ```bash
 [root@an3 ~]$ # 먼저 /etc/openldap/ldap.conf 를 먼저 설정 합니다.
 [root@an3 ~]$ cat /etc/openldap/ldap.conf
 TLS_CACERTDIR /etc/openldap/cacerts
 TLS_CACERT /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
-URI ldaps://ldap1.oops.org/
-URI ldaps://ldap2.oops.org/
+URI ldaps://ldap1.oops.org/ ldaps://ldap2.oops.org
 BASE dc=oops,dc=org
 [root@an3 ~]$
 [root@an3 ~]$ # 다음은, /etc/nslcd.conf 를 설정 합니다.
@@ -92,8 +93,7 @@ tls_cacertdir /etc/openldap/cacerts
 tls_cacertfile /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
 
 # LDAP servers
-uri ldaps://ldap1.oops.org/
-uri ldaps://ldap2.oops.org/
+uri ldaps://ldap1.oops.org/ ldaps://ldap2.oops.org/
 
 # 인증 정보
 binddn uid=ssomanager,ou=admin,dc=oops,dc=org
@@ -126,8 +126,7 @@ base dc=kldp,dc=org
 # Another way to specify your LDAP server is to provide an
 # uri with the server name. This allows to use
 # Unix Domain Sockets to connect to a local LDAP Server.
-uri ldaps://ldap1.oops.org/
-uri ldaps://ldap2.oops.org/
+uri ldaps://ldap1.oops.org/ ldaps://ldap2.oops.org/
 
 # OpenLDAP SSL mechanism
 # start_tls mechanism uses the normal LDAP port, LDAPS typically 636
