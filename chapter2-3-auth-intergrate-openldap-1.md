@@ -246,13 +246,13 @@ result: 32 No such object
 
 ###2.5 LDAP Tree 생성
 
-인증에 필요한 Ldap database tree(***OU- Organiztion Unit***)를 생성합니다. 여기서는 Admin, Users, Groups database를 생성할 예정이며, 다음의 용도로 사용합니다.
+인증에 필요한 Ldap database tree(***OU- Organiztion Unit***)를 생성합니다. 여기서는 Admin, People, Group database를 생성할 예정이며, 다음의 용도로 사용합니다.
 
 > ***Aadmin*** : Ldap 관리를 위한 user와 group entryp 저장  
-> ***Users***  : system account entry 저장  
-> ***Groups*** : system group entry 저장
+> ***People***  : system account entry 저장  
+> ***Group*** : system group entry 저장
 
-LDAP tree에서 ***DN***을 mysql의 database에 비유했다면, ***OU***는 table 정도라고 생각하면 됩니다. 위의 Admin, Users, Groups 는 ***OU***에 해당이 됩니다. 이 ***OU***안에 passwd, group entry가 들어가게 되며, mysql가 다른 점은 ***OU*** 밑에 또 ***OU***가 있을 수 있다는 점입니다. file system과 비유를 하면 ***Directory***로 생각하는 것이 더 맞을지도 모르겠습니다. 이 부분에 대해서 정확하게 알고 싶다면, LDAP 문서들을 읽어 보시는 것을 권장 합니다. 
+LDAP tree에서 ***DN***을 mysql의 database에 비유했다면, ***OU***는 table 정도라고 생각하면 됩니다. 위의 Admin, People, Group 는 ***OU***에 해당이 됩니다. 이 ***OU***안에 passwd, group entry가 들어가게 되며, mysql가 다른 점은 ***OU*** 밑에 또 ***OU***가 있을 수 있다는 점입니다. file system과 비유를 하면 ***Directory***로 생각하는 것이 더 맞을지도 모르겠습니다. 이 부분에 대해서 정확하게 알고 싶다면, LDAP 문서들을 읽어 보시는 것을 권장 합니다. 
 
 ***DN*** 설정은 *설정하신 **DN***으로 수정을 하셔야 합니다.
 
@@ -266,23 +266,23 @@ objectclass: organization
 objectclass: top
 
 dn: ou=Admin,dc=oops,dc=org
-ou: Users
+ou: Admin
 objectclass: organizationalUnit
 
-dn: ou=Users,dc=oops,dc=org
-ou: Users
+dn: ou=People,dc=oops,dc=org
+ou: People
 objectclass: organizationalUnit
 
-dn: ou=Groups,dc=oops,dc=org
-ou: Groups
+dn: ou=Group,dc=oops,dc=org
+ou: Group
 objectclass: organizationalUnit
 EOF
 [root@an3 ~]$ ldapadd -a -c -H ldapi:/// -D "cn=Manager,dc=oops,dc=org" -W -f addtree.ldif
 Enter LDAP Password: # input admin password
 adding new entry "dc=oops,dc=org"
 adding new entry "ou=Admin,dc=oops,dc=org"
-adding new entry "ou=Users,dc=oops,dc=org"
-adding new entry "ou=Groups,dc=oops,dc=org"
+adding new entry "ou=People,dc=oops,dc=org"
+adding new entry "ou=Group,dc=oops,dc=org"
 [root@an3 ~]$
 ```
 
@@ -342,8 +342,8 @@ gidNumber: 9998
 memberUid: replica
 memberUid: ssomanager
 
-# ldapusers, Groups
-dn: cn=ldapusers,ou=Groups,${BASEDN}
+# ldapusers, Group
+dn: cn=ldapusers,ou=Group,${BASEDN}
 objectClass: posixGroup
 objectClass: top
 cn: ldapusers
@@ -427,27 +427,27 @@ Enter LDAP Password: # input admin password
 
 아직 해당 account에 대한 암호가 설정이 되지 않은 상태 이며, 아래에서 passwd 설정 하는 방법을 따로 설명 합니다.
 
-다음은, Groups OU에 ldapusers group이 잘 생성이 되었는지 확인하여 봅니다.
+다음은, Group OU에 ldapusers group이 잘 생성이 되었는지 확인하여 봅니다.
 
 ```bash
-[root@an3 ~]$ # cn=manager,dc=oops,dc=org 권한으로 ou=Groups,dc=oops,dc=org 의 entry 탐색
-[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org" -W -b "ou=Groups,dc=oops,dc=org"
+[root@an3 ~]$ # cn=manager,dc=oops,dc=org 권한으로 ou=Group,dc=oops,dc=org 의 entry 탐색
+[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org" -W -b "ou=Group,dc=oops,dc=org"
 Enter LDAP Password: # LDAP 관리자 암호(여기서의 예는 "asdf!2345") 입력
 # extended LDIF
 #
 # LDAPv3
-# base <ou=Groups,dc=kldp,dc=org> with scope subtree
+# base <ou=Group,dc=kldp,dc=org> with scope subtree
 # filter: (objectclass=*)
 # requesting: ALL
 #
 
-# Groups, oops.org
-dn: ou=Groups,dc=oops,dc=org
-ou: Groups
+# Group, oops.org
+dn: ou=Group,dc=oops,dc=org
+ou: Group
 objectClass: organizationalUnit
 
-# ldapusers, Groups, oops.org
-dn: cn=ldapusers,ou=Groups,dc=oops,dc=org
+# ldapusers, Group, oops.org
+dn: cn=ldapusers,ou=Group,dc=oops,dc=org
 objectClass: posixGroup
 objectClass: top
 cn: ldapusers
@@ -483,9 +483,9 @@ changetype: modify
 add: olcAccess
 olcAccess: to dn.base="" by * read
 olcAccess: to dn.base="cn=subschema" by * read
-olcAccess: to dn.subtree="ou=Users,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
-olcAccess: to dn.subtree="ou=Groups,${BASEDN}" by users read by anonymous auth
-olcAccess: to dn.subtree="ou=Users,${BASEDN}" by users read by anonymous auth
+olcAccess: to dn.subtree="ou=People,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
+olcAccess: to dn.subtree="ou=Group,${BASEDN}" by users read by anonymous auth
+olcAccess: to dn.subtree="ou=People,${BASEDN}" by users read by anonymous auth
 olcAccess: to * by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
 EOF
 [root@an3 ~]$
@@ -814,15 +814,15 @@ objectclass: organization
 objectclass: top
 
 dn: ou=Admin,${BASEDN}
-ou: Users
+ou: Admin
 objectclass: organizationalUnit
 
-dn: ou=Users,${BASEDN}
-ou: Users
+dn: ou=People,${BASEDN}
+ou: People
 objectclass: organizationalUnit
 
-dn: ou=Groups,${BASEDN}
-ou: Groups
+dn: ou=Group,${BASEDN}
+ou: Group
 objectclass: organizationalUnit
 EOF
 
@@ -879,8 +879,8 @@ cn: ldapmanagers
 description: LDAP Manager group
 gidNumber: 9997
 
-# ldapusers, Groups
-dn: cn=ldapusers,ou=Groups,${BASEDN}
+# ldapusers, Group
+dn: cn=ldapusers,ou=Group,${BASEDN}
 objectClass: posixGroup
 objectClass: top
 cn: ldapusers
@@ -979,9 +979,9 @@ changetype: modify
 add: olcAccess
 olcAccess: to dn.base="" by * read
 olcAccess: to dn.base="cn=subschema" by * read
-olcAccess: to dn.subtree="ou=Users,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
-olcAccess: to dn.subtree="ou=Groups,${BASEDN}" by users read by anonymous auth
-olcAccess: to dn.subtree="ou=Users,${BASEDN}" by users read by anonymous auth
+olcAccess: to dn.subtree="ou=People,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
+olcAccess: to dn.subtree="ou=Group,${BASEDN}" by users read by anonymous auth
+olcAccess: to dn.subtree="ou=People,${BASEDN}" by users read by anonymous auth
 olcAccess: to * by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
 EOF
 
