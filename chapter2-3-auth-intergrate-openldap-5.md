@@ -103,9 +103,9 @@ bindpw 평문암호
 # database biding
 base dc=oops,dc=org
 # Admin database를 출력하지 않도록 제한을 함
-base   group  ou=Groups,dc=oops,dc=org
-base   passwd ou=Users,dc=oops,dc=org
-base   shadow ou=Users,dc=oops,dc=org
+base   group  ou=Group,dc=oops,dc=org
+base   passwd ou=People,dc=oops,dc=org
+base   shadow ou=People,dc=oops,dc=org
 [root@an3 ~]$ chmod 600 /etc/nslcd.conf
 [root@an3 ~]$
 [root@an3 ~]$ # nslcd 재시작
@@ -145,9 +145,9 @@ tls_cacertfile /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
 # nss_base_passwd   ou=People,
 # to append the default base DN but this
 # may incur a small performance impact.
-nss_base_passwd    ou=Users,dc=example,dc=com?one
-nss_base_shadow    ou=Users,dc=example,dc=com?one
-nss_base_group     ou=Groups,dc=example,dc=com?one
+nss_base_passwd    ou=People,dc=example,dc=com?one
+nss_base_shadow    ou=People,dc=example,dc=com?one
+nss_base_group     ou=Group,dc=example,dc=com?one
 
 # password hashing
 # md5로 지정을 하면 md5 crypt, sha512 crypt를 이용하여 로그인이 가능 합니다.
@@ -187,13 +187,13 @@ ldapusers:*:10000:
 [root@an3 ~]$
 ```
 
-***OU=Users***에 추가된 account가 없기 때문에 passwd list에서는 ldap account가 보이지 않지만, group list에서는 ***OU=Groups***에 생성한 ***ldapusers*** group을 확인할 수 있습니다.
+***OU=People***에 추가된 account가 없기 때문에 passwd list에서는 ldap account가 보이지 않지만, group list에서는 ***OU=Group***에 생성한 ***ldapusers*** group을 확인할 수 있습니다.
 
 그럼, master server에서 ***ldapuser1*** 이라는 account를 추가해 보도록 하겠습니다.
 
 ```bash
 [root@ladp1 ~]$ cat > ldapuser1.ldif <<EOF
-dn: uid=ldapuser1,ou=Users,dc=oops,dc=org
+dn: uid=ldapuser1,ou=People,dc=oops,dc=org
 objectClass: posixAccount
 objectClass: top
 objectClass: inetOrgPerson
@@ -218,7 +218,7 @@ shadowLastChange: 16903
 EOF
 [root@ldap1 ~]$ ldapadd -x -D cn=manager,dc=oops,dc=org -W -f ldapuser1.ldif
 Enter LDAP Password: # LDAP 관리자 암호 입력
-adding new entry "uid=ldapuser1,ou=Users,dc=oops,dc=org"
+adding new entry "uid=ldapuser1,ou=People,dc=oops,dc=org"
 [root@ldap1 ~]$
 ```
 
