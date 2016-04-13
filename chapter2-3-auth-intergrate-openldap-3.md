@@ -85,27 +85,27 @@ slapd (을)를 시작 중:                                      [  OK  ]
 [root@an3-s ~]$
 ```
 
-데이터를 restore를 했다면, 확인을 해 봅니다. 여기서는 restore된 ssoadmin 권한으로 Groups OU를 탐색하도록 합니다. 만약, ***Master***에서 ssoadmin의 암호를 설정하지 않은 상태라면, ssoadmin 대신 LDAP 관리자 권한 (cn=manager,dc=oops.org,dc=org)으로 확인을 하십시오.
+데이터를 restore를 했다면, 확인을 해 봅니다. 여기서는 restore된 ssoadmin 권한으로 Group OU를 탐색하도록 합니다. 만약, ***Master***에서 ssoadmin의 암호를 설정하지 않은 상태라면, ssoadmin 대신 LDAP 관리자 권한 (cn=manager,dc=oops.org,dc=org)으로 확인을 하십시오.
 
 ```bash
-[root@an3 ~]$ # cn=manager,dc=oops,dc=org 권한으로 ou=Groups,dc=oops,dc=org 의 entry 탐색
-[root@an3 ~]$ ldapsearch -x -D "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W -b "ou=Groups,dc=oops,dc=org"
+[root@an3 ~]$ # cn=manager,dc=oops,dc=org 권한으로 ou=Group,dc=oops,dc=org 의 entry 탐색
+[root@an3 ~]$ ldapsearch -x -D "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W -b "ou=Group,dc=oops,dc=org"
 Enter LDAP Password: # ssoadmin 암호 입력
 # extended LDIF
 #
 # LDAPv3
-# base <ou=Groups,dc=kldp,dc=org> with scope subtree
+# base <ou=Group,dc=kldp,dc=org> with scope subtree
 # filter: (objectclass=*)
 # requesting: ALL
 #
 
-# Groups, oops.org
-dn: ou=Groups,dc=oops,dc=org
-ou: Groups
+# Group, oops.org
+dn: ou=Group,dc=oops,dc=org
+ou: Group
 objectClass: organizationalUnit
 
-# ldapusers, Groups, oops.org
-dn: cn=ldapusers,ou=Groups,dc=oops,dc=org
+# ldapusers, Group, oops.org
+dn: cn=ldapusers,ou=Group,dc=oops,dc=org
 objectClass: posixGroup
 objectClass: top
 cn: ldapusers
