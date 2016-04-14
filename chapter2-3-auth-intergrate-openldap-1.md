@@ -980,10 +980,10 @@ changetype: modify
 add: olcAccess
 olcAccess: to dn.base="" by * read
 olcAccess: to dn.base="cn=subschema" by * read
-olcAccess: to dn.subtree="ou=People,${BASEDN}" attrs=userPassword,shadowLastChange by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" write by self =wx by anonymous auth
-olcAccess: to dn.subtree="ou=Group,${BASEDN}" by users read by anonymous auth
-olcAccess: to dn.subtree="ou=People,${BASEDN}" by users read by anonymous auth
-olcAccess: to * by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
+olcAccess: to dn.subtree="ou=People,${BASEDN}" attrs=userPassword,shadowLastChange by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by self =wx by anonymous auth
+olcAccess: to dn.subtree="ou=Group,${BASEDN}" by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by users read by anonymous auth
+olcAccess: to dn.subtree="ou=People,${BASEDN}" by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by users read by anonymous auth
+olcAccess: to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
 EOF
 
 [ $? -eq 0 ] && success "Done" || failure
