@@ -42,7 +42,7 @@ BAD PASSWORD: The password is shorter than 8 characters
 [root@an3 ~]$
 ```
 
-STDIN 으로도 가능 합니다. STDIN으로 생성할 경우에는 암호화 강도를 체크하지 않습니다.
+STDIN 으로도 가능 합니다. STDIN으로 생성할 경우에는 암호화 강도를 ~~체크하지 않습니다~~(1.0.0 부터는 체크를 합니다).
 
 ```bash
 [root@an3 ~]$ echo "asdf" | genpasswd -m md5 -i
@@ -53,10 +53,10 @@ $1$KSoP78Zr$teF7WRd2Azz0svaUXTkIZ0
 
 
 ### Reference:
-* None
+* https://github.com/Joungkyun/genpasswd
 
 ### Dependencies:
-* [libolibc](pkg-core-olibc.md)
+* ~~[libolibc](pkg-core-olibc.md)~~ : 1.0.0 부터 필요 없음
 * crypt
 
 ### Sub Packages:
