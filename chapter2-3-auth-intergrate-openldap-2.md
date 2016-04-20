@@ -12,7 +12,7 @@
 
 여기서는 [StartCOM](http://startssl.com) 의 Class2 인증서를 가지고 설정 하는 예를 듭니다. Self Sign 인증서를 생성하는 사용하는 방법은 [http://www.server-world.info/en/note?os=CentOS_7&p=openldap&f=4](http://www.server-world.info/en/note?os=CentOS_7&p=openldap&f=4)를 참고 하십시오.
 
-StartCOM의 인증서를 예로 드는 이유는, 일단 공인 인증서 이면서 가격이 가장 싸기 때문입니다. 59$로 2년짜리 인증서를 발급 받을 수 있으며, *.domain.com 과 같은 astrik 인증서를 생성할 수 있으며, 도메인도 여러개를 추가할 수 있기 때문 입니다.
+StartCOM의 인증서를 예로 드는 이유는, 일단 공인 인증서 이면서 가격이 가장 싸기 때문입니다. 59$로 2년짜리 인증서를 발급 받을 수 있으며, \*.domain.com 과 같은 astrik 인증서를 생성할 수 있으며, 도메인도 여러개를 추가할 수 있기 때문 입니다. 1년 짜리 class 1 인증서는 무상으로 계정당 5개 까지 만들 수 있습니다. [***startssl 인증서***](https://www.google.co.kr/#q=startssl+%EC%9D%B8%EC%A6%9D%EC%84%9C)로 구글 검색을 하시면 한글로 된 발급을 위한 많은 글들을 보실 수 있습니다.
 
 다른 공인 인증서도 크게 다르지는 않으니 응용해 보십시오. Chain 인증서가 없는 경우에는 CA 인증서(PEM 방식)으로 등록 하시면 됩니다.
 
