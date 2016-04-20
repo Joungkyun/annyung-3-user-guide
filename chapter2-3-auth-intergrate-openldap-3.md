@@ -120,3 +120,5 @@ result: 0 Success
 # numEntries: 2
 [root@an3 ~]$
 ```
+
+data 복구가 완료가 되었으면, [Replaction 설정](chapter2-3-auth-intergrate-openldap-3.md) 문서를 참고하여 replication 설정을 하도록 합니다.
