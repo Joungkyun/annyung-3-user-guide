@@ -57,8 +57,9 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
     * KLDP 모든 시스템
   3. 서버 전용 배포본
     1. 최초 설치 시 1.1G 정도 사이즈의 적은 용량 (설치 후 package를 어떻게 설치하느냐에 따라 달라지지만, 서버 운영이 목적이라면 최대 4G를 넘을 일은 없을 것으로 판단 합니다.)
-    2. jfbterm을 이용하여, console에서 한글 입출력 지원(현재 입력은 버그가 있어 안됨)
-    3. 최초 설치시 SSH daemon외에 서비스 daemon 실행 안됨.
+    2. X 관련 패키지 및 의존성을 최대한 배제
+    3. jfbterm을 이용하여, console에서 한글 입출력 지원(현재 입력은 버그가 있어 안됨)
+    4. 최초 설치시 SSH daemon외에 서비스 daemon 실행 안됨.
   4. Kernel과 Glibc는 RHEL/CentOS의 것을 수정하지 않음.
   5. 운영 고도화
   6. 보안 고도화
