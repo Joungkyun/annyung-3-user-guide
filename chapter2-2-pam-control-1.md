@@ -4,6 +4,9 @@ LDAP이나 AD, NIS등으로 인증 통합을 했을 경우, login이 필요없�
 
 이런 경우, pam_access 모듈을 이용하여 필요한 account만 login을 가능하도록 설정 하는 방법에 대하여 기술 합니다.
 
+> 참고  
+LDAP 연동시에는 LDAP의 host attribute를 이용하여 host 별로 인증을 제한할 수 있으며, 안녕 리눅스의 LDAP 인증 통합 문서에서 따로 다루게 됩니다. 그러므로 LDAP을 사용하여 인증 통합시에는 이 방법 보다는 LDAP에서의 제어를 이용 하십시오.
+
 ```bash
 [root@an3 ~]$ cat /etc/pam.d/password-auth-ac
 #%PAM-1.0
