@@ -119,7 +119,98 @@ password    sufficient    pam_unix.so sha512 shadow nullok try_first_pass use_au
       - pam_unix 모듈 이용
         + remember=4 - /etc/security/opasswd에 기록할 이전 암호 수. 이전 암호 사용 방지
 
-      
+마지막으로, root account로 remote login을 하는 것에 대한 설명입니다.
+
+안녕 리눅스는 버전 2부터 SSH를 이용하여 root account의 non-interactive shell로 remote access 가능합니다. 이는 관리의 편이성 때문에 변경을 한 사항인데, private network가 아닌 서버의 경우에는 remote hole이 될 수도 있습니다.
+
+그래서 안녕 리눅스 3 부터는 private network에 대해서만 root account의 non-interactive shell로 접근이 가능 합니다.
+
+***/root/.bashrc*** 하단을 보면 다음의 코드로서 제한을 하고 있습니다. (만약 이 코드가 없다면 rootfiles 버전이 **8.1-11.an3.0.1** 보다 낮은 것이기 때문에 업데이트를 해 주셔야 합니다. 또한, 버전이 같거나 높더라도 이 코드가 보이지 않는다면, .bashrc와 .bash_profile이 관리자에 의해 수정된 경우 입니다.)
+
+```bash
+[root@an3 ~]$ cat .bashrc
+   ... 상략 ...
+#
+# perimt access private network with SSH connection
+#
+if [ -n "${SSH_CLIENT}" ]; then
+    NETWORK_A_CLASS="${SSH_CLIENT%%.*}."
+    # console type
+    # non-interactive mode         => serial
+    # interactive mode (login shell) => pty
+    contype="$(/sbin/consoletype 2> /dev/null)"
+
+    #
+    # allow with A class
+    #
+    if [ -z "${LOGIN_ACCESS}" ]; then
+        case "${NETWORK_A_CLASS}" in
+            "10.")
+                #
+                # Allow non-interactive shell from private network range
+                #
+                # If you want to allow only interactive shell
+                # [ "${contype}" = "pty" ] && LOGIN_ACCESS="yes"
+                #
+                # If you want to allow both interactive and non-interactive shell
+                # LOGIN_ACCESS="yes"
+                #
+                [ "${contype}" != "pty" ] && LOGIN_ACCESS="yes"
+                ;;
+        esac
+    fi
+
+    #
+    # allow with B Class
+    #
+    if [ -z "${LOGIN_ACCESS}" ]; then
+        # ssh_client format: IP_ADDRESS:CONNECT_PORT
+        ssh_client=$(echo ${SSH_CLIENT} | /bin/awk '{print $1":"$3'})
+        NETWORK_B_CLASS=$(echo ${ssh_client} | /bin/sed -e 's/\(\([0-9]\+\.\)\{2\}\).*/\1/g' 2> /dev/null)
+        NETWORK_C_CLASS=$(echo ${ssh_client} | /bin/sed -e 's/\(\([0-9]\+\.\)\{3\}\).*/\1/g' 2> /dev/null)
+
+        case "${NETWORK_B_CLASS}" in
+            "172.16."|"192.168.")
+                #
+                # Allow non-interactive shell from private network range
+                #
+                [ "${contype}" != "pty" ] && LOGIN_ACCESS="yes"
+                ;;
+        esac
+    fi
+    #
+    # allow with C Class
+    #
+    if [ -z "${LOGIN_ACCESS}" ]; then
+        case "${NETWORK_C_CLASS}" in
+            #"211.37.6.")
+            #   [ "${contype}" != "pty" ] && LOGIN_ACCESS="yes"
+            #   ;;
+            *)
+                #
+                # allow per host
+                #
+                case "${ssh_client}" in
+                    #"1.1.1.1:22")
+                    #   [ "${contype}" != "pty" ] && LOGIN_ACCESS="yes"
+                    #   ;;
+                    #"143.1.1.1:2020")
+                    #   [ "${contype}" != "pty" ] && LOGIN_ACCESS="yes"
+                    #   ;;
+                    *)
+                        LOGIN_ACCESS=""
+                esac
+                ;;
+        esac
+    fi
+
+    [ -z "$LOGIN_ACCESS" ] && \
+        echo -en "* \\033[1;31mNotice:\\033[0;39m" && \
+        echo " You can't access root privileges with remote access!" && \
+        exit
+fi
+[root@an3 ~]$
+```
 
       
 안녕 리눅스의 shell login에 대하여 이해를 하였다면, 다음 기술 문서를 이용하여 shell login에 대해서 더 정교하게 access 설정을 할 수 있습니다.
