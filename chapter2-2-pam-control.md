@@ -122,4 +122,8 @@ password    sufficient    pam_unix.so sha512 shadow nullok try_first_pass use_au
       
 
       
-      
+안녕 리눅스의 shell login에 대하여 이해를 하였다면, 다음 기술 문서를 이용하여 shell login에 대해서 더 정교하게 access 설정을 할 수 있습니다.
+
+1. [login 가능한 account 제한](chapter2-2-pam-control-1.md)
+2. [login account chroot](chapter2-2-pam-control-2.md)
+3. [Google OTP를 이용한 2factor 인증](chapter2-2-pam-control-3.md)
