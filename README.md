@@ -55,11 +55,15 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
     * 대형 게임 포털 N사 (DB를 제외한 거의 모든 시스템)
     * 전자상거래 T사 (일부를 제외한 거의 모든 시스템)
     * KLDP 모든 시스템
-  3. Kernel과 Glibc는 RHEL/CentOS의 것을 수정하지 않음.
-  4. 운영 고도화
-  5. 보안 고도화
-  6. ISMS 인증 조건 반영
-  7. 2012.06.01 RHEL 6u2 / CentOS 6.2 기반으로 안녕 리눅스 2 출시
+  3. 서버 전용 배포본
+    1. 최초 설치 시 1.1G 정도 사이즈의 적은 용량 (설치 후 package를 어떻게 설치하느냐에 따라 달라지지만, 서버 운영이 목적이라면 최대 4G를 넘을 일은 없을 것으로 판단 합니다.)
+    2. jfbterm을 이용하여, console에서 한글 입출력 지원(현재 입력은 버그가 있어 안됨)
+    3. 최초 설치시 SSH daemon외에 서비스 daemon 실행 안됨.
+  4. Kernel과 Glibc는 RHEL/CentOS의 것을 수정하지 않음.
+  5. 운영 고도화
+  6. 보안 고도화
+  7. ISMS 인증 조건 반영
+  8. 2012.06.01 RHEL 6u2 / CentOS 6.2 기반으로 안녕 리눅스 2 출시
 
 
 ### 4) 안녕 리눅스 3
