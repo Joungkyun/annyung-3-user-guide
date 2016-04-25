@@ -125,7 +125,7 @@ password    sufficient    pam_unix.so sha512 shadow nullok try_first_pass use_au
 
 그래서 안녕 리눅스 3 부터는 private network에 대해서만 root account의 non-interactive shell로 접근이 가능 합니다.
 
-***/root/.bashrc*** 하단을 보면 다음의 코드로서 제한을 하고 있습니다. (만약 이 코드가 없다면 rootfiles 버전이 **8.1-11.an3.0.1** 보다 낮은 것이기 때문에 업데이트를 해 주셔야 합니다. 또한, 버전이 같거나 높더라도 이 코드가 보이지 않는다면, .bashrc와 .bash_profile이 관리자에 의해 수정된 경우 입니다.)
+***/root/.bashrc*** 하단을 보면 다음의 코드로서 제한을 하고 있습니다. (만약 이 코드가 없다면 rootfiles 버전이 **8.1-11.an3.0.1** 보다 낮은 것이기 때문에 업데이트를 해 주셔야 합니다. 또한, 버전이 같거나 높더라도 이 코드가 보이지 않는다면, ***.bashrc***와 ***.bash_profile***이 관리자에 의해 수정된 경우 입니다. 이 경우에는 새로운 ***.barrc***와 ***.bash_profile***은 ***.bashrc.rpmnew***와 ***.bash_profile.rpmnew***로 생성되어 있게 됩니다.)
 
 ```bash
 [root@an3 ~]$ cat .bashrc
