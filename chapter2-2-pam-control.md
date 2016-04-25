@@ -5,6 +5,8 @@
 2. [login account chroot](chapter2-2-pam-control-2.md)
 3. [Google OTP를 이용한 2factor 인증](chapter2-2-pam-control-3.md)
 
+<br><br>
+이 문서를 먼저 읽을 후, 하위 페이지를 읽으십시오.
 
 PAM 모듈을 이용하여 account access control을 하는 방법에 대하여 기술을 합니다.
 
