@@ -1,6 +1,6 @@
 # Shell login Control (with PAM)
 
-> 목차
+> Sub 목차 (하위 페이지)
 1. [login 가능한 account 제한](chapter2-2-pam-control-1.md)
 2. [login account chroot](chapter2-2-pam-control-2.md)
 3. [Google OTP를 이용한 2factor 인증](chapter2-2-pam-control-3.md)
