@@ -59,6 +59,7 @@
        * [libimginfo](pkg-core-libimginfo.md)
        * [libipcalc](pkg-core-libipcalc.md)
        * [libkrisp](pkg-core-libkrisp.md)
+       * [mariadb-aes256](pkg-core-mariadb-aes256)
        * [olibc](pkg-core-olibc.md)
        * [oops-firewall](pkg-core-oops-firewall.md)
        * [perl-KRISP](pkg-core-perl-KRISP.md)
