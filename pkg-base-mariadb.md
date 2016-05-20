@@ -16,3 +16,4 @@ MariaDB 클라이언트 프로그램과 공유 라이브러리
 * **mariadb-libs** - MariaDB/MySQL clients에 필요한 공유 라이브러리
 * **mariadb-server** - MariaDB 서버와 관련 파일들
 * **mariadb-test** - MariaDB에서 배포하는 테스트 도구
+* **[mariadb-aes256](pkg-core-mariadb-aes256.md)** - AES256_ENCRYPT / AES256_DECRYPT User define function
