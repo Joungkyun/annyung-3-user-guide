@@ -30,7 +30,7 @@ mysql> select AES256_DECRYPT(UNHEX('encrypted_hash_string'), '0123456789abcdef01
 * https://github.com/Joungkyun/lib_mysqludf_aes256
 
 ### Dependencies:
-* [mariadb-server](pkg-core-libipcalc.md)
+* [mariadb-server](pkg-base-mariadb.md)
 
 ### Sub Packages:
 
