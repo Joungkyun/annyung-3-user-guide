@@ -484,14 +484,14 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
     ```php
         // e modifier sample
         $html = preg_replace(
-            '(<h([1-6])>(.*?)</h\1>)e',
+            '/<h([1-6])>(.*?)</h[1-6]>/e',
             '"<h$1>" . strtoupper("$2") . "</h$1>"',
             $html
         );
         
         // replace 'e' modifier with preg_replace_callback
         $html = preg_replace_callback(
-            '(<h([1-6])>(.*?)</h\1>)',
+            '/<h([1-6])>(.*?)</h[1-6]>/',
             function ($m) {
                 return "<h{$m[1]}>" . strtoupper($m[2]) . "</h{$m[1]}>";
             },
