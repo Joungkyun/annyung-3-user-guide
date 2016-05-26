@@ -217,6 +217,8 @@ LoadModule  userdir_module      modules/mod_userdir.so
 
 안녕 리눅스는 기본으로 PHP7을 지원 합니다. 그리고, PHP5의 호환성을 위하여 PHP56 compat package를 FPM으로 지원을 합니다. 그러므로, PHP7과 PHP56을 모두 사용하기 위해서는 mod_php를 사용하는 것 보다 php-fpm(FastCGI)로 구성 하는 것을 권고 합니다.
 
+만약, PHP 5.3 호환이 필요하다면, /etc/php56.d/{cli,fpm}/php53compatible.ini 설정을 이용하십시오. 안녕 리눅스의 PHP56 package에는 PHP 5.4에서 deprecated 되었거나 또는 제거된 기능들을 사용할 수 있도록 옵션을 제공하고 있습니다. preg 정규식의 ***/e*** modifier 만 제외하고는 거의 PHP 5.3과 거의 비슷하게 동작 시킬 수 있습니다. 이에 대해서는 [***PHP 섹션***](chapter3-4-php.md)의 ***6.6. PHP53 comaptible mode*** 문서를 참고 하십시오.
+
 자세한 사항은 [***PHP 섹션***](chapter3-4-php.md)을 참고 하십시오.
 
 
