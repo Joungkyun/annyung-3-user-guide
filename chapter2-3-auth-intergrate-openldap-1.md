@@ -23,29 +23,47 @@
 
 
 ***참고!***
-> "***1. package 설치***" 과 "***2. Openldap 초기화***" 과정은 "***4. LDAP database init script***" 에서 이 작업을 한방에 할 수 있는 script를 제공하고 있습니다. 어떤 작업을 하는지만 참고 하시고, 스크립트를 이용하여 처리 하시면 간편하게 할 수 있습니다.
+> 이 문서는 ***RHEL*** >=6, ***CentOS*** >=6, ***AnNyung*** >=2 에서의 설정을 테스트 하였습니다.
 
 
 ##1. package 설치
 
 ```bash
-[root@an3 ~]$ yum install openldap-servers openldap-clients genpasswd
+[root@an3 ~]$ yum install ldap-auth-utils ldap-auth-utils-passwd
 ```
 
-***genpasswd*** package는 안녕 리눅스에서만 제공 합니다. RHEL이나 CentOS에서는 안녕 리눅스의 repository 에 있는 getpasswd rpm package를 수동으로 받아서 설치 하시면 사용이 가능 합니다. RHEL/CentOS 6과 7용이 제공 됩니다. RHEL 6/7(CentOS 6/7) 외의 버전이나 다른 배포본에서는 srpm을 받아서 빌드 하여 사용하십시오.
+> ***RHEL/CentOS 참고!***  
+RHEL과 CentOS의 경우에는 안녕 리눅스 repository에서 해당 패키지를 다운 받을 수 있습니다. RHEL6/CentOS6 은 [안녕 리눅스 2의 repository](http://mirror.oops.org/pub/AnNyung/2/core/x86_64/)에서, RHEL7/CentOS7은 [안녕 리눅스 3의 repository](http://mirror.oops.org/pub/AnNyung/3/core/x86_64/)에서 받으시면 됩니다.
+>
+> ***ldap-auth-utils-passwd*** 패키지의 경우 ***genpasswd*** 패키지가 의존성이 걸려 있습니다. 이 역시 안녕 리눅스 repository에서 수동 설치 하십시오.
 
-***genpasswd*** 는 꼭 필요한 package가 아니기 때문에 굳이 없어도 상관은 없습니다.
+안녕 리눅스에서 제공하는 ***ldap-auth-utils***를 이용하지 않고 수동으로 모든 설정을 하고 싶다면, 다음의 패키지들을 설치 하십시오.
+
+```bash
+[root@an3 ~]$ yum install openldap-servers openlda-clients
+```
+
 
 ##2. Openldap 초기화
+
+<br><br>
+
+> 초기화는 서버이 LDAP 설정을 최초로 한다는 가정하에 진행을 합니다. 만약 다른 LDAP database를 구동하고 있다면, 이 문서를 참고하는 것을 포기 하십시오!
+
+> 초기화 시에 모든 ldap database를 초기화 시켜 버립니다. 매우 주의 하십시오!!!
+
+<br><br>
 
 ***openldap***은 ***splapd*** daemon을 이용하여 구동이 됩니다. 또한, 2.4.23 버전 부터는 ***slapd.conf*** 대신에 ***OLC(OnLineConfiguration, cn=config 구조)***로 변경이 되었습니다.
 
 물론 기존의 ***slapd.conf***를 migration 해 주는 방법을 제공하고 있기는 하나, 여기서는 그냥 ***OLC***를 이용하는 방법으로 설명을 합니다. ***AnNyung 2*** 에서도 동일하게 ***OLC*** 방식으로 설정을 해야 합니다. (RHEL 6 부터 ***OLC***방식으로 변경이 되었습니다.)
 
+또한, 이 문서는 안녕 리눅스에서 제공하는 ldap-auth-utils 패키지를 이용하는 방법과 수동으로 설정하는 방법을 모두 기술 합니다. 이는 ldap 설정 자체에 관심이 있는 분들을 위하여 제공 합니다.
+
 
 ###2.1 OLC 초기화
 
-일단, 처음 ***openldap-servers*** package를 설치 하신 경우 또는, openldap 설정을 한번도 안한 상태라면, 이 단계는 뛰어 넘어도 상관이 없습니다.
+일단, 처음 ***openldap-servers*** package를 설치 하신 경우 또는, openldap 설정을 한번도 안 한 상태라면, 이 단계는 뛰어 넘어도 상관이 없습니다.
 
 이 단계는, 기존의 openldap 설정을 모두 날려 버리고, 설치 시의 상태로 복원 시키는 것이니, 이 작업을 할지에 대해서는 신중하게 판단을 하십시오.
 
