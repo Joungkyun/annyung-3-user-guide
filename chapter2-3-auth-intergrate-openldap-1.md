@@ -176,13 +176,13 @@ Nothing to do
      Redirecting to /bin/systemctl restart  slapd.service
 
 4.기본 정보 설정
-   BASE DN 입력 : DC=kldp,DC=org
+   BASE DN 입력 : DC=oops,DC=org
    LDAP 관리자 암호 입력   : ****
    LDAP 관리자 암호 재입력 : ****
 
    결과:
-           BASE           => kldp
-           BASE DN        => DC=kldp,DC=org
+           BASE           => oops
+           BASE DN        => DC=oops,DC=org
            ADMIN Password => asdf
            ADMIN Password => {SSHA}pct+aDwN4y4BR3ujyxgWjUBGVqo7fg1/
 
@@ -204,21 +204,21 @@ Nothing to do
 
 
 7. 기본 트리 구조 초기화
-   adding new entry "DC=kldp,DC=org"
-   adding new entry "ou=Admin,DC=kldp,DC=org"
-   adding new entry "ou=People,DC=kldp,DC=org"
-   adding new entry "ou=Group,DC=kldp,DC=org"
+   adding new entry "DC=oops,DC=org"
+   adding new entry "ou=Admin,DC=oops,DC=org"
+   adding new entry "ou=People,DC=oops,DC=org"
+   adding new entry "ou=Group,DC=oops,DC=org"
 Done
 
 
 8. 기본 그룹 생성
-   adding new entry "cn=ldapadmins,ou=Admin,DC=kldp,DC=org"
-   adding new entry "cn=ldapROusers,ou=Admin,DC=kldp,DC=org"
-   adding new entry "cn=ldapmanagers,ou=Admin,DC=kldp,DC=org"
-   adding new entry "cn=ldapusers,ou=Group,DC=kldp,DC=org"
-   adding new entry "uid=ssoadmin,ou=Admin,DC=kldp,DC=org"
-   adding new entry "uid=ssomanager,ou=Admin,DC=kldp,DC=org"
-   adding new entry "uid=replica,ou=Admin,DC=kldp,DC=org"
+   adding new entry "cn=ldapadmins,ou=Admin,DC=oops,DC=org"
+   adding new entry "cn=ldapROusers,ou=Admin,DC=oops,DC=org"
+   adding new entry "cn=ldapmanagers,ou=Admin,DC=oops,DC=org"
+   adding new entry "cn=ldapusers,ou=Group,DC=oops,DC=org"
+   adding new entry "uid=ssoadmin,ou=Admin,DC=oops,DC=org"
+   adding new entry "uid=ssomanager,ou=Admin,DC=oops,DC=org"
+   adding new entry "uid=replica,ou=Admin,DC=oops,DC=org"
 Done
 
 
@@ -239,16 +239,31 @@ Done
 
 ##3.1 LDAP 관리자 암호 변경
 
-LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다. ***2.4 Admin password 설정***에서 설정한 암호 "***asdf!2345***"는 이 LDAP 관리자의 암호 입니다.
+LDAP 관리자라고 함은, ***slapd***의 관리자를 말합니다.
 
-위의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 같습니다.
+Section 2의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 같습니다.
 
 > ***관리자 DN*** : cn=manager,dc=oops,dc=org  
-> ***관리자 PW*** : asdf!2345
+> ***관리자 PW*** : asdf
 
 ***BASE DN***에 설정한 account의 경우에는 ***ldappasswd*** 명령을 이용하여 변경을 할 수 있지만, LDAP 관리자의 암호는 ***slapd*** 설정 파일에 포함되어 있기 때문에 ***ldapmodify*** 명령을 이용해야 합니다.
 
-***2.4 Admin password 설정*** 항목을 참고 하셔서 변경을 하시면 됩니다.
+```shell
+[root@an3 ~]$ slappasswd -s 'asdf!asdf'
+{SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
+[root@an3 ~]$
+[root@an3 ~]$ cat &lt;&lt;EOF &gt; ldapmodify -Y EXTERNAL -H ldapi:///
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
+
+dn: olcDatabase={2}bdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
+[root@an3 ~]$
+```
 
 ##3.2 Account 암호 변경
 
