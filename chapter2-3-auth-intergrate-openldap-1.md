@@ -51,7 +51,7 @@ exclude=php* whois httpd*
 [root@host ~]$ yum clean all
 ```
 
-RHEL 6에서는 다음과 같이 추가해 주십시오.
+***RHEL/CentOS 6*** 에서는 다음과 같이 추가해 주십시오.
 ```shell
 [root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
@@ -68,38 +68,65 @@ exclude=php* whois httpd*
 [root@host ~]$ yum clean all
 ```
 
-ldap-auth-utils 와 ldap-auth-utils-passwd 패키지를 설치 합니다. 이 패키지들을 설치를 하면, genpasswd, openldap-servers, openldap-clients 패키지가 의존성 설정으로 같이 설치가 됩니다.
+repository 준비가 다 되었다면, ldap-auth-utils 와 ldap-auth-utils-passwd 패키지를 설치 합니다. 이 패키지들을 설치를 하면, genpasswd, openldap-servers, openldap-clients 패키지가 의존성 설정으로 같이 설치가 됩니다.
 
 ```bash
 [root@an3 ~]$ yum install ldap-auth-utils ldap-auth-utils-passwd
 ```
 
 
-
-
-
 ##2. Openldap 초기화
 
 <br><br>
 
-> 초기화는 서버이 LDAP 설정을 최초로 한다는 가정하에 진행을 합니다. 만약 다른 LDAP database를 구동하고 있다면, 이 문서를 참고하는 것을 포기 하십시오!
+> 초기화는 서버의 LDAP 설정및 데이터를 초기화 한 상태에서 진행을 하는 것을 가정 하에 진행을 합니다. 만약 다른 LDAP database를 구동하고 있다면, 이 문서를 참고하는 것을 포기 하십시오!
 
 > 초기화 시에 모든 ldap database를 초기화 시켜 버립니다. 매우 주의 하십시오!!!
 
-<br><br>
+<br>
 
 ***openldap***은 ***splapd*** daemon을 이용하여 구동이 됩니다. 또한, 2.4.23 버전 부터는 ***slapd.conf*** 대신에 ***OLC(OnLineConfiguration, cn=config 구조)***로 변경이 되었습니다.
 
 물론 기존의 ***slapd.conf***를 migration 해 주는 방법을 제공하고 있기는 하나, 여기서는 그냥 ***OLC***를 이용하는 방법으로 설명을 합니다. ***AnNyung 2*** 에서도 동일하게 ***OLC*** 방식으로 설정을 해야 합니다. (RHEL 6 부터 ***OLC***방식으로 변경이 되었습니다.)
 
-또한, 이 문서는 안녕 리눅스에서 제공하는 ldap-auth-utils 패키지를 이용하는 방법과 수동으로 설정하는 방법을 모두 기술 합니다. 이는 ldap 설정 자체에 관심이 있는 분들을 위하여 제공 합니다.
 
 
-###2.1 OLC 초기화
+###2.1 OLC 및 ldap data 초기화
 
-일단, 처음 ***openldap-servers*** package를 설치 하신 경우 또는, openldap 설정을 한번도 안 한 상태라면, 이 단계는 뛰어 넘어도 상관이 없습니다.
+ldap 초기화는 ***ldap-auth-utils*** 패키지의 ***ldap_auth_init*** 명령을 이용하여 진행 합니다. ***ldap_auth_init***를 실행하면 다음과 같이 초기화가 됩니다.
 
-이 단계는, 기존의 openldap 설정을 모두 날려 버리고, 설치 시의 상태로 복원 시키는 것이니, 이 작업을 할지에 대해서는 신중하게 판단을 하십시오.
+1. ***ldap 관리자***로 ***cn=Manager,${BASEND}*** 설정
+2. ***ldap 관리자*** 암호 설정
+3. UID 0 권한으로 ldap 설정 변경 시에 암호 없이 접근 가능 (-Y EXTERNAL -H ldapi:/// 권한 이용)
+4. ldap log를 /var/log/slapd.log 에 남기도록 설정
+5. ***ADMIN***, ***People***, ***Group*** OU 생성
+  * ***Admin*** OU : ***Poeple***, ***Group*** OU를 관리하기 위한 user 및 group
+  * ***People*** OU : ldap 에서 서비스 하는 user
+  * ***Group*** OU : ldap 에서 서비스 하는 group
+6. ㅁㄴㅇㄹ
+
+설치 후, 미리 등록되는 사용자 및 group은 다음과 같습니다.
+
+1. Manager Group
+  1. **ldapadmins** : ldap 관리를 할 수 있는 group
+  2. **ldapROusers** : ldap 전체 data에 접근할 수 있는 readonly gruop
+  3. **ldapmanagers** : ldap을 관리하기 위한 account들의 default group
+2. Manager User
+  1. **ssoadmin**
+    * ldap 관리를 할 수 있는 account
+    * ***ldapadmins*** gruop member
+    * ***DN***: uid=ssoadmin,ou=Admin,dc=oops,dc=org
+  2. **ssomanager**
+    * tree 전체의 데이터에 접근 가능한 readonly account
+    * ***ldapROusers*** group member
+    * 인증 통합시에, 각 client 서버에서 ldap에 연결하기 위한 account
+  3. **replica**
+    * replication에 사용하기 위한 account (readonly account)
+    * ***ldapROusers*** group member
+3. System Group
+  1. **ldapusers**
+    * 생성할 LDAP account들의 default Group
+
 
 ```bash
 [root@an3 ~]$ # slapd.conf와 slapd.d 디렉토리를 제거 합니다.
