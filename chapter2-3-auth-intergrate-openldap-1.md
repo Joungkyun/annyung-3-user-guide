@@ -4,13 +4,8 @@
 > ***목차***
 > 1. package 설치
 2. Openldap 초기화
-  1. OLC 초기화
-  2. syslog 설정
-  3. slapd 설정
-  4. Admin password 설정
-  5. LDAP Tree 생성
-  6. LDAP 기본 유저/그룹 생성
-  7. LDAP Access 정책 설정
+  1. OLC 및 ldap data 초기화 목표
+  2. LDAP 설정(olc) 및 LDAP data 초기화
 3. account 암호 설정
   1. LDAP 관리자 암호 변경
   2. Account 암호 변경
@@ -36,7 +31,7 @@ ldap-auth-utils 와 ldap-auth-utils-passwd, genpasswd 패키지는 안녕 리눅
 
 ***RHEL/CentOS 7*** 에서는 다음과 같이 추가해 주십시오.
 ```shell
-[root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
+[root@host ~]$ cat &lt;&lt;EOF &gt; /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
 #
 # LInux AnNyung 3 Yum repository
@@ -53,7 +48,7 @@ exclude=php* whois httpd*
 
 ***RHEL/CentOS 6*** 에서는 다음과 같이 추가해 주십시오.
 ```shell
-[root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
+[root@host ~]$ cat &lt;&lt;EOF &gt; /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
 #
 # LInux AnNyung 2 Yum repository
@@ -91,19 +86,27 @@ repository 준비가 다 되었다면, ldap-auth-utils 와 ldap-auth-utils-passw
 
 
 
-###2.1 OLC 및 ldap data 초기화
+###2.1 OLC 및 ldap data 초기화 목표
 
-ldap 초기화는 ***ldap-auth-utils*** 패키지의 ***ldap_auth_init*** 명령을 이용하여 진행 합니다. ***ldap_auth_init***를 실행하면 다음과 같이 초기화가 됩니다.
+ldap 초기화는 다음의 목표를 가지고 진행을 합니다.
 
 1. ***ldap 관리자***로 ***cn=Manager,${BASEND}*** 설정
 2. ***ldap 관리자*** 암호 설정
 3. UID 0 권한으로 ldap 설정 변경 시에 암호 없이 접근 가능 (-Y EXTERNAL -H ldapi:/// 권한 이용)
 4. ldap log를 /var/log/slapd.log 에 남기도록 설정
-5. ***ADMIN***, ***People***, ***Group*** OU 생성
-  * ***Admin*** OU : ***Poeple***, ***Group*** OU를 관리하기 위한 user 및 group
-  * ***People*** OU : ldap 에서 서비스 하는 user
-  * ***Group*** OU : ldap 에서 서비스 하는 group
-6. ㅁㄴㅇㄹ
+5. ***ADMIN***, ***People***, ***Group*** OU(Organization Unit) 생성
+  * ***Admin*** OU : ***Poeple***, ***Group*** OU를 관리하기 위한 user 및 group account
+  * ***People*** OU : ldap 에서 서비스 할 user account
+  * ***Group*** OU : ldap 에서 서비스 할 group account
+6. host 제한 연동
+7. sudo 권한 연동
+8. ldap access policy
+  1. ldapadmins group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 권한을 가진다.
+  2. ldapROusers group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 읽기 권한을 가진다.
+  3. 일반 account는 password entry만 제외하고 읽기 권한을 가진다.
+  4. 일반 account는 자신의 password entry를 변경할 수 있다.
+  5. anonymous account는 접근을 불허 한다.
+  6. Ldap server의 system root(UID 0)는 ***cn=manager*** 와 동일한 권한을 가진다.
 
 설치 후, 미리 등록되는 사용자 및 group은 다음과 같습니다.
 
@@ -111,6 +114,7 @@ ldap 초기화는 ***ldap-auth-utils*** 패키지의 ***ldap_auth_init*** 명령
   1. **ldapadmins** : ldap 관리를 할 수 있는 group
   2. **ldapROusers** : ldap 전체 data에 접근할 수 있는 readonly gruop
   3. **ldapmanagers** : ldap을 관리하기 위한 account들의 default group
+  4. ldap 관리를 위해서는 사용자를 위의 세 그룹에 권한에 맞게 등록해 주면 자동으로 권한을 획득하게 됩니다.
 2. Manager User
   1. **ssoadmin**
     * ldap 관리를 할 수 있는 account
@@ -128,448 +132,108 @@ ldap 초기화는 ***ldap-auth-utils*** 패키지의 ***ldap_auth_init*** 명령
     * 생성할 LDAP account들의 default Group
 
 
+### 2.2 LDAP 설정(olc) 및 LDAP data 초기화
+
+초기화는 ***ldap-auth-utils***의 ***ldap_auth_init*** 명령을 이용합니다.
+
+다시 강조하지만, 이 작업은 기존의 ldap data를 제거하니, 주의 하시기 바랍니다.
+
+먼저, ***ldap_auth_init***를 동작 시키기 위하여, slapd 서비스를 정지 시킨 후 기존의 설정을 제거합니다.
+
 ```bash
-[root@an3 ~]$ # slapd.conf와 slapd.d 디렉토리를 제거 합니다.
-[root@an3 ~]$ rm -f /etc/openldap/slapd.conf
-[root@an3 ~]$ rm -rf /etc/openldap/slapd.d
-[root@an3 ~]$ # slapd.d 를 생성하고 초기화 합니다.
-[root@an3 ~]$ mkdir -p /etc/openldap/slapd.d
-[root@an3 ~]$ slaptest -f /usr/share/openldap-servers/slapd.conf.obsolete \
-                     -F /etc/openldap/slapd.d
-[root@an3 ~]$ # slapd.d 의 디렉토리 파일의 권한에서 group/extra 권한을 모두 제거 합니다.
-[root@an3 ~]$ chown -R ldap:ldap /etc/openldap/slapd.d
-[root@an3 ~]$ chmod -R 000 /etc/openldap/slapd.d
-[root@an3 ~]$ chmod -R u+rwX /etc/openldap/slapd.d
-[root@an3 ~]$ #  기존의 openldap data를 모두 초기화 시킵니다.
-[root@an3 ~]$ rm -rf /var/lib/ldap/*
-[root@an3 ~]$ cp -af /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
-[root@an3 ~]$ chown ldap.ldap /var/lib/ldap/DB_CONFIG
+[root@an3 ~]$ service slapd stop
+Redirecting to /bin/systemctl stop  slapd.service
+[root@an3 ~]$ rm -rf /etc/openldap/{slapd*.conf,slapd.d}
+```
+
+설정 제거 후, ***ldap_auth_init***를 실행 시키고 다음의 과정을 진행 하십시오.
+
+```bash
+[root@an3 ~]$ ldap_auth_init
+1. ldap 패키지 설치
+
+
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.premi.st
+ * epel: ftp.riken.jp
+ * extras: ftp.tsukuba.wide.ad.jp
+ * updates: mirror.premi.st
+Package openldap-servers-2.4.40-9.el7_2.x86_64 already installed and latest version
+Package openldap-clients-2.4.40-9.el7_2.x86_64 already installed and latest version
+Nothing to do
+
+
+
+2. syslog 설정
+   . /etc/rsyslog.d/slapd.conf                                    ... Done
+     Redirecting to /bin/systemctl restart  rsyslog.service
+   . /etc/logrotate.d/openldap                                    ... Done
+
+
+3. SLAPD 설정 및 구동
+   . /etc/logrotate.d/openldap                                    ... Done
+     Redirecting to /bin/systemctl restart  slapd.service
+
+4.기본 정보 설정
+   BASE DN 입력 : DC=kldp,DC=org
+   LDAP 관리자 암호 입력   : ****
+   LDAP 관리자 암호 재입력 : ****
+
+   결과:
+           BASE           => kldp
+           BASE DN        => DC=kldp,DC=org
+           ADMIN Password => asdf
+           ADMIN Password => {SSHA}pct+aDwN4y4BR3ujyxgWjUBGVqo7fg1/
+
+
+5. BASE DN 설정
+   . /etc/openldap/slapd.d/cn=config/olcDatabase={-1}frontend.ldif ... Done
+   . /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif   ... Done
+   . /etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif  ... Done
+   . /etc/openldap/slapd.d/cn=config/olcDatabase={2}bdb.ldif      ... Done
+
+
+6. 어드민 암호 설정
+   SASL/EXTERNAL authentication started
+   SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+   SASL SSF: 0
+   modifying entry "olcDatabase={0}config,cn=config"
+   modifying entry "olcDatabase={2}bdb,cn=config"
+     Redirecting to /bin/systemctl restart  slapd.service
+
+
+7. 기본 트리 구조 초기화
+   adding new entry "DC=kldp,DC=org"
+   adding new entry "ou=Admin,DC=kldp,DC=org"
+   adding new entry "ou=People,DC=kldp,DC=org"
+   adding new entry "ou=Group,DC=kldp,DC=org"
+Done
+
+
+8. 기본 그룹 생성
+   adding new entry "cn=ldapadmins,ou=Admin,DC=kldp,DC=org"
+   adding new entry "cn=ldapROusers,ou=Admin,DC=kldp,DC=org"
+   adding new entry "cn=ldapmanagers,ou=Admin,DC=kldp,DC=org"
+   adding new entry "cn=ldapusers,ou=Group,DC=kldp,DC=org"
+   adding new entry "uid=ssoadmin,ou=Admin,DC=kldp,DC=org"
+   adding new entry "uid=ssomanager,ou=Admin,DC=kldp,DC=org"
+   adding new entry "uid=replica,ou=Admin,DC=kldp,DC=org"
+Done
+
+
+9. LDAP 기본 설정
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+   modifying entry "olcDatabase={-1}frontend,cn=config"
+Done
+
+[root@an3 ~]$
 ```
 
 위의 작업을 거치면, ***openldap-servers*** package를 처음 설치를 했을 때 처럼 초기화가 됩니다.
 
-###2.2 syslog 설정
-
-***slapd*** daemon의 log를 남기기 위한 설정을 합니다.
-
-```bash
-[root@an3 ~]$ mkdir -p /var/log/slapd
-[root@an3 ~]$ chown -R ldap:ldap /var/log/slapd
-[root@an3 ~]$ cat > /etc/syslog.d/slapd <<EOF
-local4.*  /var/log/spamd/slapd.log
-EOF
-[root@an3 ~]$ service rsyslog restart
-시스템 로거 종료 중:                                       [  OK  ]
-시스템 로거 시작 중:                                       [  OK  ]
-[root@an3 ~]$
-```
-
-다음 logrotate 설정을 합니다.
-
-```bash
-[root@an3 ~]$ cat /etc/logrotate.d/openldap <<EOF
-var/log/slapd/*.log {
-    copytruncate
-    rotate 4
-    monthly
-    notifempty
-    missingok
-    compress
-    create 0644 ldap ldap
-}
-EOF
-[root@an3 ~]$
-```
-
-###2.3 slapd 설정
-
-먼저, ***LDAP***에서 사용할 ***Base DN***을 정합니다. ***Base DN***은 mysql의 database 라고 생각을 하시면 됩니다.
-
-보통은 사용하시는 도메인을 많이 사용합니다. 사용하시는 domain이 ***oops.org***이라면
-
->***DC=oops,DC=org***
-
-위와 같이 지정하면 되며, 여기서는 이 설정을 ***Base DN***의 예제로 사용할 것입니다.
-
-다음, 위에서 정한 ***Base DN***을 설정 합니다.
-
-```bash
-[root@an3 ~] # dc=oops,dc=org 부분은 설정한 것으로 지정해야 합니다.
-[root@an3 ~]$ perl -pi -e 's/dc=my-domain,dc=com/dc=oops,dc=org/g' \
-                          /etc/openldap/slapd.d/cn\=config/olcDatabase*
-```
-
-다음, ***slapd***를 시작 시킵니다. 이는 ***slapd***가 ***OLC(OnLineConfiguration)*** 이기 때문에 설정이 초기화 상태에서 시작을 먼저 시켜 주는 것입니다.
-
-```bash
-[root@an3 ~]$ perl -pi -e 's/#SLAPD_/SLAPD_/g' /etc/sysconfig/ldap
-[root@an3 ~]$ service slapd start
-slapd 설정 파일 확인 중:                                   [주의]
-5708bfb7 ldif_read_file: checksum error on "/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif"
-5708bfb7 ldif_read_file: checksum error on "/etc/openldap/slapd.d/cn=config/olcDatabase={2}bdb.ldif"
-config file testing succeeded
-slapd (을)를 시작 중:                                      [  OK  ]
-[root@an3 ~]$ # 부팅시에 slapd가 시작되도록 해 줍니다.
-[root@an3 ~]$ systemctl enable slapd
-```
-
-위에서 slapd를 시작할 때 checksum error가 발생하는 이유는, ***openldap***이 ***OCL***로 변경된 이후 설정 파일은 ***ladpadd***, 또는 ***ldapmodify*** 등으로 설정을 변경해야 하는데, 위에서 ***DN*** 설정을 수동으로 변경을 했기 때문에 발생하는 것입니다. (물론 운영에 문제가 있지는 않습니다.)
-
-이 에러 메시지를 없애기 위해서 다음과 처리를 합니다.
-
-아래 명령은 cat 라인부터 마지막 EOF 까지를 copy 한 후, paste 하고 실행하면 됩니다.
-
-```bash
-[root@an3 ~]$ cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:///
-dn: olcDatabase={-1}frontend,cn=config
-changetype: modify
-replace: olcReadOnly
-olcReadOnly: FALSE
-
-dn: olcDatabase={0}config,cn=config
-changetype: modify
-replace: olcReadOnly
-olcReadOnly: FALSE
-
-dn: olcDatabase={1}monitor,cn=config
-changetype: modify
-replace: olcReadOnly
-olcReadOnly: FALSE
-
-dn: olcDatabase={2}bdb,cn=config
-changetype: modify
-replace: olcReadOnly
-olcReadOnly: FALSE
-EOF
-[root@an3 ~]$
-```
-
-***ldapmodify*** 명령으로 변경된 설정 파일들의 ***checksum***을 갱신합니다. 물론 위의 설정값들은 이 작업을 하는 목적이 ***checksum*** 갱신이기 때문에, 동일한 값으로 변경을 하는 것입니다. (이 작업은 1회만 하면 됩니다. 다음 부터는 직접 설정 파일을 수정하지 않기 때문입니다.)
-
-다시 ***slapd***를 재시작 해서 checksum 에러가 발생하는지 확인 합니다.
-
-```bash
-[root@an3 ~]$ service slapd restart
-slapd 설정 파일 확인 중:                                   [주의]
-config file testing succeeded
-slapd (을)를 시작 중:                                      [  OK  ]
-[root@an3 ~]$
-```
-
-
-###2.4 Admin password 설정
-
-***slappasswd*** 명령을 이용하여 사용할 암호의 hash 문자열을 생성합니다. (여기서는 "***asdf!2345***"의 hash 문자열로 진행을 합니다.)
-
-```bash
-[root@an3 ~]$ slappasswd
-New password:
-Re-enter new password:
-{SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
-[root@an3 ~]$
-```
-
-만약, system의 passwd entry에 있는 문자열을 그대로 사용하고 싶으시다면, 
-
-> ***{CRYPT}$1$ggRKVU3b$TZduI8fIrxZ9LpJ9NqAJZ1***
-
-와 같이 사용을 해도 됩니다. 위의 hash 문자열은 md5방식의 crypt 암호화된 hash로, md5 방식의 암호화 입니다. 즉, /etc/shadow의 암호화 문자열 앞에 ***{CRYPT}*** 만 prefix로 붙여 주시면 됩니다.
-
-그리고, 다음의 명령으로 Admin 암호를 설정 합니다.
-
-```bash
-[root@an3 ~]$ cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:///
-dn: olcDatabase={0}config,cn=config
-changetype: modify
-add: olcRootPW
-olcRootPW: {SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
-
-dn: olcDatabase={2}bdb,cn=config
-changetype: modify
-add: olcRootPW
-olcRootPW: {SSHA}PYxLS1BKElJx3ER3zwCfHX6nhu5a1H2l
-EOF
-[root@an3 ~]$
-```
-
-변경한 LDAP 관리자의 DN은 "***cn=manager,{BASE_DN}***"이며, 여기서는 ***cn=manager,dc=oops,dc=org***"가 되며, 다음의 방법으로 확인을 합니다.
-
-```bash
-[root@an3 ~]$ # "-W" 옵션으로 암호 입력을 하지 않을 경우 에러 발생
-[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org"
-ldap_bind: Server is unwilling to perform (53)
-        additional info: unauthenticated bind (DN with no password) disallowed
-[root@an3 ~]$ # 잘못된 암호를 입력했을 경우
-[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org" -W
-Enter LDAP Password:  # 틀린 암호 입력
-ldap_bind: Invalid credentials (49)
-[root@an3 ~]$ # 암호 입력이 제대로 되었을 경우
-[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=kldp,dc=org" -W
-Enter LDAP Password:
-# extended LDIF
-#
-# LDAPv3
-# base <> (default) with scope subtree
-# filter: (objectclass=*)
-# requesting: ALL
-#
-
-# search result
-search: 2
-result: 32 No such object
-
-# numResponses: 1
-[root@an3 ~]$
-```
-
-
-###2.5 LDAP Tree 생성
-
-인증에 필요한 Ldap database tree(***OU- Organiztion Unit***)를 생성합니다. 여기서는 Admin, People, Group database를 생성할 예정이며, 다음의 용도로 사용합니다.
-
-> ***Aadmin*** : Ldap 관리를 위한 user와 group entryp 저장  
-> ***People***  : system account entry 저장  
-> ***Group*** : system group entry 저장
-
-LDAP tree에서 ***DN***을 mysql의 database에 비유했다면, ***OU***는 table 정도라고 생각하면 됩니다. 위의 Admin, People, Group 는 ***OU***에 해당이 됩니다. 이 ***OU***안에 passwd, group entry가 들어가게 되며, mysql가 다른 점은 ***OU*** 밑에 또 ***OU***가 있을 수 있다는 점입니다. file system과 비유를 하면 ***Directory***로 생각하는 것이 더 맞을지도 모르겠습니다. 이 부분에 대해서 정확하게 알고 싶다면, LDAP 문서들을 읽어 보시는 것을 권장 합니다. 
-
-***DN*** 설정은 *설정하신 **DN***으로 수정을 하셔야 합니다.
-
-```bash
-[root@an3 ~]$ cat > addtree.ldif <<EOF
-dn: dc=oops,dc=org
-dc: oops
-o: OOPS LDAP
-objectclass: dcObject
-objectclass: organization
-objectclass: top
-
-dn: ou=Admin,dc=oops,dc=org
-ou: Admin
-objectclass: organizationalUnit
-
-dn: ou=People,dc=oops,dc=org
-ou: People
-objectclass: organizationalUnit
-
-dn: ou=Group,dc=oops,dc=org
-ou: Group
-objectclass: organizationalUnit
-EOF
-[root@an3 ~]$ ldapadd -a -c -H ldapi:/// -D "cn=Manager,dc=oops,dc=org" -W -f addtree.ldif
-Enter LDAP Password: # input admin password
-adding new entry "dc=oops,dc=org"
-adding new entry "ou=Admin,dc=oops,dc=org"
-adding new entry "ou=People,dc=oops,dc=org"
-adding new entry "ou=Group,dc=oops,dc=org"
-[root@an3 ~]$
-```
-
-###2.6 LDAP 기본 유저/그룹 생성
-
-Ldap을 관리하기 위한 기본 user/group entry를 생성 하며, 다음의 권한을 가집니다. 이 account, group들은 아래의 ACL에 의해서 자동으로 권한을 가지게 됩니다.
-
-1. Manager Group
-  1. **ldapadmins** : ldap 관리를 할 수 있는 group
-  2. **ldapROusers** : ldap 전체 data에 접근할 수 있는 readonly gruop
-  3. **ldapmanagers** : ldap을 관리하기 위한 account들의 default group
-2. Manager User
-  1. **ssoadmin**
-    * ldap 관리를 할 수 있는 account
-    * ***ldapadmins*** gruop member
-    * ***DN***: uid=ssoadmin,ou=Admin,dc=oops,dc=org
-  2. **ssomanager**
-    * tree 전체의 데이터에 접근 가능한 readonly account
-    * ***ldapROusers*** group member
-    * 인증 통합시에, 각 client 서버에서 ldap에 연결하기 위한 account
-  3. **replica**
-    * replication에 사용하기 위한 account (readonly account)
-    * ***ldapROusers*** group member
-3. System Group
-  1. **ldapusers**
-    * 생성할 LDAP account들의 default Group
-
-아래의 명령으로 user/group을 생성 합니다.
-
-```bash
-[root@an3 ~]$ export BASEDN="dc=oops,dc=org"
-[root@an3 ~]$ cat adduser.ldif <<EOF
-# extended LDIF
-#
-# LDAPv3
-# base <${BASEDN}> with scope subtree
-# filter: (cn=*)
-# requesting: ALL
-#
-
-# ldapadmins, Admin
-dn: cn=ldapadmins,ou=Admin,${BASEDN}
-objectClass: posixGroup
-objectClass: top
-cn: ldapadmins
-description: LDAP Management group
-gidNumber: 9999
-memberUid: ssoadmin
-
-# ldapROusers, Admin
-dn: cn=ldapROusers,ou=Admin,${BASEDN}
-objectClass: posixGroup
-objectClass: top
-cn: ldapROusers
-description: LDAP Read only group
-gidNumber: 9998
-memberUid: replica
-memberUid: ssomanager
-
-# ldapusers, Group
-dn: cn=ldapusers,ou=Group,${BASEDN}
-objectClass: posixGroup
-objectClass: top
-cn: ldapusers
-description: LDAP account groups
-gidNumber: 10000
-
-# ssoadmin, Admin
-dn: uid=ssoadmin,ou=Admin,${BASEDN}
-objectClass: posixAccount
-objectClass: top
-objectClass: inetOrgPerson
-objectClass: shadowAccount
-gidNumber: 9997
-givenName: SSO
-sn: Admin
-displayName: SSO Admin
-uid: ssoadmin
-homeDirectory: /
-gecos: SSO Aadmin
-loginShell: /sbin/nologin
-shadowFlag: 0
-shadowMin: 0
-shadowMax: 99999
-shadowWarning: 0
-shadowInactive: 99999
-shadowLastChange: 12011
-shadowExpire: 99999
-cn: SSO Admin
-uidNumber: 9999
-
-dn: uid=ssomanager,ou=Admin,${BASEDN}
-objectClass: posixAccount
-objectClass: top
-objectClass: inetOrgPerson
-objectClass: shadowAccount
-gidNumber: 9997
-givenName: SSO
-sn: Manager
-displayName: SSO Manager
-uid: ssomanager
-homeDirectory: /
-gecos: SSO Manager
-loginShell: /sbin/nologin
-shadowFlag: 0
-shadowMin: 0
-shadowMax: 99999
-shadowWarning: 0
-shadowInactive: 99999
-shadowLastChange: 12011
-shadowExpire: 99999
-cn: SSO manager
-uidNumber: 9998
-
-dn: uid=replica,ou=Admin,${BASEDN}
-objectClass: posixAccount
-objectClass: top
-objectClass: inetOrgPerson
-objectClass: shadowAccount
-gidNumber: 9997
-givenName: Replica
-sn: User
-displayName: Replica User
-uid: replica
-homeDirectory: /
-gecos: Replica User
-loginShell: /sbin/nologin
-shadowFlag: 0
-shadowMin: 0
-shadowMax: 99999
-shadowWarning: 0
-shadowInactive: 99999
-shadowLastChange: 12011
-shadowExpire: 99999
-cn: Replica User
-uidNumber: 9997
-EOF
-[root@an3 ~]$ ldapadd -a -c -H ldapi:/// -D "cn=Manager,${BASEDN}" -W -f adduser.ldip
-Enter LDAP Password: # input admin password
-[root@an3 ~]$
-```
-
-아직 해당 account에 대한 암호가 설정이 되지 않은 상태 이며, 아래에서 passwd 설정 하는 방법을 따로 설명 합니다.
-
-다음은, Group OU에 ldapusers group이 잘 생성이 되었는지 확인하여 봅니다.
-
-```bash
-[root@an3 ~]$ # cn=manager,dc=oops,dc=org 권한으로 ou=Group,dc=oops,dc=org 의 entry 탐색
-[root@an3 ~]$ ldapsearch -x -D "cn=manager,dc=oops,dc=org" -W -b "ou=Group,dc=oops,dc=org"
-Enter LDAP Password: # LDAP 관리자 암호(여기서의 예는 "asdf!2345") 입력
-# extended LDIF
-#
-# LDAPv3
-# base <ou=Group,dc=kldp,dc=org> with scope subtree
-# filter: (objectclass=*)
-# requesting: ALL
-#
-
-# Group, oops.org
-dn: ou=Group,dc=oops,dc=org
-ou: Group
-objectClass: organizationalUnit
-
-# ldapusers, Group, oops.org
-dn: cn=ldapusers,ou=Group,dc=oops,dc=org
-objectClass: posixGroup
-objectClass: top
-cn: ldapusers
-description: LDAP account groups
-gidNumber: 10000
-
-# search result
-search: 2
-result: 0 Success
-
-# numResponses: 3
-# numEntries: 2
-[root@an3 ~]$
-```
-
-###2.7 LDAP Access 정책 설정
-
-이 부분은 각 account/group의 정책 및 LDAP의 기본 보안을 수립하게 됩니다.
-
-정책의 모티브는 다음과 같습니다.
-
-1. ldapadmins group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 권한을 가진다.
-2. ldapROusers group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 읽기 권한을 가진다.
-3. 일반 account는 password entry만 제외하고 읽기 권한을 가진다.
-4. 일반 account는 자신의 password entry를 변경할 수 있다.
-5. anonymous account는 접근을 불허 한다.
-6. Ldap server의 system root는 ***cn=manager*** 와 동일한 권한을 가진다.
-
-```bash
-[root@an3 ~]$ export BASEDN="dc=oops,dc=org"
-[root@an3 ~]$cat <<EOF | ldapmodify -Y EXTERNAL -H ldapi:/// | sed 's/^/   /g' | grep -v "^[ ]*$"
-dn: olcDatabase={-1}frontend,cn=config
-changetype: modify
-add: olcAccess
-olcAccess: to dn.base="" by * read
-olcAccess: to dn.base="cn=subschema" by * read
-olcAccess: to dn.subtree="ou=People,${BASEDN}" attrs=userPassword,shadowLastChange by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by self =wx by anonymous auth
-olcAccess: to dn.subtree="ou=Group,${BASEDN}" by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by users read by anonymous auth
-olcAccess: to dn.subtree="ou=People,${BASEDN}" by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by users read by anonymous auth
-olcAccess: to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by set="[cn=ldapadmins,ou=Admin,${BASEDN}]/memberUid & user/uid" manage by set="[cn=ldapROusers,ou=Admin,${BASEDN}]/memberUid & user/uid" read by anonymous auth
-EOF
-[root@an3 ~]$
-```
 
 #3 account 암호 설정
 
