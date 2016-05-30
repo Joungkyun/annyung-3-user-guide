@@ -101,8 +101,8 @@ ldap 초기화는 다음의 목표를 가지고 진행을 합니다.
 6. host 제한 연동
 7. sudo 권한 연동
 8. ldap access policy
-  1. ldapadmins group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 권한을 가진다.
-  2. ldapROusers group의 member는 ***dc=kldp,dc=org*** database에 대한 모든 읽기 권한을 가진다.
+  1. ldapadmins group의 member는 ***dc=oops,dc=org*** database에 대한 모든 권한을 가진다.
+  2. ldapROusers group의 member는 ***dc=oops,dc=org*** database에 대한 모든 읽기 권한을 가진다.
   3. 일반 account는 password entry만 제외하고 읽기 권한을 가진다.
   4. 일반 account는 자신의 password entry를 변경할 수 있다.
   5. anonymous account는 접근을 불허 한다.
