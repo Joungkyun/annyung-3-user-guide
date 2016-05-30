@@ -22,21 +22,59 @@
 
 
 ***참고!***
-> 이 문서는 ***RHEL*** >=6, ***CentOS*** >=6, ***AnNyung*** >=2 에서의 설정을 테스트 하였습니다.
+> 이 문서는 ***RHEL*** >=6, ***CentOS*** >=6, ***AnNyung*** >=2 에서의 설정을 테스트 하였습니다.  
+> 이 문서는 <u>***모든 ldap data를 초기화***</u> 시킨 상태에서 설정하는 것을 기준으로 합니다.
 
 
 ##1. package 설치
+
+<br>
+
+***RHEL/CentOS 참고!***
+
+ldap-auth-utils 와 ldap-auth-utils-passwd, genpasswd 패키지는 안녕 리눅스에서만 제공을 합니다. 그러므로 RHEL/CentOS 에서는 안녕 리눅스의 core package repository를 yum에 등록해 주십시오. 아래와 같이 repository를 추가를 하면, 기존의 RHEL/CentOS package를 변경 시키지 않고, 안녕 리눅스에서만 제공하는 패키지를 사용/관리 할 수 있습니다.
+
+***RHEL/CentOS 7*** 에서는 다음과 같이 추가해 주십시오.
+```shell
+[root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
+# AnNyung.repo
+#
+# LInux AnNyung 3 Yum repository
+#
+
+[AN:core]
+name=AnNyung 3 Core Repository
+mirrorlist=http://annyung.oops.org/mirror.php?release=3&arch=$basearch&repo=core
+gpgcheck=1
+gpgkey=http://mirror.oops.org/pub/AnNyung/3/RPM-GPG-KEY-AnNyung-3
+exclude=php* whois httpd*
+[root@host ~]$ yum clean all
+```
+
+RHEL 6에서는 다음과 같이 추가해 주십시오.
+```shell
+[root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
+# AnNyung.repo
+#
+# LInux AnNyung 2 Yum repository
+#
+
+[AN:core]
+name=AnNyung 2 Core Repository
+mirrorlist=http://annyung.oops.org/mirror.php?release=2&arch=$basearch&repo=core
+gpgcheck=1
+gpgkey=http://mirror.oops.org/pub/AnNyung/2/RPM-GPG-KEY-AnNyung-2
+exclude=php* whois httpd*
+[root@host ~]$ yum clean all
+```
+
+ldap-auth-utils 와 ldap-auth-utils-passwd 패키지를 설치 합니다. 이 패키지들을 설치를 하면, genpasswd, openldap-servers, openldap-clients 패키지가 의존성 설정으로 같이 설치가 됩니다.
 
 ```bash
 [root@an3 ~]$ yum install ldap-auth-utils ldap-auth-utils-passwd
 ```
 
-ldap-auth-utils 와 ldap-auth-utils-passwd 패키지를 설치 합니다. 이 패키지들을 설치를 하면, genpasswd, openldap-servers, openldap-clients 패키지가 의존성 설정으로 같이 설치가 됩니다.
 
-> ***RHEL/CentOS 참고!***  
-ldap-auth-utils 와 ldap-auth-utils-passwd, genpasswd 패키지는 안녕 리눅스에서만 제공을 합니다. RHEL/CentOS 에서는 openldap-servers, openldap-clients 패키지를 yum으로 설치한 후에, 안녕 리눅스 repository에서 위의 세 패키지를 받아서 설치 하십시오.
-
-RHEL6/CentOS6 은 [안녕 리눅스 2의 repository](http://mirror.oops.org/pub/AnNyung/2/core/x86_64/)에서, RHEL7/CentOS7은 [안녕 리눅스 3의 repository](http://mirror.oops.org/pub/AnNyung/3/core/x86_64/)에서 받으시면 됩니다.
 
 
 
