@@ -269,9 +269,9 @@ olcRootPW: {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
 
 ##3.2 Account 암호 변경
 
-다음은 ***2.6 LDAP 기본 유저 생성***에서 생성한 account들의 암호를 변경하는 방법입니다. 생성된 account들은 ***ldappasswd*** 명령을 이용하여 변경을 합니다.
+다음은 ***Admin***, ***People***, ***Group*** OU에 생성한 account/group 들의 암호를 변경하는 방법입니다. 생성된 account들은 ***ldappasswd*** 명령을 이용하여 변경을 합니다.
 
-일단, 3.2.1 의 방법으로 위에서 생성한 ssoadmin, ssomanager, replica 의 암호를 지정 합니다.
+일단, ***ldap_auth_init***로 생성한 ssoadmin, ssomanager, replica 의 암호를 지정 합니다.
 
 ###3.2.1 관리자가 다른 account의 암호를 변경
 
