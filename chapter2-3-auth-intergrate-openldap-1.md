@@ -248,6 +248,8 @@ Section 2의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 �
 
 ***BASE DN***에 설정한 account의 경우에는 ***ldappasswd*** 명령을 이용하여 변경을 할 수 있지만, LDAP 관리자의 암호는 ***slapd*** 설정 파일에 포함되어 있기 때문에 ***ldapmodify*** 명령을 이용해야 합니다.
 
+***slappasswd*** 명령을 이용하여 암호를 encrypt 한 후에, ldif 형식을 이용하여 업데이트 합니다.
+
 ```shell
 [root@an3 ~]$ slappasswd -s 'asdf!asdf'
 {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
