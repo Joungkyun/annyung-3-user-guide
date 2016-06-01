@@ -10,7 +10,7 @@ OpenLDAP을 이용한 통합 인증을 위하여 안녕 리눅스는 ***ldap-aut
 하지만, GUI tool들도 특성이 너무 많고, LDAP의 사용 범위 역시 인증 통합에 국한이 된 것이 아니기 때문에 GUI tool
 도 선택을 하기가 쉽지 않습니다.
 
-그래서 안녕 리눅스는, command line에서 ldap 인증을 관리하기 위한 ***ldap-auth-utils***frontend package를 지원 하며, 이를 이용하여 integartion을 기술 합니다.
+그래서 안녕 리눅스는, command line에서 ldap 인증을 관리하기 위한 ***ldap-auth-utils*** frontend package를 지원 하며, 이를 이용하여 integartion을 기술 합니다.
 
 openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으로 구성을 하는 방법으로 기술을 합니다.
 
