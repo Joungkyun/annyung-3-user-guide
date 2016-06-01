@@ -413,7 +413,6 @@ Section 2의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 �
 
 ```shell
 [root@an3 ~]$ export CHGPASSWD=$(slappasswd -s 'asdf!asdf')
-{SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
 [root@an3 ~]$
 [root@an3 ~]$ cat <<EOF > ldapmodify -Y EXTERNAL -H ldapi:///
 dn: olcDatabase={0}config,cn=config
