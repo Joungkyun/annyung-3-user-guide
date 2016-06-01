@@ -6,6 +6,7 @@
 2. Openldap 초기화
   1. OLC 및 ldap data 초기화 목표
   2. LDAP 설정(olc) 및 LDAP data 초기화
+  3. LDAP client 설정
 3. account 암호 설정
   1. LDAP 관리자 암호 변경
   2. Account 암호 변경
