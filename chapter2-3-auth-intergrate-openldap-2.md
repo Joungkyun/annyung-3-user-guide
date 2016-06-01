@@ -2,7 +2,12 @@
 
 > ***목차***
 > 1. 인증서 준비
+>   1. 무료 SSL 인증서 발급 기관
+>   2. Self sign 인증서
 > 2. LDAP 설정
+>  1. ldap_ssl을 이용한 등록
+>  2. 직접 등록
+>  3. ssl 설정 제거
 > 3. OpenLDAP 재시작
 > 4. 설정 확인
 
@@ -192,7 +197,8 @@ slapd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$ cat >> /etc/openldap/ldap.conf << EOF
 
 TLS_CACERTDIR   /etc/openldap/certs
-TLS_CACERT      /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
+TLS_CACERT      /etc/openldap/certs/pki/ca.crt
+#TLS_CACERT     /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
 EOF
 [root@an3 ~]$
 ```
