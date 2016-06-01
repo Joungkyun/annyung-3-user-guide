@@ -14,6 +14,8 @@ OpenLDAP을 이용한 통합 인증을 위하여 안녕 리눅스는 ***ldap-aut
 
 openldap을 이용한 인증 통합은 openldap을 multi-master replaction 으로 구성을 하는 방법으로 기술을 합니다.
 
+이 문서는 RHEL >= 6, CentOS >= 6, AnNyung >=2 에 적용이 가능 합니다.
+
 1. [Master Server 설정](chapter2-3-auth-intergrate-openldap-1.md)
 2. [SSL 설정](chapter2-3-auth-intergrate-openldap-2.md)
 3. [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3.md)
