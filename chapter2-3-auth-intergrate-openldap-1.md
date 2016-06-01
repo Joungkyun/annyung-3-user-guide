@@ -232,7 +232,6 @@ Done
 [root@an3 ~]$
 ```
 
-위의 작업을 거치면, ***openldap-servers*** package를 처음 설치를 했을 때 처럼 초기화가 됩니다.
 
 
 #3 account 암호 설정
