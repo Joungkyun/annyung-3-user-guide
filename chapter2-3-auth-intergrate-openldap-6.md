@@ -158,3 +158,34 @@ USERNAME 형식
 
 [root@an3 ~]$
 ```
+
+그룹 account는 ***-g*** 옵션을 이용하여 확인 합니다.
+
+```shell
+[root@an3 ~]$ ldap_auth -g ldapusers@kldp.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=Group,dc=kldp,dc=org> with scope subtree
+    # filter: (cn=ldapusers)
+    # requesting: ALL
+    #
+    # ldapusers, Group, kldp.org
+    compatibility dn : ldapusers@kldp.org
+    dn               : cn=ldapusers,ou=Group,dc=kldp,dc=org
+    objectClass      : posixGroup
+    objectClass      : top
+    cn               : ldapusers
+    description      : LDAP account groups
+    gidNumber        : 10000
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+
+[root@an3 ~]$
+```
+
+확인 외에 attribute 값을 변경하거나 삭제할 수 있습니다. 이에 대해서는 help message 또는 man page를 참고 하십시오. (예제가 있습니다.) 단, 모든 attribute를 변경할 수 있지는 않습니다.
