@@ -361,61 +361,82 @@ olcRootPW: {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
 
 ##3.2 Account 암호 변경
 
-다음은 ***Admin***, ***People***, ***Group*** OU에 생성한 account/group 들의 암호를 변경하는 방법입니다. 생성된 account들은 ***ldappasswd*** 명령을 이용하여 변경을 합니다.
+***ldap_auth_init***으로 LDAP database를 초기화를 하면, 기본적으로 ***ssoadmin***, ***ssomanager***, ***replica*** account가 암호 없이 생성이 됩니다. 특히 ***ssoadmin***의 경우에는 ***BASE DN***의 데이터를 변경할 수 있는 권한을 가지고 있고, ***ssomanager*** 와 ***replica*** account는 인증 통합시에 사용하는 권한이기 때문에 데이터베이스 전반에 대한 read 권한을 가지고 있습니다.
 
-일단, ***ldap_auth_init***로 생성한 ssoadmin, ssomanager, replica 의 암호를 지정 합니다.
+그러므로, ***ldap_auth_init***으로 데이터베이스를 초기화 했을 경우, 꼭 이 3 계정의 암호를 지정해 주어야 합니다. 
 
-###3.2.1 관리자가 다른 account의 암호를 변경
+암호 변경은 ***ldap_passwd*** 명령을 이용합니다. ***openldap***의 ***ldappasswd***와 비슷하니 주의 하십시오. ***ldap_passwd***는 root 권한으로 실행을 해야 하며, <u>보안 상 ***localhost***의 ldap database만 관리할 수 있습니다.</u>
 
-```bash
-[root@an3 ~]$ export BASEDN="dc=oops,dc=org"
-[root@an3 ~]$ # Manager 권한으로 ssoadmin 의 암호 변경
-[root@an3 ~]$ ldappasswd -H ldapi:/// -x -D "cn=manager,${BASEDN}" -S "uid=ssoadmin,ou=admin,${BASEDN}" -W
-New password:          # 지정할 ssoadmin 의 압호 입력
-Re-enter new password: # 지정할 ssoadmin의 압호 재입력
-Enter LDAP Password:   # ldap 관리자 암호 입력
+***ldap_passwd***를 사용할 경우, account는 ***"ACCOUNT@DOMAIN"***의 형식을 사용합니다. 즉, ***BASE DN***이 ***DC=oops,DC=org*** 라면, ***DOMAIN***은 ***oops.org***가 됩니다.
+
+```shell
+[root@an3 ~]$ ldap_passwd -u Admin ssoadmin@kldp.org
+New password     : ***********
+Re-New password  : ***********
+
+Your Informations:
+
+    * Account: ssoadmin@kldp.org
+    * RDN : uid=ssoadmin,ou=Admin,dc=kldp,dc=org
+    * Host: ldapi:///
+    * Privilieges: -Y EXTERNAL
+    * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
+    * Hash: {CRYPT}$6$nTeAanL57QGjvsdv$fd6YrbOqI4hFTJEZxm5GIuu8HUGMfcNz6Tx0AmaEsC78TJ0SBh/lEYqCI1KP.95H3TeTBsA1wX7nBnprwv0Hz0
+
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+
+0
+Done
+[root@an3 ~]$
+[root@an3 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
+New password     : ***********
+Re-New password  : ***********
+
+Your Informations:
+
+    * Account: ssoadmin@kldp.org
+    * RDN : uid=ssoadmin,ou=Admin,dc=kldp,dc=org
+    * Host: ldapi:///
+    * Privilieges: -Y EXTERNAL
+    * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
+    * Hash: {CRYPT}$6$nTeAanL57QGjvsdv$fd6YrbOqI4hFTJEZxm5GIuu8HUGMfcNz6Tx0AmaEsC78TJ0SBh/lEYqCI1KP.95H3TeTBsA1wX7nBnprwv0Hz0
+
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+
+0
+Done
+[root@an3 ~]$
+[root@an3 ~]$ ldap_passwd -u Admin replica@kldp.org
+New password     : ***********
+Re-New password  : ***********
+
+Your Informations:
+
+    * Account: ssoadmin@kldp.org
+    * RDN : uid=ssoadmin,ou=Admin,dc=kldp,dc=org
+    * Host: ldapi:///
+    * Privilieges: -Y EXTERNAL
+    * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
+    * Hash: {CRYPT}$6$nTeAanL57QGjvsdv$fd6YrbOqI4hFTJEZxm5GIuu8HUGMfcNz6Tx0AmaEsC78TJ0SBh/lEYqCI1KP.95H3TeTBsA1wX7nBnprwv0Hz0
+
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+
+0
+Done
 [root@an3 ~]$
 ```
 
-### 3.2.2 특정 DN의 암호 변경
 
-***2.7 LDAP Access 정책 설정***의 작업에 의하여, 다른 account의 암호를 변경 하는 것은 LDAP 관리자 와 ssoadmin 유저의 권한(uid=ssoadmin,ou=admin,dc=oops,dc=org)으로 밖에 할 수 없습니다. (ssoadmin 외에 권한을 주려면 account를 생성해서 ldapadmins gruop에 등록해 주면 됩니다.)
 
-그러므로, 여기서는 자신의 계정의 암호를 변경하는 경우가 되겠습니다. 예를 들어 ssoadmin이 자신의 LDAP 암호를 변경하는 경우 입니다.
 
-```bash
-[root@an3 ~]$ ldappasswd -H ldapi:/// -D "uid=ssoadmin,ou=admin,dc=kldp,dc=org" -W -S
-New password:           # 변경할 암호 입력
-Re-enter new password:  # 변경할 암호 재입력
-Enter LDAP Password:    # 기존의 ssoadmin 암호 입력
-[root@an3 ~]$
-```
 
-위의 ***ldappasswd*** 명령에서 ***-S*** 옵션을 주지 않으면, 임의의 8자리 암호를 생성해서 변경을 합니다. 또한, ***-A*** 옵션을 주면 현재의 암호(old password)를 match 시켜야 암호를 변경할 수 있습니다만, 별로 의미가 없어 보여 여기서는 사용하지 않았습니다.
-
-변경한 암호로 로그인이 되는지 확인해 봅니다.
-
-```bash
-[root@an3 ~]$ ldapsearch -H ldap:/// -D "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W
-Enter LDAP Password: # 변경 전 암호 입력
-ldap_bind: Invalid credentials (49)
-[root@an3 ~]$ ldapsearch -H ldapi:/// -D "uid=ssoadmin,ou=admin,dc=kldp,dc=org" -W
-Enter LDAP Password: # 변경한 암호 입력
-# extended LDIF
-#
-# LDAPv3
-# base <> (default) with scope subtree
-# filter: (objectclass=*)
-# requesting: ALL
-#
-
-# search result
-search: 2
-result: 32 No such object
-
-# numResponses: 1
-[root@an3 ~]$
-```
-
-여기까지 작업을 하면, Master 서버의 설정은 SSL 설정을 마치고는 대략 다 되었습니다.
 
