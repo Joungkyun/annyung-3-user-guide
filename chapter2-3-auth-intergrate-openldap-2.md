@@ -29,10 +29,11 @@ SSL 인증서는 공인된 기관에서 발급하는 SSL인증서와 본인이 �
 ***WoSign*** 인증서의 경우 여러가지 형식의 인증서가 있는데, 이 중 Apache 인증서를 이용하시면 됩니다.
 
 ```shell
-[root@an3 pki]$ openssl rsa -in an3.pkg.oops.org.key -out an3.pkg.oops.org.key.decrypt
+[root@an3 pki]$ openssl rsa -in an3.pkg.oops.org.key -out an3.pkg.oops.org.decrypt.key
+Enter pass phrase for an3.pkg.oops.org.key: [비밀번호 입력]
 writing RSA key
 [root@an3 pki]$ chown ldap:ldap *
-[root@an3 pki]$ chmod 600 *.key*
+[root@an3 pki]$ chmod 600 *.key
 ```
 
 
@@ -86,45 +87,42 @@ Success create /etc/openldap/certs/pki/ldap.crt
 ```
 
 
+##2. LDAP 설정
 
+***ldap-auth-utils***에서 제공하는 ***ldap_ssl*** 명령을 이용하여 간단하게 등록할 수 있습니다.
 
+인증서 경로는 절대 경로를 사용하는 것이 정신 건강에 도움이 됩니다.
 
+###1. ldap_ssl을 이용한 등록
+```shell
+[root@an3 ~]$ ldap_ssl -h
+사용법: ldap_ssl [OPTIONS]
+옵션:
+    -C PATH          CA 인증서 [기본값: /etc/pki/tls/certs/ca-bundle.crt]
+    -a               이 서버에 SSL 설정 추가
+    -c               개인키 생성 및 서버 인증서 셀프 사인
+                     다른 옵션은 무시 됩니다.
+    -r               이 서버의 SSL 설정 제거
+    -p PATH          개인키
+    -s PATH          서버 인증서
+[root@an3 ]$ ldap_ssl -a -C /etc/openldap/certs/pki/ca.crt \
+                    -p /etc/openldap/certs/pki/ldap.key \
+                    -s /etc/openldap/certs/pki/ldap.crt
 
+Your informations:
+    Ca Certificate     : /etc/openldap/certs/pki/ca.crt
+    Server Certificate : /etc/openldap/certs/pki/ldap.crt
+    Server Key         : /etc/openldap/certs/pki/ldap.key
 
-
-여기서는 [StartCOM](http://startssl.com) 의 Class2 인증서를 가지고 설정 하는 예를 듭니다. Self Sign 인증서를 생성하는 사용하는 방법은 [http://www.server-world.info/en/note?os=CentOS_7&p=openldap&f=4](http://www.server-world.info/en/note?os=CentOS_7&p=openldap&f=4)를 참고 하십시오.
-
-StartCOM의 인증서를 예로 드는 이유는, 일단 공인 인증서 이면서 가격이 가장 싸기 때문입니다. 59$로 2년짜리 인증서를 발급 받을 수 있으며, \*.domain.com 과 같은 astrik 인증서를 생성할 수 있으며, 도메인도 여러개를 추가할 수 있기 때문 입니다. 1년 짜리 class 1 인증서는 무상으로 계정당 5개 까지 만들 수 있습니다. [***startssl 인증서***](https://www.google.co.kr/#q=startssl+%EC%9D%B8%EC%A6%9D%EC%84%9C)로 구글 검색을 하시면 한글로 된 발급을 위한 많은 글들을 보실 수 있습니다.
-
-다른 공인 인증서도 크게 다르지는 않으니 응용해 보십시오. Chain 인증서가 없는 경우에는 CA 인증서(PEM 방식)으로 등록 하시면 됩니다.
-
-CA chain 인증서는 [https://startssl.com/root](https://startssl.com/root)에서 받을 수 있으며, PEM 방식으로 받으셔야 하며, 인증서 타입을 잘 살펴 보셔야 합니다. 필자는 발급 받은지가 꽤 되어서 ***Deprecated Intermediate CA Certificates*** 섹션의 [***StartCom Class 2 Primary Intermediate Server CA(pem)(SHA-2)***](https://startssl.com/certs/class2/sha2/pem/sub.class2.server.sha2.ca.crt)을 사용합니다.
-
-server key는 암호를 제거해 주셔야 합니다. 암호 제거는 다음과 같이 할 수 있습니다.
-
-```bash
-[root@an3 ~]$ openssl rsa -in oops.org.key -out oops.org.decrypt.key
-Enter pass phrase for oops.org.key: [비밀번호 입력]
-writing RSA key
+등록 성공slapd 데몬을 재시작 하십시오!
 [root@an3 ~]$
 ```
 
-위와 같이 실행을 하면, oops.org.decrypt.key 로 암호가 제거된 key file이 생성이 됩니다.
+slapd daemon을 재시작 하라는 메시지가 나오지만, ***OLC*** 설정 방식의 특성 상 재시작 하지 않아도 설정 변경이 반영이 됩니다. 다만 slapd daemon이 여전이 ldaps port를 binding 하고 있기 때문에 ldaps port binding을 하지 않게 하려면 slapd daemon을 재시작 시켜 주어야 합니다.
 
-발급받은 인증서를 /etc/openldap/cert/pki 라는 디렉토리를 생성하고 복사를 합니다. 다음 소유권과 권한을 다음과 같이 설정을 합니다.
+###2. 직접 등록
 
-```bash
-[root@an3 ~]$ chown ldap.ldap /etc/openldap/cert/pki/*.*
-[root@an3 ~]$ chmod 600 /etc/openldap/cert/pki/*.key
-[root@an3 ~]$ ls -al /etc/openldap/cert/pki
--rw-r--r-- 1 ldap ldap 2451 2015-01-29 02:58 oops.org.crt
--rw------- 1 ldap ldap 1679 2015-01-28 18:03 oops.org.decrypt.key
--rw-r--r-- 1 ldap ldap 2124 2016-03-31 17:33 startssl-sub.class2.server.ca.sha2.pem
-```
-
-##2. LDAP 설정
-
-다음과 같이 ssl-conf.ldif 파일을 생성하여, ***ldapmodify*** 명령을 이용하여 ***OLC***에 반영 합니다.
+다음과 같이 ssl-conf.ldif 파일을 생성하여, ***ldapmodify*** 명령을 이용하여 ***OLC***에 반영 합니다. 다음 예제는 StartSSL의 Class 2 인증서를 사용할 경우 입니다.
 
 ```bash
 [root@an3 ~]$ cat ssl-conf.ldif
@@ -142,11 +140,24 @@ olcTLSCertificateKeyFile: /etc/openldap/certs/pki/oops.org.decrypt.key
 [root@an3 ~]$ rm -f ssl-conf.ldif # ldif 파일은 굳이 보관할 필요 없습니다.
 ```
 
+###3. SSL 설정 제거
+
+***ldap_ssl** 명령을 ***"-r"*** 옵션과 함께 실행 합니다.
+
+```shell
+[root@an3 ~]$ ldap_ssl -r
+삭제 성공 slapd 데몬을 재시작 하십시오!
+[root@an3 ~]$
+```
+
+slapd daemon을 재시작 하라는 메시지가 나오지만, ***OLC*** 설정 방식의 특성 상 재시작 하지 않아도 설정 변경이 반영이 됩니다. 다만 slapd daemon이 여전이 ldaps port를 binding 하고 있기 때문에 ldaps port binding을 하지 않게 하려면 slapd daemon을 재시작 시켜 주어야 합니다.
+
+
 ##3. OpenLDAP 재시작
 
-***OLC***를 이용하면 굳이 재시작 할 필요가 없지만, ***slapd*** 시작시에 기본으로 ***ldaps*** 프로토콜을 사용하지 않도록 실행이 되었기 때문에, 이를 수정해서 재시작 합니다.
+***OLC***를 이용하면 굳이 재시작 할 필요가 없지만, ***slapd*** 시작 시에 기본으로 ***ldaps*** 프로토콜을 사용하지 않도록 실행이 되었을 경우, 이를 수정해서 재시작 해야 합니다.
 
-***/etc/sysconfig/ldap*** 에서 ***SLAPD_LDAPS*** 의 값을 ***yes***로 수정 합니다.
+RHEL/CentOS 6 또는 AnNyung 2 에서는 ***/etc/sysconfig/ldap*** 에서 ***SLAPD_URLS*** 의 값을 ***yes***로 수정 합니다.
 
 ```bash
 [root@an3 ~]$ perl -pi -e 's/^SLAPD_LDAPS=.*/SLAPD_LDAPS=yes/g' /etc/sysconfig/ldap
@@ -154,6 +165,15 @@ olcTLSCertificateKeyFile: /etc/openldap/certs/pki/oops.org.decrypt.key
 SLAPD_LDAPS=yes
 [root@an3 ~]$
 ```
+
+RHEL/CentOS 7 또는 AnNyung 3 에서는 ***/etc/sysconfig/slapd***의 ***SLAPD_URLS***에 ldaps:/// 값을 확인 하십시오.
+
+```bash
+[root@an3 ~]$ cat /etc/sysconfig/slapd | grep SLAPD_URLS
+SLAPD_URLS="ldapi:/// ldap:/// ldaps:///"
+[root@an3 ~]$
+```
+
 
 설정을 완료 했으면, ***slapd***를 재시작 합니다.
 
