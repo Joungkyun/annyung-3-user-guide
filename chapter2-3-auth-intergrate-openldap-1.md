@@ -370,6 +370,9 @@ olcRootPW: {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
 ***ldap_passwd***를 사용할 경우, account는 ***"ACCOUNT@DOMAIN"***의 형식을 사용합니다. 즉, ***BASE DN***이 ***DC=oops,DC=org*** 라면, ***DOMAIN***은 ***oops.org***가 됩니다.
 
 ```shell
+[root@an3 ~]$ # ssoadmin, ssomanager, replica account의 OU는 People이 아니라 Admin 이기 때문에
+[root@an3 ~]$ # -u 옵션으로 OU를 변경해 줘야 합니다. -u 옵션을 주지 않으면 기본으로 People OU를
+[root@an3 ~]$ # ssoadmin account 암호 변경
 [root@an3 ~]$ ldap_passwd -u Admin ssoadmin@kldp.org
 New password     : ***********
 Re-New password  : ***********
@@ -391,6 +394,7 @@ modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
 0
 Done
 [root@an3 ~]$
+[root@an3 ~]$ # ssomanager account 암호 변경
 [root@an3 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
 New password     : ***********
 Re-New password  : ***********
@@ -412,6 +416,7 @@ modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
 0
 Done
 [root@an3 ~]$
+[root@an3 ~]$ # replica account 암호 변경
 [root@an3 ~]$ ldap_passwd -u Admin replica@kldp.org
 New password     : ***********
 Re-New password  : ***********
