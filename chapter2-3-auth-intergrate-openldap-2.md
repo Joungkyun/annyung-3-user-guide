@@ -110,12 +110,11 @@ Success create /etc/openldap/certs/pki/ldap.crt
     -r               이 서버의 SSL 설정 제거
     -p PATH          개인키
     -s PATH          서버 인증서
-[root@an3 ]$ ldap_ssl -a -C /etc/openldap/certs/pki/ca.crt \
-                    -p /etc/openldap/certs/pki/ldap.key \
+[root@an3 ]$ ldap_ssl -a -p /etc/openldap/certs/pki/ldap.key \
                     -s /etc/openldap/certs/pki/ldap.crt
 
 Your informations:
-    Ca Certificate     : /etc/openldap/certs/pki/ca.crt
+    Ca Certificate     : /etc/pki/tls/certs/ca-bundle.crt
     Server Certificate : /etc/openldap/certs/pki/ldap.crt
     Server Key         : /etc/openldap/certs/pki/ldap.key
 
@@ -191,13 +190,14 @@ slapd (을)를 시작 중:                                      [  OK  ]
 
 ##4. 설정 확인
 
-먼저, ldap client에서 인증서를 사용하기 위하여 ***/etc/openldap/ldap.conf***에 다음의 설정을 합니다.
+먼저, ldap client에서 인증서를 사용하기 위하여 ***/etc/openldap/ldap.conf***에 다음의 설정을 합니다. CA 인증서 경로는 ldap_ssl 실행 시에 지정한 경로로 지정 합니다.
 
 ```bash
 [root@an3 ~]$ cat >> /etc/openldap/ldap.conf << EOF
 
+TLS_REQCERT     allow
 TLS_CACERTDIR   /etc/openldap/certs
-TLS_CACERT      /etc/openldap/certs/pki/ca.crt
+TLS_CACERT      /etc/pki/tls/certs/ca-bundle.crt
 #TLS_CACERT     /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
 EOF
 [root@an3 ~]$
