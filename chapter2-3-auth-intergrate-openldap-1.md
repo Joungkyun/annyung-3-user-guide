@@ -31,7 +31,7 @@ ldap-auth-utils 와 ldap-auth-utils-passwd, genpasswd 패키지는 안녕 리눅
 
 ***RHEL/CentOS 7*** 에서는 다음과 같이 추가해 주십시오.
 ```shell
-[root@host ~]$ cat &lt;&lt;EOF &gt; /etc/yum.repos.d/AnNyung-core.repos
+[root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
 #
 # LInux AnNyung 3 Yum repository
