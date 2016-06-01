@@ -398,7 +398,7 @@ Re-New password  : ***********
 Your Informations:
 
     * Account: ssoadmin@kldp.org
-    * RDN : uid=ssoadmin,ou=Admin,dc=kldp,dc=org
+    * RDN : uid=ssomanager,ou=Admin,dc=kldp,dc=org
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
@@ -419,7 +419,7 @@ Re-New password  : ***********
 Your Informations:
 
     * Account: ssoadmin@kldp.org
-    * RDN : uid=ssoadmin,ou=Admin,dc=kldp,dc=org
+    * RDN : uid=replica,ou=Admin,dc=kldp,dc=org
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
