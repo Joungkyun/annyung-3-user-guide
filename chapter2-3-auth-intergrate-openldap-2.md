@@ -207,7 +207,7 @@ LDAP 매니저 권한으로 ***ldaps*** 프로토콜을 이용하여 로그인 �
 
 ```bash
 [root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -W
-Enter LDAP Password:
+Enter LDAP Password: [암호 입력]
 # extended LDIF
 #
 # LDAPv3
