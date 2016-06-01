@@ -203,7 +203,7 @@ EOF
 [root@an3 ~]$
 ```
 
-LDAP 매니저 권한으로 ***ldaps*** 프로토콜을 이용하여 로그인 테스트를 합니다. 어떤 권한으로 하여도 상관은 없습니다.
+LDAP 매니저 권한으로 ***ldaps*** 프로토콜을 이용하여 로그인 테스트를 합니다. 어떤 권한으로 하여도 상관은 없습니다. (단, -Y EXTERNAL 권한은 ldapi:// 프로토콜만 사용 가능 합니다.)
 
 ```bash
 [root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -W
