@@ -24,6 +24,16 @@ SSL 인증서는 공인된 기관에서 발급하는 SSL인증서와 본인이 �
 
 위의 3개의 인증서를 테스트 한 결과, 발급을 하기 위한 편리성 및 발급 시간은 ***WoSign***이 가장 인상적이었습니다. ***Let's encrypt***는 발급 및 유지가 너무 불편하여 권장하지 않습니다.
 
+발급 받은 인증서를 ***/etc/openldap/certs/pki*** 디렉토리에 풀어 놓습니다. 그리고, 소유권과 퍼미션 설정을 하고, key 파일의 암호를 해제 합니다. 암호 해제는 다음의 명령으로 할 수 있습니다.
+
+***WoSign*** 인증서의 경우 여러가지 형식의 인증서가 있는데, 이 중 Apache 인증서를 이용하시면 됩니다.
+
+```shell
+[root@an3 pki]$ openssl rsa -in an3.pkg.oops.org.key -out an3.pkg.oops.org.key.decrypt
+writing RSA key
+[root@an3 pki]$ chown ldap:ldap *
+[root@an3 pki]$ chmod 600 *.key*
+```
 
 
 ###2. Self sign 인증서
