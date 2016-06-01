@@ -232,6 +232,98 @@ Done
 [root@an3 ~]$
 ```
 
+### 2.3 LDAP client 설정
+
+초기화를 한 LDAP database 를 관리하기 위한 client 설정은 ***/etc/openldap/ldap.conf*** 와 ***/etc/openldap/ldap-auth-utils.conf*** 에서 합니다.
+
+먼저 ***/etc/openldap/ldap.conf***에 ***ldap_auth_init***에서 설정한 BASE DN과 LDAP 서버 URI를 설정 합니다.
+
+```shell
+[root@an3 ~]$ cat <<EOF >> /etc/openldap/ldap.conf
+URI ldapi:///
+BASE DC=oops,DC=org
+EOF
+[root@an3 ~]$
+```
+
+다음, ***/etc/openldap/ldap-auth-utils.conf***를 설정 합니다. ***ldap-auth-utils.conf*** 에서는 ***ldap_auth_init***로 초기화를 한 경우에는 별로 건드릴 것이 없습니다만, 몇몇 튜닝이 가능한 옵션에 대해서만 여기서 설명을 합니다. 자세한 사항은 "***man ldap-auth-utils.conf***" 명령으로 man page를 참조 하십시오.
+
+***ldap-auth-utils.conf***는 ldap account를 관리하기 위한 기본 값을 지정 합니다.
+
+***ldap-auth-utils*** 패키지에서 관리할 최소 UID/GID, 기본 Group ID, 기본 shell, home directory prefix, 암호 알고리즘, 암호 만기, 암호 복잡도 등의 설정을 가지고 있습니다.
+
+일단, ***ldap_auth_init***를 이용하여 초기화를 한 경우, 일단 고려를 한 것은 암호 알고리즘에 대해서 고민을 해야 합니다. ***ldap-auth-utils.conf***에서 암호 알고리즘은 다음의 옵션값으로 지정 합니다.
+
+```shell
+[root@an3 ~]$ cat /etc/openldap/ldap-auth-utils.conf | grep "^PASSWD_MECH"
+PASSWD_MECH                  = md5
+[root@an3 ~]$
+```
+
+RHEL/CentOS 6 이나 AnNyung 2 부터는는 ***PAM***에서 기본으로 ***sha512**를 지원합니다. 하지만 ***RHEL/CentOS 5***등의 오래된 배포본들은 기본값을 ***md5*** 입니다. 그러므로 암호 매커니즘의 호환성을 위하여 ***ldap-auth-utils.conf***의 암호화 기본 알고리즘은 ***md5*** 로 되어 있습니다.
+
+만약, 인증 통합을 할 서버들이 모두 최소한 ***RHEL/CentOS 6*** 또는 ***AnNyung 2*** 이상이거나, 또는 ***PAM***에서 ***sha512***를 지원하도록 설정이 되어 있으면, ***PASSWD_MECH***의 값을 ***sha512***로 변경을 하시면 password strenth가 더욱 좋아지게 됩니다.
+
+***RHEL/CentOS 5***에서 sha512를 사용하기를 원한다면 다음의 명령을 이용할 수 있습니다.
+
+```shell
+[root@RHEL5 ~]$ authconfig --passalgo=sha512 --update
+```
+
+이미 ***md5***를 사용하고 있는 시스템에서 변경을 한다면 기존의 암호들을 갱신해 줘야 합니다. 이에 대해서는 http://www.cyberciti.biz/faq/rhel-centos-fedora-linux-upgrading-password-hashing/ 문서를 참고 하십시오.
+
+
+또한, ***ISMS*** 심사에 대비하여, 암호 만기 설정이 90일로 되어 있으니, 이 기간이 너무 짧다고 생각이 되면 ***PASS_MAX_DAYS*** 값을 늘려 주십시오.
+
+암호 복잡도 설정은 ***PASS_MINLEN*** 와 ***PASS_CLASSES*** 에서 할 수 있습니다.
+
+>주의!  
+>이 설정은 ***ldap account***를 위한 설정입니다. 즉, ***ldap_adduser*** 명령을 이용할 경우 적용이 되는 것들로, system의 ***adduser***와는 별개 입니다.
+
+```shell
+[root@an3 ~]$ cat /etc/openldap/ldap-auth-utils.conf
+  .. 상략..
+#
+# Password configuration
+#
+
+# Specify the encryption method.
+# support: md5, sha256, sha512
+# default: md5
+#
+# As of RHEL 5, if there is a host that does not support sha512,
+# please specify the md5 for compatibility. From RHEL 6, it
+# supports sha512.
+PASSWD_MECH                  = md5
+
+#
+# Pasword expire configuration
+#
+# If the value is not specified, the value that is set to
+# /etc/login.defs will be used.
+#
+#   PASS_MAX_DAYS   Maximum number of days a password may be used.
+#   PASS_MIN_DAYS   Minimum number of days allowed between password changes.
+#   PASS_WARN_AGE   Number of days warning given before a password expires.
+#
+PASS_MAX_DAYS                = 90
+PASS_MIN_DAYS                = 0
+PASS_WARN_AGE                = 7
+
+#
+# Strength of password
+#
+# minimum length of password
+PASS_MINLEN                  = 9
+
+# Password complexity configuration [ 0 - 4 ]
+#
+# vSetting of the complexity of the password. Number of the character classes.
+# Character class is upper case and lower case letters, numbers and special
+# characters.
+PASS_CLASSES                 = 3
+[root@an3 ~]#
+```
 
 
 #3 account 암호 설정
