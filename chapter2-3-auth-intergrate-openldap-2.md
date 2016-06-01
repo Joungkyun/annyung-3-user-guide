@@ -190,7 +190,7 @@ slapd (을)를 시작 중:                                      [  OK  ]
 
 ##4. 설정 확인
 
-먼저, ldap client에서 인증서를 사용하기 위하여 ***/etc/openldap/ldap.conf***에 다음의 설정을 합니다. CA 인증서 경로는 ldap_ssl 실행 시에 지정한 경로로 지정 합니다.
+먼저, ldap client에서 인증서를 사용하기 위하여 ***/etc/openldap/ldap.conf***에 다음의 설정을 합니다. CA 인증서 경로는 ldap_ssl 실행 시에 지정한 경로로 지정 합니다. ***Self sign 인증서***를 사용할 경우에는, 자체 CA sign을 하지 않았다면 ***TLS_CACERT***는 지정하지 않아도 상관 없습니다.
 
 ```bash
 [root@an3 ~]$ cat >> /etc/openldap/ldap.conf << EOF
