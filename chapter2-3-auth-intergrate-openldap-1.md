@@ -402,7 +402,7 @@ Your Informations:
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
-    * Hash: {CRYPT}$6$nTeAanL57QGjvsdv$fd6YrbOqI4hFTJEZxm5GIuu8HUGMfcNz6Tx0AmaEsC78TJ0SBh/lEYqCI1KP.95H3TeTBsA1wX7nBnprwv0Hz0
+    * Hash: {{CRYPT}$6$htk01t9cUA5aFM/a$9H4.kig058cRESS6MGdjn8armHHP6IAQO9Qykr6iroW9laqugz.bIOPNzBUgk8N4H01QkeklEwQg05FBzSrfz/
 
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
@@ -423,7 +423,7 @@ Your Informations:
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
-    * Hash: {CRYPT}$6$nTeAanL57QGjvsdv$fd6YrbOqI4hFTJEZxm5GIuu8HUGMfcNz6Tx0AmaEsC78TJ0SBh/lEYqCI1KP.95H3TeTBsA1wX7nBnprwv0Hz0
+    * Hash: {{CRYPT}$6$Qo.Btjze5bY/pXGl$zUltslxPOandgoPrXb3OkESk5R7pgqAmU.Q8gGsbYxGPsx9mMnSEWVH/kdHuW4Gn7lIIBx5zr260LRoxPSMWL.
 
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
