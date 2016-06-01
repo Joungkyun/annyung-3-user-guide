@@ -7,11 +7,11 @@
   1. OLC 및 ldap data 초기화 목표
   2. LDAP 설정(olc) 및 LDAP data 초기화
   3. LDAP client 설정
+  4. 초기화 확인
 3. account 암호 설정
   1. LDAP 관리자 암호 변경
   2. Account 암호 변경
-    1. 관리자가 다른 account의 암호를 변경
-    2. 특정 DN의 암호 변경
+
 
 <br><br>
 
@@ -324,6 +324,75 @@ PASS_MINLEN                  = 9
 # characters.
 PASS_CLASSES                 = 3
 [root@an3 ~]#
+```
+
+
+##2.4 초기화 확인
+
+***ldap_auth_init***을 이용하여 초기화를 한 후에, 다음과 같이 ldap 관리 account와 gruop, 그리고 ldap account의 default group이 잘 등록이 되었는지 확인을 합니다.
+
+```shell
+[root@an3 ~]# ldap account 확인
+[root@an3 ~]$ ldapsearch -Y EXTERNAL  "(objectClass=posixAccount)" dn
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+# extended LDIF
+#
+# LDAPv3
+# base <DC=kldp, DC=org> (default) with scope subtree
+# filter: (objectClass=posixAccount)
+# requesting: dn
+#
+
+# ssoadmin, Admin, oops.org
+dn: uid=ssoadmin,ou=Admin,dc=oops,dc=org
+
+# ssomanager, Admin, kldp.org
+dn: uid=ssomanager,ou=Admin,dc=oops,dc=org
+
+# replica, Admin, kldp.org
+dn: uid=replica,ou=Admin,dc=oops,dc=org
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 4
+# numEntries: 3
+[root@an3 ~]$
+[root@an3 ~]$ # ldap group 확인
+[root@an3 ~]$ ldapsearch -Y EXTERNAL  "(objectClass=posixGroup)" dn
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+# extended LDIF
+#
+# LDAPv3
+# base <DC=kldp, DC=org> (default) with scope subtree
+# filter: (objectClass=posixGroup)
+# requesting: dn
+#
+
+# ldapadmins, Admin, kldp.org
+dn: cn=ldapadmins,ou=Admin,dc=oops,dc=org
+
+# ldapROusers, Admin, kldp.org
+dn: cn=ldapROusers,ou=Admin,dc=oops,dc=org
+
+# ldapmanagers, Admin, kldp.org
+dn: cn=ldapmanagers,ou=Admin,dc=oops,dc=org
+
+# ldapusers, Group, kldp.org
+dn: cn=ldapusers,ou=Group,dc=oops,dc=org
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 5
+# numEntries: 4
+[root@an3 ~]$
 ```
 
 
