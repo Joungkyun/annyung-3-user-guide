@@ -108,9 +108,53 @@ USERNAME 형식
 계정 삭제는 간단하게 ***ldap_userdel*** 명령에 삭제할 계정만 지정을 하면 됩니다.
 
 ```shell
-[root@an3 ~]$ ldap_userdel gildong.hong@kldp.org
-  * 'gildong.hong@kldp.org' 계정을 삭제 하겠습니까? [yes/no]  : yes
-    * 계정 삭제 gildong.hong@kldp.org               ... OK
+[root@an3 ~]$ ldap_userdel gildong.hong@oops.org
+  * 'gildong.hong@oops.org' 계정을 삭제 하겠습니까? [yes/no]  : yes
+    * 계정 삭제 gildong.hong@oops.org               ... OK
 [root@an3 ~]$
 ```
 
+### 2. 계정 확인 및 속성(attribute) 변경
+
+존재하는 계정의 관리는 ***ldap_auth*** 명령을 이용 합니다. 일단 계정의 정보를 확인하기 위해서는 다음과 같이 실행을 합니다.
+
+```shell
+[root@an3 ~]$ ldap_auth gildong.hong@kldp.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=People,dc=oops,dc=org> with scope subtree
+    # filter: (uid=gildong.hong)
+    # requesting: ALL
+    #
+    # gildong.hong, People, oops.org
+    compatibility dn : gildong.hong@oops.org
+    dn               : uid=gildong.hong,ou=People,dc=oops,dc=org
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : posixAccount
+    objectClass      : shadowAccount
+    objectClass      : hostObject
+    uid              : gildong.hong
+    cn               : gildong.hong
+    gecos            : LDAP Users
+    givenName        : 길동
+    sn               : 홍
+    uidNumber        : 10000
+    gidNumber        : 10000
+    loginShell       : /bin/bash
+    homeDirectory    : /home/ldapusers/gildong.hong
+    shadowMin        : 0
+    shadowMax        : 90
+    shadowWarning    : 7
+    shadowLastChange : 16953
+    userPassword     : {CRYPT}$1$tiAx5gCv$8uwiBHCc3v6oRuT93gC.1/
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+
+[root@an3 ~]$
+```
