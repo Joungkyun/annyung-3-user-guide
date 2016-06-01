@@ -48,7 +48,7 @@ exclude=php* whois httpd*
 
 ***RHEL/CentOS 6*** 에서는 다음과 같이 추가해 주십시오.
 ```shell
-[root@host ~]$ cat &lt;&lt;EOF &gt; /etc/yum.repos.d/AnNyung-core.repos
+[root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
 #
 # LInux AnNyung 2 Yum repository
@@ -253,7 +253,7 @@ Section 2의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 �
 [root@an3 ~]$ slappasswd -s 'asdf!asdf'
 {SSHA}V/udTVfaOUOYEGEyXpVCb6Sy+BHUb244
 [root@an3 ~]$
-[root@an3 ~]$ cat &lt;&lt;EOF &gt; ldapmodify -Y EXTERNAL -H ldapi:///
+[root@an3 ~]$ cat <<EOF > ldapmodify -Y EXTERNAL -H ldapi:///
 dn: olcDatabase={0}config,cn=config
 changetype: modify
 add: olcRootPW
