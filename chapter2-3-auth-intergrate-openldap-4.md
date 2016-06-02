@@ -88,7 +88,7 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 ***ssoamanager*** account의 암호를 변경해 보도록 합니다.
 
-먼저 master와 slave의 ssoadmin account의 현재 userPassword object를 확인 합니다.
+먼저 ***master(ldap1.oops.org)***와 ***slave(ldap2.oops.org)***의 ssoadmin account의 현재 userPassword object를 확인 합니다.
 
 자신의 암호 외에 다른 account의 암호 변경은 LDAP 관리자와 ssoadmin에게만 있으며, 현재 ssoadmin의 암호가 없는 상태이기 때문에 LDAP 관리자의 권한으로 실행을 하도록 합니다.
 
