@@ -29,8 +29,30 @@
 
 replication 설정은 ***-a*** 옵션을 이용하며, 제거는 ***-r*** 옵션을 이용합니다.
 
+ldap 서버의  이름은 ***ldap1.oops.org***와 ***ldap2.oops.org*** 라고 가정을 하고 예제를 진행 합니다.
+
+***ldap1.oops.org***에서 ***ldap2.oops.org***의 변경 사항을 반영하도록 설정 합니다.
+
 ```shell
-[root@an3 ~]$ ldap_replica -a -u UID=replica,OU=Admin,DC=oops,DC=org ldap.other.server
+[root@an3 ~]$ ldap_replica -a -i 0 -u uid=replica,ou=Admin,dc=oops,dc=org ldap2.oops.org
+Input replica password : ********* [replica account 계정 암호 입력]
+설정 정보:
+
+    Replica Account         : uid=replica,ou=admin,dc=oops,dc=org
+    Replica BIND DN         : dc=oops,dc=org
+    Replica Pre Test        : OK
+    Replica Server ID       : 0
+    Replica Target          : brk.kldp.org
+
+이 정보가 맞습니까? [Y/N] : y
+
+ * 1. sync 모듈 등록 ...  * 2. Set Server ID ... OK
+ * 3. 리플리케이션 서버 설정 ... OK
+ * 4. Mirror 모드 설정 ... OK
+ * 5. 리플리케이션 오버레이 설정 ... OK
+
+설정 완료
+
 [root@an3 ~]$
 ```
 
