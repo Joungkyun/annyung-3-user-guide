@@ -42,7 +42,7 @@ Input replica password : ********* [replica account 계정 암호 입력]
     Replica BIND DN         : dc=oops,dc=org
     Replica Pre Test        : OK
     Replica Server ID       : 0
-    Replica Target          : brk.kldp.org
+    Replica Provider        : ldap2.oops.org
 
 이 정보가 맞습니까? [Y/N] : y
 
@@ -57,6 +57,31 @@ Input replica password : ********* [replica account 계정 암호 입력]
 [root@an3 ~]$
 ```
 
+다음, ***ldap2.oops.org***에서 ***ldap1.oops.org***의 변경 사항을 반영하도록 설정 합니다. 주의할 것은 ***ldap1.oops.org***와 ***Replica Server ID(-i 옵션)*** 값을 다르게 설정 하십시오.
+
+```shell
+[root@an3 ~]$ ldap_replica -a -i 1 -u uid=replica,ou=Admin,dc=oops,dc=org ldap1.oops.org
+Input replica password : ********* [replica account 계정 암호 입력]
+설정 정보:
+
+    Replica Account         : uid=replica,ou=admin,dc=oops,dc=org
+    Replica BIND DN         : dc=oops,dc=org
+    Replica Pre Test        : OK
+    Replica Server ID       : 1
+    Replica Provider        : ldap1.oops.org
+
+이 정보가 맞습니까? [Y/N] : y
+
+ * 1. sync 모듈 등록 ...  OK
+ * 2. Set Server ID ... OK
+ * 3. 리플리케이션 서버 설정 ... OK
+ * 4. Mirror 모드 설정 ... OK
+ * 5. 리플리케이션 오버레이 설정 ... OK
+
+설정 완료
+
+[root@an3 ~]$
+```
 
 
 
