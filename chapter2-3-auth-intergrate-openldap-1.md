@@ -257,22 +257,11 @@ EOF
 
 ```shell
 [root@an3 ~]$ cat /etc/openldap/ldap-auth-utils.conf | grep "^PASSWD_MECH"
-PASSWD_MECH                  = md5
+PASSWD_MECH                  = sha512
 [root@an3 ~]$
 ```
 
-RHEL/CentOS 6 이나 AnNyung 2 부터는는 ***PAM***에서 기본으로 ***sha512**를 지원합니다. 하지만 ***RHEL/CentOS 5***등의 오래된 배포본들은 기본값을 ***md5*** 입니다. 그러므로 암호 매커니즘의 호환성을 위하여 ***ldap-auth-utils.conf***의 암호화 기본 알고리즘은 ***md5*** 로 되어 있습니다.
-
-만약, 인증 통합을 할 서버들이 모두 최소한 ***RHEL/CentOS 6*** 또는 ***AnNyung 2*** 이상이거나, 또는 ***PAM***에서 ***sha512***를 지원하도록 설정이 되어 있으면, ***PASSWD_MECH***의 값을 ***sha512***로 변경을 하시면 password strenth가 더욱 좋아지게 됩니다.
-
-***RHEL/CentOS 5***에서 sha512를 사용하기를 원한다면 다음의 명령을 이용할 수 있습니다.
-
-```shell
-[root@RHEL5 ~]$ authconfig --passalgo=sha512 --update
-```
-
-이미 ***md5***를 사용하고 있는 시스템에서 변경을 한다면 기존의 암호들을 갱신해 줘야 합니다. 이에 대해서는 http://www.cyberciti.biz/faq/rhel-centos-fedora-linux-upgrading-password-hashing/ 문서를 참고 하십시오.
-
+***ldap-auth-utils***의 기본 암호화 알고리즘은 ***sha512***를 사용합니다. 그리고 RHEL/CentOS 6 이나 AnNyung 2 부터는는 ***PAM***에서 기본으로 ***sha512***를 지원합니다. 만약 인증 통합을 할 서버들 중에 ***sha512*** 암호화를 지원하지 않는 배포본들이 있다면 ***PASSWD_MECH***의 값을 ***md5***로 변경을 하십시오.
 
 또한, ***ISMS*** 심사에 대비하여, 암호 만기 설정이 90일로 되어 있으니, 이 기간이 너무 짧다고 생각이 되면 ***PASS_MAX_DAYS*** 값을 늘려 주십시오.
 
@@ -290,12 +279,11 @@ RHEL/CentOS 6 이나 AnNyung 2 부터는는 ***PAM***에서 기본으로 ***sha5
 
 # Specify the encryption method.
 # support: md5, sha256, sha512
-# default: md5
+# default: sha512
 #
-# As of RHEL 5, if there is a host that does not support sha512,
-# please specify the md5 for compatibility. From RHEL 6, it
-# supports sha512.
-PASSWD_MECH                  = md5
+# If there is a host that does not support sha512, please specify the md5
+# for compatibility.
+PASSWD_MECH                  = sha512
 
 #
 # Pasword expire configuration
