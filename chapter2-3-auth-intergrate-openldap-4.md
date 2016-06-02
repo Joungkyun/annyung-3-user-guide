@@ -215,3 +215,5 @@ Done
 openldap의 replication에서 주의할 점은, network 단절이나 server down이 발생할 경우, 이 동안 업데이트 된 것에 대한 양측 데이터의 정합성을 보장하지 못합니다.
 
 즉, network 단절이나 server down이 발생할 경우, 수동으로 data를 맞추어 주든지 또는 한쪽을 기준으로 slave 설정을 다시 해야 한다는 의미 입니다.
+
+또한, 서버의 replication 설정은 slave 설정이므로, ldap1의 변경 사항을 sync 하지 않으려면 ldap2의 replication 설정을 제거해야 합니다.
