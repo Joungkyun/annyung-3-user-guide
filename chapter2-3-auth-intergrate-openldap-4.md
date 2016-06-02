@@ -88,6 +88,60 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 ***ssoamanager*** account의 암호를 변경해 보도록 합니다.
 
+먼저 ***ldap_auth*** 명령을 이용하여 ***master***에서 ***ssomanager***의 정보를 확인 합니다.
+
+```shell
+[root@ldap1 ~]$ ldap_auth -o Admin ssomanager@kldp.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=Admin,dc=kldp,dc=org> with scope subtree
+    # filter: (uid=ssomanager)
+    # requesting: ALL
+    #
+    # ssomanager, Admin, kldp.org
+    compatibility dn : ssomanager@kldp.org
+    dn               : uid=ssomanager,ou=Admin,dc=kldp,dc=org
+    objectClass      : posixAccount
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : shadowAccount
+    gidNumber        : 9997
+    givenName        : SSO
+    sn               : Manager
+    displayName      : SSO Manager
+    uid              : ssomanager
+    homeDirectory    : /
+    gecos            : SSO Manager
+    loginShell       : /sbin/nologin
+    shadowFlag       : 0
+    shadowMin        : 0
+    shadowMax        : 99999
+    shadowWarning    : 0
+    shadowInactive   : 99999
+    shadowLastChange : 12011
+    shadowExpire     : 99999
+    cn               : SSO manager
+    uidNumber        : 9998
+    userPassword     : {CRYPT}$6$htk01t9cUA5aFM/a$9H4.kig058cRESS6MGdjn8armHHP6IAQO9Qykr6iroW9laqugz.bIOPNzBUgk8N4H01QkeklEwQg05FBzSrfz/
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+
+[root@ldap1 ~]$
+```
+
+***master(ldap1.oops.org)***에서 ***ssomanager***의 암호를 변경합니다.
+
+```shell
+[root@ldap1 ~]$ ldap_passwd -u admin ssomanager@kldp.org
+```
+
+
+
 먼저 ***master(ldap1.oops.org)***와 ***slave(ldap2.oops.org)***의 ssoadmin account의 현재 userPassword object를 확인 합니다.
 
 자신의 암호 외에 다른 account의 암호 변경은 LDAP 관리자와 ssoadmin에게만 있으며, 현재 ssoadmin의 암호가 없는 상태이기 때문에 LDAP 관리자의 권한으로 실행을 하도록 합니다.
