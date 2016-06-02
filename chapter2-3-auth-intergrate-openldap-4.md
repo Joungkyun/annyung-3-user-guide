@@ -46,7 +46,8 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 이 정보가 맞습니까? [Y/N] : y
 
- * 1. sync 모듈 등록 ...  * 2. Set Server ID ... OK
+ * 1. sync 모듈 등록 ...  OK
+ * 2. Set Server ID ... OK
  * 3. 리플리케이션 서버 설정 ... OK
  * 4. Mirror 모드 설정 ... OK
  * 5. 리플리케이션 오버레이 설정 ... OK
