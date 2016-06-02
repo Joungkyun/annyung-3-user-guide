@@ -91,18 +91,18 @@ Input replica password : ********* [replica account 계정 암호 입력]
 먼저 ***ldap_auth*** 명령을 이용하여 ***master***에서 ***ssomanager***의 정보를 확인 합니다.
 
 ```shell
-[root@ldap1 ~]$ ldap_auth -o Admin ssomanager@kldp.org
+[root@ldap1 ~]$ ldap_auth -o Admin ssomanager@oops.org
 
     # extended LDIF
     #
     # LDAPv3
-    # base <ou=Admin,dc=kldp,dc=org> with scope subtree
+    # base <ou=Admin,dc=oops,dc=org> with scope subtree
     # filter: (uid=ssomanager)
     # requesting: ALL
     #
-    # ssomanager, Admin, kldp.org
-    compatibility dn : ssomanager@kldp.org
-    dn               : uid=ssomanager,ou=Admin,dc=kldp,dc=org
+    # ssomanager, Admin, oops.org
+    compatibility dn : ssomanager@oops.org
+    dn               : uid=ssomanager,ou=Admin,dc=oops,dc=org
     objectClass      : posixAccount
     objectClass      : top
     objectClass      : inetOrgPerson
@@ -137,78 +137,80 @@ Input replica password : ********* [replica account 계정 암호 입력]
 ***master(ldap1.oops.org)***에서 ***ssomanager***의 암호를 변경합니다.
 
 ```shell
-[root@ldap1 ~]$ ldap_passwd -u admin ssomanager@kldp.org
+[root@ldap1 ~]$ ldap_passwd -u admin ssomanager@oops.org
+New password     : **************
+Re-New password  : **************
+
+Your Informations:
+
+    * Account: ssomanager@oops.org
+    * RDN : uid=ssomanager,ou=Admin,dc=oops,dc=org
+    * Host: ldapi:///
+    * Privilieges: -Y EXTERNAL
+    * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
+    * Hash: {CRYPT}$6$qeB3N9K2FgIMds0m$tHCwJ3wS37zlDvgeza3T7ddtZN1Pc5s9qs0ROHsbPXE5MoFaQA3I8Uu.vEgcSjOSyd3/zqS.g6d/FHt2YEHf.0
+
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "uid=ssomanager,ou=Admin,dc=oops,dc=org"
+
+0
+Done
+[root@ldap1 ~]$
 ```
 
+***slave(ldap2.oops.org)***에서 ***ssomanager*** account를 확인하여 ***userPassword*** 값이 ***master(ldap1.oops.org)***와 동일한지 확인 합니다.
 
+```shell
+[root@ldap2 ~]$ ldap_auth -o Admin ssomanager@oops.org
 
-먼저 ***master(ldap1.oops.org)***와 ***slave(ldap2.oops.org)***의 ssoadmin account의 현재 userPassword object를 확인 합니다.
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=Admin,dc=oops,dc=org> with scope subtree
+    # filter: (uid=ssomanager)
+    # requesting: ALL
+    #
+    # ssomanager, Admin, oops.org
+    compatibility dn : ssomanager@oops.org
+    dn               : uid=ssomanager,ou=Admin,dc=oops,dc=org
+    objectClass      : posixAccount
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : shadowAccount
+    gidNumber        : 9997
+    givenName        : SSO
+    sn               : Manager
+    displayName      : SSO Manager
+    uid              : ssomanager
+    homeDirectory    : /
+    gecos            : SSO Manager
+    loginShell       : /sbin/nologin
+    shadowFlag       : 0
+    shadowMin        : 0
+    shadowMax        : 99999
+    shadowWarning    : 0
+    shadowInactive   : 99999
+    shadowLastChange : 12011
+    shadowExpire     : 99999
+    cn               : SSO manager
+    uidNumber        : 9998
+    userPassword     : {CRYPT}$6$qeB3N9K2FgIMds0m$tHCwJ3wS37zlDvgeza3T7ddtZN1Pc5s9qs0ROHsbPXE5MoFaQA3I8Uu.vEgcSjOSyd3/zqS.g6d/FHt2YEHf.0
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
 
-자신의 암호 외에 다른 account의 암호 변경은 LDAP 관리자와 ssoadmin에게만 있으며, 현재 ssoadmin의 암호가 없는 상태이기 때문에 LDAP 관리자의 권한으로 실행을 하도록 합니다.
-
-```bash
-[root@an3 ~]$ # master(an3) 계정 확인
-[root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
-Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
-[root@an3 ~]$ # slave(an3-s) 계정 확인
-[root@an3 ~]$ ldapsearch -H ldaps://an3-s.oops.org/ -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
-Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
-[root@an3 ~]$
+[root@ldap2 ~]$
 ```
 
-***Master(an3.oops.org)***와 ***Slave(an3-s.oops.org)*** 모두 현재 ***userPassword*** object가 존재하지 않는 상태 입니다.
+변경사항이 반영이 확인이 되었다면, 반대로 테스트를 해 봅니다.
 
-먼저 ***Master***에서 ***ssoadmin*** account의 암호를 변경 합니다.
 
-```bash
-[root@an3 ~]$ ldappasswd -H ldaps:/// -x -D "cn=manager,dc=oops,dc=org" -S "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W
-New password:            # 변경할 암호 입력
-Re-enter new password:   # 변경할 암호 재 입력
-Enter LDAP Password:     # cn=manager(LDAP 관리자)의 암호 입력
-[root@an3 ~]$
-```
 
-암호가 변경이 되었는지, 그리고 ***Slave***로 replication이 되었는지 ***Master***와 ***Slave***의 ssoadmin account entry를 확인해 봅니다.
-
-```bash
-[root@an3 ~]$ # master(an3) 계정 확인
-[root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
-Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
-userPassword:: e1NTSEF9RW80NE4KZ2NLbXNyNDdmeFTNN3RvRVRmbUNrdlFFZTc=
-[root@an3 ~]$ # slave(an3-s) 계정 확인
-[root@an3 ~]$ ldapsearch -H ldaps://an3-s.oops.org/ -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
-Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
-userPassword:: e1NTSEF9RW80NE4KZ2NLbXNyNDdmeFTNN3RvRVRmbUNrdlFFZTc=
-[root@an3 ~]$
-```
-
-***Slave(an3-s.oops.org)***에도 ***userPassword*** object가 생성이 된 것이 확인이 됩니다. 그럼 반대로 ***Slave(an3-s.oops.org)***에서 변경을 했을 경우, ***master(an3.oops.org)***에서도 변경이 되는 지 확인 해 봅니다.
-
-```bash
-[root@an3 ~]$ ldappasswd -H ldaps://an3-s.oops.org/ -x -D "cn=manager,dc=oops,dc=org" -S "uid=ssoadmin,ou=admin,dc=oops,dc=org" -W
-New password:            # 변경할 암호 입력
-Re-enter new password:   # 변경할 암호 재 입력
-Enter LDAP Password:     # cn=manager(LDAP 관리자)의 암호 입력
-[root@an3 ~]$
-```
-
-암호가 변경이 되었는지, 그리고 ***Master***로 replication이 되었는지 ***Master***와 ***Slave***의 ssoadmin account entry를 확인해 봅니다.
-
-```bash
-[root@an3 ~]$ # master(an3) 계정 확인
-[root@an3 ~]$ ldapsearch -H ldaps:/// -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
-Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
-userPassword:: e1NTSEF9SE16ZlQ5c0RFMEh4NGZadnRKbTNtYjBEWktTM1VTaww=
-[root@an3 ~]$ # slave(an3-s) 계정 확인
-[root@an3 ~]$ ldapsearch -H ldaps://an3-s.oops.org/ -D "cn=manager,dc=oops,dc=org" -b "dc=oops,dc=org" "(uid=ssoadmin)" -W | grep userPassword
-Enter LDAP Password:    # LDAP 관리자 암호 입력(cn=manager)
-userPassword:: e1NTSEF9SE16ZlQ5c0RFMEh4NGZadnRKbTNtYjBEWktTM1VTaww=
-[root@an3 ~]$
-```
-
-역시 변경된 것을 확인할 수 있습니다.
-
-##4. Multi-Msater Replication 유의 사항
+##3. Multi-Msater Replication 유의 사항
 
 openldap의 replication에서 주의할 점은, network 단절이나 server down이 발생할 경우, 이 동안 업데이트 된 것에 대한 양측 데이터의 정합성을 보장하지 못합니다.
 
