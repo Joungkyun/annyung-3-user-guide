@@ -29,12 +29,12 @@
 
 replication 설정은 ***-a*** 옵션을 이용하며, 제거는 ***-r*** 옵션을 이용합니다.
 
-ldap 서버의  이름은 ***ldap1.oops.org***와 ***ldap2.oops.org*** 라고 가정을 하고 예제를 진행 합니다.
+위에서 설명을 했듯이 ***master***, ***slave*** 구분이 의미가 없지만, 여기서는 서버의 구분을 위하여 ***master***를 ***ldap1.oops.org***, ***slave***를 ***ldap2.oops.org***라고 호칭하면서 설명을 진행하도록 합니다.
 
-***ldap1.oops.org***에서 ***ldap2.oops.org***의 변경 사항을 반영하도록 설정 합니다.
+***master(ldap1.oops.org)***에서 ***slave(ldap2.oops.org)***의 변경 사항을 반영하도록 설정 합니다.
 
 ```shell
-[root@an3 ~]$ ldap_replica -a -i 0 -u uid=replica,ou=Admin,dc=oops,dc=org ldap2.oops.org
+[root@ldap1 ~]$ ldap_replica -a -i 0 -u uid=replica,ou=Admin,dc=oops,dc=org ldap2.oops.org
 Input replica password : ********* [replica account 계정 암호 입력]
 설정 정보:
 
@@ -54,13 +54,13 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 설정 완료
 
-[root@an3 ~]$
+[root@ldap1 ~]$
 ```
 
-다음, ***ldap2.oops.org***에서 ***ldap1.oops.org***의 변경 사항을 반영하도록 설정 합니다. 주의할 것은 ***ldap1.oops.org***와 ***Replica Server ID(-i 옵션)*** 값을 다르게 설정 하십시오.
+다음, ***slave(ldap2.oops.org)***에서 ***master(ldap1.oops.org)***의 변경 사항을 반영하도록 설정 합니다. 주의할 것은 ***master(ldap1.oops.org)***와 ***Replica Server ID(-i 옵션)*** 값을 다르게 설정 하십시오.
 
 ```shell
-[root@an3 ~]$ ldap_replica -a -i 1 -u uid=replica,ou=Admin,dc=oops,dc=org ldap1.oops.org
+[root@ldap2 ~]$ ldap_replica -a -i 1 -u uid=replica,ou=Admin,dc=oops,dc=org ldap1.oops.org
 Input replica password : ********* [replica account 계정 암호 입력]
 설정 정보:
 
@@ -80,13 +80,13 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 설정 완료
 
-[root@an3 ~]$
+[root@ldap2 ~]$
 ```
 
 
 ##2. replication 확인
 
-***ssoadmin*** account의 암호를 변경해 보도록 합니다.
+***ssoamanager*** account의 암호를 변경해 보도록 합니다.
 
 먼저 master와 slave의 ssoadmin account의 현재 userPassword object를 확인 합니다.
 
