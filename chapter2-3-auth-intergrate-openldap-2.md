@@ -33,7 +33,7 @@ SSL 인증서는 공인된 기관에서 발급하는 SSL인증서와 본인이 �
 
 ***WoSign*** 인증서의 경우 여러가지 형식의 인증서가 있는데, 이 중 Apache 인증서를 이용하시면 됩니다.
 
-```shell
+```bash
 [root@an3 pki]$ openssl rsa -in an3.pkg.oops.org.key -out an3.pkg.oops.org.decrypt.key
 Enter pass phrase for an3.pkg.oops.org.key: [비밀번호 입력]
 writing RSA key
@@ -46,7 +46,7 @@ writing RSA key
 
 ***ldap-auth-utils***에서 제공하는 ***ldap_ssl*** 명령을 이용하며 간단하게 self sign 인증서를 생성할 수 있습니다. ***ldap_ssl*** 명령을 ***-c*** 옵션과 함께 실행을 하면 */etc/openldap/certs/pki*에 ***ldap.crt***와 (key 암호가 제거된)***ldap.key*** 파일이 생성이 됩니다.
 
-```shell
+```bash
 [root@an3 ~]$ ldap_ssl -c
 * 1. 개인키 생성
 
@@ -99,7 +99,7 @@ Success create /etc/openldap/certs/pki/ldap.crt
 인증서 경로는 절대 경로를 사용하는 것이 정신 건강에 도움이 됩니다.
 
 ###1. ldap_ssl을 이용한 등록
-```shell
+```bash
 [root@an3 ~]$ ldap_ssl -h
 사용법: ldap_ssl [OPTIONS]
 옵션:
@@ -148,7 +148,7 @@ olcTLSCertificateKeyFile: /etc/openldap/certs/pki/oops.org.decrypt.key
 
 ***ldap_ssl** 명령을 ***"-r"*** 옵션과 함께 실행 합니다.
 
-```shell
+```bash
 [root@an3 ~]$ ldap_ssl -r
 삭제 성공 slapd 데몬을 재시작 하십시오!
 [root@an3 ~]$
