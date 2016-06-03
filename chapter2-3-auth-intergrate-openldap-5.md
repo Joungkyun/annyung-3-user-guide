@@ -211,47 +211,81 @@ ldapusers:*:10000:
 그럼, master server에서 ***ldapuser1*** 이라는 account를 추가해 보도록 하겠습니다.
 
 ```bash
-[root@ladp1 ~]$ cat > ldapuser1.ldif <<EOF
-dn: uid=ldapuser1,ou=People,dc=oops,dc=org
-objectClass: posixAccount
-objectClass: top
-objectClass: inetOrgPerson
-objectClass: shadowAccount
-uidNumber: 10002
-gidNumber: 10000
-givenName: 이름
-sn: 성
-uid: ldapuser1
-homeDirectory: /home/ldapuser/ldapuser1
-gecos: LDAP user 1
-loginShell: /bin/bash
-shadowFlag: 0
-shadowMin: 0
-shadowMax: 99999
-shadowWarning: 0
-shadowInactive: 99999
-shadowExpire: 99999
-cn: ldapuser1
-userPassword: {CRYPT}$1$ORDoH6WC$b5T.3AUpf1eICJVTRIPzO1
-shadowLastChange: 16903
-EOF
-[root@ldap1 ~]$ ldapadd -x -D cn=manager,dc=oops,dc=org -W -f ldapuser1.ldif
-Enter LDAP Password: # LDAP 관리자 암호 입력
-adding new entry "uid=ldapuser1,ou=People,dc=oops,dc=org"
-[root@ldap1 ~]$
+[root@ldap1 ~]$ ldap_useradd ldapuser1@oops.org
+ldap_useradd  ldapuser1@kldp.org
+이름          : 이름
+성            : 성
+암호 입력                                : ***********
+암호 재입력                              : ***********
+
+Your informations:
+
+    ID           : ldapuser1
+    UID          : 10002
+    GID          : 10000
+    HOME         : /home/ldapusers/ldapuser1
+    SHELL        : /bin/bash
+    Expire Date  : 2243-10-19 00:00:00 (99999)
+    SURNAME      : 성
+    NAME         : 이름
+    GECOS        : LDAP Users
+    GROUP Lists  :
+    ACCEPT HOSTS :
+    Last Changes : 2016-06-03 20:00:02 (16955)
+    Passwd HASH  : {CRYPT}$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/
+
+Is right your informations? [Y/N] : y
+Regist account ldapuser1                   ... OK
+[root@ldap1 ~]$ ldap_auth ldapuser1@oops.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=People,dc=oops,dc=org> with scope subtree
+    # filter: (uid=ldapuser1)
+    # requesting: ALL
+    #
+    # ldapuser1, People, kldp.org
+    compatibility dn : ldapuser1@kldp.org
+    dn               : uid=ldapuser1,ou=People,dc=kldp,dc=org
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : posixAccount
+    objectClass      : shadowAccount
+    objectClass      : hostObject
+    uid              : ldapuser1
+    cn               : ldapuser1
+    gecos            : LDAP Users
+    givenName        : 엘댑
+    displayName      : 김 엘댑
+    sn               : 김
+    uidNumber        : 10002
+    gidNumber        : 10000
+    loginShell       : /bin/bash
+    homeDirectory    : /home/ldapusers/ldapuser1
+    shadowMin        : 0
+    shadowMax        : 90
+    shadowWarning    : 7
+    shadowLastChange : 16955
+    userPassword     : {CRYPT}$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+
+[root@an3 ~]$
 ```
 
-일단, 위의 정보를 그대로 입력해서 테스트 유저를 만듭니다. 위의 예제의 암호는 "***asdf***"를 md5 crypt 한 것입니다. 유저 생성에 대해서는 뒤에서 따로 다룰 예정 입니다.
-
-다음, 연동한 client에서 다시 확인을 해 봅니다.
+일단, 위와 같이 테스트 유저를 만듭니다. 다음, 연동한 client에서 다시 확인을 해 봅니다.
 
 ```bash
 [root@an3 ~]$ # password entry 를 확인 합니다.
 [root@an3 ~]$ getent passwd | grep ldapuser1
-ldapuser1:x:10001:10000:"LDAP user 1":/home/ldapuser/ldapuser1:/bin/bash
+ldapuser1:x:10002:10000:"LDAP user":/home/ldapusers/ldapuser1:/bin/bash
 [root@an3 ~]$ # shadow entry 를 확인 합니다.
 [root@an3 ~]$ getent shadow | grep ldapuser1
-ldapuser1:$1$ORDoH6WC$b5T.3AUpf1eICJVTRIPzO1:16903:0:99999:0:99999:99999:0
+ldapuser1:$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/
 [root@an3 ~]$
 ```
 
