@@ -58,13 +58,13 @@ Done
 
 ## 2. 필요 패키지 설치
 
-LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니다.)에서 ***nss-pam-ldapd*** package와 ***nss-pam_ldap*** package를 설치합니다.
+LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니다.)에서 ***nss-pam-ldapd*** package와 ***ldap-auth-utils-passwd*** package를 설치합니다.
 
 ```bash
 [root@an3 ~]$ yum install openldap-clients nss-pam-ldapd ldap-auth-utils-passwd
 ```
 
-***RHEL/CentOS 6***과 ***안녕 2***에서는 ***pam_ldap*** package가 의존성 설정에 의해 같이 설치가 됩니다.
+***RHEL 6***계열에서는 ***pam_ldap*** package가 의존성 설정에 의해 같이 설치가 됩니다.
 
 ***openldap-clients***, ***nss-pam-ldapd***는 LDAP과 연동을 하는데 사용이 되어지며, ***ldap-auth-utils-passwd*** 패키지는 system에서 LDAP database의 암호를 변경하기 위하여 사용을 합니다. 물론 ***openldap-clients***의 ***ldappasswd***를 이용해도 상관 없지만, ldif 통신을 해야 하는 귀찮음으로 사용하기 쉬운 ***ldap_passwd*** 명령을 제공 합니다.
 
@@ -105,7 +105,7 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 ***RHEL 6*** 계열은 /etc/pam_ladp.conf 도 수정을 해 줍니다.
 
 ```bash
-[root@an2 ~]$ chmod 600 /etc/pam_ldap.conf
+[root@an2 ~]$ chmod 600 /etc/nslcd.conf /etc/pam_ldap.conf
 ```
 
 다음, ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf***의 설정을 확인 합니다.
