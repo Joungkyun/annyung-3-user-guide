@@ -19,7 +19,7 @@
 
 이미 account는 준비가 되었고, replcation 설정을 위하여 ***ldap_replica***라는 명령을 이용합니다.
 
-```shell
+```bash
 [root@an3 ~]$ ldap_replica
 이 서버는 replication 설정이 되어 있지 않습니다!
 [root@an3 ~]$
@@ -33,7 +33,7 @@ replication 설정은 ***-a*** 옵션을 이용하며, 제거는 ***-r*** 옵션
 
 ***master(ldap1.oops.org)***에서 ***slave(ldap2.oops.org)***의 변경 사항을 반영하도록 설정 합니다.
 
-```shell
+```bash
 [root@ldap1 ~]$ ldap_replica -a -i 0 -u uid=replica,ou=Admin,dc=oops,dc=org ldap2.oops.org
 Input replica password : ********* [replica account 계정 암호 입력]
 설정 정보:
@@ -59,7 +59,7 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 다음, ***slave(ldap2.oops.org)***에서 ***master(ldap1.oops.org)***의 변경 사항을 반영하도록 설정 합니다. 주의할 것은 ***master(ldap1.oops.org)***와 ***Replica Server ID(-i 옵션)*** 값을 다르게 설정 하십시오.
 
-```shell
+```bash
 [root@ldap2 ~]$ ldap_replica -a -i 1 -u uid=replica,ou=Admin,dc=oops,dc=org ldap1.oops.org
 Input replica password : ********* [replica account 계정 암호 입력]
 설정 정보:
@@ -90,7 +90,7 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 먼저 ***ldap_auth*** 명령을 이용하여 ***master***에서 ***ssomanager***의 정보를 확인 합니다.
 
-```shell
+```bash
 [root@ldap1 ~]$ ldap_auth -o Admin ssomanager@oops.org
 
     # extended LDIF
@@ -136,7 +136,7 @@ Input replica password : ********* [replica account 계정 암호 입력]
 
 ***master(ldap1.oops.org)***에서 ***ssomanager***의 암호를 변경합니다.
 
-```shell
+```bash
 [root@ldap1 ~]$ ldap_passwd -u admin ssomanager@oops.org
 New password     : **************
 Re-New password  : **************
@@ -162,7 +162,7 @@ Done
 
 ***slave(ldap2.oops.org)***에서 ***ssomanager*** account를 확인하여 ***userPassword*** 값이 ***master(ldap1.oops.org)***와 동일한지 확인 합니다.
 
-```shell
+```bash
 [root@ldap2 ~]$ ldap_auth -o Admin ssomanager@oops.org
 
     # extended LDIF
