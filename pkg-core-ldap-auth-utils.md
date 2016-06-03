@@ -20,14 +20,6 @@ LDAP 인증 통합 도구
 
 ### Releated Packages:
 
-* php-chardet
-  * php libchardet binding
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/README
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/Reference
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/sample-oop.php
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/sample.php
-* python-chardet
-  * python libchardet bindnig
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/README
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test.py
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
+* [genpasswd](pkg-core-genpasswd.md)
+* openldap-servers
+* openldap-clients
