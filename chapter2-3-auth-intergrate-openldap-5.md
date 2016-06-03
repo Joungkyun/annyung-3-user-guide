@@ -96,6 +96,8 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 [root@an3 ~]$ cat /etc/openldap/ldap.conf
 TLS_CACERTDIR /etc/openldap/cacerts
 TLS_CACERT /etc/openldap/certs/pki/startssl-sub.class2.server.ca.sha2.pem
+TLS_REQCERT allow
+
 URI ldaps://ldap1.oops.org/ ldaps://ldap2.oops.org
 BASE dc=oops,dc=org
 [root@an3 ~]$
