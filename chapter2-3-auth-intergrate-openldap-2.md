@@ -33,6 +33,8 @@ SSL 인증서는 공인된 기관에서 발급하는 SSL인증서와 본인이 �
 
 ***WoSign*** 인증서의 경우 여러가지 형식의 인증서가 있는데, 이 중 Apache 인증서를 이용하시면 됩니다.
 
+참고로, replication 설정을 할 것이라면, ldap server들은 동일한 CA에서 발급한 인증서를 사용하시기 바랍니다. client에서 연결을 할 때, CA 인증서가 다르면 좀 복잡해 지는 문제가 있습니다. 이런 경우는, NSS certificate database를 사용해야 하는데, 이에 대해서는 이 문서에서는 다루지 않으므로, 스스로 해결을 해야 합니다.
+
 ```bash
 [root@an3 pki]$ openssl rsa -in an3.pkg.oops.org.key -out an3.pkg.oops.org.decrypt.key
 Enter pass phrase for an3.pkg.oops.org.key: [비밀번호 입력]
