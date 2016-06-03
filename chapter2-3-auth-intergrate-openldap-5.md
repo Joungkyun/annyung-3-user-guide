@@ -136,7 +136,7 @@ nslcd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$
 ```
 
-RHEL 6/CentOS 6/안녕 2에서는 ***/etc/pam_ldap.conf***의 다음 설정 값들을 수정/추가 하십시오.
+***RHEL/CentOS 6***, ***AnNyung 2***에서는 ***/etc/pam_ldap.conf***의 다음 설정 값들을 수정/추가 하십시오.
 
 ```bash
 [root@an2 ~]$ cat /etc/pam_ldap.conf
