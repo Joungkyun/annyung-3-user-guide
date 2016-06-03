@@ -164,9 +164,9 @@ tls_cacertfile /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
 # nss_base_passwd   ou=People,
 # to append the default base DN but this
 # may incur a small performance impact.
-nss_base_passwd    ou=People,dc=example,dc=com?one
-nss_base_shadow    ou=People,dc=example,dc=com?one
-nss_base_group     ou=Group,dc=example,dc=com?one
+nss_base_passwd    ou=People,dc=oops,dc=org?one
+nss_base_shadow    ou=People,dc=oops,dc=org?one
+nss_base_group     ou=Group,dc=oops,dc=org?one
 
 # password hashing
 # md5로 지정을 하면 md5 crypt, sha512 crypt를 이용하여 로그인이 가능 합니다.
