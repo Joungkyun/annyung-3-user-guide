@@ -363,3 +363,104 @@ Creating directory '/home/ldapuser/ldapuser1'.
 [root@an3 ~]$ echo "pam_check_host_attr yes" >> /etc/pam_ldap.conf
 [root@an3 ~]$ service nslcd restart
 ```
+
+설정을 마쳤으면 다신 ***ldapuser1*** account로 로그인을 해 봅니다.
+
+```bash
+[root@an3 ~]$ ssh ldapuser1@localhost
+AnNyung LInux 3 (Labas)
+Login an3.oops.org on an 21:18 on Friday, 03 June 2016
+
+Warning!! Authorized users only.
+All activity may be monitored and reported
+
+ldapuser1@localhost's password:
+LDAP authorisation check failed
+Connection closed by 127.0.0.1
+[root@an3 ~]$
+```
+
+아까는 로그인이 되었지만, host 설정 이후, ldapuser1 entry에 host attribute가 없기 때문에 로그인이 되지 않습니다. ***secure*** log는 다음과 같이 남습니다.
+
+```bash
+[root@an3 ~]$ tail /var/log/secure
+Jun  3 20:41:50 open sshd[9570]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=ldapuser1
+Jun  3 20:41:50 open sshd[9570]: pam_ldap(sshd:account): LDAP authorisation check failed; user=ldapuser1; err=Success
+Jun  3 20:41:50 open sshd[9570]: Failed password for ldapuser1 from 127.0.0.1 port 33566 ssh2
+Jun  3 20:41:50 open sshd[9570]: fatal: Access denied for user ldapuser1 by PAM account configuration [preauth]
+Jun  3 21:18:50 open sshd[11938]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=127.0.0.1  user=ldapuser1
+Jun  3 21:18:50 open sshd[11938]: pam_ldap(sshd:account): LDAP authorisation check failed; user=ldapuser1; err=Success
+Jun  3 21:18:50 open sshd[11938]: Failed password for ldapuser1 from 127.0.0.1 port 33619 ssh2
+Jun  3 21:18:50 open sshd[11938]: fatal: Access denied for user ldapuser1 by PAM account configuration [preauth]
+[root@an3 ~]$
+```
+
+그럼, login이 가능하도록 ldapuser1 entry에 host attribute 설정을 해 보도고 합니다.
+
+***master(ldap1.oops.org)***나 ***slave(ldap2.oops.org)***에서 다음의 명령을 실행 합니다.
+
+```bash
+[root@ldap1 ~]$ ldap_host_manage ldapuser1@oops.org an3.oops.org
+[root@ldap1 ~]$ ldap_auth ldapuser1@oops.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=People,dc=oops,dc=org> with scope subtree
+    # filter: (uid=ldapuser1)
+    # requesting: ALL
+    #
+    # ldapuser1, People, kldp.org
+    compatibility dn : ldapuser1@kldp.org
+    dn               : uid=ldapuser1,ou=People,dc=kldp,dc=org
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : posixAccount
+    objectClass      : shadowAccount
+    objectClass      : hostObject
+    uid              : ldapuser1
+    cn               : ldapuser1
+    gecos            : LDAP Users
+    givenName        : 엘댑
+    displayName      : 김 엘댑
+    sn               : 김
+    uidNumber        : 10002
+    gidNumber        : 10000
+    loginShell       : /bin/bash
+    homeDirectory    : /home/ldapusers/ldapuser1
+    shadowMin        : 0
+    shadowMax        : 90
+    shadowWarning    : 7
+    shadowLastChange : 16955
+    userPassword     : {CRYPT}$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/
+    host             : an3.oops.org
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+[root@ldap1 ~]$
+```
+
+***ldap_auth*** 결과를 보면, password hash 문자열 아래에 ***host*** attribute가 설정이 되어 있음을 확인할 수 있습니다. ***ldap_host_manage*** 명령을 이용하여 추가 또는 삭제를 할 수 있습니다.
+
+주의할 것은, host 이름은 해당 서버의 ***FQDN***으로 설정을 해 줘야 합니다.
+
+이제 다시, 로그인 테스트를 해 보도록 합니다.
+
+```bash
+[root@an3 ~]$ ssh ldapuser1@localhost
+AnNyung LInux 3 (Labas)
+Login an3.oops.org on an 21:32 on Friday, 03 June 2016
+
+Warning!! Authorized users only.
+All activity may be monitored and reported
+
+ldapuser1@localhost's password:
+Last failed login: Fri Jun  3 21:18:50 KST 2016 from 127.0.0.1 on ssh:notty
+There were 2 failed login attempts since the last successful login.
+Last login: Fri Jun  3 20:41:29 2016 from 127.0.0.1
+[ldayuser1@an3 ~]$
+```
+
+이제 로그인이 잘 되는 것을 확인할 수 있습니다.
