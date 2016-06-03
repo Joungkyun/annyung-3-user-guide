@@ -26,7 +26,7 @@ LDAP 설정 초기화 시에, 연동에 필요한 ***ssomanager***라는 account
 
 또한, ***ldapROusers*** 그룹은 LDAP 전체 database에 대해서 read only 권한을 가지고 있습니다.
 
-앞에서 암호를 미리 지정해 놓았습니다만 혹시 잊어 버렸거나 또는 설정을 하지 않았다면 다음 명령을 이용하여 다시 설정을 합니다.
+앞에서 암호를 미리 지정해 놓았습니다만 혹시 잊어 버렸거나 또는 설정을 하지 않았다면 ***master(ldap1.oops.org)*** 또는 ***slave(ldap2.oops.org)***에서 다음 명령을 이용하여 다시 설정을 합니다. (replication 설정이 되어 있으므로 어디서 해도 상관이 없습니다.)
 
 ```bash
 [root@ldap1 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
