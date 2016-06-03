@@ -313,3 +313,21 @@ ldapuser1@localhost''s password:
 Creating directory '/home/ldapuser/ldapuser1'.
 [ldapuser1@an3 ~]$
 ```
+
+##5. host attribute를 이용한 로그인 제한
+
+***ldap-auth-utils***를 이용하여 LDAP 인증 연동을 구성할 경우, 기본으로 ldap entry의 host attribute를 이용하여 로그인을 제한 할 수 있도록 구성되어 있습니다.
+
+일단, 이 기능을 사용하기 위해서는 ldap client에서 다음 설정을 해야 합니다.
+
+***RHEL 7*** 호환 계열:
+```bash
+[root@an3 ~]$ echo "pam_authz_search (&(objectClass=posixAccount)(uid=$username)(|(host=$hostname)(host=$fqdn)(host=\\*)))" >> /etc/nslcd.conf
+[root@an3 ~]$ service nslcd restart
+```
+
+***RHEL 6*** 호환 계열:
+```bash
+[root@an3 ~]$ echo "pam_check_host_attr yes" >> /etc/pam_ldap.conf
+[root@an3 ~]$ service nslcd restart
+```
