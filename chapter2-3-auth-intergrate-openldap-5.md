@@ -322,7 +322,7 @@ Creating directory '/home/ldapuser/ldapuser1'.
 
 ***RHEL 7*** 호환 계열:
 ```bash
-[root@an3 ~]$ echo "pam_authz_search (&(objectClass=posixAccount)(uid=$username)(|(host=$hostname)(host=$fqdn)(host=\\*)))" >> /etc/nslcd.conf
+[root@an3 ~]$ echo 'pam_authz_search (&(objectClass=posixAccount)(uid=$username)(|(host=$hostname)(host=$fqdn)(host=\\*)))' >> /etc/nslcd.conf
 [root@an3 ~]$ service nslcd restart
 ```
 
