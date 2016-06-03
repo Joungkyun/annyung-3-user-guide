@@ -26,6 +26,26 @@ LDAP 설정 초기화 시에, 연동에 필요한 ***ssomanager***라는 account
 
 ```bash
 [root@ldap1 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
+New password     : ***********
+Re-New password  : ***********
+
+Your Informations:
+
+    * Account: ssoadmin@kldp.org
+    * RDN : uid=ssomanager,ou=Admin,dc=kldp,dc=org
+    * Host: ldapi:///
+    * Privilieges: -Y EXTERNAL
+    * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
+    * Hash: {CRYPT}$6$htk01t9cUA5aFM/a$9H4.kig058cRESS6MGdjn8armHHP6IAQO9Qykr6iroW9laqugz.bIOPNzBUgk8N4H01QkeklEwQg05FBzSrfz/
+
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+
+0
+Done
+[root@an3 ~]$
 ```
 
 LDAP 서버 구축 시에, 연동에 사용을 하기 위하여 ***ssomanager***라는 account를 미리 생성해 놓았드벼, ***ssomanager*** 는 ***ldapROusers*** 그룹의 member로 생성이 되었습니다.
