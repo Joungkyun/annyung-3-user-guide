@@ -61,6 +61,8 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 [root@an3 ~]$ yum install openldap-clients nss-pam-ldapd
 ```
 
+***RHEL/CentOS 6***과 ***안녕 2***에서는 ***pam_ldap*** package가 의존성 설정에 의해 같이 설치가 됩니다.
+
 ## 3. 인증 연동 설정
 
 먼저, LDAP 서버 구성시에 SSL을 가능하도록 하였다면, 인증서의 CA 인증서를 클라이언트에 복사 합니다. CA 인증서는 앞에서 예로 든 ***startssl***의 공인 인증서를 예로 듭니다. self sign을 하셨거나 다른 공인 인증서를 사용하신다면, 사용하는 인증서의 CA 인증서를 복사 하시면 됩니다.
