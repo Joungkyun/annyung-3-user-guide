@@ -150,8 +150,19 @@ base   shadow ou=People,dc=oops,dc=org
 [root@an3 ~]$ service nslcd restart
 nslcd 를 정지 중:                                          [실패]
 nslcd (을)를 시작 중:                                      [  OK  ]
+[root@an3 ~]$
+```
+
+Booting 시에 nslcd가 동작하도록 설정 합니다.
+
+***RHEL 7*** 계열에서는
+
+```bash
 [root@an3 ~]$ systemctl enable nslcd
-[root@an3 ~]$ # RHEL6 계열에서는
+```
+
+***RHEL 6*** 계열에서는 다음과 같이 합니다.
+```bash
 [root@an3 ~]$ chkconfig nslcd on
 ```
 
@@ -200,7 +211,7 @@ bindpw 평문암호
 [root@an2 ~]$
 ```
 
-다음, nscd를 구동하고 있는 시스템이라면 nscd database를 갱신해 줘야 합니다. (안그러면 30분 정도 기다려야 할 수도 있습니다.)
+다음, nscd를 구동하고 있는 시스템이라면 <u>nscd database를 갱신</u>해 줘야 합니다. (안그러면 30분 정도 기다려야 할 수도 있습니다.)
 
 ```bash
 [root@an3 ~]$ service nscd force-reload
