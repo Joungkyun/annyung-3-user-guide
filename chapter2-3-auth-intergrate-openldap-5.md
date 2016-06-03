@@ -177,6 +177,11 @@ pam_password md5
 [root@an2 ~]
 ```
 
+다음, nscd를 구동하고 있는 시스템이라면 nscd database를 갱신해 줘야 합니다. (안그러면 30분 정도 기다려야 할 수도 있습니다.)
+
+```bash
+[root@an3 ~]$ service nscd force-reload
+```
 
 여기까지 하면, 기본적으로 연동이 완료 되었습니다. 
 
