@@ -287,9 +287,11 @@ Regist account ldapuser1                   ... OK
 ldapuser1:x:10002:10000:"LDAP user":/home/ldapusers/ldapuser1:/bin/bash
 [root@an3 ~]$ # shadow entry 를 확인 합니다.
 [root@an3 ~]$ getent shadow | grep ldapuser1
-ldapuser1:$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/:16955:0:90:7:::0
+ldapuser1:*:16955:0:90:7:::0
 [root@an3 ~]$
 ```
+
+참고로, ***getent shadow***에서 암호 필드는 ***RHEL 7*** 호환 계열은 위와 같이 ___*___로 masking이 되어서 나오고, ***RHEL 6*** 호환 이하로는 hashed string으로 출력이 됩니다.
 
 마지막으로 login 을 테스트 해 봅니다.
 
