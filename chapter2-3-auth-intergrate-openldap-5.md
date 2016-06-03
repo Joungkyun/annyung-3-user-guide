@@ -145,14 +145,14 @@ base dc=oops,dc=org
 base   group  ou=Group,dc=oops,dc=org
 base   passwd ou=People,dc=oops,dc=org
 base   shadow ou=People,dc=oops,dc=org
-[root@an3 ~]$ chmod 600 /etc/nslcd.conf
 [root@an3 ~]$
 [root@an3 ~]$ # nslcd 재시작
 [root@an3 ~]$ service nslcd restart
 nslcd 를 정지 중:                                          [실패]
 nslcd (을)를 시작 중:                                      [  OK  ]
 [root@an3 ~]$ systemctl enable nslcd
-[root@an3 ~]$
+[root@an3 ~]$ # RHEL6 계열에서는
+[root@an3 ~]$ chkconfig nslcd on
 ```
 
 ***RHEL/CentOS 6***, ***AnNyung 2***에서는 ***/etc/pam_ldap.conf***도 설정을 해 줘야 합니다. ***/etc/pam_ldap.conf***의 다음 설정 값들도 수정/추가 하십시오.
