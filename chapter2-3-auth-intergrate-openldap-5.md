@@ -29,14 +29,14 @@ LDAP 설정 초기화 시에, 연동에 필요한 ***ssomanager***라는 account
 앞에서 암호를 미리 지정해 놓았습니다만 혹시 잊어 버렸거나 또는 설정을 하지 않았다면 ***master(ldap1.oops.org)*** 또는 ***slave(ldap2.oops.org)***에서 다음 명령을 이용하여 다시 설정을 합니다. (replication 설정이 되어 있으므로 어디서 해도 상관이 없습니다.)
 
 ```bash
-[root@ldap1 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
+[root@ldap1 ~]$ ldap_passwd -u Admin ssomanager@oops.org
 New password     : ***********
 Re-New password  : ***********
 
 Your Informations:
 
-    * Account: ssoadmin@kldp.org
-    * RDN : uid=ssomanager,ou=Admin,dc=kldp,dc=org
+    * Account: ssoadmin@oops.org
+    * RDN : uid=ssomanager,ou=Admin,dc=oops,dc=org
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
@@ -45,29 +45,13 @@ Your Informations:
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
-modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+modifying entry "uid=ssoadmin,ou=Admin,dc=oops,dc=org"
 
 0
 Done
 [root@an3 ~]$
 ```
 
-LDAP 서버 구축 시에, 연동에 사용을 하기 위하여 ***ssomanager***라는 account를 미리 생성해 놓았드벼, ***ssomanager*** 는 ***ldapROusers*** 그룹의 member로 생성이 되었습니다.
-
-또한, ***ldapROusers*** 그룹은 LDAP 전체 database에 대해서 read only 권한을 가지고 있습니다.
-
-이, ***ssomanager*** account의 암호를 설정 하도록 합니다.
-
-Master 서버 (ldap1)에서 LDAP 관리자의 권한(***cn=manager,dc=oops,dc=org***)으로 설정을 합니다. Slave(ldap2)에서 해도 무방합니다. (어차피 Multi matster 구성이기 때문입니다.)
-
-```bash
-[root@ldap1 ~]$ export BASEDN="dc=oops,dc=org"
-[root@ldap1 ~]$ ldappasswd -x -D "cn=manager,${BASEDN}"  "uid=ssomanager,ou=admin,${BASEDN}" -W -S
-New password:            # 변경할 암호 입력
-Re-enter new password:   # 변경할 암호 재 입력
-Enter LDAP Password:     # cn=manager(LDAP 관리자)의 암호 입력
-[root@an3 ~]$
-```
 
 ## 2. 필요 패키지 설치
 
