@@ -498,6 +498,7 @@ NIS master에서 설정했던 NIS DOMAIN을 동일하게 설정을 합니다.
 
 *** NIS slave***를 구성했다면 */etc/yp.conf* 에 추가해 줍니다.
 
+```shell
 [root@an3 ~]$ echo "server nis2.domain.com" >> /etc/yp.conf
 [root@an3 ~]$ cat /etc/yp.conf
   .. 상략 ..
