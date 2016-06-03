@@ -94,7 +94,7 @@ Enter LDAP Password: # ssoadmin 암호 입력
 # extended LDIF
 #
 # LDAPv3
-# base <ou=Group,dc=kldp,dc=org> with scope subtree
+# base <ou=Group,dc=oops,dc=org> with scope subtree
 # filter: (objectclass=*)
 # requesting: ALL
 #
