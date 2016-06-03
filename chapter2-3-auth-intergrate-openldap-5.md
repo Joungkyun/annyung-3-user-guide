@@ -92,7 +92,7 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 [root@an3 ~]$
 ```
 
-다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 에서 다음의 값을들 확인 합니다. 다르면 수정을 하고, 설정이 안되어 있으면 추가해 주도록 합니다.
+다음 ***/etc/openldap/ldap.conf***와 ***/etc/nslcd.conf*** 에서 다음의 값들을 확인 합니다. 다르면 수정을 하고, 설정이 안되어 있으면 추가해 주도록 합니다.
 
 ```bash
 [root@an3 ~]$ # 먼저 /etc/openldap/ldap.conf 를 먼저 설정 합니다.
