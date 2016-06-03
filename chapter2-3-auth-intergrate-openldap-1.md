@@ -328,7 +328,7 @@ SASL SSF: 0
 # extended LDIF
 #
 # LDAPv3
-# base <DC=kldp, DC=org> (default) with scope subtree
+# base <DC=oops, DC=org> (default) with scope subtree
 # filter: (objectClass=posixAccount)
 # requesting: dn
 #
@@ -336,10 +336,10 @@ SASL SSF: 0
 # ssoadmin, Admin, oops.org
 dn: uid=ssoadmin,ou=Admin,dc=oops,dc=org
 
-# ssomanager, Admin, kldp.org
+# ssomanager, Admin, oops.org
 dn: uid=ssomanager,ou=Admin,dc=oops,dc=org
 
-# replica, Admin, kldp.org
+# replica, Admin, oops.org
 dn: uid=replica,ou=Admin,dc=oops,dc=org
 
 # search result
@@ -357,21 +357,21 @@ SASL SSF: 0
 # extended LDIF
 #
 # LDAPv3
-# base <DC=kldp, DC=org> (default) with scope subtree
+# base <DC=oops, DC=org> (default) with scope subtree
 # filter: (objectClass=posixGroup)
 # requesting: dn
 #
 
-# ldapadmins, Admin, kldp.org
+# ldapadmins, Admin, oops.org
 dn: cn=ldapadmins,ou=Admin,dc=oops,dc=org
 
-# ldapROusers, Admin, kldp.org
+# ldapROusers, Admin, oops.org
 dn: cn=ldapROusers,ou=Admin,dc=oops,dc=org
 
-# ldapmanagers, Admin, kldp.org
+# ldapmanagers, Admin, oops.org
 dn: cn=ldapmanagers,ou=Admin,dc=oops,dc=org
 
-# ldapusers, Group, kldp.org
+# ldapusers, Group, oops.org
 dn: cn=ldapusers,ou=Group,dc=oops,dc=org
 
 # search result
@@ -429,14 +429,14 @@ ssoadmin, ssomanager, replica account의 OU는 People이 아니라 Admin 이기 
 
 ```bash
 [root@an3 ~]$ # ssoadmin account 암호 변경
-[root@an3 ~]$ ldap_passwd -u Admin ssoadmin@kldp.org
+[root@an3 ~]$ ldap_passwd -u Admin ssoadmin@oops.org
 New password     : ***********
 Re-New password  : ***********
 
 Your Informations:
 
-    * Account: ssoadmin@kldp.org
-    * RDN : uid=ssoadmin,ou=Admin,dc=kldp,dc=org
+    * Account: ssoadmin@oops.org
+    * RDN : uid=ssoadmin,ou=Admin,dc=oops,dc=org
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
@@ -445,20 +445,20 @@ Your Informations:
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
-modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+modifying entry "uid=ssoadmin,ou=Admin,dc=oops,dc=org"
 
 0
 Done
 [root@an3 ~]$
 [root@an3 ~]$ # ssomanager account 암호 변경
-[root@an3 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
+[root@an3 ~]$ ldap_passwd -u Admin ssomanager@oops.org
 New password     : ***********
 Re-New password  : ***********
 
 Your Informations:
 
-    * Account: ssoadmin@kldp.org
-    * RDN : uid=ssomanager,ou=Admin,dc=kldp,dc=org
+    * Account: ssoadmin@oops.org
+    * RDN : uid=ssomanager,ou=Admin,dc=oops,dc=org
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
@@ -467,20 +467,20 @@ Your Informations:
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
-modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+modifying entry "uid=ssoadmin,ou=Admin,dc=oops,dc=org"
 
 0
 Done
 [root@an3 ~]$
 [root@an3 ~]$ # replica account 암호 변경
-[root@an3 ~]$ ldap_passwd -u Admin replica@kldp.org
+[root@an3 ~]$ ldap_passwd -u Admin replica@oops.org
 New password     : ***********
 Re-New password  : ***********
 
 Your Informations:
 
-    * Account: ssoadmin@kldp.org
-    * RDN : uid=replica,ou=Admin,dc=kldp,dc=org
+    * Account: ssoadmin@oops.org
+    * RDN : uid=replica,ou=Admin,dc=oops,dc=org
     * Host: ldapi:///
     * Privilieges: -Y EXTERNAL
     * Commnad: /usr/bin/ldapmodify -H "ldapi:///" -Y EXTERNAL
@@ -489,7 +489,7 @@ Your Informations:
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
-modifying entry "uid=ssoadmin,ou=Admin,dc=kldp,dc=org"
+modifying entry "uid=ssoadmin,ou=Admin,dc=oops,dc=org"
 
 0
 Done
