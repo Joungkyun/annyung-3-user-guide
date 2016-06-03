@@ -22,6 +22,12 @@
 
 LDAP 인증을 시작하기 전에, LDAP server에서 연동에 사용할 account 설정을 합니다.
 
+LDAP 설정 초기화 시에, 연동에 필요한 ***ssomanager***라는 account를 미리 생성해 놓았으며, 암호를 미리 지정해 놓았습니다. 혹시 생각이 나지 않거나, 잊어 버렸다면 다음 명령을 이용하여 다시 설정을 합니다.
+
+```shell
+[root@ldap1 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
+```
+
 LDAP 서버 구축 시에, 연동에 사용을 하기 위하여 ***ssomanager***라는 account를 미리 생성해 놓았드벼, ***ssomanager*** 는 ***ldapROusers*** 그룹의 member로 생성이 되었습니다.
 
 또한, ***ldapROusers*** 그룹은 LDAP 전체 database에 대해서 read only 권한을 가지고 있습니다.
