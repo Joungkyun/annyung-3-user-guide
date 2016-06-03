@@ -65,7 +65,9 @@ LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니�
 
 ## 3. 인증 연동 설정
 
-먼저, LDAP 서버 구성시에 SSL을 가능하도록 하였다면, 인증서의 CA 인증서를 클라이언트에 복사 합니다. CA 인증서는 앞에서 예로 든 ***startssl***의 공인 인증서를 예로 듭니다. self sign을 하셨거나 다른 공인 인증서를 사용하신다면, 사용하는 인증서의 CA 인증서를 복사 하시면 됩니다.
+먼저, LDAP 서버 구성 시에 SSL을 가능하도록 하였다면, 인증서의 CA 인증서를 클라이언트에 복사 합니다. self sign 인증서를 사용한다면, CA 인증서는 system에 있는 ***/etc/pki/tls/certs/ca-bundle.crt***를 이용하시면 되고, 발급 기관에서 받았을 경우에는 CA에서 제공하는 CA 인증서를 이용 합니다.
+
+다음은 ***startssl***의 CA 인증서를 예로 듭니다.
 
 ```bash
 [root@an3 ~]$ rsync -av \
