@@ -55,6 +55,7 @@
        * [httpd-url](pkg-core-httpd-url.md)
        * [kmod-geoip](pkg-core-kmod-geoip.md)
        * [l4vip](pkg-core-l4vip.md)
+       * [ldap-auth-utils](pkg-core-ldpa-auth-utils)
        * [libchardet](pkg-core-libchardet.md)
        * [libimginfo](pkg-core-libimginfo.md)
        * [libipcalc](pkg-core-libipcalc.md)
