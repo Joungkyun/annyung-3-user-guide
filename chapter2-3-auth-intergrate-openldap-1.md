@@ -31,7 +31,7 @@
 이 문서에서 설명하는 LDAP 관리도구인 ldap-auth-utils 와 ldap-auth-utils-passwd, genpasswd 패키지는 안녕 리눅스에서만 제공을 합니다. 그러므로 RHEL/CentOS 에서는 안녕 리눅스의 core package repository를 yum에 등록해 주십시오. 아래와 같이 repository를 추가를 하면, 기존의 RHEL/CentOS package를 변경 시키지 않고, 안녕 리눅스에서만 제공하는 패키지를 사용/관리 할 수 있습니다.
 
 ***RHEL/CentOS 7*** 에서는 다음과 같이 추가해 주십시오.
-```shell
+```bash
 [root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
 #
@@ -48,7 +48,7 @@ exclude=php* whois httpd*
 ```
 
 ***RHEL/CentOS 6*** 에서는 다음과 같이 추가해 주십시오.
-```shell
+```bash
 [root@host ~]$ cat <<EOF > /etc/yum.repos.d/AnNyung-core.repos
 # AnNyung.repo
 #
@@ -239,7 +239,7 @@ Done
 
 먼저 ***/etc/openldap/ldap.conf***에 ***ldap_auth_init***에서 설정한 BASE DN과 LDAP 서버 URI를 설정 합니다.
 
-```shell
+```bash
 [root@an3 ~]$ cat <<EOF >> /etc/openldap/ldap.conf
 URI ldapi:///
 BASE DC=oops,DC=org
@@ -255,7 +255,7 @@ EOF
 
 일단, ***ldap_auth_init***를 이용하여 초기화를 한 경우, 일단 고려를 한 것은 암호 알고리즘에 대해서 고민을 해야 합니다. ***ldap-auth-utils.conf***에서 암호 알고리즘은 다음의 옵션값으로 지정 합니다.
 
-```shell
+```bash
 [root@an3 ~]$ cat /etc/openldap/ldap-auth-utils.conf | grep "^PASSWD_MECH"
 PASSWD_MECH                  = sha512
 [root@an3 ~]$
@@ -270,7 +270,7 @@ PASSWD_MECH                  = sha512
 >주의!  
 >이 설정은 ***ldap account***를 위한 설정입니다. 즉, ***ldap_adduser*** 명령을 이용할 경우 적용이 되는 것들로, system의 ***adduser***와는 별개 입니다.
 
-```shell
+```bash
 [root@an3 ~]$ cat /etc/openldap/ldap-auth-utils.conf
   .. 상략..
 #
@@ -319,7 +319,7 @@ PASS_CLASSES                 = 3
 
 ***ldap_auth_init***을 이용하여 초기화를 한 후에, 다음과 같이 ldap 관리 account와 gruop, 그리고 ldap account의 default group이 잘 등록이 되었는지 확인을 합니다.
 
-```shell
+```bash
 [root@an3 ~]# ldap account 확인
 [root@an3 ~]$ ldapsearch -Y EXTERNAL  "(objectClass=posixAccount)" dn
 SASL/EXTERNAL authentication started
@@ -399,7 +399,7 @@ Section 2의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 �
 
 ***slappasswd*** 명령을 이용하여 암호를 encrypt 한 후에, ldif 형식을 이용하여 업데이트 할 수 있습니다.
 
-```shell
+```bash
 [root@an3 ~]$ export CHGPASSWD=$(slappasswd -s 'asdf!asdf')
 [root@an3 ~]$
 [root@an3 ~]$ cat <<EOF > ldapmodify -Y EXTERNAL -H ldapi:///
@@ -427,7 +427,7 @@ olcRootPW: ${CHGPASSWD}
 
 ssoadmin, ssomanager, replica account의 OU는 People이 아니라 Admin 이기 때문에 ***-u*** 옵션으로 OU를 변경해 줘야 합니다. -u 옵션을 주지 않으면 기본으로 People OU를 사용하게 됩니다.
 
-```shell
+```bash
 [root@an3 ~]$ # ssoadmin account 암호 변경
 [root@an3 ~]$ ldap_passwd -u Admin ssoadmin@kldp.org
 New password     : ***********
