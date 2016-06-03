@@ -5,6 +5,7 @@
 >2. 필요 package 설치
 >3. 인증 연동 설정
 >4. 연동 확인
+>5. host attribute를 이용한 로그인 제한
 >
 
 <br><br>
