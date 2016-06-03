@@ -181,7 +181,7 @@ pam_password md5
 binddn uid=ssomanager,ou=admin,dc=oops,dc=org
 # LDAP 서버에서 설정한 ssomanager의 암호를 평문으로 작성
 bindpw 평문암호
-[root@an2 ~]$ chmod 600 /etc/pam_ldap.conf
+[root@an2 ~]$
 ```
 
 다음, nscd를 구동하고 있는 시스템이라면 nscd database를 갱신해 줘야 합니다. (안그러면 30분 정도 기다려야 할 수도 있습니다.)
