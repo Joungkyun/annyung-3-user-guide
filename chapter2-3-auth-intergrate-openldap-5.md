@@ -287,7 +287,7 @@ Regist account ldapuser1                   ... OK
 ldapuser1:x:10002:10000:"LDAP user":/home/ldapusers/ldapuser1:/bin/bash
 [root@an3 ~]$ # shadow entry 를 확인 합니다.
 [root@an3 ~]$ getent shadow | grep ldapuser1
-ldapuser1:$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/
+ldapuser1:$6$xTSXCyCXbBF12xwo$er4hbzAjFJKTueScqg1UT.msN1w0TY4EauaBtoBJ4Eeb2Oy/ZDNbf8O7hlkffroLPMY4c1njTDKncH/pxU5ob/:16955:0:90:7:::0
 [root@an3 ~]$
 ```
 
