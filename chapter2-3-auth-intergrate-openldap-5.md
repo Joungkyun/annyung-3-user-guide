@@ -225,7 +225,6 @@ bindpw 평문암호
 
 ```
 [root@an3 ~]$ pwck -s && grpck -s
-[root@an3 ~]$
 ```
 
 다음 시스템 계정 정보를 확인 합니다.
@@ -332,7 +331,7 @@ ldapuser1:*:16955:0:90:7:::0
 
 참고로, ***getent shadow***에서 암호 필드는 ***RHEL 7*** 호환 계열은 위와 같이 ___*___로 masking이 되어서 나오고, ***RHEL 6*** 호환 이하로는 hashed string으로 출력이 됩니다.
 
-마지막으로 login 을 테스트 해 봅니다.
+마지막으로 login 테스트를 해 봅니다.
 
 ```bash
 [root@an3 ~]$ ssh ldapuser1@localhost
