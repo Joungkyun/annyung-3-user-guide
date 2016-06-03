@@ -6,7 +6,7 @@
 >3. 인증 연동 설정
 >4. 연동 확인
 >5. host attribute를 이용한 로그인 제한
->6. sudo 권한 설정
+>6. sudo 권한 설정 (Not yet)
 >
 
 <br><br>
