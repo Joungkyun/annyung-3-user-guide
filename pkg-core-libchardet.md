@@ -7,7 +7,7 @@ Mozilla Universial charset detector를 이용하여 문자열의 문자셋을 �
 ### Features:
 
 ### Reference:
-* http://svn.oops.org/wsvn/OOPS.libchardet/trunk/README
+* https://github.com/Joungkyun/libchardet
 * [Sample codes]( http://svn.oops.org/wsvn/OOPS.libchardet/trunk/test/?#ac1fc86aa7d1e395a6af808545468aca3)
 
 ### Dependencies:
