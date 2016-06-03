@@ -14,7 +14,9 @@
 
 1. Master server ***ldap1.oops.org***
 2. Slave server ***ldap2.oops.org***
-3. Client ***an3.oops.org***
+3. Client
+ * RHEL 7 계열: ***an3.oops.org***
+ * RHEL 6 계열: ***an2.oops.org***
 
 앞 장에서 설명을 했듯이, ***Multi-Master Replication***으로 LDAP 서버를 구성했기 때문에, 명칭 상 Master와 Slave를 구분한 것이지, 기능적으로는 둘 다 Master 입니다.
 
