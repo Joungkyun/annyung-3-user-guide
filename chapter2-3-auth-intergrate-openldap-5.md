@@ -24,7 +24,7 @@ LDAP 인증을 시작하기 전에, LDAP server에서 연동에 사용할 accoun
 
 LDAP 설정 초기화 시에, 연동에 필요한 ***ssomanager***라는 account를 미리 생성해 놓았으며, 암호를 미리 지정해 놓았습니다. 혹시 생각이 나지 않거나, 잊어 버렸다면 다음 명령을 이용하여 다시 설정을 합니다.
 
-```shell
+```bash
 [root@ldap1 ~]$ ldap_passwd -u Admin ssomanager@kldp.org
 ```
 
