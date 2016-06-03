@@ -55,7 +55,7 @@ Done
 
 ## 2. 필요 패키지 설치
 
-LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니다.)에서 ***nss-pam-ldapd*** package와 ***pam_ldap*** package를 설치합니다.
+LDAP 연동을 할 서버(LDAP client server, 여기서는 ***an3*** host입니다.)에서 ***nss-pam-ldapd*** package와 ***nss-pam_ldap*** package를 설치합니다.
 
 ```bash
 [root@an3 ~]$ yum install openldap-clients nss-pam-ldapd
@@ -135,7 +135,7 @@ RHEL 6/CentOS 6/안녕 2에서는 ***/etc/pam_ldap.conf***의 다음 설정 값�
 ```bash
 [root@an2 ~]$ cat /etc/pam_ldap.conf
 # The distinguished name of the search base.
-base dc=kldp,dc=org
+base dc=oops,dc=org
 
 # Another way to specify your LDAP server is to provide an
 # uri with the server name. This allows to use
