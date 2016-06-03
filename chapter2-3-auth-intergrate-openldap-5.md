@@ -456,7 +456,7 @@ Login an3.oops.org on an 21:32 on Friday, 03 June 2016
 Warning!! Authorized users only.
 All activity may be monitored and reported
 
-ldapuser1@localhost's password:
+ldapuser1@localhost''s password:
 Last failed login: Fri Jun  3 21:18:50 KST 2016 from 127.0.0.1 on ssh:notty
 There were 2 failed login attempts since the last successful login.
 Last login: Fri Jun  3 20:41:29 2016 from 127.0.0.1
