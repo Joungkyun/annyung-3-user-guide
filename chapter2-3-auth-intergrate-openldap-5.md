@@ -190,7 +190,7 @@ nss_base_group     ou=Group,dc=oops,dc=org?one
 # {SSHA}는 로그인이 안됩니다.
 pam_password md5
 
-# BASE dn
+# BIND DN
 # 인증 정보
 binddn uid=ssomanager,ou=admin,dc=oops,dc=org
 # LDAP 서버에서 설정한 ssomanager의 암호를 평문으로 작성
