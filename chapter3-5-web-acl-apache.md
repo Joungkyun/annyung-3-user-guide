@@ -128,6 +128,41 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
  * 등록된 유저만 허가 합니다.
 
 ## 5. LDAP 인증
+
+apache와 LDAP을 연동하기 위해서는 mod_ldap package가 필요 합니다.
+
+```bash
+[root@an3 ~]$ yum install mod_ldap
+```
+
+```apache
+# context가 server config 이므로 <virtualhost>, <location>, <directory>
+# block에 포함되면 안된다.
+LDAPTrustedMode SSL
+# LDAP SSL 구성시에 사용한 CA 인증서
+LDAPTrustedGlobalCert CA_BASE64 /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+
+<Location /ldap-test>
+    AuthName "KLDP LDAP test"
+    Authtype Basic
+
+    <IfModule authnz_ldap_module>
+        # https 접근이 아니면 block
+        SSLRequireSSL
+        AuthBasicProvider ldap
+        AuthLDAPURL ldaps://ldap1.oops.org/ou=People,dc=oops,dc=org?uid?sub?(objectClass=posixAccount)
+        AuthLDAPBindDN uid=ssomanager,ou=admin,dc=oops,dc=org
+        AuthLDAPBindPassword "SSOMANAGER_평문암호"
+    </IfModule>
+    
+    Require valid-user
+    # 10.0.0.0/8 네트워크에서의 접근은 인증 없이 허가
+    Require 10.0.0.0/8
+</Location>
+```
+
+
+
 ## 6. NIS 인증
 
 안녕 3의 apache에서 NIS를 이용한 인증 및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 하며, apache가 동작하는 시스템에 YPBIND가 구동되고 있어야 합니다.
