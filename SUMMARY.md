@@ -24,7 +24,7 @@
            * [LDAP 클라이언트 인증 연동 설정](chapter2-3-auth-intergrate-openldap-5.md)
            * [LDAP data 관리](chapter2-3-auth-intergrate-openldap-6.md)
            * [Sudo LDAP 연동](chapter2-3-auth-intergrate-openldap-7.md)
-       * [NIS](chapter2-3-auth-intergrate-nis.md)
+       * [NIS](chapter2-3-auth-integrate-nis.md)
        * [Active Directory](chapter2-3-auth-intergrate-ad)
 * [Chapter 3. Web control](chapter3.md)
    * [httpd](chapter3-1-httpd.md)
