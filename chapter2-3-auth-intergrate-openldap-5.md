@@ -138,3 +138,24 @@ result: 0 Success
 # numEntries: 4
 [root@ldap1 ~]$
 ```
+
+## 2. sudo entry 추가
+
+sudo entry에서 사용하는 attribute는 다음과 같습니다.
+
+```ruby
+sudoUser: root
+sudoHost: ALL
+sudoRunAsUser: ALL
+sudoCommand: ALL
+sudoOption: authenticate
+sudoOrder: 3
+```
+
+일단 먼저 sudoOrder의 최대값을 체크 합니다.
+
+```bash
+[root@ldap1 ~]$ ldapsearch -Y EXTERNAL -H ldapi:/// -b ou=sudo,dc=oops,dc=org "(sudoOrder=*)" sudoOrder 2> /dev/null | awk -F ": " '/^sudoOrder:/ {print $2}' | sort -r | head -n 1
+3
+[root@ldap1 ~]$
+```
