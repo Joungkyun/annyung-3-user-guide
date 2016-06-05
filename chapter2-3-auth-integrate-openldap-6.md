@@ -320,4 +320,49 @@ Your informations:
 [root@ldap1 ~]$
 ```
 
-####2. host entry 제가
+####2. host entry 제거
+
+***gildong.hong@oops.org*** account로 host1.oops.org에 로그인 할 수 없도록 설정
+
+```bash
+[root@ldap1 ~]$ ldap_host_manager -r gildong.hong host1.oops.org
+[root@ldap1 ~]$ ldap_auth gildong.hong@kldp.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=People,dc=oops,dc=org> with scope subtree
+    # filter: (uid=gildong.hong)
+    # requesting: ALL
+    #
+    # gildong.hong, People, oops.org
+    compatibility dn : gildong.hong@oops.org
+    dn               : uid=gildong.hong,ou=People,dc=oops,dc=org
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : posixAccount
+    objectClass      : shadowAccount
+    objectClass      : hostObject
+    uid              : gildong.hong
+    cn               : gildong.hong
+    gecos            : LDAP Users
+    givenName        : 길동
+    sn               : 홍
+    uidNumber        : 10000
+    gidNumber        : 10000
+    loginShell       : /bin/bash
+    homeDirectory    : /home/ldapusers/gildong.hong
+    shadowMin        : 0
+    shadowMax        : 90
+    shadowWarning    : 7
+    shadowLastChange : 16953
+    userPassword     : {CRYPT}$1$tiAx5gCv$8uwiBHCc3v6oRuT93gC.1/
+    host             : host2.oops.org
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+
+[root@ldap1 ~]$
+```
