@@ -167,7 +167,7 @@ sudoOrder: 3
 다음, 아래와 같이 ldif 파일을 생성 한 후, ***ldap*** database에 추가 합니다. sudoOrder 값은 위에서 구한 "최대값 + 1" 로 지정을 합니다.
 
 ```bash
-[root@ldap1 ~]$ cat <<EOF
+[root@ldap1 ~]$ cat <<EOF > add-sudotest.txt
 dn: cn=sudotest,ou=sudo,dc=oops,dc=org
 objectClass: top
 objectClass: sudoRole
@@ -179,6 +179,12 @@ sudoCommand: /bin/ls
 sudoOption: !authenticate
 sudoOrder: 4
 EOF
+[root@ldap1 ~]$ ldapadd -Y EXTERNAL -H ldapi:/// < add-sudotest.txt
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+adding new entry "cn=sudotest,ou=sudo,dc=oops,dc=org"
+
 [root@ldap1 ~]$
 ```
 
