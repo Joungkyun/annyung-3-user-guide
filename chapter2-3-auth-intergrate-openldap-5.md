@@ -164,7 +164,7 @@ sudoOrder: 3
 [root@ldap1 ~]$
 ```
 
-다음, 아래와 같이 ldif 파일을 생성 합니다. sudoOrder 값은 위에서 구한 "최대값 + 1" 로 지정을 합니다.
+다음, 아래와 같이 ldif 파일을 생성 한 후, ***ldap*** database에 추가 합니다. sudoOrder 값은 위에서 구한 "최대값 + 1" 로 지정을 합니다.
 
 ```bash
 [root@ldap1 ~]$ cat <<EOF
@@ -181,3 +181,4 @@ sudoOrder: 4
 EOF
 [root@ldap1 ~]$
 ```
+
