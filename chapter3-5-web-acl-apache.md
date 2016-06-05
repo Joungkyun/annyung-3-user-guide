@@ -127,7 +127,8 @@ google에서 ***"htpasswd web generator"*** 로 검색을 하면 web상에서 pa
 * ***user*** method (***Require user ...***)
  * 등록된 유저만 허가 합니다.
 
-## 5. NIS 인증
+## 5. LDAP 인증
+## 6. NIS 인증
 
 안녕 3의 apache에서 NIS를 이용한 인증 및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 하며, apache가 동작하는 시스템에 YPBIND가 구동되고 있어야 합니다.
 
@@ -157,7 +158,7 @@ apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.by
 </Directory>
 ```
 
-## 6. 국가/ISP based access control
+## 7. 국가/ISP based access control
 
 안녕 3에서는 ***libkrisp*** library를 이용하여 국가 또는 ISP로 권한 제어를 할 수 있습니다. 이를 위해서는 [httpd-krisp](pkg-core-httpd-krisp.md) 모듈이 필요 합니다.
 
@@ -180,7 +181,7 @@ apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.by
 
 ***krisp*** module을 이용한 권한 제어는 mod_authz_core의 *expr* method 또는 *Rewrite rule*을 이용하여 가능 합니다.
 
-### 6.1. ***expr*** method
+### 7.1. ***expr*** method
 
 ```apache
 <Directory "/some/path">
@@ -191,7 +192,7 @@ apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.by
 </Directory>
 ```
 
-### 6.2. ***Rewrite Rule***
+### 7.2. ***Rewrite Rule***
 
 ```apache
 <Directory "/some/path">
@@ -202,12 +203,12 @@ apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.by
 </Directory>
 ```
 
-## 7. Google Authentificator(Google OTP) 인증
+## 8. Google Authentificator(Google OTP) 인증
 
 
 이 모듈에 대한 자세한 설명은 [공식 홈페이지 문서](https://code.google.com/archive/p/google-authenticator-apache-module/wikis/GoogleAuthenticatorApacheModule.wiki)를 참고 하십시오.
 
-### 7.1 module dependency
+### 8.1 module dependency
 
 Google OTP를 이용하기 위해서는 ***httpd-authn-google*** package를 설치해야 합니다.
 
@@ -222,7 +223,7 @@ Google OTP를 이용하기 위해서는 ***httpd-authn-google*** package를 설�
   * mod_authz_core
   * mod_authz_user
 
-### 7.2 configuration file
+### 8.2 configuration file
 
 설정 파일은 */etc/httpd/conf.d/authn-google.conf* 에서 Module을 load하고 있으며, 인증 설정은 */etc/httpd/user.d* 에서 적당한 위치에 하면 됩니다.
 
@@ -262,7 +263,7 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 [root@an3 ~]$
 ```
 
-### 7.3 Secret file 생성
+### 8.3 Secret file 생성
 
 다음 작업은 root 권한으로 하는 것을 가정으로 설명 합니다.
 
@@ -329,7 +330,7 @@ Loadmodule authn_google_module modules/mod_authn_google.so
 [root@ane ~]$
 ```
 
-### 7.4 Client 설정
+### 8.4 Client 설정
 
 사용자들에게 우선 OPT program 설치에 대해서 안내를 합니다.
 
@@ -346,7 +347,7 @@ password를 지정하여 2 factor 인증을 하게 할 경우, 암호는 *passwo
 일 경우, 암호는 ***"ehfhtl&vlxj123456"*** 입니다. 공백 문자 없이 암호와 verication code를 붙여서 입력 하면 됩니다.
 
 
-### 7.4 인증 설정
+### 8.4 인증 설정
 
 Google Authentificator Apache module은 ***AuthType***으로 *Basic*과 *Digest*를 모두 지원 합니다만, 현재 버전에서 Digest 방식은 segfault를 발생 시키고 있습니다. 그러니 *Basic* type으로 사용하시기 바랍니다.
 
