@@ -152,10 +152,32 @@ sudoOption: authenticate
 sudoOrder: 3
 ```
 
+여기서는 sudotest 라는 account가 an3.oops.org 에서 sudo를 이용하여 an3.oops.org에서 인증없이 ls 명령을 실행하는 권한을 예제로 합니다.
+
+먼저, ***ldap_useradd*** 명령을 이용하여, sudotest ldap account를 생성합니다.
+
 일단 먼저 sudoOrder의 최대값을 체크 합니다.
 
 ```bash
 [root@ldap1 ~]$ ldapsearch -Y EXTERNAL -H ldapi:/// -b ou=sudo,dc=oops,dc=org "(sudoOrder=*)" sudoOrder 2> /dev/null | awk -F ": " '/^sudoOrder:/ {print $2}' | sort -r | head -n 1
 3
+[root@ldap1 ~]$
+```
+
+다음, 아래와 같이 ldif 파일을 생성 합니다. sudoOrder 값은 위에서 구한 "최대값 + 1" 로 지정을 합니다.
+
+```bash
+[root@ldap1 ~]$ cat <<EOF
+dn: cn=sudotest,ou=sudo,dc=oops,dc=org
+objectClass: top
+objectClass: sudoRole
+cn: sudotest
+sudoUser: sudotest
+sudoHost: an3.oops.org
+sudoRunAsUser: ALL
+sudoCommand: /bin/ls
+sudoOption: !authenticate
+sudoOrder: 4
+EOF
 [root@ldap1 ~]$
 ```
