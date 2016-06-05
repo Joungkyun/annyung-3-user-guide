@@ -16,7 +16,7 @@
        * [login account chroot](chapter2-2-pam-control-2.md)
        * [Google OTP를 이용한 2 factor 인증](chapter2-2-pam-control-3.md)
    * [인증 통합 (Authentification/Authorization Intergrate)](chapter2-3-auth-intergrate.md)
-       * [Openldap](chapter2-3-auth-intergrate-openldap.md)
+       * [Openldap](chapter2-3-auth-integrate-openldap.md)
            * [Master Server 설정](chapter2-3-auth-intergrate-openldap-1.md)
            * [SSL 설정](chapter2-3-auth-intergrate-openldap-2.md)
            * [Slave Server 설정](chapter2-3-auth-intergrate-openldap-3.md)
