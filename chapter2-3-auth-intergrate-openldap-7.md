@@ -149,6 +149,10 @@ result: 0 Success
 
 ## 2. sudo entry 추가 및 삭제
 
+추가 삭제는 GUI tool을 사용하는 것이 좀 더 편할 수 있습니다. entry 추가시에 sudoRole objectClass를 이용하여 추가를 하면 됩니다.
+
+다음은 CLI(command line interface)에서의 방법 입니다.
+
 sudo entry에서 사용하는 attribute는 다음과 같습니다.
 
 ```ruby
