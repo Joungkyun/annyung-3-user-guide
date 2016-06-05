@@ -147,7 +147,7 @@ result: 0 Success
 [root@ldap1 ~]$
 ```
 
-## 2. sudo entry 추가
+## 2. sudo entry 추가 및 삭제
 
 sudo entry에서 사용하는 attribute는 다음과 같습니다.
 
@@ -196,7 +196,17 @@ adding new entry "cn=sudotest,ou=sudo,dc=oops,dc=org"
 [root@ldap1 ~]$
 ```
 
-클라이언트에서의 동작 확인은 [2.3.1.6 LDAP 클라이언트 인증 연동](chapter2-3-auth-intergrate-openldap-6.md) 문서에서 다루도록 하겠습니다.
+클라이언트에서의 동작 확인은 아래의 ***3. LDAP client 설정 및 확인***을 참고 하십시오.
+
+sudo entry 삭제는 다음과 같이 하면 됩니다.
+
+```bash
+[root@ldap1 ~]$ ldapdelete -Y EXTERNAL -H ldapi:/// 'cn=sudotest,ou=sudo,dc=oops,dc=org'
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+[root@ldap1 ~]$
+```
 
 ## 3. LDAP client 설정 및 확인
 
