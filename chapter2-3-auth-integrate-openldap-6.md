@@ -42,7 +42,7 @@ console에서의 LDAP data관리는 너무나도 불편합니다. 특히나 설�
 기본적인 사용법은 "***ldap_useradd [USER_ACCOUNT]***" 와 같이 합니다. ***USER_ACCOUNT***는 앞에서 사용했던 ***USER@BASEDN***의 형식을 사용하며, BASEDN은 domain 처럼 표현 합니다. 즉, ***DC=oops,DC=org***는 ***oops.org***와 같이 표현 합니다.
 
 ```shell
-[root@an3 ~]$ ldap_useradd gildong.hong@oops.org
+[root@ldap1 ~]$ ldap_useradd gildong.hong@oops.org
 이름          : 길동 [성을 제외한 이름 입력]
 성            : 홍
 암호 입력                                : ***********
@@ -66,13 +66,13 @@ Your informations:
 
 Is right your informations? [Y/N] : y
 Regist account gildong.hong                ... OK
-[root@an3 ~]$
+[root@ldap1 ~]$
 ```
 
 기본적으로 아무런 옵션을 주지 않으면, 계정 이름과 암호 외의 정보는 ***/etc/openldap/ldap-auth-utils.conf***에 있는 값을 사용합니다. 다른 값을 변경 하고 싶으면 ***ldap_adduser -h*** 명령으로 옵션을 확인 하십시오.
 
 ```shell
-[root@an3 ~]$ ladp_useradd -h
+[root@ldap1 ~]$ ladp_useradd -h
 ldap_useradd: LDAP 데이터베이스에 user 추가
 사용법: ldap_useradd [OPTIONS] USERNAME
 옵션:
@@ -105,16 +105,16 @@ USERNAME 형식
     ldap_useradd -n "Michael" -l "Jackson" LDAP_USER@DOMAIN.COM
     # add LDAP_USER with interactive mode
     ldap_useradd -i LDAP_USER@DOMAIN.COM
-[root@an3 ~]$
+[root@ldap1 ~]$
 ```
 
 계정 삭제는 간단하게 ***ldap_userdel*** 명령에 삭제할 계정만 지정을 하면 됩니다.
 
 ```shell
-[root@an3 ~]$ ldap_userdel gildong.hong@oops.org
+[root@ldap1 ~]$ ldap_userdel gildong.hong@oops.org
   * 'gildong.hong@oops.org' 계정을 삭제 하겠습니까? [yes/no]  : yes
     * 계정 삭제 gildong.hong@oops.org               ... OK
-[root@an3 ~]$
+[root@ldap1 ~]$
 ```
 
 ### 2. 계정 확인 및 속성(attribute) 변경
@@ -122,7 +122,7 @@ USERNAME 형식
 존재하는 계정의 관리는 ***ldap_auth*** 명령을 이용 합니다. 일단 계정의 정보를 확인하기 위해서는 다음과 같이 실행을 합니다.
 
 ```shell
-[root@an3 ~]$ ldap_auth gildong.hong@kldp.org
+[root@ldap1 ~]$ ldap_auth gildong.hong@kldp.org
 
     # extended LDIF
     #
@@ -159,13 +159,13 @@ USERNAME 형식
     # numResponses: 2
     # numEntries: 1
 
-[root@an3 ~]$
+[root@ldap1 ~]$
 ```
 
 그룹 account는 ***-g*** 옵션을 이용하여 확인 합니다.
 
 ```shell
-[root@an3 ~]$ ldap_auth -g ldapusers@kldp.org
+[root@ldap1 ~]$ ldap_auth -g ldapusers@kldp.org
 
     # extended LDIF
     #
@@ -188,7 +188,7 @@ USERNAME 형식
     # numResponses: 2
     # numEntries: 1
 
-[root@an3 ~]$
+[root@ldap1 ~]$
 ```
 
 확인 외에 attribute 값을 변경하거나 삭제할 수 있습니다. 이에 대해서는 help message 또는 man page를 참고 하십시오. (예제가 있습니다.) 단, 모든 attribute를 변경할 수 있지는 않습니다.
@@ -270,3 +270,54 @@ Your informations:
 
 
 ###4. login host 제한 설정
+
+####1. host entry 추가
+
+***gildong.hong@oops.org*** account로 host1.oops.org와 host2.oops.org에 로그인 할 수 있도록 설정
+
+```bash
+[root@ldap1 ~]$ ldap_host_manager gildong.hong host1.oops.org
+[root@ldap1 ~]$ ldap_host_manager gildong.hong host2.oops.org
+[root@ldap1 ~]$ ldap_auth gildong.hong@kldp.org
+
+    # extended LDIF
+    #
+    # LDAPv3
+    # base <ou=People,dc=oops,dc=org> with scope subtree
+    # filter: (uid=gildong.hong)
+    # requesting: ALL
+    #
+    # gildong.hong, People, oops.org
+    compatibility dn : gildong.hong@oops.org
+    dn               : uid=gildong.hong,ou=People,dc=oops,dc=org
+    objectClass      : top
+    objectClass      : inetOrgPerson
+    objectClass      : posixAccount
+    objectClass      : shadowAccount
+    objectClass      : hostObject
+    uid              : gildong.hong
+    cn               : gildong.hong
+    gecos            : LDAP Users
+    givenName        : 길동
+    sn               : 홍
+    uidNumber        : 10000
+    gidNumber        : 10000
+    loginShell       : /bin/bash
+    homeDirectory    : /home/ldapusers/gildong.hong
+    shadowMin        : 0
+    shadowMax        : 90
+    shadowWarning    : 7
+    shadowLastChange : 16953
+    userPassword     : {CRYPT}$1$tiAx5gCv$8uwiBHCc3v6oRuT93gC.1/
+    host             : host1.oops.org
+    host             : host2.oops.org
+    # search result
+    search           : 3
+    result           : 0 Success
+    # numResponses: 2
+    # numEntries: 1
+
+[root@ldap1 ~]$
+```
+
+####2. host entry 제가
