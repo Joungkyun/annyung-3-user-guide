@@ -4,6 +4,9 @@
 >1. GUI Tool
 2. Command line tool
   1. 계정 추가 및 삭제
+  2. 계정 확인 및 속성(attribute) 변경
+  3. 그룹 추가 및 삭제
+  4. login host 제한 설정
 
 
 ##1. GUI Tool
@@ -189,3 +192,81 @@ USERNAME 형식
 ```
 
 확인 외에 attribute 값을 변경하거나 삭제할 수 있습니다. 이에 대해서는 help message 또는 man page를 참고 하십시오. (예제가 있습니다.) 단, 모든 attribute를 변경할 수 있지는 않습니다.
+
+###3. 그룹 추가 및 삭제
+
+그룹 추가/삭제는 ***ldap_grpadd***와 ***ldap_grpdel*** 명령을 사용합니다.
+
+####1. 그룹 추가
+
+DC=oops,DC=org에 ldapgrptest group 추가
+
+```bash
+[root@ldap1 ~]$ ldap_grpadd ldapgrptest@oops.org
+
+Your informations:
+
+    GROUP ID     : ldapgrptest
+    GROUP DESC   : LDAP GROUP
+    GID          : 10002
+    MEMBERS      :
+
+ * 'ldapgrptest'에 대한 그룹 엔트리 확인 .. 등록 진행 중
+ ldapgrptest 그룹 엔트리 생성 .. OK
+[root@ldap1 ~]$
+```
+
+####2. 그룹 멤버 추가
+
+ldapgrptest group member로 gildong.hong account 추가
+
+```bash
+[root@ladp1 ~]$ ldap_grpadd -m gildong.hong ldapgrptest@oops.org
+
+Your informations:
+
+    GROUP ID     : ldapgrptest
+    GROUP DESC   : LDAP GROUP
+    GID          : 10002
+    MEMBERS      : gildong.hong
+
+ * 'ldapgrptest'에 대한 그룹 엔트리 확인 .. exsit
+ * 추가 멤버 'gildong.hong' 확인 .. OK
+ ldapgrptest에 추가 멤버 추가 .. OK
+[root@ldap1 ~]$
+```
+
+####3. 그룹 멤버 삭제
+
+ldapgrptest group에서 gildong.hong account 제거
+
+```bash
+[root@ladp1 ~]$ ldap_grpdel -m gildong.hong ldapgrptest@oops.org
+
+Your informations:
+
+    GROUP ID     : ldapgrptest
+    MEMBERS      : gildong.hong
+
+ * 'ldapgrptest'의 'gildong.hong' 삭제 .. OK
+[root@ldap1 ~]$
+```
+
+####4. 그룹 삭제
+
+cn=ldapgrptest,ou=Group,dc=oops,dc=org 그룹 삭제
+
+```bash
+[root@ladp1 ~]$ ldap_grpdel ldapgrptest@oops.org
+
+Your informations:
+
+    GROUP ID     : ldapgrptest
+    MEMBERS      :
+
+ * 'ldapgrptest' 그룹 삭제 .. OK
+[root@ldap1 ~]$
+```
+
+
+###4. login host 제한 설정
