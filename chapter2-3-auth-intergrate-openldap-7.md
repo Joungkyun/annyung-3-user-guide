@@ -200,3 +200,32 @@ adding new entry "cn=sudotest,ou=sudo,dc=oops,dc=org"
 
 ## 3. LDAP client 설정 및 확인
 
+다음 설정은 ldap client인 ***an3*** host에서 합니다.
+
+###1. sudo-ldap.conf 설정
+
+***/etc/sudo-ldap.conf***에 LDAP 연동 설정을 해 줍니다. ***/etc/nslcd.conf***의 설정을 참조하면 됩니다.
+
+```bash
+[root@an3 ~]$ cat <<EOF >> /etc/sudo-ldap.conf
+base           dc=oops,dc=org
+uri            ldaps://ldap1.oops.org ldaps://ldap2.oops.org
+binddn         uid=ssomanager,ou=admin,dc=oops,dc=org
+bindpw         ssomanager__평문암호
+TLS_CACERTFILE /etc/openldap/certs/pki/1_root_bundle.crt
+tls_checkpeer  no
+timelimit      15
+sudoers_base   ou=sudo,dc=oops,dc=org
+[root@an3 ~]$
+```
+
+###2. nsswitch.conf 설정
+
+***/etc/nsswitch.conf*** 에 ***sudoers*** 설정을 추가 합니다.
+
+```bash
+[root@an3 ~]$ echo "sudoers:    files ldap" >> /etc/nsswitch.conf
+[root@an3 ~]$
+```
+
+###3. ldap sudo 연동 테스트
