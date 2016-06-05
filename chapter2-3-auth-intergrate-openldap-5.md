@@ -94,7 +94,7 @@ dn: cn=defaults,ou=sudo,dc=oops,dc=org
 objectClass: top
 objectClass: sudoRole
 cn: defaults
-description: Default sudoOption's go here
+description: Default sudoOption''s go here
 sudoOption: requiretty
 sudoOption: !visiblepw
 sudoOption: always_set_home
