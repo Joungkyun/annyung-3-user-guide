@@ -5,6 +5,7 @@
 >2. sudo entry 추가
 >3. LDAP client 설정 및 확인
 
+<br><br>
 
 이번 장은 SUDO를 LDAP을 이용하여 연동하는 방법을 기술 합니다.
 
@@ -23,13 +24,13 @@ Defaults    !visiblepw
 Defaults    always_set_home
 
 Defaults    env_reset
-Defaults    env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
-Defaults    env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
-Defaults    env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
-Defaults    env_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
-Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+Defaults    env_keep="COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
+Defaults    env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+Defaults    env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+Defaults    env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+Defaults    env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
 
-Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+Defaults    secure_path=/sbin:/bin:/usr/sbin:/usr/bin
 
 root    ALL=(ALL)   ALL
 %wheel  ALL=(ALL)   ALL
@@ -37,7 +38,7 @@ EOF
 [root@ldap1 ~]$
 ```
 
-기본으로, ***root*** account와 ***%wheel*** group은 root권한으로 sudo를 실행할 수 있도록 한 설정 입니다. 이 설정을 ***ldap*** database에 추가 합니다.
+기본으로, ***root*** account와 ***%wheel*** group은 root 권한으로 sudo를 실행할 수 있도록 한 설정 입니다. 이 설정을 ***ldap*** database에 추가 합니다.
 
 먼저 sudo-ladp.txt 파일을 ***LDIF***로 변환 합니다.
 
@@ -53,6 +54,8 @@ EOF
 [root@an3 ~]$ sudo SUDOERS_BASE="ou=sudo,dc=oops,dc=org" perl $(rpm -ql sudo | grep sudoers2ldif) ./sudo-ldap.txt >> sudo-ldap.ldif
 [root@an3 ~]$ 
 ```
+
+위의 예제를 참고하면 짐작할 수 있듯이, /etc/sudoers 파일을 직접 ***sudoers2ldif*** 필터로 LDIF로 변환할 수도 있습니다. 여기서 주의해야 하는 것이, ***Defaults***의 값에서 ***env_keep***이나 ***secure_path***의 값 처럼 "=" 또는 "+=" 앞뒤로 공백이 있을 경우 "***sudo: unknown defaults entry 'env_keep '***"와 같은 에러가 발생하니 주의해야 합니다.
 
 변환한 ***LDIF*** 파일을 이용하여 ***ldap*** database에 입력을 합니다.
 
@@ -104,12 +107,12 @@ sudoOption: requiretty
 sudoOption: !visiblepw
 sudoOption: always_set_home
 sudoOption: env_reset
-sudoOption: env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
-sudoOption: env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
-sudoOption: env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
-sudoOption: env_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
-sudoOption: env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
-sudoOption: secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+sudoOption: env_keep="COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
+sudoOption: env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+sudoOption: env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+sudoOption: env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+sudoOption: env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+sudoOption: secure_path=/sbin:/bin:/usr/sbin:/usr/bin
 sudoOrder: 1
 
 # root, sudo, oops.org
