@@ -135,6 +135,8 @@ apache와 LDAP을 연동하기 위해서는 mod_ldap package가 필요 합니다
 [root@an3 ~]$ yum install mod_ldap
 ```
 
+LDAP 구성은 [2.3.1 OpenLDAP 인증 통합](https://www.gitbook.com/book/joungkyun/annyung-3-user-guide/edit#/edit/master/chapter2-3-auth-integrate-openldap.md) 문서를 참고 하십시오. 아래 구성은 https에서만 인증이 허가 됩니다.
+
 ```apache
 # context가 server config 이므로 <virtualhost>, <location>, <directory>
 # block에 포함되면 안된다.
