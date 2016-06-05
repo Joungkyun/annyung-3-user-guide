@@ -1,5 +1,10 @@
 # Sudo LDAP 연동
 
+>*** 목차***
+>1. 기본 설정
+>2. sudo entry 추가
+>3. LDAP client 설정 및 확인
+
 
 이번 장은 SUDO를 LDAP을 이용하여 연동하는 방법을 기술 합니다.
 
@@ -189,3 +194,6 @@ adding new entry "cn=sudotest,ou=sudo,dc=oops,dc=org"
 ```
 
 클라이언트에서의 동작 확인은 [2.3.1.6 LDAP 클라이언트 인증 연동](chapter2-3-auth-intergrate-openldap-6.md) 문서에서 다루도록 하겠습니다.
+
+## 3. LDAP client 설정 및 확인
+
