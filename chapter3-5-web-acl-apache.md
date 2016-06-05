@@ -135,26 +135,46 @@ apache와 LDAP을 연동하기 위해서는 mod_ldap package가 필요 합니다
 [root@an3 ~]$ yum install mod_ldap
 ```
 
-LDAP 구성은 [2.3.1 OpenLDAP 인증 통합](https://www.gitbook.com/book/joungkyun/annyung-3-user-guide/edit#/edit/master/chapter2-3-auth-integrate-openldap.md) 문서를 참고 하십시오. 아래 구성은 https에서만 인증이 허가 됩니다.
+* LDAP 구성은 [2.3.1 OpenLDAP 인증 통합](https://www.gitbook.com/book/joungkyun/annyung-3-user-guide/edit#/edit/master/chapter2-3-auth-integrate-openldap.md) 문서를 참고 하십시오.
+* 다음 구성은 https에서만 인증이 허가 됩니다.
+* ldap1과 ldap2 redundency 구성을 합니다.
 
 ```apache
 # context가 server config 이므로 <virtualhost>, <location>, <directory>
-# block에 포함되면 안된다.
+# block에 포함되면 안됩니다.
 LDAPTrustedMode SSL
 # LDAP SSL 구성시에 사용한 CA 인증서
 LDAPTrustedGlobalCert CA_BASE64 /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
 
+# LDAP server redundency 설정
+<IfModule authn_core_module>
+    <AuthnProviderAlias ldap ldap-ldap1>
+        <IfModule authnz_ldap_module>
+            AuthLDAPURL ldaps://ldap1.oops.org/ou=People,dc=oops,dc=org?uid?sub?(objectClass=posixAccount)
+            AuthLDAPBindDN "uid=ssomanager,ou=admin,dc=oops,dc=org"
+            AuthLDAPBindPassword "SSO_MANAGER_평문_암호"
+        </IfModule>
+    </AuthnProviderAlias>
+    <AuthnProviderAlias ldap ldap-ldap2>
+        <IfModule authnz_ldap_module>
+            AuthLDAPURL ldaps://ldap2.oops.org/ou=People,dc=oops,dc=org?uid?sub?(objectClass=posixAccount)
+            AuthLDAPBindDN "uid=ssomanager,ou=admin,dc=kldp,dc=org"
+            AuthLDAPBindPassword "SSO_MANAGER_평문_암호"
+        </IfModule>
+    </AuthnProviderAlias>
+</IfModule>
+
 <Location /ldap-test>
-    AuthName "KLDP LDAP test"
+    AuthName "LDAP test"
     Authtype Basic
 
     <IfModule authnz_ldap_module>
-        # https 접근이 아니면 block
-        SSLRequireSSL
-        AuthBasicProvider ldap
-        AuthLDAPURL ldaps://ldap1.oops.org/ou=People,dc=oops,dc=org?uid?sub?(objectClass=posixAccount)
-        AuthLDAPBindDN uid=ssomanager,ou=admin,dc=oops,dc=org
-        AuthLDAPBindPassword "SSOMANAGER_평문암호"
+        <IfModule ssl_module>
+            # https 접근이 아니면 403
+            SSLRequireSSL
+        </IfModule>
+        
+        AuthBasicProvider ldap-ldap1 ldap-ldap2
     </IfModule>
     
     Require valid-user
