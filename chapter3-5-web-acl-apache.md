@@ -185,6 +185,19 @@ apache와 LDAP을 연동하기 위해서는 mod_ldap package가 필요 합니다
 </Location>
 ```
 
+설정을 마쳤으면, ssomanager의 암호가 설정에 있기 때문에 설정한 파일에서 other의 권한을 모두 삭제 합니다.
+
+```bash
+[root@an3 ~]$ chmod 640 /etc/httpd/user.d/vhost.conf
+```
+
+문법 오류 검사 후, apache를 재시작 합니다.
+
+```bash
+[root@an3 ~]$ httpd -t
+Syntax OK
+[root@an3 ~]$ service httpd restart
+```
 
 
 ## 6. NIS 인증
