@@ -246,3 +246,5 @@ nscd databse를 갱신해 주도록 합니다.
 anaconda-ks.cfg  ks-post.log
 [sudotest@an3 ~]$
 ```
+
+정상적으로 실행이 되면, 다른 호스트에서 연동 설정을 한 후에 다시 sudotest 테스트를 해 보도록 합니다. 위에서 an3.oops.org 에서만 동작하도록 설정을 했기 때문에, 다른 호스트에서는 실행이 되면 안되어야 합니다.
