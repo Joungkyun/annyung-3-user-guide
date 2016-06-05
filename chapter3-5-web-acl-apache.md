@@ -142,9 +142,11 @@ apache와 LDAP을 연동하기 위해서는 mod_ldap package가 필요 합니다
 ```apache
 # context가 server config 이므로 <virtualhost>, <location>, <directory>
 # block에 포함되면 안됩니다.
-LDAPTrustedMode SSL
-# LDAP SSL 구성시에 사용한 CA 인증서
-LDAPTrustedGlobalCert CA_BASE64 /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+<IfModule ldap_module>
+    LDAPTrustedMode SSL
+    # LDAP SSL 구성시에 사용한 CA 인증서
+    LDAPTrustedGlobalCert CA_BASE64 /etc/pki/startssl/startssl-sub.class2.server.ca.sha2.pem
+</IfModule>
 
 # LDAP server redundency 설정
 <IfModule authn_core_module>
