@@ -25,7 +25,7 @@
            * [LDAP data 관리](chapter2-3-auth-integrate-openldap-6.md)
            * [Sudo LDAP 연동](chapter2-3-auth-integrate-openldap-7.md)
        * [NIS](chapter2-3-auth-integrate-nis.md)
-       * [Active Directory](chapter2-3-auth-intergrate-ad)
+       * [Active Directory](chapter2-3-auth-integrate-ad)
 * [Chapter 3. Web control](chapter3.md)
    * [httpd](chapter3-1-httpd.md)
    * [nginx](chapter3-2-nginx.md)
