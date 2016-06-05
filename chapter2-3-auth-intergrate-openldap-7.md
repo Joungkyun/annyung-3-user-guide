@@ -228,6 +228,13 @@ sudoers_base   ou=sudo,dc=oops,dc=org
 [root@an3 ~]$
 ```
 
+nscd databse를 갱신해 주도록 합니다.
+
+```bash
+[root@an3 ~]$ service nscd force-reload
+[root@an3 ~]$
+```
+
 ###3. ldap sudo 연동 테스트
 
 위에서 추가한 sudotest account로 테스트를 진행해 봅니다.
