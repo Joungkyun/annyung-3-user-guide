@@ -14,7 +14,7 @@
 ```bash
 [root@ ldap1 ~]$ cat <<<EOF > sudo-ldap.txt
 Defaults    requiretty
-Defaults   !visiblepw
+Defaults    !visiblepw
 Defaults    always_set_home
 
 Defaults    env_reset
@@ -28,6 +28,31 @@ Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
 
 root    ALL=(ALL)   ALL
 %wheel  ALL=(ALL)   ALL
-# wheel group의 경우 암호를 묻지 않고 실행 하도록 하고 싶다면 위의 라인 대신 다음 라인을 이용
-# %wheel  ALL=(ALL)  NOPASSWD: ALL
+EOF
+[root@ldap1 ~]$
+```
+
+기본으로, ***root*** account와 ***%wheel*** group은 root권한으로 sudo를 실행할 수 있도록 한 설정 입니다. 이 설정을 ***ldap*** database에 추가 합니다.
+
+먼저 sudo-ladp.txt 파일을 ***LDIF***로 변환 합니다.
+
+```bash
+[root@an3 ~]$ cat <<EOF
+dn: ou=sudo,dc=oops,dc=org
+objectClass: top
+objectClass: organizationalUnit
+description: sudo
+ou: sudo
+
+EOF
+[root@an3 ~]$ sudo SUDOERS_BASE="ou=sudo,dc=oops,dc=org" perl $(rpm -ql sudo | grep sudoers2ldif) ./sudo-ldap.txt >> sudo-ldap.ldif
+[root@an3 ~]$ 
+```
+
+
+
+
+
+```bash
+[root@ldap1 ~]$ ldapadd -Y EXTERNAL -H ldapi:/// < sudo-ldap.txt
 ```
