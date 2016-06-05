@@ -229,3 +229,13 @@ sudoers_base   ou=sudo,dc=oops,dc=org
 ```
 
 ###3. ldap sudo 연동 테스트
+
+위에서 추가한 sudotest account로 테스트를 진행해 봅니다.
+
+```bash
+[root@an3 ~]$ su - sudotest
+'/home/ldapusers/sudotest' 디렉토리 생성 중.
+[sudotest@an3 ~]$ sudo ls /root
+anaconda-ks.cfg  ks-post.log
+[sudotest@an3 ~]$
+```
