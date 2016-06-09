@@ -152,7 +152,7 @@
        * [mhash](pkg-addon-mhash.md)
        * [mimetex](pkg-addon-mimetex.md)
        * [mm](pkg-addon-mm.md)
-       * [netdata](pkg-addon-netdata)
+       * [netdata](pkg-addon-netdata.md)
        * [netperf](pkg-addon-netperf.md)
        * [nginx](pkg-addon-nginx.md)
        * [openvpn](pkg-addon-openvpn.md)
