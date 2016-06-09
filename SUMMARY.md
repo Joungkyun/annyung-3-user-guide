@@ -147,7 +147,7 @@
        * [jlint](pkg-addon-jlint.md)
        * [libevent14](pkg-addon-libevent14.md)
        * [libnet](pkg-addon-libnet.md)
-       * [libnetfilter_acct](pkg-addon-libnetfilter_acct)
+       * [libnetfilter_acct](pkg-addon-libnetfilter_acct.md)
        * [lighttpd](pkg-addon-lighttpd.md)
        * [mhash](pkg-addon-mhash.md)
        * [mimetex](pkg-addon-mimetex.md)
