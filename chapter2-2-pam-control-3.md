@@ -9,7 +9,7 @@
 > 목차
 1. Installation
 2. PAM 설정
-3. <a href="#sshconfig">openssh 설정</a>
+3. openssh 설정
 4. client 설정
 
 ##1. Installation
@@ -63,7 +63,6 @@ auth       include      postlogin
 여기서 ***nullok*** 옵션을 지정하면, account에 google-authenticator secret 파일이 있을 경우에만 2-factor 인증이 진행 됩니다. 없을 경우에는 기존의 1-factor 인증으로 진행이 되게 됩니다. 일단 ***nullok**** 옵션이 없으면 login을 하지 못하므로 지정하도록 합니다.
 
 
-<a name="sshconfig"></a>
 ##3. SSH 설정
 
 다음, openssh 서버 설정 파일(*/etc/ssh/sshd_config*)에서 Verication code를 사용할 수 있도록 설정해 줍니다.
