@@ -5,9 +5,10 @@
 2. 기본 syntax
 3. IP or Host based access control
 4. User based access control 
-5. NIS 인증
-6. 국가/ISP based access control
-7. Google Authentificator(Google OTP) 인증
+5. LDAP 인증
+6. NIS 인증
+7. 국가/ISP based access control
+8. Google Authentificator(Google OTP) 인증
 
 
 apahce 2.4의 access control은 apache 2.2의 새로운 인증 모듈을 사용합니다. 기존의 mod_access는 deprecated 되어 기본으로 사용을 할 수 없습니다.
@@ -204,7 +205,7 @@ Syntax OK
 
 안녕 3의 apache에서 NIS를 이용한 인증 및 권한 설정을 제공 합니다. 이 기능을 사용하기 위해서는 [httpd-nis](pkg-core-httpd-nis.md) 모듈이 필요 하며, apache가 동작하는 시스템에 YPBIND가 구동되고 있어야 합니다.
 
-apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.byname MAP을 사용하지 않아야 합니다. 이는 passwd 리스트의 password entry의 값이 'x'로 되어 있으면 안된다는 의미입니다. 보안 상 상당히 좋지 않기 때문에 사용을 권장하지 않습니다.
+apache nis module을 사용하기 위해서는, ***NIS*** 구성시에 shadow.byname MAP을 사용하지 않아야 합니다. 이는 passwd 리스트의 password entry의 값이 'x'로 되어 있으면 안된다는 의미입니다. 보안상 상당히 좋지 않기 때문에 사용을 권장하지 않습니다.
 
 만약 ***NIS*** 구성 하에서 웹 인증이 필요하다면, ***NIS***를 ***shadow***로 구성을 하시고, cronjob script를 이용하여 ***.htpasswd*** 파일을 생성하시는 것을 권장 합니다.
 
