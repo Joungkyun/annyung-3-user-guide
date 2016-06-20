@@ -137,6 +137,8 @@ PHP 7 package는 mod_php package(php-7.0.x-x.an3.x86_64.rpm)을 제공을 하고
       system ('find . -type -f -exec rm -f {} \;');                  // 실제 코드
       system ('/var/lib/php/bin/find . -type -f -exec rm -f {} \;'); // PHP 내부에서 치환되어 수행되는 코드
     ```
+    
+***exec_dir*** patch는 https://github.com/OOPS-ORG-PHP/mod_execdir/tree/master/patches 에서 유지보수가 됩니다.
 
 ###4.2. disable_functions 기본 적용
 
@@ -305,10 +307,9 @@ PHP 5.4 부터는 ***short_open_tag***가 off 이더라도 ***&lt;?=$var&gt;*** 
 
 ###4.7. realpath_cache_force
 
-PHP는 open_basedir 이 설정 되어 있을 경우, soft link를 이용한 race condition을 이용하여 open_basedir을 무력화 시키는 버그 때문에, open_basedir이 설정 되어 있을 경우, realpath_cache를 하지 않도록 변경을 하였습니다. 이 이유로, php의 opcache 특성상 항상 파일의 mtime 체크하기 때문에 open_basedir을 사용하면 성능이 굉장히 많이 저하 됩니다.
+PHP는 open_basedir 이 설정 되어 있을 경우, [soft link를 이용한 race condition을 이용하여 open_basedir을 무력화 시키는 버그](http://www.hardened-php.net/advisory_082006.132.html) 때문에, open_basedir이 설정 되어 있을 경우, realpath_cache를 하지 않도록 변경을 하였습니다. 이 이유로, php의 opcache 특성상 항상 파일의 mtime 체크하기 때문에 open_basedir을 사용하면 성능이 굉장히 많이 저하 됩니다.
 
-안녕 리눅스에서는 이 성능 문제를 해결하기 위하여 ***realpath_cache_force*** 옵션을 제공 합니다.
-php.ini 에서
+안녕 리눅스에서는 이 성능 문제를 해결하기 위하여 ***realpath_cache_force*** 옵션을 제공 합니다. 기본값은 off 입니다. php.ini 에서
 
 ```ini
 realpath_cache_force = On
