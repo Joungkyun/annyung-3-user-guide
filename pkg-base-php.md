@@ -16,6 +16,7 @@ understand and process the embedded PHP language in web pages.
 ### Changes on AnNyung:
 1. php 7 업데이트
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
+ * https://github.com/OOPS-ORG-PHP/mod_execdir/
  * PHP의 shell injection을 **engine level에서 방어**하기 위한 기능
      * 이 기능은 engine level에서 처리를 하기 때문에, php code 쪽에서는 아무런 영향이 없음.
  * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
