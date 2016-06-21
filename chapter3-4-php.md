@@ -653,7 +653,7 @@ LoadModule  proxy_fcgi_module       modules/mod_proxy_fcgi.so
 #LoadModule proxy_scgi_module       modules/mod_proxy_scgi.so
 ```
 
-PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에서 ***php***와 ***php3*** 확장자에 대해서 PHP 동작을 하도록 설정이 되어 있습니다.
+PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에서 ***php***와 ***php3*** 확장자에 대해서 PHP 동작을 하도록 설정이 되어 있습니다. FPM 설정에서 ***listen***을  IPv4로 했다면, 아래의 설정을 unix socket에서 IPv4 로 변경해 주십시오.
 
 ```apache
 
@@ -661,6 +661,10 @@ PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에�
 #
 <IfModule proxy_fcgi_module>
     <FilesMatch "\.(php|php3)$">
+        # use IPv4
+        #SetHandler  "proxy:fcgi://localhost:9000"
+        
+        # use unix domain socket
         SetHandler "proxy:unix:/var/run/php-fpm-default.sock|fcgi://localhost/"
     </FilesMatch>
 </IfModule>
