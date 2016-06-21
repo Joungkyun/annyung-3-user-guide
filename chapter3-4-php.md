@@ -586,3 +586,42 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
   ```bash
   [root@an3 ~]$ service php-fpm status
   ```
+
+## 8. Web server 연동
+
+### 8.1 Apache
+
+***/etc/httpd/conf.d/LoadModules.conf*** 에서 ***proxy_module*** 과 ***proxy_fcgi_module*** 의 주석을 해제 합니다.
+
+```apache
+#
+# Proxy Modules
+#
+LoadModule  proxy_module            modules/mod_proxy.so
+#LoadModule lbmethod_bybusyness_module  modules/mod_lbmethod_bybusyness.so
+#LoadModule lbmethod_byrequests_module  modules/mod_lbmethod_byrequests.so
+#LoadModule lbmethod_bytraffic_module   modules/mod_lbmethod_bytraffic.so
+#LoadModule lbmethod_heartbeat_module   modules/mod_lbmethod_heartbeat.so
+#LoadModule proxy_ajp_module        modules/mod_proxy_ajp.so
+#LoadModule proxy_balancer_module   modules/mod_proxy_balancer.so
+#LoadModule proxy_connect_module    modules/mod_proxy_connect.so
+#LoadModule proxy_express_module    modules/mod_proxy_express.so
+LoadModule  proxy_fcgi_module       modules/mod_proxy_fcgi.so
+#LoadModule proxy_fdpass_module     modules/mod_proxy_fdpass.so
+#LoadModule proxy_ftp_module        modules/mod_proxy_ftp.so
+#LoadModule proxy_http_module       modules/mod_proxy_http.so
+#LoadModule proxy_scgi_module       modules/mod_proxy_scgi.so
+```
+
+다음 httpd를 재시작 해 줍니다. PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에서 ***php***와 ***php3*** 확장자에 대해서 PHP 동작을 하도록 설정이 되어 있습니다.
+
+```apache
+
+# for fastcgi configuration
+#
+<IfModule proxy_fcgi_module>
+    <FilesMatch "\.(php|php3)$">
+        SetHandler "proxy:unix:/var/run/php-fpm-default.sock|fcgi://localhost/"
+    </FilesMatch>
+</IfModule>
+```
