@@ -654,6 +654,21 @@ PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에�
 [root@an3 ~]$ service httpd restart
 ```
 
+위의 과정을 간단하게 정리를 하면 다음과 같습니다. ***php56-fpm*** 을 사용하면 설정 파일의 경로가 ***/etc/php56.d/fpm.d*** 입니다.
+
+```bash
+[root@host ~]$ yum install httpd php-fpm
+[root@host ~]$ echo "listen = /var/run/php-fpm-default.sock" >> /etc/php.d/fpm.d/local.conf
+[root@host ~]$ echo "listen.mode = 0666" >> /etc/php.d/fpm.d/local.conf
+[root@host ~]$ service php-fpm start
+[root@host ~]$ vi /etc/httpd/LoadModules.conf
+...
+LoadModule  proxy_module            modules/mod_proxy.so
+LoadModule  proxy_fcgi_module       modules/mod_proxy_fcgi.so
+```
+[root@host ~]$ service httpd restart
+```
+
 ### 8.2 lighttpd 1.4
 
 lighttpd는 fastcgi 연동을 unix domain socket으로 할 수 없기 때문에, php-fpm의 listen 설정을 IPv4로 하십시오.
