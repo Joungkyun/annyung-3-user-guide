@@ -711,7 +711,7 @@ server {
 
         include  params/fastcgi_params;
         #fastcgi_pass 127.0.0.1:9000;
-        fastcgi_pass unix:/var/run/php-fpmr-www.sock;
+        fastcgi_pass unix:/var/run/php-fpm-default.sock;
 
         fastcgi_index index.php;
         fastcgi_param PATH_INFO $fastcgi_path_info;
@@ -722,4 +722,6 @@ server {
 }
 ```
 
-
+```bash
+[root@an3 ~]$ service nginx restart
+```
