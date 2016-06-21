@@ -511,7 +511,7 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 
 ***php-fpm***을 사용하기 위해서는 ***php-fpm*** package 또는 ***php56-fpm*** package가 필요 합니다. 이 둘의 차이는 PHP version이 다르며 ***php-fpm*** package는 7, ***php56-fpm***은 PHP 5.6 기반에서 동작을 합니다.
 
-### 7.1. php-fpm 설정
+### 7.1. 안녕 리눅스 php-fpm 안내
 
 ***php-fpm***의 설정은 다음의 위치에서 이루어 집니다.
 
@@ -552,7 +552,45 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
 
 또한, site를 여러개를 운영할 경우 site별로 pool을 만들어서 resource를 배분할 수도 있습니다.
 
-### 7.2. php-fpm 구동
+### 7.2. php-fpm 설정
+
+일단 기본적인 구동 방법을 설명 합니다. 자세한 사항은 설정 파일의 주석으로 보고 처리 하십시오.
+
+여기서는, 기본 설정 파일은 건드리지 않고, ***/etc/php.d/fpm.d*** 에 설정을 overwrite 하거나 추가 하는 방향으로 운영의 미를 살립니다. :-) 
+
+아래의 내용으로 ***/etc/php.d/fpm.d/local.conf*** 를 생성 합니다.
+
+```bash
+[root@an3 fpm.d] cat local.conf
+user = nobody
+group = nobody
+
+# IPv4 보다는 unix domain socket을 이용하는 것이 좀 더 성능이 좋습니다.
+# local에서 웹서버와  연동을 할 것이라면 unix domain socket을 권장 합니다.
+# 단, lighttpd와 연동을 할 경우, lighttpd가 unix domain socket과 연동이
+# 되지 않으므로 IPv4 로 설정 하십시오.
+#listen = 127.0.0.1:9000
+listen = /var/run/php-fpmr-www.sock
+listen.mode = 0666;
+listen.backlog = 4096
+
+chdir = /
+
+pm = dynamic
+
+pm.max_children = 40
+pm.start_servers = 5
+pm.min_spare_servers = 5
+pm.max_spare_servers = 40
+
+php_admin_value[open_basedir] = /home/httpd:/usr/share/php/pear:/var/lib/php
+php_flag[allow_url_fopen] = Off
+[root@an3 fpm.d]
+```
+
+위의 설정은 기본 값도 인 것들도 있고, 변경된 값도 있지만, 대충 PHP-FPM을 구동할 때 서비스에 영향을 미칠 수 있는 것들을 나열해 놓은 것입니다.
+
+### 7.3. php-fpm 구동
 
   간단한 ***php-fpm*** control 방법에 대하여 기술 합니다. ***php56-fpm*** package는 php-fpm 대신 php56-fpm을 사용하시면 됩니다.
   
@@ -633,3 +671,22 @@ PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에�
 ```bash
 [root@an3 ~]$ service httpd restart
 ```
+
+### 8.2 lighttpd
+
+```ini
+server.modules += ( "mod_fastcgi" )
+
+fastcgi.server = (
+    ".php" => (
+        "localhost" => (
+            "host" => "127.0.0.1",
+            "port" => 9000,
+            "broken-scriptfilename" => "enable",
+            "allow-x-send-file" => "enable"
+        )
+    )
+)
+```
+
+
