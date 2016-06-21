@@ -480,29 +480,6 @@ PHP 5.3이나 5.4에서 호환성 때문에 5.6으로 업그레이드가 어려�
     ; This directive has dependency with 'php53_compatible=On'
     magic_quotes_sybase = Off
 ```
-  * 다음 사항은 지원하지 않습니다.
-    * preg_replace 사용시에, ***"e"*** modifier(PREG_REPLACE_EVAL)는 지원하지 않음
-     * preg_replace_callback 으로 변경
-    ```php
-        // e modifier sample
-        $html = preg_replace(
-            '/<h([1-6])>(.*?)</h[1-6]>/e',
-            '"<h$1>" . strtoupper("$2") . "</h$1>"',
-            $html
-        );
-        
-        // replace 'e' modifier with preg_replace_callback
-        $html = preg_replace_callback(
-            '/<h([1-6])>(.*?)</h[1-6]>/',
-            function ($m) {
-                return "<h{$m[1]}>" . strtoupper($m[2]) . "</h{$m[1]}>";
-            },
-            $html
-        );
-    ```
-     * ereg API  
-       ***ereg** API는 ***preg*** API로 변경 하시기 바랍니다. ***ereg***는 성능도 너무 않좋기 때문에 변경하는 것을 유도하기 위해서라도 지원하지 않습니다.
-
 
 
 ##7. php-fpm 구동
