@@ -658,7 +658,7 @@ PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에�
 
 lighttpd는 fastcgi 연동을 unix domain socket으로 할 수 없기 때문에, php-fpm의 listen 설정을 IPv4로 하십시오.
 
-```ini
+```bash
 server.modules += ( "mod_fastcgi" )
 
 fastcgi.server = (
