@@ -548,8 +548,8 @@ group = nobody
 # 단, lighttpd와 연동을 할 경우, lighttpd가 unix domain socket과 연동이
 # 되지 않으므로 IPv4 로 설정 하십시오.
 #listen = 127.0.0.1:9000
-listen = /var/run/php-fpmr-www.sock
-listen.mode = 0666;
+listen = /var/run/php-fpm-default.sock
+listen.mode = 0666
 listen.backlog = 4096
 
 chdir = /
