@@ -677,3 +677,34 @@ fastcgi.server = (
 [root@an3 ~]$ service lighttpd restart
 ```
 
+### 8.3 nginx
+
+```nginx
+server {
+    listen       80;
+    ...
+
+    #
+    # Fastcgi localhost
+    #
+    location ~ \.php($|/) {
+        fastcgi_split_path_info ^((?U).+\.php)(/?.+)$;
+
+        if ( !-f $document_root$fastcgi_script_name ) {
+            return 404;
+        }
+
+        include  params/fastcgi_params;
+        #fastcgi_pass 127.0.0.1:9000;
+        fastcgi_pass unix:/var/run/php-fpmr-www.sock;
+
+        fastcgi_index index.php;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_read_timeout 60;
+    }
+}
+```
+
+
