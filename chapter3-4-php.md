@@ -613,7 +613,7 @@ LoadModule  proxy_fcgi_module       modules/mod_proxy_fcgi.so
 #LoadModule proxy_scgi_module       modules/mod_proxy_scgi.so
 ```
 
-다음 httpd를 재시작 해 줍니다. PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에서 ***php***와 ***php3*** 확장자에 대해서 PHP 동작을 하도록 설정이 되어 있습니다.
+PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에서 ***php***와 ***php3*** 확장자에 대해서 PHP 동작을 하도록 설정이 되어 있습니다.
 
 ```apache
 
@@ -624,4 +624,10 @@ LoadModule  proxy_fcgi_module       modules/mod_proxy_fcgi.so
         SetHandler "proxy:unix:/var/run/php-fpm-default.sock|fcgi://localhost/"
     </FilesMatch>
 </IfModule>
+```
+
+다음 httpd를 재시작 해 줍니다. 
+
+```bash
+[root@an3 ~]$ service httpd restart
 ```
