@@ -93,22 +93,22 @@ server {
   
   nginx의 인증서는 chain 인증서가 존재할 경우, 인증서와 chain 인증서를 합쳐서 만들어야 합니다.
   
-  다음은 startssl class2 chain 인증서를 이용하여 만드는 경우 입니다.
+  다음은 startssl class 2 chain 인증서를 이용하여 만드는 경우 입니다.
   
   ```bash
   [root@an3 ~]$ cat annyung-sample.org.crt startssl-sub.class2.server.ca.sha2.pem > annyung-sample.org.pem
   ```
   
-  key 파일의 암호를 제거하지 않으면, ngninx 구동시에 key 암호를 입력해야 합니다. 이를 해결하기 위해서 암호를 제거한 key 파일을 설정 합니다.
+  key 파일의 암호를 제거하지 않으면, ngninx 구동 시에 key 암호를 입력해야 합니다. 이를 해결하기 위해서 암호를 제거한 key 파일을 설정 합니다.
   
   ```bash
   [root@an3 ~]$ openssl rsa -in annyung-sample.org.key -out annyung-sample.org.decrypt.key
   ```
   
   
-  또한, ningx 는 http2 protocol을 1.9 main line에서 지원하고 있습니다. 안녕 리눅스는 ***stable*** 버전인 1.8을 제공하고 있으므로 h2c protocol 대신 spdy v3를 이용해야 합니다.
+  또한, ningx 는 http2 protocol을 1.9 main line에서 지원하고 있습니다. 안녕 리눅스는 ***stable*** 버전인 1.10을 제공하고 있으므로 h2c protocol 을 지원합니다. 이전에 1.8을 설치했었다면, ***spdy*** 옵션을 ***http2***로 변경 하십시오.
   
-  안녕 리눅스의 ssl 설정 예제는 기본으로 spdy v3를 사용하도록 되어 있습니다.
+  안녕 리눅스의 ssl 설정 예제는 기본으로 h2c(http2)를 사용 하도록 되어 있습니다.
 
 ##4. 안녕에서 제공하는 추가 모듈
 
