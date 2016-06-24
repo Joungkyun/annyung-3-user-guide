@@ -116,7 +116,7 @@ server {
     apache mod_url 과 동일한 동작을 합니다.
  2. [krisp module](https://github.com/vozlt/nginx-module-krisp)  
     nginx libkrisp module
- 3. [vtm module](https://github.com/vozlt/nginx-module-vts)  
+ 3. [vts module](https://github.com/vozlt/nginx-module-vts)  
     가상 호스트별 tracffic 상태를 확인 할 수 있습니다.
  4. [fancyindex](https://www.nginx.com/resources/wiki/modules/fancy_index/)  
     directory listing을 이쁘게 해 줍니다.
