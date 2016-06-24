@@ -186,7 +186,7 @@ server {
   [root@an3 ~]$ # 또는
   [root@an3 ~]$ ntsysv-systemd
   ```
-  * 부팅시 nginx 시작 하지 않도록 설정
+  * 부팅 시 nginx 시작 하지 않도록 설정
   ```bash
   [root@an3 ~]$ service nginx disable
   [root@an3 ~]$ # 또는
