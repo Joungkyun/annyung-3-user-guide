@@ -11,9 +11,9 @@
 
 ##1. 개요
 
-  안녕 리눅스에서 제공하는 nginx는 1.8 ***stable*** branch를 제공합니다.
+  안녕 리눅스에서 제공하는 nginx는 1.10 ***stable*** branch를 제공합니다.
   
-  참고로, 안녕 리눅스에서 제공하는 error page는 <u>공식적인 서비스에 활용하기에 적합하지 않은 표현을 사용</u>하고 있습니다. 공식적인 서비스 사용시에는 꼭 에러 페이지들을 별도로 만드는 것을 권고합니다.
+  참고로, 안녕 리눅스에서 제공하는 error page는 <u>공식적인 서비스에 활용하기에 적합하지 않은 표현을 사용</u>하고 있습니다. 공식적인 서비스 사용 시에는 꼭 에러 페이지들을 별도로 만드는 것을 권고합니다.
 
 ##2. ningx 설정 파일
 
@@ -35,6 +35,7 @@ etc
 │   ├── koi-win
 │   ├── mime.types
 │   ├── nginx.conf
+│   ├── modules.conf
 │   ├── params
 │   │   ├── fastcgi.conf
 │   │   ├── fastcgi_params
@@ -69,7 +70,7 @@ server {
 
 ```nginx
 server {
-    listen       443 ssl spdy;
+    listen       443 ssl http2;
     server_name  annyung-sample.org;
     root         /home/httpd/annyung-smaple.org;
     index        index.html;
