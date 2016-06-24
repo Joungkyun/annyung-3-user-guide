@@ -64,7 +64,7 @@ server {
     include /etc/nginx/common.d/*.conf;
 }
 ```
-6. ***/etc/nginx/common.d/core-secure.conf***에서 취약한 웹접근을 막는 설정이 있습니다. 운영에 문제가 될 수 있는 설정이니, 서비스 전에 꼭 확인 하십시오.
+6. ***/etc/nginx/common.d/core-secure.conf***에서 취약한 웹 접근을 막는 설정이 있습니다. 운영에 문제가 될 수 있는 설정이니, 서비스 전에 꼭 확인 하십시오.
 
 ##3. SSL 설정 및 HTTP2 protocol 지원
 
@@ -81,7 +81,7 @@ server {
     ssl_certificate_key annyung-sample.org.decrypt.key
     
     ssl_protocols        TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers          ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+    ssl_ciphers          ECDH+AESGCM:ECDH+AES256:ECDH+AES128:ECDH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL
     ssl_prefer_server_ciphers on;
 
     # Load configuration files for the default server block.
