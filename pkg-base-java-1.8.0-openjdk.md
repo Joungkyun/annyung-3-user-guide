@@ -26,7 +26,7 @@ OpenJDK 1.8 Runtime 환경(JRE)
  * java-1.8.0-openjdk-javadoc
  * java-1.8.0-openjdk-src
 
-### Releated Packages:
+### Related packages:
 * java-1.8.0-oracle
 * java-1.7.0-openjdk
 * java-1.6.0-openjdk
