@@ -49,5 +49,5 @@ access to replicated or clustered databases and throttling database access.
 * **python-sqlrelay** - SQL Relay module for Python
 * **ruby-sqlrelay** - SQL Relay module for Ruby
 
-### Releated Packages:
+### Related Packages:
 * None
