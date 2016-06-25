@@ -16,5 +16,5 @@ Geoip 를 이용한 국가코드를 알아내는 오픈소스 C API
 * **GeoIP-doc** - GeoIP 문서
 * **GeoIP-update** - GeoIP database update tool
 
-### Releated Packages:
+### Related Packages:
 * [**kmod-geoip**](pkg-core-kmod-geoip)
