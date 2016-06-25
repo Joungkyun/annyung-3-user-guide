@@ -46,6 +46,6 @@
    * ImageMagick-devel - Library links and header files for ImageMagick app development
    * ImageMagick-doc - ImageMagick html documentation
    * ImageMagick-perl - ImageMagick perl bindings
- * p**ango**
+ * **pango**
    * pango - System for layout and rendering of internationalized text
    * pango-devel - Development files for pango
