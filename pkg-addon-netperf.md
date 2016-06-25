@@ -15,5 +15,5 @@ TCP/UDP를 위한 성능 테스트 도구
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
