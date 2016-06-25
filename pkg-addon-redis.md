@@ -39,5 +39,5 @@ You can use Redis from most programming languages also.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
