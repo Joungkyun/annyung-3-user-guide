@@ -15,5 +15,5 @@ Mako is a template library written in Python
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
