@@ -20,6 +20,6 @@ GeoIP netfilter kernel module
 * kmod-geoip-devel  
   kmod-geoip를 이용한 개발에 필요한 header file
 
-### Releated Packages:
+### Related Packages:
 * [oops-firewall](pkg-core-oops-firewall.md)
 * [iptables](pkg-base-iptables.md)
