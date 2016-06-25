@@ -15,5 +15,5 @@ PHP OAUTH 1.0 확장
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
