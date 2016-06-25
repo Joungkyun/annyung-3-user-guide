@@ -23,5 +23,5 @@ ProFTPD는 Unix또는 Unix 호환 시스템을 위한 강력한 FTP daemon 이�
 * **proftpd-standalone** - ProFTPd Standalone 구동 스크립트
 * **proftpd-xinetd** - ProFTPd xinetd configuration
 
-### Releated Packages:
+### Related Packages:
 * None
