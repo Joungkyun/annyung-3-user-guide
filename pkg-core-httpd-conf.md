@@ -40,5 +40,5 @@
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * [httpd](pkg-base-httpd.md) package의 sub package
