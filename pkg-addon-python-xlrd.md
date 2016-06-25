@@ -17,5 +17,5 @@ support for Excel dates. Unicode-aware.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
