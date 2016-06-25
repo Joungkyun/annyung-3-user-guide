@@ -62,5 +62,5 @@ $1$KSoP78Zr$teF7WRd2Azz0svaUXTkIZ0
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
