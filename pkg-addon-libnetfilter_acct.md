@@ -16,7 +16,7 @@
 ### Sub Packages:
 * **libnetfilter_acct-devel** - libnetfilter_acct를 이용하여 개발하기 위한 header 파일과 목적 파일들
 
-### Releated Packages:
+### Related Packages:
 * iptables
 * kernel
 
