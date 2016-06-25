@@ -35,5 +35,5 @@ Require valid-user
 * None
 
 
-### Releated Packages:
+### Related Packages:
 * None
