@@ -28,7 +28,7 @@ RewriteRule   /.* /kr$0 [L]
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * [perl-KRISP](pkg-core-perl-KRISP.md)
 * [php-krisp](pkg-core-php-krisp.md)
 * [php-pecl-krisp](pkg-core-php-krisp.md)
