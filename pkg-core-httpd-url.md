@@ -29,5 +29,5 @@ Client 요청 URI와 서버 파일간의 character set 문제가 있을 경우 �
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
