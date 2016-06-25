@@ -16,5 +16,5 @@
 * **libnet-devel** - libnet을 이용하여 개발하기 위한 header 파일과 목적 파일들
 * **libnet-doc** - libnet documentation
 
-### Releated Packages:
+### Related Packages:
 * None
