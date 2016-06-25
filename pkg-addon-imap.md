@@ -21,4 +21,4 @@ IMAP 과 POP 프로토콜 서버 데몬
 * **imap-init-pop3s** - 암호화된 pop3 프로토콜 구동 파일 (with xinetd)
 
 ### Related Packages:
-* None
+* [xinted](pkg-base-xinetd.md)
