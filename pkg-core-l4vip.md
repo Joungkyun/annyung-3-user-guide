@@ -38,5 +38,5 @@ shell> /sbin/service l4vip [start|stop|status]
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
