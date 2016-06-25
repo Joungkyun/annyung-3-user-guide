@@ -20,5 +20,5 @@ Splint can perform even stronger checks than can be done by any standard lint.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
