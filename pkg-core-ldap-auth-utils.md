@@ -29,7 +29,7 @@ Support follow commands and config file:
 * **ldap-auth-utils-passwd**  
   clent에서 사용자들이 암호를 변경하기 위한 도구
 
-### Releated Packages:
+### Related Packages:
 
 * [genpasswd](pkg-core-genpasswd.md)
 * openldap-servers
