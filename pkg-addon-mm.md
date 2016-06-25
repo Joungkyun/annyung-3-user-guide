@@ -15,5 +15,5 @@ Shared memory allocation library
 ### Sub Packages:
 * **mm-devel** - Header files and libraries for mm development
 
-### Releated Packages:
+### Related Packages:
 * None
