@@ -24,5 +24,5 @@ A high performance web server and reverse proxy server
 ### Sub Packages:
 * **nginx-filesystem** - The basic directory layout for the Nginx server
 
-### Releated Packages:
+### Related Packages:
 * None
