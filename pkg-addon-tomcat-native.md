@@ -25,5 +25,5 @@ provides support for using APR in Tomcat.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
