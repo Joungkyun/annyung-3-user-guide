@@ -15,5 +15,5 @@ Abstract asynchronous event notification library
 ### Sub Packages:
 * **libevent14-devel** - Header files, libraries and development documentation for libevent14
 
-### Releated Packages:
+### Related Packages:
 * None
