@@ -35,5 +35,5 @@ annyung-release 패키지는 안녕 리눅스 3의 릴리즈 정보를 가지고
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
