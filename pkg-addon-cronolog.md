@@ -15,7 +15,7 @@
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * [httpd](pkg-base-httpd.md)
 * [lighttpd](pkg-addon-lighttpd.md)
 * [nginx](pkg-addon-nginx.md)
