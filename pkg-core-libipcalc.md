@@ -48,5 +48,5 @@ Options:
 ```
 
 
-### Releated Packages:
+### Related Packages:
 * None
