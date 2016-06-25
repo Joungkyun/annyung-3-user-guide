@@ -27,5 +27,5 @@
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
