@@ -15,5 +15,5 @@ Implements a XML/HTML/XHTML Markup safe string for Python
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
