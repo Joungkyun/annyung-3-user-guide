@@ -15,5 +15,5 @@ Document Object Model for Cascading Style Sheets perl module
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
