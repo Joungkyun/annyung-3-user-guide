@@ -20,6 +20,6 @@ flexible.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * [php-devel](pkg-base-php.md)
 * [php56-devel](pkg-addon-php56.md)
