@@ -12,5 +12,5 @@
 * **iptables-services** - iptables, ip6tables 서비스 파일
 * **iptables-utils** - iptables and ip6tables services for iptables
 
-### Releated packages:
+### Related packages:
 * [**kmod-geoip**](pkg-core-kmod-geoip.md)
