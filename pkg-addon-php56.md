@@ -237,5 +237,5 @@ understand and process the embedded PHP language in web pages.
 * [**php56-pecl-xdebug**](pkg-addon-php56-pecl-xdebug.md)
 * [**php56-sqlrelay**](pkg-addon-sqlrelay.md)
 
-### Releated Packages:
+### Related Packages:
 * [php](pkg-base-php.md)
