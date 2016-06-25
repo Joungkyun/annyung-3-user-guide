@@ -23,5 +23,5 @@ SQLite 는 향상된 내장 SQL 데이터베이스 엔진 C 라이브러리 이�
 * **sqlite32-devel** - sqlite 를 이용한 개발시 필요한 헤더파일과 라이브러리들
 * **sqlite32-doc** - sqlite3 document
 
-### Releated Packages:
+### Related Packages:
 * None
