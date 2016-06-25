@@ -24,5 +24,5 @@ and the file README.par in /usr/share/doc/pdnsd-1.2.9a
 ### Sub Packages:
 * **pdnsd-doc** - pdnsd 문서
 
-### Releated Packages:
+### Related Packages:
 * None
