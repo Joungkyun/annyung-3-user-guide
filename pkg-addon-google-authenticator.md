@@ -20,5 +20,5 @@ Google OPT와 연동이 가능하며, iOS와 Android App으로 지원합니다.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
