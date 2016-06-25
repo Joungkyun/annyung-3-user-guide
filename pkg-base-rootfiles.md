@@ -4,17 +4,16 @@
 root 홈디렉토리에 필요한 기본 파일
 
 ### Changes on AnNyung:
-1. root login 정책 제한
+1. serial console로 접속시 LANG 환경 변수를 en_US.UTF-8로 변경
+2. [ISMS](http://isms.kisa.or.kr/kor/intro/intro01.jsp) 인증 관련 정책 적용
+3. root login 정책 제한
   1. 기본적으로 root로 login을 제한
   2. 사설 IP에서의 접근의 경우, tty console 만(non-intercative shell) 접속 가능
     * ```ssh root@host``` 접속 불가
     * ```ssh root@host "ls -al"``` 가능
-  3. /root/.bashrc 에서 사용자 정의 가능
+  3. /root/.bashrc 에서 사용자 정의 가능 
 
-  ```bash
-#
-# perimt access private network with SSH connection
-#
+```bash
 if [ -n "${SSH_CLIENT}" ]; then
     NETWORK_A_CLASS="${SSH_CLIENT%%.*}."
     # console type
@@ -75,9 +74,6 @@ if [ -n "${SSH_CLIENT}" ]; then
                 # allow per host
                 #
                 case "${ssh_client}" in
-                    "211.237.1.229:22" | "211.237.1.229:2020" | "211.237.1.226:22")
-                       LOGIN_ACCESS="yes"
-                       ;;
                     #"1.1.1.1:22")
                     #   [ "${contype}" != "pty" ] && LOGIN_ACCESS="yes"
                     #   ;;
@@ -97,7 +93,6 @@ if [ -n "${SSH_CLIENT}" ]; then
         exit
 fi
 ```
-2. serial console로 접속시 LANG 환경 변수를 en_US.UTF-8로 변경
-3. [ISMS](http://isms.kisa.or.kr/kor/intro/intro01.jsp) 인증 관련 정책 적용
+
 
 ### Sub packages:
