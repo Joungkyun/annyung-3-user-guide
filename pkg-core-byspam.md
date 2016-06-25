@@ -15,5 +15,5 @@ BySPAM 은 smtp 데몬과 procmail 과 연동하여 스팸메일을 필터링 �
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
