@@ -16,5 +16,5 @@ files. It is ported from the PHPExcel project
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
