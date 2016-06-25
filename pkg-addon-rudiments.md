@@ -18,5 +18,5 @@ Rudiments is an Open Source C++ class library providing base classes for things 
 * **rudiments-devel** - rudiments 를 이용하여 개발시 필요한 라이브러리와 헤더
 * **rudiments-doc** - rudiments 문서
 
-### Releated Packages:
+### Related Packages:
 * [sqlrelay](pkg-addon-sqlrelay.md)
