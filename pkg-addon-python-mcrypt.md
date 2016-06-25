@@ -20,5 +20,5 @@ CAST-256, ARCFOUR, SERPENT, SAFER+, and more.
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
