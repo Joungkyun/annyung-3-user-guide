@@ -18,4 +18,4 @@
 * None
 
 ### Related Packages:
-* httpd
+* [httpd](pkg-base-httpd.md)
