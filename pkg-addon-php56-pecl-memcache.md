@@ -15,5 +15,5 @@ PHP 5.6 PECL memcache 확장
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * None
