@@ -45,6 +45,6 @@
 ### Sub Packages:
 * None
 
-### Releated Packages:
+### Related Packages:
 * [httpd](pkg-base-httpd.md)
 * [nginx](pkg-addon-nginx.md)
