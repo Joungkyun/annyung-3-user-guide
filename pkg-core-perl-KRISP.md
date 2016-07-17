@@ -8,7 +8,7 @@ krisp perl C binding 모듈
 ### Reference:
 * https://github.com/Joungkyun/perl-KRISP/blob/master/README
 * https://github.com/Joungkyun/perl-KRISP/blob/master/lib/KRISP.pm
-* https://github.com/Joungkyun/perl-KRISP/blob/master/example/
+* https://github.com/Joungkyun/perl-KRISP/tree/master/example/
 
 ### Dependencies:
 * perl
