@@ -20,7 +20,7 @@ Options:
 ```
 
 ### Reference:
-* https://github.com/Joungkyun/libchardet/blob/master/README.md
+* https://github.com/Joungkyun/libkrisp/blob/master/README.md
 
 ### Dependencies:
 * [libipcalc](pkg-core-libipcalc.md)
