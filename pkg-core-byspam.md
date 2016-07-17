@@ -7,7 +7,7 @@ BySPAM 은 smtp 데몬과 procmail 과 연동하여 스팸메일을 필터링 �
 ### Features:
 
 ### Reference:
-* http://devel.oops.org/viewtopic.php?t=25
+* https://github.com/JoungKyun/byspam/wiki
 
 ### Dependencies:
 * None
