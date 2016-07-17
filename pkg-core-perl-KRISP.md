@@ -6,9 +6,9 @@ krisp perl C binding 모듈
 ### Features:
 
 ### Reference:
-* http://svn.oops.org/wsvn/Perl.KRISP/trunk/README
-* http://svn.oops.org/wsvn/Perl.KRISP/trunk/lib/KRISP.pm
-* http://svn.oops.org/wsvn/Perl.KRISP/trunk/example/
+* https://github.com/Joungkyun/perl-KRISP/blob/master/README
+* https://github.com/Joungkyun/perl-KRISP/blob/master/lib/KRISP.pm
+* https://github.com/Joungkyun/perl-KRISP/blob/master/example/
 
 ### Dependencies:
 * perl
