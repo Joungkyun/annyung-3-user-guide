@@ -9,9 +9,9 @@
 2. Pypi에서 제공하는 chardet 모듈을 C binding으로 구현
 
 ### Reference:
-* http://svn.oops.org/wsvn/Python.chardet/trunk/README
-* http://svn.oops.org/wsvn/Python.chardet/trunk/test.py
-* http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
+* https://github.com/JoungKyun/python-chardet/blob/master/README.md
+* https://github.com/JoungKyun/python-chardet/blob/master/test.py
+* https://github.com/JoungKyun/python-chardet/blob/master/test1.py
 
 ### Dependencies:
 * python
