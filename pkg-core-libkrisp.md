@@ -20,7 +20,7 @@ Options:
 ```
 
 ### Reference:
-* http://svn.oops.org/wsvn/OOPS.libkrisp/trunk/README
+* https://github.com/Joungkyun/libchardet/blob/master/README.md
 
 ### Dependencies:
 * [libipcalc](pkg-core-libipcalc.md)
