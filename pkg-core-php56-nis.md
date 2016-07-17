@@ -23,7 +23,7 @@ else
 ```
 
 ### Reference:
-* http://svn.oops.org/wsvn/PHP.mod_nis/trunk/README
+* https://github.com/OOPS-ORG-PHP/mod_nis/blob/master/README
 
 ### Dependencies:
 * [php56](pkg-addon-php56.md)
