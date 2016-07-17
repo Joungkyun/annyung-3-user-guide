@@ -9,8 +9,8 @@ KRISP python 확장
 * [libipcalc](pkg-core-libipcalc.md)의 IP 연산 및 서브네팅 API도 포함되어 있다.
 
 ### Reference:
-* http://svn.oops.org/wsvn/Python.krisp/trunk/README
-* http://svn.oops.org/wsvn/Python.krisp/trunk/test.py
+* https://github.com/JoungKyun/python-krisp/blob/master/README.md
+* https://github.com/JoungKyun/python-krisp/blob/master/test.py
 
 ### Dependencies:
 * Python
