@@ -10,7 +10,7 @@ IPv4 관련 연산과 서브넷 연산을 위한 라이브러리
 
 
 ### Reference:
-* http://svn.oops.org/wsvn/OOPS.libipcalc/trunk/utils/netcalc.c
+* https://github.com/Joungkyun/libipcalc/blob/master/utils/netcalc.c
 
 ### Dependencies:
 * None
