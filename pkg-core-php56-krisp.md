@@ -38,8 +38,8 @@ try {
 ```
 
 ### Reference:
-* http://svn.oops.org/wsvn/PHP.mod_krisp/trunk/sample.php
-* http://svn.oops.org/wsvn/PHP.mod_krisp/trunk/sample-oop.php
+* https://github.com/OOPS-ORG-PHP/mod_krisp/blob/master/sample.php
+* https://github.com/OOPS-ORG-PHP/mod_krisp/blob/master/sample-oop.php
 
 ### Dependencies:
 * [php56](pkg-addon-php56.md)
