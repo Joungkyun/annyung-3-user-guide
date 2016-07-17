@@ -22,12 +22,12 @@ Mozilla Universial charset detector를 이용하여 문자열의 문자셋을 �
 
 * php-chardet
   * php libchardet binding
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/README
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/Reference
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/sample-oop.php
-  * http://svn.oops.org/wsvn/PHP.mod_chardet/trunk/sample.php
+  * https://github.com/OOPS-ORG-PHP/mod_chardet/blob/master/README.ko.md
+  * https://github.com/OOPS-ORG-PHP/mod_chardet/blob/master/Reference
+  * https://github.com/OOPS-ORG-PHP/mod_chardet/blob/master/sample-oop.php
+  * https://github.com/OOPS-ORG-PHP/mod_chardet/blob/master/sample.php
 * python-chardet
   * python libchardet bindnig
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/README
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test.py
-  * http://svn.oops.org/wsvn/Python.chardet/trunk/test1.py
+  * https://github.com/Joungkyun/python-chardet/blob/master/README.md
+  * https://github.com/Joungkyun/python-chardet/blob/master/test.py
+  * https://github.com/Joungkyun/python-chardet/blob/master/test1.py
