@@ -96,8 +96,8 @@ try {
 ```
 
 ### Reference:
-* http://svn.oops.org/wsvn/PHP.mod_geoip/trunk/
-* http://svn.oops.org/wsvn/PHP.mod_geoip/trunk/sample.php
+* https://github.com/OOPS-ORG-PHP/mod_geoip
+* https://github.com/OOPS-ORG-PHP/mod_geoip/blob/master/sample.php
 
 ### Dependencies:
 * [GeoIP](pkg-base-GeoIP,md)
