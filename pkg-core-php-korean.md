@@ -9,7 +9,8 @@
 ### Features:
 
 ### Reference:
-* http://devel.oops.org/manual/korean/
+* https://joungkyun.gitbooks.io/php-mod_korean-extension-reference/content/
+* https://github.com/OOPS-ORG-PHP/mod_korean
 
 ### Dependencies:
 * [php](pkg-base-php.md)
