@@ -21,4 +21,4 @@
 
 ## 4. PHP composer 사용시, "Invalid version string" 에러 발생
   * 안녕 리눅스 PHP의 PHP_VERSION 상수에 "***AnNyung***" 문자열이 포함되어 있어 발생하는 문제.
-  * ***3.4.9 composer 사용*** 문서를 참조 하여 수정할 수 있음.
+  * ***[3.4.9 composer 사용](chapter3-4-php.md)*** 문서를 참조 하여 수정할 수 있음.
