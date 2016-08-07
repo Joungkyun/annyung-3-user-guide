@@ -9,6 +9,7 @@
 6. php56 package
 7. php-fpm 구동
 8. Web server 연동
+9. composer 사용
 
 ##1. 개요
 안녕 리눅스 3은 CentOS/RHEL과 달리 ***PHP 7***을 기본 제공 합니다. 또한 기존의 ***PHP 5***를 사용하는 환경의 호환을 위하여 ***php56*** package를 제공합니다.
@@ -724,4 +725,92 @@ server {
 
 ```bash
 [root@an3 ~]$ service nginx restart
+```
+
+## 9. Composer 사용
+
+안녕 리눅스에서 composer를 사용할 경우, 안녕 리눅스의 PHP의 PHP_VERSION 에 "***AnNyung***" 이라는 문자열이 포함되어 있어 다음과 같이 "***Invalid version string***" 에러가 발생 합니다.
+
+```bash
+[root@an3 ~]$ ./composer.phar require monolog/monolog
+
+  [UnexpectedValueException]
+  Invalid version string "7.0.7AnNyung"
+
+[root@an3 ~]$
+```
+
+이 문제를 해결하기 위하여 composer를 설치 한 다음, http://mirror.oops.org/pub/AnNyung/etc/composer 에서 이 문제가 수정된 최신 버전의 파일을 받아서 composer.phar을 바꿔치지 해 주시면 됩니다.
+
+직접 파일을 수정 하기 위해서는 다음의 작업 과정을 거칠 수 있습니다.
+
+### 9.1 Composer 문제 해결
+
+#### 9.1.1 composer 압축 해제
+
+```bash
+  [root@an3 ~]$ phar extract -f composer.phar composer/
+```
+
+#### 9.1.2 nomalize 함수 수정
+
+*composer/vendor/composer/semver/src/VersionParser.php* 에서 ***nomalize*** 함수를 아래 패치 파일을 참조 하여 수정 합니다.
+  
+```patch  
+diff -urNp composer.org/vendor/composer/semver/src/VersionParser.php composer/vendor/composer/semver/src/VersionParser.php
+--- composer.org/vendor/composer/semver/src/VersionParser.php   2016-08-08 01:06:55.439483174 +0900
++++ composer/vendor/composer/semver/src/VersionParser.php   2016-08-08 01:10:54.268678206 +0900
+@@ -105,6 +105,8 @@ if (null === $fullVersion) {
+ $fullVersion = $version;
+ }
+
++$version = preg_replace ('/AnNyung/i', '', $version);
++$fullVersion = preg_replace ('/AnNyung/i', '', $fullVersion);
+
+  if (preg_match('{^([^,\s]++) ++as ++([^,\s]++)$}', $version, $match)) {
+ $version = $match[1];
+```
+
+#### 9.1.3 phar package stub 파일 생성
+
+stub 파일은 원본 composer.phar 에서 얻을 수 있습니다.
+
+```bash
+[root@an3 ~]$ phar stub-get -f composer.phar
+#!/usr/bin/env php
+<?php
+/*
+ * This file is part of Composer.
+ *
+ * (c) Nils Adermann <naderman@naderman.de>
+ *     Jordi Boggiano <j.boggiano@seld.be>
+ *
+ * For the full copyright and license information, please view
+ * the license that is located at the bottom of this file.
+ */
+
+// Avoid APC causing random fatal errors per https://github.com/composer/composer/issues/264
+if (extension_loaded('apc') && ini_get('apc.enable_cli') && ini_get('apc.cache_by_default')) {
+    if (version_compare(phpversion('apc'), '3.0.12', '>=')) {
+        ini_set('apc.cache_by_default', 0);
+    } else {
+        fwrite(STDERR, 'Warning: APC <= 3.0.12 may cause fatal errors when running composer commands.'.PHP_EOL);
+        fwrite(STDERR, 'Update APC, or set apc.enable_cli or apc.cache_by_default to 0 in your php.ini.'.PHP_EOL);
+    }
+}
+
+Phar::mapPhar('composer.phar');
+require 'phar://composer.phar/bin/composer';
+
+__HALT_COMPILER(); ?>
+[root@an3 ~]$
+```
+
+아쉽게도 redirection으로 파일을 직접 저장하면 좋겠지만, 되지를 않습니다. 출력된 결과물을 stub.php 라는 파일에 copy & paste 하도록 합니다.
+
+#### 9.1.4 composer.phar 재 패키징
+
+```bash
+[root@an3 ~]$ phar pack -f composer-new.phar -s stub.php composer
+[root@an3 ~]$
 ```
