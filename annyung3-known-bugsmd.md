@@ -18,3 +18,7 @@
   * reload(-USR2 signal) 시에 process가 죽어 버림.
     * ```service php-fpm reload```
     * ```systemctl reload php-fpm```
+
+## 4. PHP composer 사용시, "Invalid version string" 에러 발생
+  * 안녕 리눅스 PHP의 PHP_VERSION 상수에 "***AnNyung***" 문자열이 포함되어 있어 발생하는 문제.
+  * 3.4.9 를 참조 하여 수정할 수 있음.
