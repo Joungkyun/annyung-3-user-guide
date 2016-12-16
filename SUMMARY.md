@@ -2,7 +2,7 @@
 
 ## [Introduction](README.md)
 ## [Chapter 1. 안녕 리눅스 3 \/ CentOS 7.2 차이점](chapter1.md)
-* [Chapter 2. Access Control](chapter2.md)
+## [Chapter 2. Access Control](chapter2.md)
     * [안녕 리눅스 방화벽 설정](chapter2-1-firewall.md)
         * [기본 설정](chapter2-1-firewall-1.md)
         * [Inbound 제어](chapter2-1-firewall-2.md)
@@ -26,7 +26,7 @@
             * [Sudo LDAP 연동](chapter2-3-auth-integrate-openldap-7.md)
         * [NIS](chapter2-3-auth-integrate-nis.md)
         * [Active Directory](chapter2-3-auth-integrate-ad)
-* [Chapter 3. Web control](chapter3.md)
+## [Chapter 3. Web control](chapter3.md)
     * [httpd](chapter3-1-httpd.md)
     * [nginx](chapter3-2-nginx.md)
     * [lighttpd](chapter3-3-lighttpd.md)
