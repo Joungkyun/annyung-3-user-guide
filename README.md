@@ -25,7 +25,7 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
  
 안녕 리눅스는 RHEL(Redhat Enterprise Linux) 계열의 배포본으로, RHEL/CentOS와 최대한 호환되도록 만들어진 배포본 입니다. 안녕 리눅스 1.x에서는 독자적인 배포본을 지향하였고, enterprise 환경 보다는 중소 규모의 독립적인 웹서버에 적합하도록 개발이 되었으나, 안녕 리눅스 2 부터는 RHEL/CentOS와의 최대한 호환을 유지하는 정책을 이어 enterprise 환경을 지향 합니다.
 
-RHEL/CentOS와의 최대한의 호환을 유지한다는 의미는, RHEL/CentOS를 운영함과 거의 동일함을 의미합니다. RHEL/CentOS의 정책을 유지하면서, 보안성과 운영의 활용도를 높일 수 있는 기능이 추가 되었습니다.
+RHEL/CentOS와의 최대한의 호환을 유지한다는 의미는, RHEL/CentOS를 운영함과 거의 동일함을 의미합니다. RHEL/CentOS의 정책을 유지하면서, 보안성과 운영의 활용도를 높일 수 있는 기능과 최신 패키지가 추가 되었습니다.
 
 안녕 리눅스 2의 경우, Apache / PHP / JVM 환경을 제외하고는 RHEL/CentOS와 동일한 정책으로 운영이 가능하며, 안녕 리눅스 3의 경우에는 Apache / PHP 환경을 제외하고 RHEL /CentOS 와 동일한 정책으로 운영이 가능 합니다.
 
