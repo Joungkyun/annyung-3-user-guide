@@ -31,6 +31,7 @@
 3. cvs usermap 기능 지원으로 공용 repository 운영 고도화
 
 4. IDN 지원 \(bind, ssh client, whois 등등\)
+
 5. rsyslog mysql backend에서 mysql unix domain socket 사용 가능
 6. tcping, tcptraceroute 등 ICMP 제한된 네트워크 탐지를 위해 기본 제공
 7. vim
@@ -68,30 +69,34 @@
 
 6. 1일 1회 yum update 기본 작동 \(yum-cron: RHEL/CentOS는 기본으로 동작 안함\)
 
+
 ## 4. 서비스 고도화
 
 1. HTTP/2 protocol 지원 \(ALPN 지원\)
 
-   * http 2.4.18 mod\_http2 \(안녕 기본 지원\)
+   * http &gt; 2.4.18 mod\_http2 \(안녕 기본 지원\)
    * nginx 1.9 http2 module
-   * RHEL 7과 CentOS 7의 openssl 1.0.1e는 ALPN을 지원하지 않아 HTTP/2 지원에 애로가 있지만, 안녕 3에서는 1.0.2의 ALPN 기능을 backporting 하여 지원 가능
+   * RHEL 7과 CentOS 7의 openssl 1.0.1e는 **ALPN**을 지원하지 않아 HTTP/2 지원을 못하지만, 안녕 3에서는 1.0.2의 **ALPN** 기능을 backporting 하여 지원 가능
 
 2. PHP 고도화
 
-   * PHP 7 support
-   * PHP 5.6 compatible package 지원 \(php-fpm\)
+   * **PHP 7** support
+   * **PHP 5.6** compatible package 지원 \(php56-fpm\)
 
      * PHP 5.3 compatible mode 지원
 
+
+   * **PHP 7.1** compatible package 지원 \(php71-fpm\)
+
    * realpath\_cache\_force 지원 \(file system 탐색 성능 향상\)
 
-     * open\_basedir 사용시에 30% 정도 성능 향상
+   * * **open\_basedir** 사용시에 30% 정도 성능 향상
 
 
-   * ZEND VM을 GOTO mode로 빌드하여 기본 CALL type VM보다 20% 성능 향상
 
-3. Mariadb 10.1 업데이트
+* ZEND VM을 **GOTO mode로 빌드**하여 기본 CALL type VM보다 20% 성능 향상
 
+1. Mariadb 10.1 업데이트
 
 ## 5. 기타
 
