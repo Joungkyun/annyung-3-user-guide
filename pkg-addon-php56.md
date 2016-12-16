@@ -130,7 +130,9 @@ understand and process the embedded PHP language in web pages.
  command && command            => /path/bin/command && /path/bin/command
  command || command            => /path/bin/command || /path/bin/command
  ```
-  * 참조: http://kldp.org/node/45576
+  * 참조:
+    * http://kldp.org/node/45576
+    * https://github.com/OOPS-ORG-PHP/mod_execdir
   * 적용 functions
     * 내부적으로 php_exec API를 호출하는 function들
     * [system](http://php.net/manual/kr/function.system.php)
