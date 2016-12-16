@@ -44,7 +44,7 @@
 8. legacy 호환 패키지 지원
 
    * [PHP56](pkg-addon-php56.md)
-   * PHP71
+   * [PHP71](pkg-addon-php71.md)
    * [libevent14](pkg-addon-libevent14.md)
    * [sqlite32](pkg-addon-sqlite32.md)
 
