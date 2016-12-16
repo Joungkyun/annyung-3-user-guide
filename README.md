@@ -27,7 +27,7 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 RHEL/CentOS와의 최대한의 호환을 유지한다는 의미는, RHEL/CentOS를 운영함과 거의 동일함을 의미합니다. RHEL/CentOS의 정책을 유지하면서, 보안성과 운영의 활용도를 높일 수 있는 기능과 최신 패키지가 추가 되었습니다.
 
-안녕 리눅스 2의 경우, Apache / PHP / JVM 환경을 제외하고는 RHEL/CentOS와 동일한 정책으로 운영이 가능하며, 안녕 리눅스 3의 경우에는 Apache / PHP 환경을 제외하고 RHEL /CentOS 와 동일한 정책으로 운영이 가능 합니다.
+안녕 리눅스 2의 경우, Apache / PHP / JVM / BIND 환경을 제외하고는 RHEL/CentOS와 동일한 정책으로 운영이 가능하며, 안녕 리눅스 3의 경우에는 Apache / PHP / BIND 환경을 제외하고 RHEL /CentOS 와 동일한 정책으로 운영이 가능 합니다.
 
 즉, CentOS/RHEL 사용자라면, 안녕 리눅스로 전환하는데 드는 비용이 거의 0에 가깝다는 것을 의미합니다.
 
