@@ -66,9 +66,12 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
   6. 보안 고도화
   7. ISMS 인증 조건 반영
   8. 2012.06.01 RHEL 6u2 / CentOS 6.2 기반으로 안녕 리눅스 2 출시
+   * Apache / PHP / JVM 환경 호환 되지 않음. 사용자 가이드 참고
 
 
 ### 4) 안녕 리눅스 3
 
   1. 2016.02.29 RHEL 7u2 / CentOS 7.2 기반으로 안녕 리눅스 3 출시
+   * Apache / PHP 환경 호환 되지 않음. 사용자 가이드 참고
+   * JVM 환경은 호환 됨. (안녕 2와의 차이)
   2. 안녕 리눅스 2의 deploy 계승
