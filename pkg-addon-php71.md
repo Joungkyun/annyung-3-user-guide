@@ -24,7 +24,7 @@ understand and process the embedded PHP language in web pages.
  * FPM 설정 파일
     * _/etc/php71.d/php-fpm-fcgi.ini_
     * _/etc/php71.d/fpm/SHARED.ini_
-    * <u>php-fpm-fcgi.ini는 수정을 하지 말고</u>, 변경할 옵션을 _/etc/php56.d/fpm/SHARED.ini_ 에 하는 것을 권장함
+    * <u>php-fpm-fcgi.ini는 수정을 하지 말고</u>, 변경할 옵션을 _/etc/php71.d/fpm/SHARED.ini_ 에 하는 것을 권장함
 
 ### Reference:
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
@@ -51,7 +51,9 @@ understand and process the embedded PHP language in web pages.
  command && command            => /path/bin/command && /path/bin/command
  command || command            => /path/bin/command || /path/bin/command
  ```
-  * 참조: http://kldp.org/node/45576
+  * 참조: 
+    * http://kldp.org/node/45576
+    * https://github.com/OOPS-ORG-PHP/mod_execdir
   * 적용 functions
     * 내부적으로 php_exec API를 호출하는 function들
     * [system](http://php.net/manual/kr/function.system.php)
