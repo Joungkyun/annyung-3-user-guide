@@ -16,7 +16,7 @@ understand and process the embedded PHP language in web pages.
 3. php71-cli 설정 파일
  * _/etc/php71.d/php-cli.ini_
  * _/etc/php71.d/cli/SHARED.ini_
- * <u>php-cli.ini는 수정을 하지 말고</u>, 변경할 옵션을 _/etc/php56.d/cli/SHARED.ini_ 에 하는 것을 권장함
+ * <u>php-cli.ini는 수정을 하지 말고</u>, 변경할 옵션을 _/etc/php71.d/cli/SHARED.ini_ 에 하는 것을 권장함
 4. php71-fpm 설정 파일
  * FPM 구동 설정 파일
     * _/etc/php71.d/fpm.conf_
