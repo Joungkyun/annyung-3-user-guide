@@ -15,21 +15,27 @@ understand and process the embedded PHP language in web pages.
 
 ### Changes on AnNyung:
 1. php 7 업데이트
-2. exec_dir (**PHP_INI_SYSTEM**) 기능
- * https://github.com/OOPS-ORG-PHP/mod_execdir/
- * PHP의 shell injection을 **engine level에서 방어**하기 위한 기능
-     * 이 기능은 engine level에서 처리를 하기 때문에, php code 쪽에서는 아무런 영향이 없음.
- * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
- * PHP 5.4 이전의 safe_mode_exec_dir을 safe_mode가 아닌 경우에도 사용할 수 있도록 수정하고 command 치환 parser를 확장
- * 기본값 _/var/lib/php/bin_
-    * 안녕의 PHP 에서 system 함수를 사용하려면 사용하려면 command가 /var/lib/php/bin 에 soft link나 복사 되어야 함.
- * system function에 의해서 실행된 command의 경로를 강제로 지정한 값으로 변환
+2. 성능
+ * PHP VM type을 ***GOTO*** mode로 빌드 (성능 20% 향상)
+ * ***realpath_cache_force*** ini 옵션 제공
+     * ***openbase_dir*** 사용시에, realpath_cache 기능을 강제로 사용하게 하여 30% 정도의 성능을 향상
+ * https://my.oops.org/173 참조
+3. 보안
+  * exec_dir (**PHP_INI_SYSTEM**) 기능
+    * https://github.com/OOPS-ORG-PHP/mod_execdir/
+    * PHP의 shell injection을 **engine level에서 방어**하기 위한 기능
+      * 이 기능은 engine level에서 처리를 하기 때문에, php code 쪽에서는 아무런 영향이 없음.
+    * 2005년 부터 KLDP와 N사 T사의 core system에 적용되어 검증
+    * PHP 5.4 이전의 safe_mode_exec_dir을 safe_mode가 아닌 경우에도 사용할 수 있도록 수정하고 command 치환 parser를 확장
+    * 기본값 _/var/lib/php/bin_
+      * 안녕의 PHP 에서 system 함수를 사용하려면 사용하려면 command가 /var/lib/php/bin 에 soft link나 복사 되어야 함.
+    * system function에 의해서 실행된 command의 경로를 강제로 지정한 값으로 변환
  ```php
  exec_dir = /path/bin
  system('/some/path/command -option cmd_arg');
  => system('/path/bin/command -option cmd_arg'); 치환됨
  ```
- * 치환 가능 범위
+    * 치환 가능 범위
  ```bash
  command; command              => /path/bin/command; /path/bin/command
  command $(command)            => /path/bin/command $(/path/bin/command)
@@ -40,48 +46,48 @@ understand and process the embedded PHP language in web pages.
  command && command            => /path/bin/command && /path/bin/command
  command || command            => /path/bin/command || /path/bin/command
  ```
-  * 참조: http://kldp.org/node/45576
-  * 적용 functions
-    * 내부적으로 php_exec API를 호출하는 function들
-    * [system](http://php.net/manual/kr/function.system.php)
-    * [exec](http://php.net/manual/kr/function.exec.php)
-    * [passthru](http://php.net/manual/kr/function.passthru.php)
-    * [popen](http://php.net/manual/kr/function.popen.php)
-    * [escapeshellcmd](http://php.net/manual/kr/function.escapeshellcmd.php)
-    * [pcntl_exec](http://php.net/manual/kr/function.pcntl-exec.php)
-    * [backtick operator](http://php.net/manual/kr/language.operators.execution.php)
-3. disable_functions 기본 적용
- * phpinfo
- * php_uname
- * sys_get_temp_dir
- * phpversion
- * ini_get
- * ini_set
- * ini_get_all
- * get_cfg_var
- * 상단의 적용 function들은 함수명 앞에 prefix로 under bar 3개를 붙이면 호출이 가능함.
+    * 참조: http://kldp.org/node/45576
+    * 적용 functions
+      * 내부적으로 php_exec API를 호출하는 function들
+      * [system](http://php.net/manual/kr/function.system.php)
+      * [exec](http://php.net/manual/kr/function.exec.php)
+      * [passthru](http://php.net/manual/kr/function.passthru.php)
+      * [popen](http://php.net/manual/kr/function.popen.php)
+      * [escapeshellcmd](http://php.net/manual/kr/function.escapeshellcmd.php)
+      * [pcntl_exec](http://php.net/manual/kr/function.pcntl-exec.php)
+      * [backtick operator](http://php.net/manual/kr/language.operators.execution.php)
+  * disable_functions 기본 적용
+    * phpinfo
+    * php_uname
+    * sys_get_temp_dir
+    * phpversion
+    * ini_get
+    * ini_set
+    * ini_get_all
+    * get_cfg_var
+    * 상단의 적용 function들은 함수명 앞에 prefix로 under bar 3개를 붙이면 호출이 가능함.
  ```php
  <?php
  ___phpinfo();
  ?>
  ```
-4. file upload시 image header의 injection code 여부 검사 기능 추가
- * php.ini 에 다음 옵션 추가
-     * **upload_image_check** (기본값 On)
+  * file upload시 image header의 injection code 여부 검사 기능 추가
+    * php.ini 에 다음 옵션 추가
+      * **upload_image_check** (기본값 On)
          * 업로드 이미지 헤더에 php code가 포함되었는지 검사
          * php code 발견 시에 E_WARNING 발생
-     * **upload_image_check_log** (기본값 On) - 업로드 이미지 헤더 검사 관련 로그 기록
-     * **upload_image_check_test** (기본값 On)
+      * **upload_image_check_log** (기본값 On) - 업로드 이미지 헤더 검사 관련 로그 기록
+      * **upload_image_check_test** (기본값 On)
          * 검사만 하고, 에러 레벨만 리턴(E_WARNING 발생 안함)
          * 검사 결과 감지가 되면 **UPLOAD_ERR_SEC** 반환
-     * **upload_image_check_whitelist** - 이미지 헤더 문자열 white list
-5. **allow_url_fopen**과 **allow_url_include**를 PHP_INI_ALL로 수정
- * 기본값 OFF이며, php code에서 ini_set으로 변경 가능
-6. **allow_include_extension** 옵션 추가 (기본값: **.php**)
- * 등록된 확장자만 php compiler에 의해 compile 됨.
- * include / require 모두 해당
- * 등록된 확장자 파일을 upload 할 경우, **UPLOAD_ERR_ILL** 에러를 반환하고 업로드 되지 않음.
-7. **short_open_tag** 기본 값 Off
+      * **upload_image_check_whitelist** - 이미지 헤더 문자열 white list
+  * **allow_url_fopen**과 **allow_url_include**를 PHP_INI_ALL로 수정
+    * 기본값 OFF이며, php code에서 ini_set으로 변경 가능
+  * **allow_include_extension** 옵션 추가 (기본값: **.php**)
+    * 등록된 확장자만 php compiler에 의해 compile 됨.
+    * include / require 모두 해당
+    * 등록된 확장자 파일을 upload 할 경우, **UPLOAD_ERR_ILL** 에러를 반환하고 업로드 되지 않음.
+  * **short_open_tag** 기본 값 Off
 
 ### Sub packages:
 * **php-cli** - php7 cli 인터페이스
