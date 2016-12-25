@@ -17,7 +17,9 @@ vim package는 존재하지 않으며, 기본 패키지는 **vim-enhanced** 이�
  ```ini
  let g:annyungfolding = 0
  ```
-6. phpDocument 스타일의 phpfolding 추가
+6. 공백문자와 탭을 구분하기 위한 기능 추가.
+ * 언더바(\_)를 toggle key로 하여 탭을 청색으로 표시
+7. phpDocument 스타일의 phpfolding 추가
  * http://www.vim.org/scripts/script.php?script_id=1623 참조
  * 단축키 설정: 다음 설정을 vimrc 또는 .vimrc 에 셋팅
  ```ini
@@ -25,8 +27,8 @@ vim package는 존재하지 않으며, 기본 패키지는 **vim-enhanced** 이�
  map <F6> <Esc>:EnablePHPFolds<Cr>
  map <F7> <Esc>:DisablePHPFolds<Cr>
  ```
-7. native PHP manual 추가 (_Shift + k_)
-8. checksyntax 플러그인 추가
+8. native PHP manual 추가 (_Shift + k_)
+9. checksyntax 플러그인 추가
  * 이 기능의 사용을 원치 않으면, vimrc 또는 .vimrc에 다음 설정 셋팅
  ```ini
  let g:checksyntax_auto = 0
