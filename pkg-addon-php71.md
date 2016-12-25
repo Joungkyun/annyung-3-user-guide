@@ -25,6 +25,12 @@ understand and process the embedded PHP language in web pages.
     * _/etc/php71.d/php-fpm-fcgi.ini_
     * _/etc/php71.d/fpm/SHARED.ini_
     * <u>php-fpm-fcgi.ini는 수정을 하지 말고</u>, 변경할 옵션을 _/etc/php71.d/fpm/SHARED.ini_ 에 하는 것을 권장함
+5. 성능
+ * PHP VM type을 ***GOTO*** mode로 빌드 (성능 20% 향상)
+ * ***realpath_cache_force*** ini 옵션 제공
+     * ***openbase_dir*** 사용시에, realpath_cache 기능을 강제로 사용하게 하여 30% 정도의 성능을 향상
+ * https://my.oops.org/173 참조
+
 
 ### Reference:
 2. exec_dir (**PHP_INI_SYSTEM**) 기능
