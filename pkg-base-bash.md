@@ -11,7 +11,7 @@ The GNU Bourne Again shell
 ```
 
 2. HISTTIMEFORMAT 환경 변수 셋팅 시, history에 SU_USER 환경변수가 있으면 기록
- * thanks for 장현성 (hajang &commat; gmail.com)
+ * thanks for 장현성 (hsjang &commat; gmail.com)
 
 
  ```bash
