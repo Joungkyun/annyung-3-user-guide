@@ -12,6 +12,8 @@ Chroot가 적용된 버클리 인터넷 네임 서버 (BIND)
 5. geodns 기능 지원
  * _/etc/sysconfig/named_에 GEOIP_DATA_COPY="yes" 설정
  * https://code.google.com/p/bind-geoip/wiki/UsageGuide 참조
+ * ***RHEL/CentOS*** 7.3에서 추가된 ***GeoDNS*** 기능과 다름!!
+     * 안녕 리눅스는 ***RHEL/CentOS*** 7.3과는 다른 패치로 지원을 하며, ***RHEL/CentSO*** 보다 먼저 지원을 시작한 이유로 이전 버전과의 호환성을 위하여 ***RHEL/CentOS***과는 다른 기능으로 제공
 
 ### Notice:
 DNSSEC와 database backend(bind-sdb)에 관련된 테스트는 안녕에서 보증하지 않습니다. 이 기능을 사용하기 위해서는 CentOS 7의 bind package를 사용하십시오.
