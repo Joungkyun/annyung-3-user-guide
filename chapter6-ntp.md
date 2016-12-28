@@ -2,8 +2,9 @@
 
 > **목차**
 > 1. 개요
-> 1. NTP를 이용한 시간 동기화
-> 1. Time server 구성
+> 2. NTP를 이용한 시간 동기화
+> 3. Time server 구성
+> 4. 윤초 대응
 
 
 #1. 개요
@@ -296,4 +297,46 @@ OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.10.1:123
  10.5.22.145     .INIT.          16 u    -   64    0    0.000    0.000   0.000
 *10.10.0.1       141.223.182.106  2 u    2   64    1    0.173   -1.231   0.001
  10.10.10.1      211.237.1.226    3 u    1   64    1    1.099   -0.758   0.001
+```
+
+## 4. 윤초 대응
+
+> ***윤초(閏秒)***란 협정 세계시에서 기준으로 삼고 있는 세슘 원자시계와 실제 지구의 자전·공전 속도를 기준으로 한 태양시의 차이로 인해 발생한 오차를 보정하기 위하여 추가하는 1초이다. 12월 31일의 마지막에 추가하거나, 혹은 6월 30일의 마지막에 추가한다.(출처: 위치백과)
+
+보통 ***윤초***가 추가되게 되면, RHEL/CentOS에서는 ***tzdata*** package를 업데이트 하여 시스템에 반영을 하게 됩니다. (/etc/localtime을 윤초가 반영된 파일로 갱신 시켜 glibc가 reload 하도록 합니다.)
+
+그런데 문제는 시간 동기화 데몬(chrony, npt, ptp 등)을 운영하는 경우 특정 버그로 인하여 문제가 되는 경우가 발생할 수있습니다. [대표적인 사건으로 2016.6.30일의 윤초 추가시에 ~~time server, 리눅스 커널 버그와 JVM 버그의 3단 컴비네이션~~으로 인하여 CPU 100% 사용률을 가지게 되는 장애를 발생시키는 사건이 있었습니다. (linkedIn, Reddit 등..)](https://translate.google.com/translate?hl=ko&sl=ja&tl=ko&u=https%3A%2F%2Fsrad.jp%2F~marusa%2Fjournal%2F593599%2F)
+
+그래서 이를 원천적으로 회피하기 위한 기술로 Google에서 [Leap Smear](https://googleblog.blogspot.kr/2011/09/time-technology-and-leaping-seconds.html) 기법을 발표하고, ***NTP***에서 이를 설정 하는 방법을 기술 합니다.
+
+다음의 설정은 ntp server를 운영하고 있다면 ntp server에만 반영해 주시면 되며, 따로 ntp server를 운영하고 있지 않다면 모든 ntp client 설정에 추가를 해 주어야 합니다. 즉, 서버가 많다면 straum 3정도의 NTP 서버를 운영하시는 것을 권장 합니다.
+
+이 구성을 사용하기 위해서는 RHEL/CentOS 6.6 이상에 포함이 되어 있는 커널과 NTP package가 필요 합니다. 이전 버전에는 버그가 있습니다.
+
+1. NTP 버전 업
+  * time server 서버가 CentOS 5 이하라면, 최소한 CentOS 6 이상으로 업그레이드 하십시오.
+  * 별도로 time server를 운영하지 않는다면, [leap-smeared time](https://developers.google.com/time/smear)이 적용된 Google Public NTP를 이용 하십시오.
+```bash
+[root@an3 ~]$ yum update ntp
+```
+
+2. ntpd 중지
+```bash
+[root@an3 ~]$ service ntpd stop
+```
+3. kernel의 유지시간 및 주파수 offset을 초기화 한다.
+```bash
+[root@an3 ~]$ ntptime -s 0 -f 0
+```
+4. nptd를 slew mode로 설정
+  * ntpd 명령행 옵션에 -x를 추가해 준다. (slew mode option)
+```bash
+[root@an3 ~]$ cat /etc/sysconfig/ntpd
+# Drop root to id 'ntp:ntp' by default.
+OPTIONS="-x -u ntp:ntp -p /var/run/ntpd.pid -g"
+[root@an3 ~]$
+```
+5. ntpd 재시작
+```bash
+[root@an3 ~]$ service ntpd start
 ```
