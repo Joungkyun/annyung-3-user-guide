@@ -259,7 +259,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 보통 ***윤초***가 추가되게 되면, RHEL/CentOS에서는 ***tzdata*** package를 업데이트 하여 시스템에 반영을 하게 됩니다. (/etc/localtime을 윤초가 반영된 파일로 갱신 시켜 glibc가 reload 하도록 합니다.)
 
-그런데 문제는 시간 동기화 데몬(chrony, npt, ptp 등)을 운영하는 경우 특정 버그로 인하여 문제가 되는 경우가 발생할 수있습니다. 대표적인 사건이 2016.6.30일의 윤초 추가시에 ~~time server, 리눅스 커널 버그와 JVM 버그의 3단 컴비네이션~~으로 인하여 CPU 100% 사용률을 가지게 되는 장애를 발생시키는 사건이 있었습니다. (linkedIn, Reddit 등..)
+그런데 문제는 시간 동기화 데몬(chrony, npt, ptp 등)을 운영하는 경우 특정 버그로 인하여 문제가 되는 경우가 발생할 수있습니다. [대표적인 사건으로 2016.6.30일의 윤초 추가시에 ~~time server, 리눅스 커널 버그와 JVM 버그의 3단 컴비네이션~~으로 인하여 CPU 100% 사용률을 가지게 되는 장애를 발생시키는 사건이 있었습니다. (linkedIn, Reddit 등..)](https://translate.google.com/translate?hl=ko&sl=ja&tl=ko&u=https%3A%2F%2Fsrad.jp%2F~marusa%2Fjournal%2F593599%2F)
 
 그래서 이를 원천적으로 회피하기 위한 기술로 Google에서 [Leap Smear](https://googleblog.blogspot.kr/2011/09/time-technology-and-leaping-seconds.html) 기법을 발표하고, ***Chrony***에서 이를 설정 하는 방법을 기술 합니다.
 
