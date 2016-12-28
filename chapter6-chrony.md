@@ -271,8 +271,7 @@ leapsecmode slew
 # slew 모드에서의 동기화 속도. slew 속도 1000ppm. 1 초 차이를
 # 17 시간 34 분 동안 분할 동기화.
 maxslewrate 1000
-# 장기간 오프라인되어 후에도 순조롭게 시간 동기화. 윤초에 대해서만
-# 평활화 프로세스(smoothing process)를 활성화
+# 장기간 오프라인되어 후에도 순조롭게 시간 동기화.
 smoothtime 400 0.001 leaponly
 ```
 
