@@ -263,7 +263,11 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 그래서 이를 원천적으로 회피하기 위한 기술로 Google에서 [Leap Smear](https://googleblog.blogspot.kr/2011/09/time-technology-and-leaping-seconds.html) 기법을 발표하고, ***Chrony***에서 이를 설정 하는 방법을 기술 합니다.
 
-이 설정을 사용하기 위해서는 ***chrony*** 버전이 2.0 보타 높아야 합니다. CentOS/RHEL 7이 처음 출시 되었을 때는 ***chrony*** 1.3을 탑재하고 있었으므로, yum을 이용하여 최신 버전으로 업데이트를 해 주어야 합니다.
+이 설정을 사용하기 위해서는 ***chrony*** 버전이 2.0 보다 높아야 합니다. CentOS/RHEL 7이 처음 출시 되었을 때는 ***chrony*** 1.3을 탑재하고 있었으므로, yum을 이용하여 최신 버전으로 업데이트를 해 주어야 합니다.
+
+또한, 따로 time server를 운영하고 있지 않다면 모든 chrony client 설정에 추가를 해 주어야 합니다. 즉, 서버가 많다면 straum 3정도의 time 서버를 운영하시는 것을 권장 합니다.
+
+***/etc/chrony/chrony.conf*** 에 다음의 설정을 추가 하십시오. (RHEL 또는 CentOS에서는 ***/etc/chrony.conf*** 입니다.)
 
 ```php
 # 윤초의 모드 설정. 클러킹 프로세스를 비활성화
