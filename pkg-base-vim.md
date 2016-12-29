@@ -22,9 +22,13 @@ vim package는 존재하지 않으며, 기본 패키지는 **vim-enhanced** 이�
  * http://www.vim.org/scripts/script.php?script_id=1623 참조
  * 단축키 설정: 다음 설정을 vimrc 또는 .vimrc 에 셋팅
  ```ini
- map <F5> <Esc>:EnableFastPHPFolds<Cr>
- map <F6> <Esc>:EnablePHPFolds<Cr>
- map <F7> <Esc>:DisablePHPFolds<Cr>
+map <F5> <Esc>:EnableFastPHPFolds<Cr>
+map <F6> <Esc>:EnablePHPFolds<Cr>
+map <F7> <Esc>:DisablePHPFolds<Cr>
+```
+ * phpfolding을 사용하고 싶지 않다면, vimrc 또는 .vimrc에 다음 설정을 추가
+ ```ini
+ let g:DisableAutoPHPFolding = 1
  ```
 8. native PHP manual 추가 (_Shift + k_)
 9. checksyntax 플러그인 추가
