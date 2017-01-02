@@ -278,9 +278,6 @@ UTF-8 한글 입니다.
 ***bind***의 경우에는 기본으로 chroot기능으로 packaging 되어 있으므로, ***/var/named*** 에 모든 설정이 들어가게 됩니다. ***/etc/named*** 는 설정 호환을 위하여 soft link로 지원이 됩니다.
 
 
-
-
-
 ## 6. 기타
 
 위의 특징들 외에 많은 변경 사항이 있으며, 이에 대해서는 "[안녕 리눅스 3 패키지 일람](AnNyung3-Package-Catalog.md)"을 참조 하십시오.
