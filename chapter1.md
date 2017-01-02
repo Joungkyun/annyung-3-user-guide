@@ -155,7 +155,13 @@
 [root@an3 ~]$
 ```
 
-### 5.3 패키지 업데이트
+### 5.3 Yum
+
+### 5.3.1 AnNyung LInux repository
+
+안녕 리눅스 repository 설정은 ***/etc/yum.repos.d/AnNyung.repo*** 에 있습니다. 안녕 리눅스 repository 중 ***Base*** repository는 ***RHEL/CentOS***의 패키지를 수정한 다음, Epoch를 올려서 ***RHEL/CentOS*** 원래의 패키지가 다시 원복되지 않도록 하고 있습니다. 안녕 리눅스 repository의 업데이트 상황은 http://annyung.oops.org/?m=update&p=3 에서 확인할 수 있으며, [RSS](http://annyung.oops.org/rss.php?v=3)를 제공하고 있습니다.
+
+### 5.3.2 Package 업데이트
 
 안녕 리눅스는 처음 설치 시에 ***CentOS/RHEL***과는 달리 ***yum-cron*** 패키지가 기본으로 설치가 됩니다. 이 의미는 1일 1회 패키지 체크를 통하여 패키지 업데이트를 자동 실행 한다는 의미입니다.
 
@@ -187,6 +193,22 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AnNyung-$annyungver
 # 안녕리눅스의 bind를 사용하지 않고 RHEL의 bind를 사용할 경우
 exclude=bind*
 ..하략
+```
+
+### 5.3.3 X 기능 제거
+
+안녕 리눅스는 서버 전용 배포본을 추구합니다. 그렇기 일부 패키지에서 X 기능이 제거된 경우가 있습니다. 이 패키지들은 안녕 리눅스의 [***Xless*** repository](http://mirror.oops.org/pub/AnNyung/3/xless/x86_64/)에서 관리 되고 있습니다. 만약 서버에 Oracle을 설치해야 하는 경우에는 Oracle installer가 X windows 환경을 요구하므로, ***Xless*** repository를 disable 한 후에 X 관련 패키지를 설치해 주어야 합니다.
+
+```bash
+[root@an3 ~]$ cat /etc/yum.repos.d/AnNyung.reps
+... 상략
+[AN:xless]
+name=AnNyung $anntyung-ver X less Repository
+mirrorlist=http://annyung.oops.org/mirror.php?release=$annyungver&arch=$basearch&repo=xless
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AnNyung-$annyungver
+enabled=0
+... 하략
 ```
 
 
