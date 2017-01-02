@@ -101,10 +101,13 @@
 차이점 일람은 RHEL/CentOS 사용자가 안녕 리눅스로 전환할 때, 고려해야 할 점이나, 달라진 점을 정리 합니다.
 ***이 단락은 현재 작성 중 입니다.***
 
+### 5.1 OS banner
 
-### 5.1 방화벽
+안녕 리눅스의 ***/etc/centos-release***와 ***/etc/redhat-release***는 수정되지 않기 때문에, 각종 application의 OS detect 시에 ***CentOS 7*** 또는 ***RHEL 7***로 인식이 되어집니다. 이 의미는 그만큼 호환이 가능하다는 의미입니다. 안녕 리눅스 배너는 ***/etc/annyung-release***와 ***/etc/system-release***, ***/etc/system-release-cpe*** 에 적용이 되어 있으므로, 안녕 리눅스를 detect 하기 위해서는 이 파일들을 체크 해야 합니다.
 
-#### 5.1.1 방화벽 프로그램
+### 5.2 방화벽
+
+#### 5.2.1 방화벽 프로그램
 
 안녕 리눅스는 ***RHEL/CentOS*** 7의 ***firewalld*** 대신 [***oops-firewall***](http://oops.org/?t=lecture&sb=firewall&n=2) 을 사용합니다. ***oops-firewall***은 직관적이고 관리가 쉬우며, iptables를 잘 이해하고 있는 경우에는 직접 rule set을 조정할 수도 있습니다.
 
@@ -131,7 +134,7 @@
 
 ***oops-firewall***에 대한 자세한 사항은 http://oops.org/?t=lecture&sb=firewall&n=2 문서를 참고 하십시오.
 
-#### 5.1.2 iptables + GeoIP 연동
+#### 5.2.2 iptables + GeoIP 연동
 
 안녕 리눅스는 기본적으로 iptables와 GeoIP가 연동이 되어 있어 국가별 rule set을 사용할 수 있습니다. ***RHEL/CentOS*** 7에서 iptables 와 GeoIP 연동을 원한다면, [안녕 리눅스 3 repository](http://mirror.oops.org/pub/AnNyung/3/)에서 다음 패키지를 다운로드 받아서 업데이트 하면 사용할 수 있습니다.
 
@@ -150,6 +153,40 @@
 # 한국 외의 ssh 접근 거부
 %-A INPUT -p tcp --dport 22 -m geoip ! --src-cc KR -j DROP
 [root@an3 ~]$
+```
+
+### 5.3 패키지 업데이트
+
+안녕 리눅스는 처음 설치 시에 ***CentOS/RHEL***과는 달리 ***yum-cron*** 패키지가 기본으로 설치가 됩니다. 이 의미는 1일 1회 패키지 체크를 통하여 패키지 업데이트를 자동 실행 한다는 의미입니다.
+
+만약, 패키지 업데이트를 원하지 않는다면, 정말 권장하지는 않지만 다음의 명령으로 중지할 수 있습니다.
+
+```bash
+[root@an3 ~]$ service yum-cron stop
+```
+
+특정 package만 업데이트를 원하지 않을 경우에는 ***yum*** 설정 파일에서 ***exclude*** 옵션을 이용하여 설정 할 수 있습니다.
+
+1. yum 전체 설정에 반영할 경우 (***/etc/yum.conf***)
+```bash
+[root@an3 ~]$ cat /etc/yum.conf
+...상략
+# 모든 i386/i686 package, GeoIP-data, libkrisp-data package를 yum으로 관리하지 않음
+exclude=*.i*86 GeoIP-data libkrisp-data
+...하략
+```
+2. 특정 repository 에 반영할 경우
+```bash
+[root@an3 ~]$ cat /etc/yum.repos.d/AnNyung.repo
+..상략
+[AN:base]
+name=AnNyung $annyungver Base Repository
+mirrorlist=http://annyung.oops.org/mirror.php?release=$annyungver&arch=$basearch&repo=base
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AnNyung-$annyungver
+# 안녕리눅스의 bind를 사용하지 않고 RHEL의 bind를 사용할 경우
+exclude=bind*
+..하략
 ```
 
 
