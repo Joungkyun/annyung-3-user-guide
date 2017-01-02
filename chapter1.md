@@ -199,6 +199,8 @@ exclude=bind*
 
 안녕 리눅스는 서버 전용 배포본을 추구합니다. 그렇기 일부 패키지에서 X 기능이 제거된 경우가 있습니다. 이 패키지들은 안녕 리눅스의 [***Xless*** repository](http://mirror.oops.org/pub/AnNyung/3/xless/x86_64/)에서 관리 되고 있습니다. 만약 서버에 Oracle을 설치해야 하는 경우에는 Oracle installer가 X windows 환경을 요구하므로, ***Xless*** repository를 disable 한 후에 X 관련 패키지를 설치해 주어야 합니다.
 
+***Xless*** repository의 패키지들은 안녕 리눅스 처음 설치시에 기본으로 설치되지 않습니다.
+
 ```bash
 [root@an3 ~]$ cat /etc/yum.repos.d/AnNyung.reps
 ... 상략
