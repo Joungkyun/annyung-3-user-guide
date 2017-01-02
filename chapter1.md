@@ -213,6 +213,73 @@ enabled=0
 ... 하략
 ```
 
+### 5.4 계정 정책
+
+#### 5.4.1 root login
+
+1. 기본적으로 root login 제한
+2. 사설(private) IP에서는 interactive root shell 접근 가능
+   * "```ssh root@host.com```" 접근 제한
+   * "```ssh root@host.com 'ls -al'```" 가능
+3. /root/.bashrc 에서 설정 변경 가능. [rootfiles](https://joungkyun.gitbooks.io/annyung-3-user-guide/content/pkg-base-rootfiles.html) 패키지 일람 참조.
+
+#### 5.4.2 account policy 변경
+
+***ISMS*** 권고 사항 반영.
+
+1. 암호 최소 길이 8자
+2. 암호 생성 시, 대문자/소문자/숫자/특수문자 중 3개가 포함이 되어야 함
+3. 이전 4개의 암호를 기억
+4. 5회 로그인 실패 시, 120초간 계정 잠금
+5. 암호 만료 90일(3개월).
+   * ***/etc/login.defs.exception*** 에 암호 만료 예외 account 설정
+6. [Shell login Control (with PAM)](https://joungkyun.gitbooks.io/annyung-3-user-guide/content/chapter2-2-pam-control.html) 문서 참조
+
+### 5.4 Shell
+
+#### 5.4.1 한국어 출력
+
+**jfbterm*** 패키지가 기본 설치 되어 있어, local console에서 한글 출력이 기본으로 가능. (현재 입력은 버그가 있어 안됨).
+
+```bash
+[root@an3 ~]$ jfbterm
+[root@an3 ~]$ cat utf8-hangul.txt
+UTF-8 한글 입니다.
+[root@ane ~]$ exit
+```
+
+#### 5.4.2 shell 추적
+
+1. USER_LANG 환경 변수를 가지고 있을 경우, ssh 접속시에나 sudo 전환 시에 LANG 환경 변수를 USER_LANG 환경변수를 이용하여 상속.
+   * 시스템 환경 변수 LANG=ko_KR.UTF-8 일 경우
+   * ***putty***에 USER_LANG="ko_KR.eucKR" 환경 변수 설정
+   * ***putty***로 로그인시, LANG 변수 값은 ***ko_KR.eucKR***이 됨.
+   * 이 상태에서 sudo를 했을 경우에도, ***ko_KR.eucKR***이 유지됨.
+2. shell time out 이 600초로 기본 설정 됨.
+3. sudo를 이용하여 account 전환을 했을 경우, 전환된 계정의 history에 원래의 user 기록.
+```bash
+[root@an3 ~]$ history
+   14  2016-02-03 16:18:01 oops make a && make s
+   15  2016-02-03 16:18:53 oops ls
+   16  2016-02-03 16:18:56 oops ./sync
+   17  2016-02-03 16:20:12 oops vi /var/log/yum.log
+   18  2016-02-03 16:37:22 james rpm -q openssl
+   19  2016-02-03 16:38:06 james cd ../SPECS/
+   20  2016-02-03 16:38:06 james ls
+   21  2016-02-03 16:38:11 oops rpm -q openssh
+```
+
+### 5.5 CentOS/RHEL 7과 비호환 사항
+
+***httpd***, ***php***, ***bind*** 의 경우는 ***RHEL/CentOS***와 호환되지 않습니다. 설정 파일의 구성 등이 다르기 때문에 이 3개의 패키지의 경우에는 기존의 설정 파일을 사용할 수 없고, 처음 부터 설정을 다시 하여야 합니다.
+
+***httpd***, ***php***의 경우에는 [3. Web Control](https://joungkyun.gitbooks.io/annyung-3-user-guide/content/chapter3.html)문서를 참고 하십시오. ***fastcgi***를 이용하여 ***php56*** 또는 ***php71***을 사용할 수 있습니다.
+
+***bind***의 경우에는 기본으로 chroot기능으로 packaging 되어 있으므로, ***/var/named*** 에 모든 설정이 들어가게 됩니다. ***/etc/named*** 는 설정 호환을 위하여 soft link로 지원이 됩니다.
+
+
+
+
 
 ## 6. 기타
 
