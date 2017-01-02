@@ -99,7 +99,6 @@
 ## 5. 차이점 일람
 
 차이점 일람은 RHEL/CentOS 사용자가 안녕 리눅스로 전환할 때, 고려해야 할 점이나, 달라진 점을 정리 합니다.
-***이 단락은 현재 작성 중 입니다.***
 
 ### 5.1 OS banner
 
@@ -110,6 +109,14 @@
 #### 5.2.1 방화벽 프로그램
 
 안녕 리눅스는 ***RHEL/CentOS*** 7의 ***firewalld*** 대신 [***oops-firewall***](http://oops.org/?t=lecture&sb=firewall&n=2) 을 사용합니다. ***oops-firewall***은 직관적이고 관리가 쉬우며, iptables를 잘 이해하고 있는 경우에는 직접 rule set을 조정할 수도 있습니다.
+
+***oops-firewll*** 대신 ***firewalld***를 사용하고 싶다면, 다음 명령으로 가능 합니다.
+
+```bash
+[root@an3 ~]$ service oops-firewall stop
+[root@an3 ~]$ yum remove oops-firewall
+[root@an3 ~]$ yum install firewalld
+```
 
 ***oops-firewall***은 1999년 부터 개발이 되어온 iptables frontend 방화벽 관리자로서, 15년 이상 enterprise 환경에서 검증이 된 서버 방화벽 프로그램 입니다.
 
