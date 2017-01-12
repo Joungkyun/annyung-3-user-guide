@@ -25,7 +25,7 @@
 ***Master*** 서버에서 복제할 data를 ***dump*** 받습니다. 이 명령은 나중에 data backup용으로 사용을 할 수 있습니다.
 
 ```bash
-[root@an3 ~]$ /usr/sbin/slapadd -l master-backup.ldif
+[root@an3 ~]$ /usr/sbin/slapcat -l master-backup.ldif
 5709f0f7 The first database does not allow slapcat; using the first available one (2)
 # id=00000001
 # id=00000002
