@@ -10,7 +10,26 @@ RHEL 7 또는 CentOS 7과 호환이 되지 않는 부분은 아래에 기술이 
 
 ## RHEL 7 / CentOS 7 과 다른 점
 
-1. 안녕 리눅스의 bind package는 기본으로 ***chroot*** 가 적용이 되어 있습니다. 그러므로 모든 설정 파일은 ***/var/named*** 아래에 존재 합니다. ***chroot*** 하지 않는 bind와의 호환성을 위하여 ***named.conf***가 위치하는 ***/var/named/etc*** 는 ***/etc/named*** 로 soft link 처리 되어 있습니다.
-2. ***named.conf*** 설정이 ***named.XXXXX.conf***와 같이 기능별로 설정 파일이 구분이 되어 있습니다. 이 의미는, ***named.XXXX.conf*** 에 들어갈 내용은 ***named.conf***에 들어가도 상관이 없다는 의미이며, ***named.conf***나 ***named.XXXXX.conf***에 들어갈 내용들은 ***named.conf*** 또는 어떤 ***named.XXXXX.conf*** 에 들어가도 상관이 없다는 의미입니다.
+1. 안녕 리눅스의 bind package는 기본으로 ***chroot*** 가 적용이 되어 있습니다.  
+
+   * 모든 설정 파일은 ***/var/named*** 아래에 존재 합니다.  
+   ```bash
+[root@an3 etc]$ cd /var/named/etc/
+[root@an3 etc]$ ls
+named.acl.conf named.rfc1912.zones pki
+named.conf named.root.key rndc.conf
+named.iscdlv.key named.user.zones rndc.key
+[root@an3 etc]$
+```
+
+   * ***chroot*** 하지 않는 bind와의 호환성을 위하여 ***named.conf***가 위치하는 ***/var/named/etc*** 는 ***/etc/named*** 로 soft link 처리 되어 있습니다.  
+   
+2. ***named.conf*** 설정은 기능별로 아래와 같이 구분이 되어 있습니다. (***named.conf***에서 아래의 순서대로 include 합니다.)  
+   
+   * ***named.acl.conf*** : bind에서 사용할 각종 ACL group을 설정 합니다. 기본으로 ***LocalAllow*** group이 설정 되어 있습니다.
+   * ***rndc.conf*** : ***rndc*** 설정과 ***rndc key*** 설정이 있습니다. 설치시에 기본으로 rndc key가 생성이 되므로, 굳이 따로 설정을 할 필요는 없습니다.
+   * ***named.rfc1912.zones*** : loopback 및 기본으로 필요한 zone 설정을 가지고 있습니다. 역시 건드릴 필요는 없습니다.
+   * ***named.suer.zones*** : 사용자 domain 설정을 추가 합니다.
+
 
 
