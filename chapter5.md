@@ -35,7 +35,9 @@ RHEL 7 또는 CentOS 7과 호환이 되지 않는 부분은 아래에 기술이 
    * ***named.rfc1912.zones*** : loopback 및 기본으로 필요한 zone 설정을 가지고 있습니다. 역시 건드릴 필요는 없습니다.
    * ***named.suer.zones*** : 사용자 domain 설정을 추가 합니다.
 
-## BIND 설정   
+## BIND 설정
+
+***현재 문서 작성 중 입니다. - 2017/02/11 -***
    
 1. [기본 설정](chapter5-1-basic.md)
 2. [ACL 설정](chapter5-2-acl.md)
