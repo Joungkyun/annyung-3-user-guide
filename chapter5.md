@@ -37,7 +37,7 @@ RHEL 7 또는 CentOS 7과 호환이 되지 않는 부분은 아래에 기술이 
 
 ## BIND 설정   
    
-1. [기본 설정](chapter5-1-basic.md)
+1. [기본 설정](chapter5-1-basic)
 2. [ACL 설정](chapter5-2-acl.md)
 3. [Domain 추가](chapter5-3-add-domain.md)
 4. [Slave DNS 구성](chapter5-4-slave-dns.md)
