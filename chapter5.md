@@ -14,15 +14,19 @@ RHEL 7 또는 CentOS 7과 호환이 되지 않는 부분은 아래에 기술이 
 
    * 모든 설정 파일은 ***/var/named*** 아래에 존재 합니다.  
    ```bash
-[root@an3 etc]$ cd /var/named/etc/
-[root@an3 etc]$ ls
-named.acl.conf named.rfc1912.zones pki
-named.conf named.root.key rndc.conf
-named.iscdlv.key named.user.zones rndc.key
-[root@an3 etc]$
-```
+   [root@an3 etc]$ cd /var/named/etc/
+   [root@an3 etc]$ ls
+   named.acl.conf  named.iscdlv.key     named.root.key    pki        rndc.key
+   named.conf      named.rfc1912.zones  named.user.zones  rndc.conf
+   [root@an3 etc]$
+   ```
 
    * ***chroot*** 하지 않는 bind와의 호환성을 위하여 ***named.conf***가 위치하는 ***/var/named/etc*** 는 ***/etc/named*** 로 soft link 처리 되어 있습니다.  
+   ```bash
+   [root@an3 etc]$ ls -l /etc/named
+   lrwxrwxrwx 1 root named 16  2월 10 19:53 /etc/named -> ../var/named/etc
+   [root@an3 etc]$
+   ```
    
 2. ***named.conf*** 설정은 기능별로 아래와 같이 구분이 되어 있습니다. (***named.conf***에서 아래의 순서대로 include 합니다.)  
    
@@ -30,6 +34,8 @@ named.iscdlv.key named.user.zones rndc.key
    * ***rndc.conf*** : ***rndc*** 설정과 ***rndc key*** 설정이 있습니다. 설치시에 기본으로 rndc key가 생성이 되므로, 굳이 따로 설정을 할 필요는 없습니다.
    * ***named.rfc1912.zones*** : loopback 및 기본으로 필요한 zone 설정을 가지고 있습니다. 역시 건드릴 필요는 없습니다.
    * ***named.suer.zones*** : 사용자 domain 설정을 추가 합니다.
+   
+   
 
 
 
