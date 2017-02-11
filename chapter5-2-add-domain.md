@@ -169,7 +169,7 @@ sub        IN  NS ns.sub.annyung.oops.org.
 
 예를 들어, 기존에 운영이 되고 있는 ***ns.dns.com(10.10.10.10)*** 서버로 위임을 할 경우, 아래와 같이 ***glue record***를 설정하지 말아야 합니다.
 
-* ***잘못된 예:*** 이미 존재하는 DNS에 대한 이름을 또 만들지 않는다.
+* ***잘못된 예:*** 이미 존재하는 DNS에 대한 이름을 또 만들지 않아야 합니다!
   ```
   sub        IN  NS ns.sub.annyung.oops.org.
              IN  A  10.10.10.10
@@ -180,8 +180,9 @@ sub        IN  NS ns.sub.annyung.oops.org.
   sub        IN  NS ns.dns.com.
   ```
 
+### 5.2.2.6 A(Address) & CNAME(Canonical Name)
 
-
+***A*** record와 ***CNAME*** record는 도메인에 대한 IP 주소나 별칭을 설정 하는데 사용을 합니다. IP 주소를 지정할 경우에는 ***A*** record를 사용하며, 별칭을 설정할 때는 ***CNAME*** record를 사용 합니다.
 
 
 
