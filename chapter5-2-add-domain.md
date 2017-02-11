@@ -180,7 +180,7 @@ sub        IN  NS ns.sub.annyung.oops.org.
   sub        IN  NS ns.dns.com.
   ```
 
-### 5.2.2.6 A(Address) & CNAME(Canonical Name)
+### 5.2.2.6 A(Address) & CNAME(Canonical Name) record
 
 ***A*** record와 ***CNAME*** record는 도메인에 대한 IP 주소나 별칭을 설정 하는데 사용을 합니다. IP 주소를 지정할 경우에는 ***A*** record를 사용하며, 별칭을 설정할 때는 ***CNAME*** record를 사용 합니다.
 
@@ -216,7 +216,27 @@ mail       IN  CNAME @
            IN  MX 10 mail
 ``` 
 
+### 5.2.2.7 MX(Mail eXchanger) record
 
+***MX*** record는 지정된 도메에 대한 mail routing 경로를 설정합니다. 쉽게 말하면, 지정된 도메인으로 된 메일 주소를 처리할 mail 서버를 지정하는 것입니다.
+
+```
+@          IN  MX 10 mail
+mail       IN  A     111.112.113.119
+```
+
+위의 설정은 ***@annyung.oops.org*** 메일 주소를 사용하는 메일은 ***mail.annyung.oops.org***에서 처리를 한다는 것을 announce 하는 설정 입니다. ***SMTP*** daemon들은 메일을 처리할 때 메일 주소의 도메인에 대한 ***MX*** record를 참조하여 처리할 메일 서버를 선택하게 됩니다.
+
+***MX*** record는 ***MX*** record 다음에 priority(우선 순위)를 설정할 수 있습니다.
+
+```
+@          IN  MX 10 mail
+           IN  MX 20 mail2
+```
+
+위의 설정은, ***mail.annyung.oops.org***에 연결이 되지 않으면, ***mail2.annyung.oops.org***로 보내라는 설정 입니다. priority가 낮은 서버가 우선 순위를 가지게 됨을 숙지 하십시오. (위와 같이 구성을 하였을때 mail2는 실제 메일을 처리하면 안되고 queuing만 해야 합니다. 안그러면 메일이 여기저기 분산이 되는 문제가 발생을 합니다. 이 부분은 SMTP daemon 구성에서 별도로 다뤄야 할 주제 입니다.)
+
+***MX*** record의 알고리즘에 대해서는 https://wiki.kldp.org/KoreanDoc/html/PoweredByDNS-KLDP/mx-algorithm.html 문서를 참고 하십시오.
 
 
 
