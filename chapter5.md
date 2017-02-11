@@ -64,7 +64,7 @@ _**현재 문서 작성 중 입니다. - 2017/02/11 -**_
 
 안녕 리눅스의 bind package는 설치 시에 기본적으로 구동이 되는데 문제가 없도록 기본 설정이 되어 있습니다. 하지만, 기본으로 localhost에서의 query만 허락하도록 되어 있으므로, DNS 운영 설정을 하기 위해서는 먼저 Recursion 정책을 결정하여 설정을 변경 해야 합니다.
 
-1. [Recursion 설정](chapter5-1-recursion.md)
+1. [기본 설정](chapter5-1-basic.md)
 2. [신규 Domain 설정](chapter5-2-add-domain.md)
 3. [Slave DNS 구성](chapter5-3-slave-dns.md)
 4. [DNSSEC 설정](chapter5-4-dnssec.md)
