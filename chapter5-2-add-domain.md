@@ -83,14 +83,14 @@ www             IN  CNAME   @
 
 ### 5.2.2.3 zone database 설정 형식
 
-zone file에서 작성하는 database의 형식은 다음과 같다.
+zone file에서 작성하는 database의 형식은 다음과 같습니다.
 
 ```
 [DOMAIN]           [TTL]  [CLASS] [RECORD]  [DOMIAN | IPADDRESS]
 annyugn.oosp.org.  86400  IN      A         1.1.1.1
 ```
 
-***TTL*** 필드는 생략이 가능하며, 이에 대해서는 ***TTL 설정*** 항목에서 다룰 것이다.
+***TTL*** 필드는 생략이 가능하며, 이에 대해서는 ***TTL 설정*** 항목에서 다룰 것 입니다.
 
 
 ### 5.2.2.3 SOA 영역
