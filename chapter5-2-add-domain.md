@@ -112,7 +112,8 @@ zone file에서 사용할 수 있는 몇가지 지시자가 있습니다.
   라벨 또는 이름 필드에서 사용될 경우, ***at-sign(@)***은 현재의 ***ORIGIN***을 의미 합니다. zone file의 처음에 나올 경우, ***at-sign(@)***은 zone name 자체 입니다.
   
 * ***$TTL***  
-  zone file 전반에서 사용되는 기본 TTL 값을 설정 합니다.
+  zone file 전반에서 사용되는 기본 TTL 값을 설정 합니다. ***Chapter 5.2.3 TTL 설정***을 참고 하십시오.
+  
 * ***$ORIGIN***  
   규정되지 않은 도메인(dot(.)으로 끝나지 않은 이름 또는 도메인) 뒤에 추가될 도메인을 지정 합니다. 별도로 ***$ORIGIN***이 설정 되어 있지 않다면, zone name을 기본으로 사용 합니다.
 
@@ -140,6 +141,7 @@ zone file에서 사용할 수 있는 몇가지 지시자가 있습니다.
 
 * ***$GENERATE***
 
+  [Chapter 5.4 Inverse Domain 설정](chapter5-4-inverse-domain.md)
 
 ### 5.2.2.4 zone database 설정 형식
 
@@ -150,7 +152,7 @@ zone file에서 작성하는 database의 형식은 다음과 같습니다.
 domain.org.  86400  IN      A         1.1.1.1
 ```
 
-***TTL*** 필드는 생략이 가능하며, 이에 대해서는 ***TTL 설정*** 항목에서 다룰 것 입니다.
+***TTL*** 필드는 생략이 가능하며, 이에 대해서는 ***Chapter 5.2.3 TTL 설정*** 항목에서 다룰 것 입니다.
 
 ***CLASS***는 ***IN***, ***HS***, ***HESIOD***, ***CHAOS*** 등이 있지만, 대부분 ***IN*** 외에는 사용할 일이 거의 없습니다. 아주 특별한 설정이 아닌 이상 ***IN***만 사용한다고 생각하면 됩니다.
 
@@ -303,17 +305,4 @@ mail       IN  A     111.112.113.119
 
 zone database는 Forward, Reverse 두 가지로 구분이 됩니다. Forward Zone은 도메인에 대한 IP 정보를 갖고 있는 database이고, Reverse Zone은 IP에 대한 도메인 정보를 갖는 database 입니다.
 
-***PTR*** record는 Reverse zone database를 설정을 할 때 사용을 합니다. 즉, IP 주소에 이름을 mapping 할 경우에 사용을 합니다. 이 record에 대해서는 ***inverse domain*** 설정에서 따로 다루도록 합니다. 
-
-
-
-
-
-
-
-
-
-
-
-
-
+***PTR*** record는 Reverse zone database를 설정을 할 때 사용을 합니다. 즉, IP 주소에 이름을 mapping 할 경우에 사용을 합니다. 이 record에 대해서는 ***[Chapter 5.4 Inverse Domain 설정](chapter5-4-inverse-domain.md)***에서 따로 다루도록 합니다. 
