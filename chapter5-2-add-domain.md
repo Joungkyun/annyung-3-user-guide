@@ -106,15 +106,34 @@ www             IN  CNAME   @
 
 ### 5.2.2.3. zone database에서 사용하는 지시자(directive)
 
-zone file에서 사용할 수 있는 몇가지 지시자가 있다.
+zone file에서 사용할 수 있는 몇가지 지시자가 있습니다.
 
 * ***@***  
   라벨 또는 이름 필드에서 사용될 경우, ***at-sign(@)***은 현재의 ***ORIGIN***을 의미 합니다. zone file의 처음에 나올 경우, ***at-sign(@)***은 zone name 자체 입니다.
   
 * ***$TTL***  
   zone file 전반에서 사용되는 기본 TTL 값을 설정 합니다.
-* ***$ORIGIN***
-* ***$INCLUDE***
+* ***$ORIGIN***  
+  규정되지 않은 도메인(dot(.)으로 끝나지 않은 이름 또는 도메인) 뒤에 추가될 도메인을 지정 합니다. 별도로 ***$ORIGIN***이 설정 되어 있지 않다면, zone name을 기본으로 사용 합니다.
+
+  ```
+  $ORIGIN example.com.
+  WWW     IN  CNAME   MAIN-SERVER
+  ```
+  위의 설정은 다음과 동일 합니다.
+
+  ```
+  WWW.EXAMPLE.COM. IN  CNAME   MAIN-SERVER.EXAMPLE.COM.
+  ```
+  
+* ***$INCLUDE***  
+
+  ***$INCLUDE*** 지시자가 설정된 라인에, 지정된 파일의 내용을 추가 합니다. 지정된 파일 내부에 ***$ORIGIN***이 설정이 되어 있으면, 설정된 ***$ORIGIN***으로 처리가 되며, 설정이 되어 있지 않으면 현재의 ***$ORIGIN***으로 처리가 됩니다.
+
+  ***$INCLUDE***가 처리된 후, origin과 현재 domain name은 ***$INCLUDE***가 수행되기 전의 값으로 원복 됩니다.
+  
+  ***[참고] :*** ***RFC 1035***에서 ***$INCLUDE*** 후에 현재 origin은 복원이 되어야 한다고 정의가 되어 있습니다. 하지만 현재 domain name의 원복에 대해서는 정의하고 있지 않습니다. ***bind*** v9에서는 origin과 현재 domain name 모두를 복원 합니다. 이 행위는 어떤면에서 ***RFC 1035***를 위반하고 있다고 할 수도 있습니다.
+
 * ***$CHARSET***
 * ***$GENERATE***
 
