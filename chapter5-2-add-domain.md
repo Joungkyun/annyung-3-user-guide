@@ -337,3 +337,38 @@ zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습�
 
 
 ## 5.2.4. 다국어 도메인 설정
+
+다국어 도메인이라 함은 예를 들어 ***한국.com***같이 ascii 외의 문자로 도메인 이름을 사용하는 것을 의미 합니다. 다국어 도메인은 기본적으로 punycode를 이용하여 설정을 해야 합니다. 다국어 도메인을 punycode로 변환하는 것은 인터넷 상에서 ***punycode 변환기***로 검색을 하면 쉽게 변환을 할 수 있습니다.
+
+***한글.com***을 punycode로 변환을 하면 ***xn--bj0bj06e.com***이 됩니다. 상단의 DNS 설정에서 도메인 부분만 이렇게 punycode로 사용하는 것만을 제외 한다면, 일반적인 도메인 설정과 동일하게 할 수 있습니다.
+
+또한, 안녕 리눅스의 ***bind***는 다국어 도메인에 관련된 추가 패치가 되어 있어, punycode를 사용하지 않고 직접 다국어 도메인을 사용할 수 있습니다. 다국어 도메인의 문자셋은 기본으로 ***UTF-8*** 이어야 합니다.
+
+사용 예는 다음과 같습니다.
+
+* domain zone 정의
+  ```
+  zone "xn--bj0bj06e.com" IN {
+      type master;
+      file "한글.com.zone";
+      allow-update { none; };
+  };
+  
+  or (only AnNyung LInux)
+  
+  zone "한글.com" IN {
+      type master;
+      file "한글.com.zone";
+      allow-update { none; };
+  };
+  ```
+  
+  named.conf 파일의 문자셋이 ***EUC-KR*** 일 경우에는 다음과 같이 설정 합니다.
+  
+  ```
+  zone "CH+EUC-KR.한글.com" IN {
+      type master;
+      file "한글.com.zone";
+      allow-update { none; };
+  };
+  ```
