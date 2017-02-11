@@ -240,6 +240,12 @@ mail       IN  A     111.112.113.119
 
 ***MX*** record로 지정된 이름은 ***CNAME*** record로 정의가 되어서는 안됨을 명심 하십시오!
 
+### 5.2.2.8 PTR record
+
+zone database는 Forward, Reverse 두 가지로 구분이 됩니다. Forward Zone은 도메인에 대한 IP 정보를 갖고 있는 database이고, Reverse Zone은 IP에 대한 도메인 정보를 갖는 database 입니다.
+
+***PTR*** record는 Reverse zone database를 설정을 할 때 사용을 합니다. 즉, IP 주소에 이름을 mapping 할 경우에 사용을 합니다. 이 record에 대해서는 ***inverse domain*** 설정에서 따로 다루도록 합니다. 
+
 
 
 
