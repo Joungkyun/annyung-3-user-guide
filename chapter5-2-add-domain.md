@@ -313,6 +313,26 @@ zone database는 Forward, Reverse 두 가지로 구분이 됩니다. Forward Zon
 
 ## 5.2.3 TTL 설정
 
-zone databse에서 TTL(Time-To-Live)은 cache expire에 영향을 주는 설정입니다. caching name server에게 지정된 TTL 시간 동안만 caching을 하라는 의미로 사용이 되어집니다.
+zone database에서 TTL(Time-To-Live)은 cache expire에 영향을 주는 설정입니다. caching name server에게 지정된 ***TTL*** 시간 동안만 caching을 하라는 의미로 사용이 되어집니다.
+
+***TTL*** 값은 32bit 정수로 구성된 시간(초)을 설정 합니다.
+
+zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습니다.
+
+The time-to-live of the RR field is a 32-bit integer represented in units of seconds, and is primarily used by resolvers when they cache RRs. The TTL describes how long a RR can be cached before it should be discarded. The following three types of TTL are currently used in a zone file.
+
+* ***Negative caching TTL***
+
+  ***SOA*** 영역의 마지막 ***TTL*** 값은 negative caching TTL을 설정 합니다. 이 의미는 다른 caching server가  ***NXDOMAIN***(찾을 수 없는 도메인)에 대한 응답을 얼마동안 cache를 할지를 조절 합니다. negative caching의 최대값은 3시간(3h) 입니다.
+
+$TTL
+
+The $TTL directive at the top of the zone file (before the SOA) gives a default TTL for every RR without a specific TTL set.
+
+RR TTLs
+
+Each RR can have a TTL as the second field in the RR, which will control how long other servers can cache it.
+
+All of these TTLs default to units of seconds, though units can be explicitly specified, for example, 1h30m.
 
 ## 5.2.4. 다국어 도메인 설정
