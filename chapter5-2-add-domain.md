@@ -1,9 +1,19 @@
 # Chapter 5.2 Bind 신규 도메인 설정
 
-> 목차
-5.2.2.8 PTR record
+> 목차 :
+5.2.1. domain zone 정의
+5.2.2. zone database 설정
+* 5.2.2.1. 도메인 origin
+* 5.2.2.2. 도메인 이름 확장
+* 5.2.2.3. zone database에서 사용하는 keyword
+* 5.2.2.4. zone database 설정 형식
+* 5.2.2.5. SOA record 영역
+* 5.2.2.6. NS record
+* 5.2.2.7. A(Address) & CNAME(Canonical Name) record
+* 5.2.2.8. MX(Mail eXchanger) record
+* 5.2.2.9. PTR record
 
-
+<br><br>
 
 이 챕터는 ***domain.org*** 도메인을 bind에 추가하고 관리하는 것을 예로 듭니다.
 
@@ -90,7 +100,10 @@ www             IN  CNAME   @
 
 이 부분은 숙련되 엔지니어도 자주 하는 실수 영역이므로, zone databse 설정 시에는 이를 숙지하면서 작업을 해야 합니다.
 
-### 5.2.2.3 zone database 설정 형식
+### 5.2.2.3. zone database에서 사용하는 keyword
+
+
+### 5.2.2.4 zone database 설정 형식
 
 zone file에서 작성하는 database의 형식은 다음과 같습니다.
 
@@ -119,7 +132,7 @@ www      IN    A     1.1.1.1
 www      IN    A     1.1.1.2
 ```
 
-### 5.2.2.4 SOA record 영역
+### 5.2.2.5 SOA record 영역
 
 zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA 레코드는 해당 도메인, ***domain.org***에 대해 네임서버가 인증(authoritative)된 자료를 갖고 있음을 의미하며, 자료가 최적의 상태로 유지, 관리될 수 있도록 합니다.
 
@@ -155,7 +168,7 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
   
   이 값이 너무 길게 지정이 될 경우에는 변경된 record가 다른 DNS로 전파되는데 오래 걸리는 단점이 있습니다. 그러므로 record 변경 전에 TTL을 감안하여 미리 TTL을 줄여 놓고 작업을 해야할 수도 있습니다.
   
-### 5.2.2.5 NS record
+### 5.2.2.6 NS record
 
 ***NS*** record를 이용하여 해당 도메인의 name server를 나타냅니다.
 
@@ -188,7 +201,7 @@ ns.sub     IN  A  111.112.113.120
   sub        IN  NS ns.dns.com.
   ```
 
-### 5.2.2.6 A(Address) & CNAME(Canonical Name) record
+### 5.2.2.7 A(Address) & CNAME(Canonical Name) record
 
 ***A*** record와 ***CNAME*** record는 도메인에 대한 IP 주소나 별칭을 설정 하는데 사용을 합니다. IP 주소를 지정할 경우에는 ***A*** record를 사용하며, 별칭을 설정할 때는 ***CNAME*** record를 사용 합니다.
 
@@ -224,7 +237,7 @@ mail       IN  CNAME @
            IN  MX 10 mail
 ``` 
 
-### 5.2.2.7 MX(Mail eXchanger) record
+### 5.2.2.8 MX(Mail eXchanger) record
 
 ***MX*** record는 지정된 도메에 대한 mail routing 경로를 설정합니다. 쉽게 말하면, 지정된 도메인으로 된 메일 주소를 처리할 mail 서버를 지정하는 것입니다.
 
@@ -248,7 +261,7 @@ mail       IN  A     111.112.113.119
 
 ***MX*** record로 지정된 이름은 ***CNAME*** record로 정의가 되어서는 안됨을 명심 하십시오!
 
-### 5.2.2.8 PTR record
+### 5.2.2.9 PTR record
 
 zone database는 Forward, Reverse 두 가지로 구분이 됩니다. Forward Zone은 도메인에 대한 IP 정보를 갖고 있는 database이고, Reverse Zone은 IP에 대한 도메인 정보를 갖는 database 입니다.
 
