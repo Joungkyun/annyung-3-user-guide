@@ -350,7 +350,7 @@ zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습�
   ```
   zone "xn--bj0bj06e.com" IN {
       type master;
-      file "한글.com.zone";
+      file "hangul.com.zone";
       allow-update { none; };
   };
   
@@ -358,7 +358,7 @@ zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습�
   
   zone "한글.com" IN {
       type master;
-      file "한글.com.zone";
+      file "hangul.com.zone";
       allow-update { none; };
   };
   ```
@@ -368,7 +368,23 @@ zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습�
   ```
   zone "CH+EUC-KR.한글.com" IN {
       type master;
-      file "한글.com.zone";
+      file "hangul.com.zone";
       allow-update { none; };
   };
   ```
+  
+* zone database 설정
+
+  zone 파일에서도, domain zone 정의를 할 때와 동일하게 국어 도메인을 설정하면 됩니다.
+  
+  ```
+  www     IN  CNAME  test.xn--bj0bj06e.com.
+  www     IN  CNAME  test.한글.com.
+  www     IN  CNAME  test.CH+EUC-KR.한글.com.
+  xn--op2bn8a IN CNAME @
+  메롱    IN  CNAME   @
+  CH+EUC-KR.메롱 IN CNAME @
+  ```
+
+  zone file의 문자셋이 EUC-KR 일 경우에는 ***$CHARSET*** 지시자를 이용할 수 있습니다. ***$CHARSET*** 지시자는 zone 파일 최상단에 위치해야 합니다.
+  
