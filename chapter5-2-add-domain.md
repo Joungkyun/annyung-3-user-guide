@@ -109,4 +109,6 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
 ```
 
 ***PRIMARY DNS***는 origin에 대한 primary name server 이름을 지정 합니다.
-***E-MAIL***은 이 도메인을 관리하는 name server 관리자의 메일 주소를 지정 합니다. 단 메일 주소의 ***@***을 ***dot(.)***으로 표기하는 것을 주의해야 합니다.
+***E-MAIL***은 이 도메인을 관리하는 name server 관리자의 메일 주소를 지정 합니다. 단 메일 주소의 ***@***을 ***dot(.)***으로 표기하는 것을 주의해야 합니다. 해당 도메인의 contact point로 사용이 되며, 도메인에 문제가 있을 경우에 이에 대한 리포팅 대상으로 사용되기 됩니다. 또한 Namespace를 쫒으며 도메인 오류를 점검하는 lamers와 같은 도구들이 문제를 검출 하였을 경우, 이 메일 주소로 통지를 하게 됩니다.
+
+다음 괄호로 둘러싸인 부분엔 ***Serial***, ***Refresh***, ***Retry***, ***Expire***, ***Minimum*** 5개의 시간을 지정하는 필드가 정의 됩니다. ***TTL***을 제외한 처음 4개 필드는 Secondary 또는 Slave 네임서버를 제어하기 위한 값 d입니다. 기본 단위는 '초'이고, 단위기호 M(Minute), H(Hour), D(Day), W(Week)를 붙여 30M, 8H, 2D, 1W와 같이 사용할 수 있습니다.
