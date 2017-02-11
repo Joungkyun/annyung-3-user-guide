@@ -37,13 +37,14 @@ $TTL 86400
                 )
 
                 IN  NS      ns.oops.org.
+                IN  NS      ns2.oops.org.
                 IN  MX 10   mail
-                IN  A       14.0.82.85
+                IN  A       111.112.113.1
 
 www             IN  CNAME   @
 ftp             IN  CNAME   @
 mail            IN  A       111.112.113.114
-                IN  TXT     "v=spf1 include:an3.pkg.oops.org ~all"
+                IN  TXT     "v=spf1 include:annyung.oops.org ~all"
 
 ``` 
 
@@ -150,7 +151,34 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
 
 ***NS*** record를 이용하여 해당 도메인의 name server를 나타냅니다.
 
+```
+@          IN  NS  ns.oops.org.
+           IN  NS  ns2.oops.org.
+```
 
+***origin(annyung.oops.org)***는 ***ns.oops.org***와 ***ns2.oops.org***에서 관리 되어진다고 announce 하게 됩니다.
+
+또한, ***NS*** record는 서브 도메인의 권한을 다른 DNS에 위임할 경우에도 사용할 수 있습니다.
+
+```
+sub        IN  NS ns.sub.annyung.oops.org.
+           IN  A  111.112.113.120
+```
+
+위의 설정은 ****.sub.annyung.oops.org*** 의 권한을 ***ns.sub.annyung.oops.org***에 위임한다는 설정입니다. 여기서 위임한 네임 서버(ns.sub.annyung.oops.org)의 ***A*** record(IP 주소)를 ***glue record***라고 합니다. ***glue record***를 언급하는 이유는, 위임을 하는 DNS가 신규로 만들어 지는 DNS일 경우에는 위와 같이 ***glue record***를 설정해야 하지만, 기존의 운영되고 있는 DNS로 위임을 하는 경우에는 ***glue record***를 설정하지 않는 것이 좋습니다.
+
+예를 들어, 기존에 운영이 되고 있는 ***ns.dns.com(10.10.10.10)*** 서버로 위임을 할 경우, 아래와 같이 ***glue record***를 설정하지 말아야 합니다.
+
+* ***잘못된 예:*** 이미 존재하는 DNS에 대한 이름을 또 만들지 않는다.
+  ```
+  sub        IN  NS ns.sub.annyung.oops.org.
+             IN  A  10.10.10.10
+  ```
+
+* ***올바른 예:***
+  ```
+  sub        IN  NS ns.dns.com.
+  ```
 
 
 
