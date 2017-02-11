@@ -1,4 +1,4 @@
-# Chapter 5.1 Bind 기본 설정
+# Chapter 5.1 Bind Recursion 설정
 
 이 문서는 DNS에 도메인을 추가하기 전에 일단 bind 구동을 위한 기본 설정을 다룹니다.
 
