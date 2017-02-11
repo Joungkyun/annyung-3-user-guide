@@ -184,6 +184,25 @@ sub        IN  NS ns.sub.annyung.oops.org.
 
 ***A*** record와 ***CNAME*** record는 도메인에 대한 IP 주소나 별칭을 설정 하는데 사용을 합니다. IP 주소를 지정할 경우에는 ***A*** record를 사용하며, 별칭을 설정할 때는 ***CNAME*** record를 사용 합니다.
 
+```
+sub        IN  A     1.1.1.1
+sub1       IN  CNAME sub
+```
+
+위의 설정은 다음을 의미합니다.
+
+* ***sub.annyung.oops.org***의 IP 주소는 1.1.1.1
+* ***sub1.annyung.oops.org***는 ***sub.annyung.oops.org***와 동일함.
+
+하나의 도메인에 대해서 여러개의 ***A*** record를 부여하는 것을 ***DNS RR(Round Robin)*** 이라고 합니다.
+
+```
+sub        IN  A     1.1.1.1
+           IN  A     1.1.1.2
+           IN  A     1.1.1.3
+```
+
+위와 같이 설정을 하면, 요청이 올 때 마다 차례대로 하나씩 응답을 하게 됩니다. (서버 입장에서 요청온 순서대로 차례대로 이기 때문에 client 입장에서는 동일한 IP를 연속으로 받을 수도 있습니다.) ***DNS를 이용한 서버 부하 분산***을 할 경우에 이 설정을 이용할 수 있습니다. 하지만, 지정된 서버의 fail over를 할 수 없기 때문에 대부분 서버 부하 분산은 DNS를 이용하기 보다는 ***L4***나 ***L7*** 장비 또는 software를 이용하는 것이 바람직 합니다.
 
 
 
