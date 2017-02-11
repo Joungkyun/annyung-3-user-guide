@@ -206,6 +206,16 @@ sub        IN  A     1.1.1.1
 
 ***A*** record를 이용하여 ***DNS RR***을 처리 하듯이 ***CNAME*** record를 이용하여 할 수도 있습니다. 하지만, ***CNAME***을 이용한 ***DNS RR***은 안녕 리눅스에서 제공하는 ***bind*** 또는 ***bind*** v4 에서나 가능 합니다. 사실 multiple ***CNAME***은 DNS의 규약 위반 입니다. 그러므로 ***bind*** v8 이후에는 제거가 되었습니다. 하지만 간혹 유용하게 쓰일 경우가 있어 안녕 리눅스의 ***bind***에서는 multiple ***CNAME***을 지원 합니다. (하지만 될 수 있으면 사용하지 마십시오!)
 
+또한, ***CNAME*** record로 지정된 이름은, ***NS***, ***MX*** record에 지정할 수 없습니다. 다음의 예는 잘못된 CNAME 사용법 입니다.
+
+```
+@          IN  NS    ns
+ns         IN  CNAME @
+
+mail       IN  CNAME @
+           IN  MX 10 mail
+``` 
+
 
 
 
