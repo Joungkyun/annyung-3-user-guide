@@ -40,6 +40,9 @@
 * [Chapter 5. DNS 운영](chapter5.md)
   * [기본 설정](chapter5-1-basic.md)
   * [신규 도메인 설정](chapter5-2-add-domain.md)
+  * Slave DNS 구성
+  * DNSSEC 설정
+  * GeoDNS 설정
 * [Chapter 6. Time Server 운영](chapter6.md)
   * [Chrony](chapter6-chrony.md)
   * [NTP](chapter6-ntp.md)
