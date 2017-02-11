@@ -39,6 +39,7 @@
 * [Chapter 4. JVM 운영](chapter4.md)
 * [Chapter 5. DNS 운영](chapter5.md)
   * [Recursion 설정](chapter5-1-recursion.md)
+  * [신규 도메인 설정](chapter5-2-add-domain.md)
 * [Chapter 6. Time Server 운영](chapter6.md)
   * [Chrony](chapter6-chrony.md)
   * [NTP](chapter6-ntp.md)
