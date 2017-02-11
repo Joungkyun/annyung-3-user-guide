@@ -100,3 +100,13 @@ annyugn.oosp.org.  86400  IN      A         1.1.1.1
 ### 5.2.2.4 SOA record 영역
 
 zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA 레코드는 해당 도메인, ***annyung.oops.org***에 대해 네임서버가 인증(authoritative)된 자료를 갖고 있음을 의미하며, 자료가 최적의 상태로 유지, 관리될 수 있도록 합니다.
+
+***SOA*** record 설정의 형식은 다음과 같습니다.
+
+```
+[ORIGN] [CLASS] [RECORD] [PRIMARY DNS] [E-MAIL]        ([SERIAL]   [REFRESH] [RETRY] [EXPIRE] [TTL])
+@       IN      SOA      ns.oops.org.  admin.oops.org. (2017011500 10800     3600    604800   86400)
+```
+
+***PRIMARY DNS***는 origin에 대한 primary name server 이름을 지정 합니다.
+***E-MAIL***은 이 도메인을 관리하는 name server 관리자의 메일 주소를 지정 합니다. 단 메일 주소의 ***@***을 ***dot(.)***으로 표기하는 것을 주의해야 합니다.
