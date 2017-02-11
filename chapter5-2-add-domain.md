@@ -1,5 +1,9 @@
 # Chapter 5.2 Bind 신규 도메인 설정
 
+> 목차
+5.2.2.8 PTR record
+
+
 
 이 챕터는 ***domain.org*** 도메인을 bind에 추가하고 관리하는 것을 예로 듭니다.
 
