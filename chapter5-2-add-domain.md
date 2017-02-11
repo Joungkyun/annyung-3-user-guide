@@ -68,9 +68,9 @@ $ORIGIN annyung.oops.org.
 data            IN  CNAME   @  ; data.annyung.oops.org를 annyung.oops.org의 CNAME으로 설정
 ```
 
-### 5.2.2.2 도메인 표현 형식
+### 5.2.2.2 도메인 이름 확장
 
-도메인 표현 형식은 zone 파일 설정에서 아주 중요한 부분 입니다. 대부분의 DNS 설정 오류가 도메인 형식을 잘못 사용하여 발생을 하게 됩니다.
+도메인 이름 확장은 zone 파일 설정에서 아주 중요한 부분 입니다. 대부분의 DNS 설정 오류가 도메인 이름 확장을 잘못 사용하여 발생을 하게 됩니다.
 
 기본적으로, zone 파일에서 완전한 도메인을 표기할 때는 마지막에 ***annyung.oops.org.***와 같이 ***dot(.)***로 끝이 나야 합니다. 이름 마지막이 ***dot(.)***으로 끝나지 않을 경우에는 bind는 그 뒤에 ***origin***이 붙는 것으로 간주를 한다. 즉, ***www.annyung.oops.org***는 ***www.annyung.oops.org.annyung.oops.org***로 인식이 되는 것 입니다. 그러므로 다음의 설정에서
 
@@ -130,7 +130,7 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
 * ***Serial*** :
   Secondary 또는 Slave가 zone 파일의 수정 여부를 알 수 있도록 하기 위하여 사용합니다. Slave DNS 설정이 되어 있을 경우, ***Master*** 서버는 reload 또는 restart signal을 받을 경우, 각 zone 파일의 ***serial*** 값을 ***Slave*** 서버로 전송하게 됩니다. ***serial*** 값을 전송받은 ***Slave*** 서버는 백업본의 ***serial***이 전송받은 값 보다 작을 경우 zone 파일을 재전송 받게 됩니다. 즉, ***Master***에서 zone 파일이 변경이 되었더라도 ***serial***값이 변경이 되지 않는다면 ***Slave*** 서버들이 데이터는 갱신이 되지 않는다는 의미 입니다. 그러므로 ***Slave*** DNS가 없더라도 항상 zone file을 변경한 후에는 ***serial*** 값을 갱신 시키는 습관을 들이는 것을 권장 합니다.
   
-  ***serial***의 표기법은 증가하는 임의의 숫자 보다는 일반적으로는 최종 수정일을 ***YYYYMMDDNN***의 형식으로 표기 합니다. ***YYYYMMDDNN*** 연도 표기법은 4294년까지 가능 합니다.
+  ***serial***의 표기법은 최근의 ***bind***에서는 증가하는 임의의 숫자는 deprecated 되어 사용을 지양하고 있으며, 최종 수정일을 ***YYYYMMDDNN***의 형식으로 표기 합니다. ***YYYYMMDDNN*** 연도 표기법은 4294년까지 가능 합니다.
 
 * ***Refresh*** :
   ***Slave*** DNS가 ***Master***의 zone database 수정 여부를 검사하는 주기 입니다. 이 기능은 ***Master***의 notify가 실패를 하였을 경우를 대비하여 ***Slave***측에서 동기화를 어긋나지 않도록 하기 위한 기능 입니다. 
@@ -203,6 +203,8 @@ sub        IN  A     1.1.1.1
 ```
 
 위와 같이 설정을 하면, 요청이 올 때 마다 차례대로 하나씩 응답을 하게 됩니다. (서버 입장에서 요청온 순서대로 차례대로 이기 때문에 client 입장에서는 동일한 IP를 연속으로 받을 수도 있습니다.) ***DNS를 이용한 서버 부하 분산***을 할 경우에 이 설정을 이용할 수 있습니다. 하지만, 지정된 서버의 fail over를 할 수 없기 때문에 대부분 서버 부하 분산은 DNS를 이용하기 보다는 ***L4***나 ***L7*** 장비 또는 software를 이용하는 것이 바람직 합니다.
+
+***A*** record를 이용하여 ***DNS RR***을 처리 하듯이 ***CNAME*** record를 이용하여 할 수도 있습니다. 하지만, ***CNAME***을 이용한 ***DNS RR***은 안녕 리눅스나 
 
 
 
