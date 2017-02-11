@@ -203,12 +203,7 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
   ***Slave***가 ***expire***로 지정된 시간동안 동기화가 이루어 지지 못할 경우, 오래된 백업 카피의 자료를 폐기 합니다. 이 값을 너무 작게 책정하는 것은 좋지 않고 보통 1~2주 정도로 설정을 하면 됩니다.것은 좋지 않다. 보통 1W - 2W(1209600)로 설정한다.
 
 * ***TTL***
-
-  caching name server가 본 zone database 자료를 가지고 있을 때, 이 database에 대한 유효 기간을 설정 합니다. TTL 값이 명시되지 않은 record들은 이 값을 기본 TTL로 설정이 됩니다. ***0***은 caching을 하지 말라는 의미입니다.  Bind 8에서 ***$TTL*** keyword가 추가된 이후로는 이 값을 이용하여 TTL 설정을 하기 보다는 ***$TTL*** keyword를 이용해서 기본 TTL 값을 설정하는 것이 근래의 추세 입니다.  
-  
-  이 값이 너무 길게 지정이 될 경우에는 변경된 record가 다른 DNS로 전파되는데 오래 걸리는 단점이 있습니다. 그러므로 record 변경 전에 TTL을 감안하여 미리 TTL을 줄여 놓고 작업을 해야할 수도 있습니다.
-  
-  ***TTL***에 대한 자세한 내용은 ***Chapter 5.2.3 TTL 설정***을 참고 하십시오.
+  Negative caching TTL 설정을 합니다. Caching name server에 ***NXDOMAIN***(찾을 수 없는 도메인)에 대한 응답을 얼마동안 caching 할지를 설정 합니다. 이에 대한 자세한 내용은 ***Chapter 5.2.3 TTL 설정***을 참고 하십시오.
 
   
 ### 5.2.2.6 NS record
@@ -319,20 +314,26 @@ zone database에서 TTL(Time-To-Live)은 cache expire에 영향을 주는 설정
 
 zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습니다.
 
-The time-to-live of the RR field is a 32-bit integer represented in units of seconds, and is primarily used by resolvers when they cache RRs. The TTL describes how long a RR can be cached before it should be discarded. The following three types of TTL are currently used in a zone file.
-
 * ***Negative caching TTL***
 
-  ***SOA*** 영역의 마지막 ***TTL*** 값은 negative caching TTL을 설정 합니다. 이 의미는 다른 caching server가  ***NXDOMAIN***(찾을 수 없는 도메인)에 대한 응답을 얼마동안 cache를 할지를 조절 합니다. negative caching의 최대값은 3시간(3h) 입니다.
+  ***SOA*** 영역의 마지막 ***TTL*** 값은 negative caching TTL을 설정 합니다. 이 의미는 다른 caching server가  ***NXDOMAIN***(찾을 수 없는 도메인)에 대한 응답을 얼마동안 cache를 할지를 조절 합니다. negative caching의 최대값은 3시간(3h) 입니다. ***0***은 caching을 하지 말라는 의미로 사용이 됩니다.
 
-$TTL
+* ***Default TTL***
 
-The $TTL directive at the top of the zone file (before the SOA) gives a default TTL for every RR without a specific TTL set.
+  ***$TTL*** 지시자는 zone 파일의 최상단(SOA 설정 전)에서 설정해야 하며, ***TTL***이 설정되지 않은 모든 ***RR***에 대한 기본 ***TTL***값으로 사용이 되어집니다.
+  
+  이 값이 너무 길게 지정이 될 경우에는 변경된 record가 다른 DNS로 전파되는데 오래 걸리는 단점이 있습니다. 그러므로 record 변경 전에 TTL을 감안하여 미리 TTL을 줄여 놓고 작업을 해야할 수도 있습니다.
 
-RR TTLs
+* ***RR TTLs***
 
-Each RR can have a TTL as the second field in the RR, which will control how long other servers can cache it.
+  각 record 설정 시에, 두번째 필드를 ***TTL*** 필드로 사용을 할 수 있습니다. 특정 record만 ***$TTL*** 값과 다르게 지정하고 싶을 경우에 사용을 할 수 있습니다.
+  
+  ```
+  $TTL 86400
+  www      60   IN  A  10.10.10.1
+  ```
+  
+  위의 설정은, 기본 TTL은 1일(86400)이지만, www record만 TTL을 60초로 설정하는 예 입니다.
 
-All of these TTLs default to units of seconds, though units can be explicitly specified, for example, 1h30m.
 
 ## 5.2.4. 다국어 도메인 설정
