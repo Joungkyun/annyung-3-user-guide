@@ -175,6 +175,18 @@ oops@linux:~$
 ***recursion*** 정책 설정이 완료가 되면, 이제 bind는 기본적으로 정책에 따라 응답을 할 수 있는 상황이 됩니다.
 
 
+## 5.1.2 bind 구동 확인
 
+안녕 리눅스 3의 데몬 구동은 systemd를 이용 합니다. 다음의 명령으로 bind 구동이 제대로 되는지 확인을 합니다.
 
+```bash
+[root@an3 ~]$ service named restart
+```
 
+또는
+
+```bash
+[root@an3 ~]$ systemctl restart named.service
+```
+
+구동이 잘 되었는지 확인을 하려면, ***/var/log/named/named.og*** 파일을 확인해 보도록 합니다. 실시간으로 확인을 하고 싶으시다면, 구동 전에, ***tail*** 명령을실행한 다음 n ***-f*** 옵션을 주고 ***/var/log/named/named.log***를 실행한 다음 ***bind***를 재시작 해 주시면 됩니다.
