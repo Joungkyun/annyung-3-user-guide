@@ -1,34 +1,35 @@
 # Chapter 5.2 Bind 신규 도메인 설정
 
-이 챕터는 ***annyung.oops.org*** 도메인을 bind에 추가하고 관리하는 것을 예로 듭니다.
+
+이 챕터는 ***domain.org*** 도메인을 bind에 추가하고 관리하는 것을 예로 듭니다.
 
 ## 5.2.1 domain zone 정의
 
 ***/var/named/etc/named.user.conf*** 에 추가할 domain zone을 정의 합니다.
 
 ```bind
-zone "annyung.oops.org" IN {
+zone "domain.org" IN {
     type master;
-    file "annyung.oops.org.zone";
+    file "domain.org.zone";
     allow-update { none; };
 };
 ```
 
 zone 정의에 대해서는 https://ftp.isc.org/isc/bind9/cur/9.9/doc/arm/Bv9ARM.ch06.html#zone_statement_grammar 문서에 자세하게 나와 있으니 참고 하시고, 위와 같이 최소한의 정의를 해 주면 domain을 lookup 하는데 문제가 없습니다.
 
-위의 설정은, ***annyung.oops.org*** 도메인을 ***master***로 정의를 했으며, zone의 상세 설정은 ***/var/name/zone/annyung.oops.org.zone*** 파일에서 한다는 의미입니다.
+위의 설정은, ***domain.org*** 도메인을 ***master***로 정의를 했으며, zone의 상세 설정은 ***/var/name/zone/domain.org.zone*** 파일에서 한다는 의미입니다.
 
 ## 5.2.2 zone database 설정
 
 zone을 정의하였으면, 그 다음 해당 zone에 대한 상세 설정을 합니다. 즉, zone을 정의 하였다는 것은 bind에서 운영할 도메인을 추가하였다는 의미이며, zone 설정은 추가한 도메인을 관리하기 위한 설정을 하는 것입니다. 예를 들어, 서브 도메인 추가 같은 설정을 의미합니다.
 
-***/var/named/zone/annyung.oops.org.zone*** 파일을 생성하고 다음의 template으로 설정을 하도록 합니다.
+***/var/named/zone/domain.org.zone*** 파일을 생성하고 다음의 template으로 설정을 하도록 합니다.
 
 참고로, zone file에서 주석은 ***세미콜론(;)***을 이용하여 처리 합니다.
 
 ```zone
 $TTL 86400
-@               IN  SOA ns.oops.org. admin.oops.org. (
+@               IN  SOA ns.domain.org. admin.domain.org. (
                 2017011500
                 10800
                 3600
@@ -36,49 +37,52 @@ $TTL 86400
                 86400
                 )
 
-                IN  NS      ns.oops.org.
-                IN  NS      ns2.oops.org.
+                IN  NS      ns.domain.org.
+                IN  NS      ns2.domain.org.
                 IN  MX 10   mail
-                IN  A       111.112.113.1
+                IN  A       111.112.113.15
+
+ns              IN  A       111.112.113.10
+ns2             IN  A       111.112.113.11
 
 www             IN  CNAME   @
 ftp             IN  CNAME   @
 mail            IN  A       111.112.113.114
-                IN  TXT     "v=spf1 include:annyung.oops.org ~all"
+                IN  TXT     "v=spf1 include:domain.org ~all"
 
 ``` 
 
 ### 5.2.2.1 도메인 origin
 
-도메인 origin이라는 것은, zone block 시에 정의를 해 준 도메인을 zone 파일에서 domain origin 이라고 명칭 합니다. 위의 예에서는 ***annyung.oops.org***가 도메인 origin으로 사용이 되며, zone file 내부에서는 ***@*** 기호로 단축해서 사용을 할 수 있습니다. 예를 들어
+도메인 origin이라는 것은, zone block 시에 정의를 해 준 도메인을 zone 파일에서 domain origin 이라고 명칭 합니다. 위의 예에서는 ***domain.org***가 도메인 origin으로 사용이 되며, zone file 내부에서는 ***@*** 기호로 단축해서 사용을 할 수 있습니다. 예를 들어
 
 ```zone
 www             IN  CNAME   @
 ```
 
-위의 설정은, www.annyung.oops.org(***www***)를 annyung.oops.org(***@***)의 ***CNAME***으로 설정하라는 의미입니다.
+위의 설정은, www.domain.org(***www***)를 domain.org(***@***)의 ***CNAME***으로 설정하라는 의미입니다.
 
 또한, ***$ORIGIN*** 키워드를 이용하여 ***origin***을 변경할 수 있습니다.
 
 ```zone
 www             IN  CNAME   @
-$ORIGIN www.annyung.oops.org.
-data            IN  CNAME   @  ; data.www.annyung.oops.org를 www.annyung.oops.org의 CNAME으로 설정
-$ORIGIN annyung.oops.org.
-data            IN  CNAME   @  ; data.annyung.oops.org를 annyung.oops.org의 CNAME으로 설정
+$ORIGIN www.domain.org.
+data            IN  CNAME   @  ; data.www.domain.org를 www.domain.org의 CNAME으로 설정
+$ORIGIN domain.org.
+data            IN  CNAME   @  ; data.domain.org를 domain.org의 CNAME으로 설정
 ```
 
 ### 5.2.2.2 도메인 이름 확장
 
 도메인 이름 확장은 zone 파일 설정에서 아주 중요한 부분 입니다. 대부분의 DNS 설정 오류가 도메인 이름 확장을 잘못 사용하여 발생을 하게 됩니다.
 
-기본적으로, zone 파일에서 완전한 도메인을 표기할 때는 마지막에 ***annyung.oops.org.***와 같이 ***dot(.)***로 끝이 나야 합니다. 이름 마지막이 ***dot(.)***으로 끝나지 않을 경우에는 bind는 그 뒤에 ***origin***이 붙는 것으로 간주를 한다. 즉, ***www.annyung.oops.org***는 ***www.annyung.oops.org.annyung.oops.org***로 인식이 되는 것 입니다. 그러므로 다음의 설정에서
+기본적으로, zone 파일에서 완전한 도메인을 표기할 때는 마지막에 ***domain.org.***와 같이 ***dot(.)***로 끝이 나야 합니다. 이름 마지막이 ***dot(.)***으로 끝나지 않을 경우에는 bind는 그 뒤에 ***origin***이 붙는 것으로 간주를 한다. 즉, ***www.domain.org***는 ***www.domain.org.domain.org***로 인식이 되는 것 입니다. 그러므로 다음의 설정에서
 
 ```zone
 www             IN  CNAME   @
 ```
 
-***www***는 ***dot(.)***으로 끝나지 않았기 때문에 내부적으로 ***www.annyung.oops.org***로 처리가 되는 것 입니다.
+***www***는 ***dot(.)***으로 끝나지 않았기 때문에 내부적으로 ***www.domain.org***로 처리가 되는 것 입니다.
 
 이 부분은 숙련되 엔지니어도 자주 하는 실수 영역이므로, zone databse 설정 시에는 이를 숙지하면서 작업을 해야 합니다.
 
@@ -87,8 +91,8 @@ www             IN  CNAME   @
 zone file에서 작성하는 database의 형식은 다음과 같습니다.
 
 ```
-[DOMAIN]           [TTL]  [CLASS] [RECORD]  [DOMIAN | IPADDRESS]
-annyugn.oosp.org.  86400  IN      A         1.1.1.1
+[DOMAIN]     [TTL]  [CLASS] [RECORD]  [DOMIAN | IPADDRESS]
+domain.org.  86400  IN      A         1.1.1.1
 ```
 
 ***TTL*** 필드는 생략이 가능하며, 이에 대해서는 ***TTL 설정*** 항목에서 다룰 것 입니다.
@@ -113,13 +117,13 @@ www      IN    A     1.1.1.2
 
 ### 5.2.2.4 SOA record 영역
 
-zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA 레코드는 해당 도메인, ***annyung.oops.org***에 대해 네임서버가 인증(authoritative)된 자료를 갖고 있음을 의미하며, 자료가 최적의 상태로 유지, 관리될 수 있도록 합니다.
+zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA 레코드는 해당 도메인, ***domain.org***에 대해 네임서버가 인증(authoritative)된 자료를 갖고 있음을 의미하며, 자료가 최적의 상태로 유지, 관리될 수 있도록 합니다.
 
 ***SOA*** record 설정의 형식은 다음과 같습니다.
 
 ```
-[ORIGN] [CLASS] [RECORD] [PRIMARY DNS] [E-MAIL]        ([SERIAL]   [REFRESH] [RETRY] [EXPIRE] [TTL])
-@       IN      SOA      ns.oops.org.  admin.oops.org. (2017011500 10800     3600    604800   86400)
+[ORIGN] [CLASS] [RECORD] [PRIMARY DNS]  [E-MAIL]          ([SERIAL]   [REFRESH] [RETRY] [EXPIRE] [TTL])
+@       IN      SOA      ns.domain.org. admin.domain.org. (2017011500 10800     3600    604800   86400)
 ```
 
 ***PRIMARY DNS***는 origin에 대한 primary name server 이름을 지정 합니다.
@@ -152,27 +156,27 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
 ***NS*** record를 이용하여 해당 도메인의 name server를 나타냅니다.
 
 ```
-@          IN  NS  ns.oops.org.
-           IN  NS  ns2.oops.org.
+@          IN  NS  ns.domain.org.
+           IN  NS  ns2.domain.org.
 ```
 
-***origin(annyung.oops.org)***는 ***ns.oops.org***와 ***ns2.oops.org***에서 관리 되어진다고 announce 하게 됩니다.
+***origin(domain.org)***는 ***ns.domain.org***와 ***ns2.domain.org***에서 관리 되어진다고 announce 하게 됩니다.
 
 또한, ***NS*** record는 서브 도메인의 권한을 다른 DNS에 위임할 경우에도 사용할 수 있습니다.
 
 ```
-sub        IN  NS ns.sub.annyung.oops.org.
-           IN  A  111.112.113.120
+sub        IN  NS ns.sub.domain.org.
+ns.sub     IN  A  111.112.113.120
 ```
 
-위의 설정은 ****.sub.annyung.oops.org*** 의 권한을 ***ns.sub.annyung.oops.org***에 위임한다는 설정입니다. 여기서 위임한 네임 서버(ns.sub.annyung.oops.org)의 ***A*** record(IP 주소)를 ***glue record***라고 합니다. ***glue record***를 언급하는 이유는, 위임을 하는 DNS가 신규로 만들어 지는 DNS일 경우에는 위와 같이 ***glue record***를 설정해야 하지만, 기존의 운영되고 있는 DNS로 위임을 하는 경우에는 ***glue record***를 설정하지 않는 것이 좋습니다.
+위의 설정은 ****.sub.domain.org*** 의 권한을 ***ns.sub.domain.org***에 위임한다는 설정입니다. 여기서 위임한 네임 서버(ns.sub.domain.org)의 ***A*** record(IP 주소)를 ***glue record***라고 합니다. ***glue record***를 언급하는 이유는, 위임을 하는 DNS가 신규로 만들어 지는 DNS일 경우에는 위와 같이 ***glue record***를 설정해야 하지만, 기존의 운영되고 있는 DNS로 위임을 하는 경우에는 ***glue record***를 설정하지 않는 것이 좋습니다.
 
 예를 들어, 기존에 운영이 되고 있는 ***ns.dns.com(10.10.10.10)*** 서버로 위임을 할 경우, 아래와 같이 ***glue record***를 설정하지 말아야 합니다.
 
 * ***잘못된 예:*** 이미 존재하는 DNS에 대한 이름을 또 만들지 않아야 합니다!
   ```
-  sub        IN  NS ns.sub.annyung.oops.org.
-             IN  A  10.10.10.10
+  sub        IN  NS ns.sub.domain.org.
+  ns.sub     IN  A  10.10.10.10
   ```
 
 * ***올바른 예:***
@@ -191,8 +195,8 @@ sub1       IN  CNAME sub
 
 위의 설정은 다음을 의미합니다.
 
-* ***sub.annyung.oops.org***의 IP 주소는 1.1.1.1
-* ***sub1.annyung.oops.org***는 ***sub.annyung.oops.org***와 동일함.
+* ***sub.domain.org***의 IP 주소는 1.1.1.1
+* ***sub1.domain.org***는 ***sub.domain.org***와 동일함.
 
 하나의 도메인에 대해서 여러개의 ***A*** record를 부여하는 것을 ***DNS RR(Round Robin)*** 이라고 합니다.
 
@@ -225,7 +229,7 @@ mail       IN  CNAME @
 mail       IN  A     111.112.113.119
 ```
 
-위의 설정은 ***@annyung.oops.org*** 메일 주소를 사용하는 메일은 ***mail.annyung.oops.org***에서 처리를 한다는 것을 announce 하는 설정 입니다. ***SMTP*** daemon들은 메일을 처리할 때 메일 주소의 도메인에 대한 ***MX*** record를 참조하여 처리할 메일 서버를 선택하게 됩니다.
+위의 설정은 ***@domain.org*** 메일 주소를 사용하는 메일은 ***mail.domain.org***에서 처리를 한다는 것을 announce 하는 설정 입니다. ***SMTP*** daemon들은 메일을 처리할 때 메일 주소의 도메인에 대한 ***MX*** record를 참조하여 처리할 메일 서버를 선택하게 됩니다.
 
 ***MX*** record는 ***MX*** record 다음에 priority(우선 순위)를 설정할 수 있습니다.
 
@@ -234,7 +238,7 @@ mail       IN  A     111.112.113.119
            IN  MX 20 mail2
 ```
 
-위의 설정은, ***mail.annyung.oops.org***에 연결이 되지 않으면, ***mail2.annyung.oops.org***로 보내라는 설정 입니다. priority가 낮은 서버가 우선 순위를 가지게 됨을 숙지 하십시오. (위와 같이 구성을 하였을때 mail2는 실제 메일을 처리하면 안되고 queuing만 해야 합니다. 안그러면 메일이 여기저기 분산이 되는 문제가 발생을 합니다. 이 부분은 SMTP daemon 구성에서 별도로 다뤄야 할 주제 입니다.)
+위의 설정은, ***mail.domain.org***에 연결이 되지 않으면, ***mail2.domain.org***로 보내라는 설정 입니다. priority가 낮은 서버가 우선 순위를 가지게 됨을 숙지 하십시오. (위와 같이 구성을 하였을때 mail2는 실제 메일을 처리하면 안되고 queuing만 해야 합니다. 안그러면 메일이 여기저기 분산이 되는 문제가 발생을 합니다. 이 부분은 SMTP daemon 구성에서 별도로 다뤄야 할 주제 입니다.)
 
 ***MX*** record의 알고리즘에 대해서는 https://wiki.kldp.org/KoreanDoc/html/PoweredByDNS-KLDP/mx-algorithm.html 문서를 참고 하십시오.
 
