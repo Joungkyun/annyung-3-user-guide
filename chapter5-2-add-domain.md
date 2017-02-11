@@ -396,3 +396,40 @@ zone 파일에서는 3가지 형식의 ***TTL*** 설정을 사용할 수 있습�
   메롱     IN   A    1.1.1.1
   ```
   
+* nslookup, dig, host 등의 dnslookup 도구
+
+  기본적으로 다국어 도메인은 ***punycode***로 변환을 해서 사용해야 합니다. 하지만 안녕 리눅스에서는 다국어 도메인을 그대로 사용할 수 있습니다.
+  
+  ```bash
+  [root@an3 ~]$ nslookup 청와대.com
+  Server:         8.8.8.8
+  Address:        8.8.8.8#53
+
+  Non-authoritative answer:
+  Name:   청와대.com
+  Address: 211.234.63.232
+
+  [root@an3 ~]$ dig 청와대.com
+
+  ; <<>> DiG 9.9.4-geoip-1.4-RedHat-9.9.4-38.an3.1 <<>> 청와대.com
+  ;; global options: +cmd
+  ;; Got answer:
+  ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41662
+  ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+  ;; OPT PSEUDOSECTION:
+  ; EDNS: version: 0, flags:; udp: 512
+  ;; QUESTION SECTION:
+  ;청와대.com.                    IN      A
+
+  ;; ANSWER SECTION:
+  청와대.com.             179     IN      A       211.234.63.232
+
+  ;; Query time: 171 msec
+  ;; SERVER: 8.8.8.8#53(8.8.8.8)
+  ;; WHEN: 일  2월 12 04:57:04 KST 2017
+  ;; MSG SIZE  rcvd: 64
+
+  [root@an3 ~]$ host 청와대.com
+  청와대.com has address 211.234.63.232
+  ```
