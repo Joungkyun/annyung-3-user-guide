@@ -112,7 +112,7 @@ zone file에서 사용할 수 있는 몇가지 지시자가 있습니다.
   라벨 또는 이름 필드에서 사용될 경우, ***at-sign(@)***은 현재의 ***ORIGIN***을 의미 합니다. zone file의 처음에 나올 경우, ***at-sign(@)***은 zone name 자체 입니다.
   
 * ***$TTL***  
-  zone file 전반에서 사용되는 기본 TTL 값을 설정 합니다. ***Chapter 5.2.3 TTL 설정***을 참고 하십시오.
+  zone file 전반에서 사용되는 기본 TTL 값을 설정 합니다. 자세한 내용은 ***Chapter 5.2.3 TTL 설정***을 참고 하십시오.
   
 * ***$ORIGIN***  
   규정되지 않은 도메인(dot(.)으로 끝나지 않은 이름 또는 도메인) 뒤에 추가될 도메인을 지정 합니다. 별도로 ***$ORIGIN***이 설정 되어 있지 않다면, zone name을 기본으로 사용 합니다.
@@ -207,6 +207,9 @@ zone database의 시작은 항상 ***SOA*** RECORD로 시작을 합니다. SOA �
   caching name server가 본 zone database 자료를 가지고 있을 때, 이 database에 대한 유효 기간을 설정 합니다. TTL 값이 명시되지 않은 record들은 이 값을 기본 TTL로 설정이 됩니다. ***0***은 caching을 하지 말라는 의미입니다.  Bind 8에서 ***$TTL*** keyword가 추가된 이후로는 이 값을 이용하여 TTL 설정을 하기 보다는 ***$TTL*** keyword를 이용해서 기본 TTL 값을 설정하는 것이 근래의 추세 입니다.  
   
   이 값이 너무 길게 지정이 될 경우에는 변경된 record가 다른 DNS로 전파되는데 오래 걸리는 단점이 있습니다. 그러므로 record 변경 전에 TTL을 감안하여 미리 TTL을 줄여 놓고 작업을 해야할 수도 있습니다.
+  
+  ***TTL***에 대한 자세한 내용은 ***Chapter 5.2.3 TTL 설정***을 참고 하십시오.
+
   
 ### 5.2.2.6 NS record
 
