@@ -3,15 +3,19 @@
 > 목차 :
 5.2.1. domain zone 정의
 5.2.2. zone database 설정
-* 5.2.2.1. 도메인 origin
-* 5.2.2.2. 도메인 이름 확장
-* 5.2.2.3. zone database에서 사용하는 keyword
-* 5.2.2.4. zone database 설정 형식
-* 5.2.2.5. SOA record 영역
-* 5.2.2.6. NS record
-* 5.2.2.7. A(Address) & CNAME(Canonical Name) record
-* 5.2.2.8. MX(Mail eXchanger) record
-* 5.2.2.9. PTR record
+  * 5.2.2.1. 도메인 origin
+  * 5.2.2.2. 도메인 이름 확장
+  * 5.2.2.3. zone database에서 사용하는 지시자(directive)
+  * 5.2.2.4. zone database 설정 형식
+  * 5.2.2.5. SOA record 영역
+  * 5.2.2.6. NS record
+  * 5.2.2.7. A(Address) & CNAME(Canonical Name) record
+  * 5.2.2.8. MX(Mail eXchanger) record
+  * 5.2.2.9. PTR record
+
+> 5.2.3. TTL 설정
+5.2.4. 다국어 도메인 설정
+
 
 <br><br>
 
@@ -100,7 +104,19 @@ www             IN  CNAME   @
 
 이 부분은 숙련되 엔지니어도 자주 하는 실수 영역이므로, zone databse 설정 시에는 이를 숙지하면서 작업을 해야 합니다.
 
-### 5.2.2.3. zone database에서 사용하는 keyword
+### 5.2.2.3. zone database에서 사용하는 지시자(directive)
+
+zone file에서 사용할 수 있는 몇가지 지시자가 있다.
+
+* ***@***  
+  라벨 또는 이름 필드에서 사용될 경우, ***at-sign(@)***은 현재의 ***ORIGIN***을 의미 합니다. zone file의 처음에 나올 경우, ***at-sign(@)***은 zone name 자체 입니다.
+  
+* ***$TTL***  
+  zone file 전반에서 사용되는 기본 TTL 값을 설정 합니다.
+* ***$ORIGIN***
+* ***$INCLUDE***
+* ***$CHARSET***
+* ***$GENERATE***
 
 
 ### 5.2.2.4 zone database 설정 형식
