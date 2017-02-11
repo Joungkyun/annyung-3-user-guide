@@ -1,5 +1,9 @@
 # Chapter 5.1 기본 설정
 
+>목차:
+5.1.1. Bind recursion 설정
+5.1.2. bind log 설정
+5.1.3. bind 구동 확인
 
 
 
