@@ -309,3 +309,10 @@ mail       IN  A     111.112.113.119
 zone database는 Forward, Reverse 두 가지로 구분이 됩니다. Forward Zone은 도메인에 대한 IP 정보를 갖고 있는 database이고, Reverse Zone은 IP에 대한 도메인 정보를 갖는 database 입니다.
 
 ***PTR*** record는 Reverse zone database를 설정을 할 때 사용을 합니다. 즉, IP 주소에 이름을 mapping 할 경우에 사용을 합니다. 이 record에 대해서는 ***[Chapter 5.4 Inverse Domain 설정](chapter5-4-inverse-domain.md)***에서 따로 다루도록 합니다. 
+
+
+## 5.2.3 TTL 설정
+
+zone databse에서 TTL(Time-To-Live)은 cache expire에 영향을 주는 설정입니다. caching name server에게 지정된 TTL 시간 동안만 caching을 하라는 의미로 사용이 되어집니다.
+
+## 5.2.4. 다국어 도메인 설정
