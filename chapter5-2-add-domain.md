@@ -238,7 +238,7 @@ mail       IN  A     111.112.113.119
 
 ***MX*** record의 알고리즘에 대해서는 https://wiki.kldp.org/KoreanDoc/html/PoweredByDNS-KLDP/mx-algorithm.html 문서를 참고 하십시오.
 
-
+***MX*** record로 지정된 이름은 ***CNAME*** record로 정의가 되어서는 안됨을 명심 하십시오!
 
 
 
