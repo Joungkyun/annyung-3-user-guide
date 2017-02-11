@@ -67,8 +67,9 @@ _**현재 문서 작성 중 입니다. - 2017/02/11 -**_
 1. [기본 설정](chapter5-1-basic.md)
 2. [신규 Domain 설정](chapter5-2-add-domain.md)
 3. [Slave DNS 구성](chapter5-3-slave-dns.md)
-4. [DNSSEC 설정](chapter5-4-dnssec.md)
-5. [GeoDNS 설정](chapter5-5-geodns.md)
+4. [Inverse Domain 설정](chapter5-4-inverse-domain.md)
+4. [DNSSEC 설정](chapter5-5-dnssec.md)
+5. [GeoDNS 설정](chapter5-6-geodns.md)
 
 
 
