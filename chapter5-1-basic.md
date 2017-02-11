@@ -1,30 +1,7 @@
-# Chapter 5.1 Bind Recursion 설정
+# Chapter 5.1 기본 설정
 
-이 문서는 DNS에 도메인을 추가하기 전에 일단 bind 구동을 위한 기본 설정을 다룹니다.
 
-안녕 리눅스의 bind는 기본으로 chroot가 적용이 되어 있으며, 모든 파일들은 ***/var/named*** 에 있습니다.
 
-```bash
-[root@an3 ~]$ cd /var/named/
-[root@an3 named]$ pwd
-/var/named
-[root@an3 named]$ ls
-dev  etc  log  run  usr  zone
-[root@an3 named]$
-```
-
-***/var/named*** 아래에 있는 디렉토리의 용도는 다음과 같습니다.
-
-* ***dev*** : bind 구동시에 필요한 device file들이 위치 합니다. 이는 chroot 환경 때문에 존재 합니다.
-* ***etc*** : ***named.conf***, ***rndc.conf*** 등의 bind 설정 파일들이 위치 합니다. 이 디렉토리는 ***/etc/named*** 로 soft link 되어 있습니다.
-* ***log*** : bind log가 저장이 됩니다. 역시 chroot 환경 때문에 필요하며, ***/var/log/named***로 soft link 되어 있습니다.
-* ***run*** : bind pid file이 저장 됩니다. chroot 환경 때문에 필요하며, ***/run/named*** 로 soft link 되어 있습니다.
-* ***usr*** : bind 구동시에 필요한 library들이 있습니다. 이는 chroot 환경 때문에 존재 합니다.
-* ***zone*** : DNS 추가 시에 필요한 zone file들이 위치 합니다.
-
-즉, DNS 구성을 위해서는 ***/var/named/etc/*** 와 ***/var/named/zone*** 만 이용을 하며, 로그 확인 시에 ***/var/named/log*** 또는 ***/var/log/named*** 를 이용하시면 됩니다.
-
-안녕 리눅스의 bind package는 설치 시에 기본적으로 구동이 되는데 문제가 없도록 기본 설정이 되어 있습니다. 하지만, 기본으로 localhost에서의 query만 허락하도록 되어 있으므로, DNS 설정을 하기 위해서는 먼저 ACL 설정을 변경 해야 합니다.
 
 ## 5.1.1 Bind recursion 설정
 
@@ -175,7 +152,52 @@ oops@linux:~$
 ***recursion*** 정책 설정이 완료가 되면, 이제 bind는 기본적으로 정책에 따라 응답을 할 수 있는 상황이 됩니다.
 
 
-## 5.1.2 bind 구동 확인
+## 5.1.2 bind log 설정
+
+안녕 리눅스 3의 bind 기본 log 설정은 다음과 같습니다. bind log 설정은 ***/var/named/etc/named.conf***에 있습니다.
+
+```bind
+logging {
+    channel default_debug {
+        file "/log/named.log";
+        severity dynamic;
+        print-time yes;
+    };
+
+    channel "query-log" {
+        file "/log/query.log";
+        severity info;
+        print-category yes;
+        print-time yes;
+    };
+
+    category queries { query-log; };
+    category lame-servers { null; };
+    category unmatched { null; };
+    category network { null; };
+    category notify { null; };
+    category update { null; };
+};
+
+```
+
+***/var/log/named/named.log***에 bind daemon 관련 log가 기록되며, 외부 DNS나 client들의 도메인 질의에 대한 log는 ***/var/log/named/query.log***에 기록이 됩니다.
+
+bind logging은 ***channel***을 정의를 하고, 각종 ***category***를 어느 ***channel***로 기록하게 할지를 결정 하면 됩니다. ***channel***은 사용자 정의이기 때문에 알아서 설정을 하면 됩니다.
+
+***channel*** 설정과 ***category*** 항목에 대해서는 다음 문서를 참고 하십시오.
+
+https://ftp.isc.org/isc/bind9/cur/9.9/doc/arm/Bv9ARM.ch06.html#logging_grammar
+https://ftp.isc.org/isc/bind9/cur/9.9/doc/arm/Bv9ARM.ch06.html#logging_statement
+
+
+
+
+
+
+
+
+## 5.1.3 bind 구동 확인
 
 안녕 리눅스 3의 데몬 구동은 systemd를 이용 합니다. 다음의 명령으로 bind 구동이 제대로 되는지 확인을 합니다.
 
