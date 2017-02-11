@@ -46,27 +46,31 @@ zone을 정의하였으면, 그 다음 해당 zone에 대한 상세 설정을 �
 참고로, zone file에서 주석은 ***세미콜론(;)***을 이용하여 처리 합니다.
 
 ```zone
+; default ttl is 1 day.
 $TTL 86400
 @               IN  SOA ns.domain.org. admin.domain.org. (
-                2017011500
-                10800
-                3600
-                604800
-                86400
+                2017011500 ; serial
+                10800      ; refresh
+                3600       ; retry
+                604800     ; expire
+                86400      ; negative ttl
                 )
 
                 IN  NS      ns.domain.org.
                 IN  NS      ns2.domain.org.
-                IN  MX 10   mail
                 IN  A       111.112.113.15
+; Defines mail exchanger
+                IN  MX 10   mail
+                IN  TXT     "v=spf1 include:domain.org ~all"
 
+; Defines glue record
 ns              IN  A       111.112.113.10
 ns2             IN  A       111.112.113.11
 
+; Defines sub domains
 www             IN  CNAME   @
 ftp             IN  CNAME   @
 mail            IN  A       111.112.113.114
-                IN  TXT     "v=spf1 include:domain.org ~all"
 
 ``` 
 
