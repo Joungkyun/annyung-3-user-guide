@@ -183,6 +183,12 @@ logging {
 
 ***/var/log/named/named.log***에 bind daemon 관련 log가 기록되며, 외부 DNS나 client들의 도메인 질의에 대한 log는 ***/var/log/named/query.log***에 기록이 됩니다.
 
+주할 것은, 안녕 리눅스 3의 bind는 기본으로 query log를 기록하고 있다는 점입니다. resolving client가 굉장히 많을 경우에는 엄청난 log가 기록이 될 것이고, 이 logging 때문에 I/O 부하가 올라갈 수 있으므로, query logging을 하지 않도록 해 주는 것이 좋습니다. 다음의 설정을 주석 처리 하십시오.
+
+```bind
+    // category queries { query-log; };
+```
+
 bind logging은 ***channel***을 정의를 하고, 각종 ***category***를 어느 ***channel***로 기록하게 할지를 결정 하면 됩니다. ***channel***은 사용자 정의이기 때문에 알아서 설정을 하면 됩니다.
 
 ***channel*** 설정과 ***category*** 항목에 대해서는 다음 문서를 참고 하십시오.
@@ -190,12 +196,46 @@ bind logging은 ***channel***을 정의를 하고, 각종 ***category***를 어�
 https://ftp.isc.org/isc/bind9/cur/9.9/doc/arm/Bv9ARM.ch06.html#logging_grammar
 https://ftp.isc.org/isc/bind9/cur/9.9/doc/arm/Bv9ARM.ch06.html#logging_statement
 
+참고로 ***OOPS.org***에서는 다음과 같이 logging 설정을 하여 구동 중입니다.
 
+```bind
+logging {
+    channel default-log {
+        file "/log/named.log";
+        severity dynamic;
+        print-time yes;
+    };
 
+    channel "query-log" {
+        file "/log/query.log";
+        severity info;
+        print-category yes;
+        print-time yes;
+    };
 
+    category client { null; };
+    category config { default-log; };
+    category database { default-log; };
+    category default { default-log; };
+    category delegation-only { default-log; };
+    category dispatch { default-log; };
+    category dnssec { default-log; };
+    category general { default-log; };
+    category lame-servers { null; };
+    category network { null; };
+    category notify { null; };
+    category queries { query-log; };
+    category resolver { default-log; };
+    category rpz { null; };
+    category security { default-log; };
+    category unmatched { default-log; };
+    category update { null; };
+    category update-security { default-log; };
+    category xfer-in { default-log; };
+    category xfer-out { default-log; };
+};
 
-
-
+```
 
 ## 5.1.3 bind 구동 확인
 
