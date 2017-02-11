@@ -141,7 +141,7 @@ zone file에서 사용할 수 있는 몇가지 지시자가 있습니다.
 
 * ***$GENERATE***
 
-  [Chapter 5.4 Inverse Domain 설정](chapter5-4-inverse-domain.md)
+  ***$GENERATE*** 지시자는 Reverse zone database에서 ***PTR*** record와 함께 사용을 합니다. 사용법에 대해서는 [Chapter 5.4 Inverse Domain 설정](chapter5-4-inverse-domain.md) 문서를 참고 하십시오.
 
 ### 5.2.2.4 zone database 설정 형식
 
