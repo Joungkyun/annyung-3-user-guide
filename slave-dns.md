@@ -56,7 +56,7 @@ acl DNSLIST {
 
 ***NS*** record로 지정되어 있는 모든 name server의 IP를 등록 하십시오.
 
-3## 5.3.2.2 Msater 옵션 설정
+### 5.3.2.2 Msater 옵션 설정
 
 ***/var/named/etc/named.conf***의 ***optoions***에서 다음의 설정을 추가/변경 하십시오.
 
@@ -99,4 +99,21 @@ acl DNSLIST {
 ```
 
 ***NS*** record로 지정되어 있는 모든 name server의 IP를 등록 하십시오.
+
+### 5.3.2.2 Slave 옵션 설정
+
+***Slave*** 서버는 notify를 하지 않기 때문에, ***allow-transfer*** 설정만 해 주도록 합니다.
+
+***/var/named/etc/named.conf***의 ***optoions***에서 다음의 설정을 추가/변경 하십시오.
+
+```
+options {
+    ...
+    allow-transfer {
+        LocalAllow;
+        DNSLIST;
+    };
+    ...
+};
+```
 
