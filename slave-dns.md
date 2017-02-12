@@ -2,7 +2,18 @@
 
 >목차
 5.3.1. Master / Slave 의 이해
+5.3.2. Master 설정
+ * 5.3.2.1 ACL 설정 
+ * 5.3.2.2 Msater 옵션 설정
+ 
+>5.3.3 Slave 설정
+ * 5.3.3.1 ACL 설정
+ * 5.3.3.2 Slave 옵션 설정
+ * 5.3.3.3 Slave zone 설정
+ * 5.3.3.4 Slave 동기화 확인
 
+
+<br>
 
 
 이 챕터에서는 ***[Chapter 5.2 신규 도메인 설정](chapter5-2-add-domain.md)***의 구성에 이어 Master/Slave 구조를 구성하는 것을 설명합니다.
@@ -100,7 +111,7 @@ acl DNSLIST {
 
 ***NS*** record로 지정되어 있는 모든 name server의 IP를 등록 하십시오.
 
-### 5.3.2.2 Slave 옵션 설정
+### 5.3.3.2 Slave 옵션 설정
 
 ***Slave*** 서버는 notify를 하지 않기 때문에, ***allow-transfer*** 설정만 해 주도록 합니다.
 
@@ -115,5 +126,47 @@ options {
     };
     ...
 };
+```
+
+### 5.3.3.3 Slave zone 설정
+
+다음 역시 ***/var/named/etc/named.conf***에 ***domain.org***의 zone을 ***slave*** type으로 추가 합니다.
+
+```
+zone "domain.org" IN {
+    type slave;
+    file "slave/domain.org-slave.zone";
+    master { 111.112.113.10; };
+    allow-notify { 111.112.113.10; };
+};
+```
+
+***Slave*** 정의는 ***Master***와는 다른 준비가 필요 합니다.
+
+일단, ***file***에 정의되어 있는 zone file의 위치는 실행 되어 있는 ***bind***가 write를 할 수 있는 권한이 있어야 합니다. 안녕 리눅스의 ***bind***는 기본으로 ***named*** 유저 권한으로 동작하므로, ***named*** 유저에게 쓰기 권한이 있어야 합니다. 그러므로 안녕 리눅스의 ***bind*** package에서 미리 권한을 맞추어 놓은 ***/var/named/zone/slave*** 디렉토리를 이용하도록 하는 것입니다. 만약 다른 배포본이나, 직접 bind를 설치해서 사용하는 경우에는 ***file*** 옵션에 지정된 파일을 ***bind*** process가 control 할 수 있는지 여부를 확인 해야 합니다.
+
+***master*** 옵션은 이 ***Slave*** 영역의 ***Master*** 서버의 정보를 지정 합니다. ***Master*** 서버의 IP를 지정하며 됩니다.
+
+***allow-notify*** 옵션 역시 ***Master*** 서버의 IP를 지정 합니다.
+
+### 5.3.3.4 Slave 동기화 확인
+
+zone 설정을 마쳤다면, ***Master***에서 했던 것 처럼 ***bind*** process를 reload 해 줍니다.
+
+```bash
+[root@ns2 etc]$ rndc reload
+or
+[root@ns2 etc]$ service named reload
+```
+
+다음, ***/var/named/zone/slave/domain.org-slave.zone*** 파일이 생성이 되었는지 확인을 합니다. 만약 생성이 되지 않았다면 ***/var/named/zone/slave/*** 디렉토리의 권한 문제일 경우가 많습니다. 권한에 문제가 없을 경우에는 ***/var/log/named/named.log***를 확인해서 어떠한 오류가 발생하고 있는지 확인해 보아야 합니다.
+
+만약 transfer가 잘 되었다면 log에 다음과 같은 라인이 기록이 됩니다.
+
+```
+12-Feb-2017 19:47:54.234 zone domain.org/IN: Transfer started.
+12-Feb-2017 19:47:54.242 transfer of 'domain.org/IN' from 111.112.113.10#53: connected using 111.112.113.11#53768
+12-Feb-2017 19:47:54.267 zone domain.org/IN: transferred serial 2017011500
+12-Feb-2017 19:47:54.268 transfer of 'domain.org/IN' from 111.112.113.10#53: Transfer completed: 1 messages, 11 records, 123 bytes, 0.025 secs (51320 bytes/sec)
 ```
 
