@@ -316,13 +316,17 @@ X libaray나 audio, video API를 사용하기 위해서는 다음의 명령으�
 
 안녕 리눅스의 oracle-jre 업데이트는 oracle에서 제공하는 년 3회의 ***Critical Patch Update*** release에 대응 합니다.
 
-Oracle의 2016년 ***Critical Patch Update*** 예정은 다음과 같습니다.
+Oracle의 2017년 ***Critical Patch Update*** 예정은 다음과 같습니다.
 
   * http://www.oracle.com/technetwork/topics/security/alerts-086861.html
   * 2016.04.19
   * 2016.07.19
   * 2016.10.18
   * 2017.01.17
+  * 2017.04.18
+  * 2017.07.18
+  * 2017.10.17
+  * 2018.01.16
 
 
 ## 6. CentOS JVM 환경으로 rollback
