@@ -42,7 +42,7 @@
   * [신규 도메인 설정](chapter5-2-add-domain.md)
   * [Slave DNS 구성](slave-dns.md)
   * Inverse Domain 설정
-  * DNSSEC 설정
+  * [DNSSEC 설정](dnssec.md)
   * GeoDNS 설정
 * [Chapter 6. Time Server 운영](chapter6.md)
   * [Chrony](chapter6-chrony.md)
