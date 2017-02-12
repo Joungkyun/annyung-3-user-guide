@@ -1,5 +1,19 @@
 # Chapter 5.5 DNSSEC 구성
 
+>목차
+5.5.1 Zone key 생성
+ * 5.5.1.1 KSK(Key signing key) 생성
+ * 5.5.1.2 ZSK(Zone signing key) 생성
+ 
+>5.5.2 Zone sign
+5.5.3 siged zone 파일 등록
+5.5.4  Slave 전송
+5.5.5 상위 registrar에 DS record 등록
+5.5.6 DNSSEC 검증
+5.5.7 참고 문서
+
+<br>
+
 ***DNSSEC(DNS Security Extensions)***는 도메인 정보의 위/변조를 방지하기 위하여 기존의 DNS 시스템 표준에 대해 공개키 암호화 방식의 전자서명 메커니즘을 적용한 확장표준 입니다.
 
 ***DNSSEC***에 대한 이해는 [KISA에서 제공하는 문서](http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecInfo.jsp)를 참고 하시기 바랍니다.
@@ -90,6 +104,8 @@ domain.org.zone.signed
 
 주의할 것은 ***-S*** (smart key) 옵션을 사용하지 않으면, 생성된 ***KSK***와 ***ZSK***를 zone file안에 include 해 줘야 합니다. ***-S*** 옵션을 사용하면 include 하지 않아도 상관이 없습니다. 여기서는 ***-S*** 옵션을 사용했기 때문에 zone file에 key를 include 하지 않습니다.
 
+명령행의 ***67136a*** 값은 임의의 6자리 소문자/숫자 조합을 사용하시면 됩니다.
+
 제대로 생성이 되었다면, ***domain.org.zone.signed*** 와 ***dsset-domain.org.*** 파일이 생성이 됩니다. 
 
 
@@ -117,7 +133,7 @@ or
 [root@ns zone]$ service named reload
 ```
 
-## 5.5.4  Slave 전송
+## 5.5.4 Slave 전송
 
 ***Slave*** 구성이 되어 있다면, ***Slave***에서는 별도로 할 일이 없고, ***Master***에서 zone sign을 하기 전에 ***SOA*** 필드의 ***Searial*** 값만 증가 시킨 후에 sign을 하면 알아서 전송이 됩니다.
 
@@ -139,7 +155,7 @@ http://krnic2014.websrv.co.kr/jsp/resources/dns/dnssecInfo/dnssecTool.jsp
 http://dnsviz.net/
 http://dnssec-debugger.verisignlabs.com/
 
-### 5.5.7 참고 문서
+## 5.5.7 참고 문서
 https://www.dragonsreach.it/2013/11/13/configuring-dnssec-personal-domain/
 https://sites.google.com/site/dnsportalkorea/home
 http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecBind.jsp
