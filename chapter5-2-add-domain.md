@@ -299,6 +299,8 @@ mail       IN  A     111.112.113.119
 
 위의 설정은, ***mail.domain.org***에 연결이 되지 않으면, ***mail2.domain.org***로 보내라는 설정 입니다. priority가 낮은 서버가 우선 순위를 가지게 됨을 숙지 하십시오. (위와 같이 구성을 하였을때 mail2는 실제 메일을 처리하면 안되고 queuing만 해야 합니다. 안그러면 메일이 여기저기 분산이 되는 문제가 발생을 합니다. 이 부분은 SMTP daemon 구성에서 별도로 다뤄야 할 주제 입니다.)
 
+***MX*** record가 지정이 되어 있지 않은 경우에는 메일 주소의 도메인을 그대로 이용하게 됩니다. 즉, 메일 주소의 도메인과 실제 메일 서버의 주소가 동일할 경우에는 굳이 MX record를 지정할 필요는 없습니다만, 동일하더라도 명확하게 MX record를 지정해 주는 것을 권장 합니다.
+
 ***MX*** record의 알고리즘에 대해서는 https://wiki.kldp.org/KoreanDoc/html/PoweredByDNS-KLDP/mx-algorithm.html 문서를 참고 하십시오.
 
 ***MX*** record로 지정된 이름은 ***CNAME*** record로 정의가 되어서는 안됨을 명심 하십시오!
