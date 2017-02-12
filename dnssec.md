@@ -139,7 +139,7 @@ or
 
 ## 5.5.5 상위 registrar에 DS record 등록
 
-이 부분이 가장 난관 입니다. 도메인 registrar에서 지원을 해 줘야 하는데, 필자가 보유한 domain registra가 지원하지 않아 확인을 하지 못했습니다.
+이 부분이 가장 난관 입니다. 도메인 registrar에서 지원을 해 줘야 하는데, 필자가 보유한 domain의 registrar가 지원하지 않아 확인을 하지 못했습니다.
 
 일단, org extensiondp 대한 DNSSEC를 지원하는 registrar의 목록은 다음 URL에서 확인할 수 있습니다.
 
