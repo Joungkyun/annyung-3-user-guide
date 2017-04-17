@@ -41,9 +41,9 @@
   * [기본 설정](chapter5-1-basic.md)
   * [신규 도메인 설정](chapter5-2-add-domain.md)
   * [Slave DNS 구성](slave-dns.md)
-  * Inverse Domain 설정
+  * [Inverse Domain 설정](inverse-domain-c124-c815.md)
   * [DNSSEC 설정](dnssec.md)
-  * GeoDNS 설정
+  * [GeoDNS 설정](geodns-c124-c815.md)
 * [Chapter 6. Time Server 운영](chapter6.md)
   * [Chrony](chapter6-chrony.md)
   * [NTP](chapter6-ntp.md)

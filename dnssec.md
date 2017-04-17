@@ -110,7 +110,7 @@ domain.org.zone.signed
 
 
 
-## 5.5.3 siged zone 파일 등록
+## 5.5.3 signed zone 파일 등록
 
 ***/var/named/etc/named.user.conf*** 에서 정의된 zone 영역에서 zone file을 새로 생성된 zone file로 변경한 다음, ***bind***를 재시작 합니다.
 
