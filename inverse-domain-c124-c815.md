@@ -1,6 +1,15 @@
 # Chapter 5.4 Inverse Domain 설정
 
 
+>목차
+5.4.1 Inverse domain 권한 신청
+5.4.2 Inverse domain 설정
+ * 5.4.2.1 Zone 설정
+ * 5.4.2.2 Zone file 설정
+
+
+<br>
+
 
 ***Inverse domain***은 IP 주소에 할당된 domain을 의미 합니다. 좀더 쉽게 말하면, IP에 해당하는 domain을 역으로 찾을 수 있도록 합니다. 즉, 일반적인 name service는 domain에 IP를 할당하는 구조이지만, ***inverse domain***은 IP 주소에 domain을 할당하는 것 입니다.
 
