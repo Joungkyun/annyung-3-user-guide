@@ -71,7 +71,6 @@ ns2             IN  A       111.112.113.11
 www             IN  CNAME   @
 ftp             IN  CNAME   @
 mail            IN  A       111.112.113.114
-
 ``` 
 
 ### 5.2.2.1 도메인 origin

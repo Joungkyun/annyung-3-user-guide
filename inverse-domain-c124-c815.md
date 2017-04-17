@@ -92,8 +92,8 @@ inverse domain 권한을 위임 받기 위해서는 직접 관리할 수 있는 
 Server:     kns.kornet.net
 Address:    168.126.63.1#53
 
-245.64.14.in-addr.arpa       nameserver = ns.mydomain.com.
-245.64.14.in-addr.arpa       nameserver = ns2.mydomain.com.
+245.64.14.in-addr.arpa       nameserver = ns.mydomain.org.
+245.64.14.in-addr.arpa       nameserver = ns2.mydomain.org.
 ```
 
 위와 같이 query를 해서, 내가 신청한 도메인이 나온다면 해당 네트워크에 대한 inverse domain 권한을 위임 받은 것입니다.
@@ -101,7 +101,7 @@ Address:    168.126.63.1#53
 
 ## 5.4.2 Inverse domain 설정
 
-## 5.4.2.1 Zone 설정
+### 5.4.2.1 Zone 설정
 
 ***inverse domain***도 일반 domain과 동일하게 먼저 zone 설정을 합니다.
 
@@ -115,8 +115,40 @@ zone "256.64.14.in-addr.arpa" IN {
 };
 ```
 
-Slave 구성을 하고 싶다면,
+Slave 구성을 하고 싶다면, [5.3 Slave DNS 구성](https://joungkyun.gitbooks.io/annyung-3-user-guide/content/slave-dns.html) 문서를 참고하여 동일하게 구성해 주면 됩니다.
 
+### 5.4.2.2 Zone file 설정
+
+기본적인 zone file 형식은 동일합니다. 다만, 역방향 탐색에 필요한 record는 ***A*** record 대신 ***PTR*** record를 사용 합니다.
+
+```zone
+; default ttl is 1 day.
+$TTL 86400
+@               IN  SOA ns.mydomain.org. admin.mydomain.org. (
+                2017011500 ; serial
+                10800      ; refresh
+                3600       ; retry
+                604800     ; expire
+                86400      ; negative ttl
+                )
+
+                IN  NS      ns.mydomain.org.
+                IN  NS      ns2.mydomain.org.
+;
+; Defines in.addr-arpa
+1               IN  PTR     gateway.mydomain.com.
+10              IN  PTR     ns.mydoamin.com.
+11              IN  PTR     ns2.mydomain.com.
+20              IN  PTR     www.mydomain.com.
+```
+
+PTR record 의 경우에는 각 IP 주소의 마지막 자리에 대해서 domain 이름을 매핑 하고 있습니다. 예를 들어
+
+```
+1               IN  PTR     gateway.mydomain.com.
+```
+
+의 설정은 14.64.256.1 IP에 gateway.mydomain.com 을 mapping 하라는 의미 입니다.
 
 
 
