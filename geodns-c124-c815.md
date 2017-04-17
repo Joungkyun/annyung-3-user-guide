@@ -1,5 +1,12 @@
 # Chapter 5.6 GeoDNS 설정
 
+>목차
+5.6.1 GeoDNS 란?
+5.6.2 GeoDNS 설정
+
+<br>
+
+
 ## 5.6.1 GeoDNS 란?
 
 GeoDNS 기능은, GeoIP의 database를 이용하여 조건에 따라 다른 응답을 하는 기능을 의미 합니다.
