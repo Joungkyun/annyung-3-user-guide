@@ -151,7 +151,7 @@ zone "0.168.192.in-addr.arpa" IN {
                 IN  NS      ns.b.com.
                 IN  NS      ns2.b.com.
 ;
-$GENERATE 0-14 $    IN  NS  ns.a.com.
+$GENERATE 0-7  $    IN  NS  ns.a.com.
                     IN  NS  ns2.a.com.
 ;
 8               IN  NS      192-168-0-8.b.com.
@@ -163,6 +163,6 @@ $GENERATE 0-14 $    IN  NS  ns.a.com.
 14              IN  NS      192-168-0-14.b.com.
 15              IN  NS      192-168-0-15.b.com.
 ;
-$GENERATE 0-14 $    IN  NS  ns.a.com.
+$GENERATE 16-255 $  IN  NS  ns.a.com.
                     IN  NS  ns2.a.com.
 ```
