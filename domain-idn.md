@@ -4,8 +4,13 @@
 5.8.1 punycode
 5.8.2 IDN 환경
 5.8.3 한글 도메인 설정
-  * 5.8.3.1 domain zone 설정
-  * 5.8.3.2 zone file 설정
+  * 5.8.3.1 IDN zone 설정
+  * 5.8.3.2 zone file에서의 IDN 사용
+
+<br>
+
+
+
 
 IDN(Internationalized Domain Name)은 흔히 다국어 도메인이라고 말을 하기도 합니다.
 
@@ -45,7 +50,8 @@ PING 한글.com (202.31.187.154) 56(84) bytes of data.
 
 ### 5.8.3 한글 도메인 설정
 
-#### 5.8.3.1 zone
+#### 5.8.3.1 IDN zone 설정
+
 기본적으로, ***bind***에서 IDN을 사용하기 위해서는 punycode를 사용해야 합니다. 예를 들어 ***한글.com***을 설정 한다고 가정 하면 다음과 같습니다.
 
 ```
@@ -65,4 +71,49 @@ zone "한글.com" IN {
     allow-update { none; };
 };
 ```
+
+IDN을 작성할 때, zone 파일의 문자셋이 ***UTF-8***일 경우에는 모든 IDN을 punycode로 변환 없이 사용이 가능하며, ***UTF-8***이 아닐 경우에는 ***EUC-KR*** 과 ***EUC-JP***만 지원을 합니다.
+
+또한, ***EUC-KR*** 또는 ***EUC-JP***를 사용하기 위해서는 ***CH+문자셋.도메인***의 형식을 이용해야 합니다.
+
+```
+zone "CH+EUC-KR.한글.com" IN {
+    type master;
+    file "zone/한글.com.zone";
+    allow-update { none; };
+};
+```
+
+#### 5.8.3.2 zone file에서의 IDN 사용
+
+zone 설정과 마찬 가지로, ***UTF-8*** 환경이라면, 아무런 제약 없이 ***IDN***을 직접 사용할 수 있습니다.
+
+```
+자음         IN  A   10.0.0.1
+```
+
+이렇게 설정을 하면, 자음.한글.com 의 A record가 10.0.0.1로 설정이 되게 됩니다.
+
+zone 설정과 마찬가지로, ***UTF-8*** 환경이 아니라면, ***EUC-KR*** 및 ***EUC-JP***만을 지원 하며, IDN 표기를 ***CH+문자셋.도메인***의 형식을 이용해야 합니다.
+
+단, 혼용을 하지 않는 다는 가정하에서, ZONE 파일 제일 처음에 ***@CHARSET*** 지시자를 이용할 수 있습니다.
+
+```
+@CHARSET "EUC-KR"
+$TTL 60
+@               IN  SOA ns.oops.org. admin.oops.org.    (
+                2017021205  ; Serial
+                10800       ; Refresh
+                3600        ; Retry
+                604800      ; Expire
+                60          ; TTL (1day)
+                )
+
+자음         IN  A   10.0.0.1
+```
+
+위와 같이 사용이 가능 합니다.
+
+
+
 
