@@ -45,7 +45,7 @@
   * [DNSSEC 설정](dnssec.md)
   * [GeoDNS 설정](geodns-c124-c815.md)
   * [Domain 위임](domain-mandate.md)
-  * [Internationalized Domain Name](domain-idn.md)
+  * [IDN](domain-idn.md)
 * [Chapter 6. Time Server 운영](chapter6.md)
   * [Chrony](chapter6-chrony.md)
   * [NTP](chapter6-ntp.md)
