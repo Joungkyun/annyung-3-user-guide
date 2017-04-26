@@ -674,7 +674,7 @@ PHP-FPM 구동에 대한 기본 설정은 ***/etc/httpd/conf.d/php.conf*** 에�
 ...
 LoadModule  proxy_module            modules/mod_proxy.so
 LoadModule  proxy_fcgi_module       modules/mod_proxy_fcgi.so
-```
+...
 [root@host ~]$ service httpd restart
 ```
 
