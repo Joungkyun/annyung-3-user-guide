@@ -8,9 +8,10 @@ Copyright &copy; 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 * 2016.02.29 초판 발행
 * 설치에 대해서는 [안녕 리눅스 3 설치 문서](https://joungkyun.gitbooks.io/annyung3-installation-guide/content/)를 참조 하십시오.
 * 모든 문서가 작성 완료 되지는 않았으며, 계속 작성 중입니다.
-* 2016.03.11 ***[Chapter 6. Time Server 운영](chapter6.md)*** 문서 업데이트
-* 2016.04.05 ***[Chapter 2.3.2 NIS 인증 통합](chapter2-3-auth-integrate-nis.md)*** 문서 업데이트
-* 2016.06.05 ***[Chapter 2.3.1 Openldap 인증 통합](chapter2-3-auth-integrate-openldap.md)*** 문서 업데이트
+* 2016.03.11 ***[Chapter 6. Time Server 운영](chapter6.md)*** 문서 등록
+* 2016.04.05 ***[Chapter 2.3.2 NIS 인증 통합](chapter2-3-auth-integrate-nis.md)*** 문서 등록
+* 2016.06.05 ***[Chapter 2.3.1 Openldap 인증 통합](chapter2-3-auth-integrate-openldap.md)*** 문서 등록
+* 2017.04.18 ***[Chapter 5. DNS 운영](chapter5.md)*** 문서 등록
 
 ## 2. 개요
 
