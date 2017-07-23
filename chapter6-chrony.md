@@ -227,7 +227,7 @@ OUT_UDP_HOSTPERPORT = 10.10.0.1:123 10.10.10.1:123
 
 [root@an3 ~]$ oops-firewall -v  # oops-firewall 재구동
 [root@an3 ~]$
-
+```
 
 ####3.4.3 chrony 재시작 및 확인
 
