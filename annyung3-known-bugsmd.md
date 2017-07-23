@@ -9,7 +9,7 @@
 
 ## 2. httpd-authn-google
 
-  * ***AuthType***을 *digest*로 설정했을 경우 setfault 발생
+  * ***AuthType***을 *digest*로 설정했을 경우 segfault 발생
   * 역시 우선 순위가 낮아서 추후 살펴볼 예정
   * ***AuthType***을 *Basic*으로 사용할 것!
 
