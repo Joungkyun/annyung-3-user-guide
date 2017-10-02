@@ -5,7 +5,7 @@ Disk 파티션 정렬
 
 기본적으로 Disk partitioning 시에 첫번째 파티션은 항상 64번째 섹터에 해당하는 LBA 주소 63에서 시작하여, 이 섹터는 기본적으로 512 Byte의 크기를 가지고 있습니다.
 
-이 이유는 ___CHS(Cylinder, Head, Sector)___ 가 63 섹터 구조를 가지기 때문입니다. 디스크의 숨겨진 트랙(Logical Sector 0~62, Total 63 cector, 31.5KB) 영역이 끝나는 지점이 62 sector 이기 때문입니다.
+이 이유는 ___CHS(Cylinder, Head, Sector)___ 가 63 섹터 구조를 가지기 때문입니다. 디스크의 숨겨진 트랙(Logical Sector 0~62, Total 63 cector, 31.5KB) 영역이 끝나는 지점(보통 ***MBR*** 이라고 하는 영역 입니다.)이 62 sector 이기 때문입니다.
 
 이런 구조에서, 1 sector가 512 Byte일 경우에는 크게 문제가 없던 것이, disk가 고용량이 되면서, ***Advanced Format*** 형식(1sector 당 4K 할당)의 Disk가 나오면서 또는 RAID 구성시에 ***strip size*** 를 크게 잡을 경우에 문제가 발생하기 시작 합니다.
 
@@ -210,8 +210,69 @@ Command (m for help): q
 
 ## 3. parted 를 이용한 파티셔닝
 
-ㄴㄴ
+parted 를 이용하여 파티셔닝 정렬을 할 경우에는, label을 GPT로 만들면 첫번째 실린더를 2048 sector 부터 생성해 줍니다.
+
+```
+(parted) mklabel GTP
+```
+
+이 의미는 ***mkpart*** 시에 시작이 ***0*** 이 아니라, ***1*** 이어야 한다는 것입니다.
+
+```
+(parted) mkpart primary 0 100%
+Warning: The resulting partition is not properly aligned for best performance.
+Ignore/Cancel?
+```
+
+시작을 0으로 하면, 위와 같이 정렬이 되지 않는다는 메시지가 나오게 됩니다. 그러므로 아래와 같이 1로 설정을 하도록 합니다.
+
+```
+(parted) mkpart primary 1 100%
+(parted) print
+Model: ATA ST3000DM001-9YN1 (scsi)
+Disk /dev/sdb: 3001GB
+Sector size (logical/physical): 512B/4096B
+Partition Table: gpt
+
+Number  Start   End     Size    File system  Name     Flags
+1      1049kB  3001GB  3001GB               primary
+```
+
+또는 unit을 sector로 변경을 하여 설정을 하는 것이 더 직관적 입니다.
+
+```
+(parted) mkpart primary 2048s 100%
+(parted) print
+Model: ATA ST3000DM001-9YN1 (scsi)
+Disk /dev/sdb: 5860533168s
+Sector size (logical/physical): 512B/4096B
+Partition Table: gpt
+
+Number  Start  End          Size         File system  Name     Flags
+1      2048s  5860532223s  5860530176s               primary
+```
+
 
 ## 4. 파티션 정렬 확인
 
-ㅋㅋ
+```
+Partition_Offset ÷ Stripe_Unit_Size = 정수
+Stripe_Unit_Size ÷ File_Allocation_Unit_Size = 정수
+```
+
+***Partition StartingOffset*** 을 1024로 나누었을 경우, 정수의 값이 나온다면 정렬이 잘 되어 있다고 볼 수 있습니다. StartingOffset 값은 sector 값으로 보시면 되며, 첫번째 파티션의 시작 sector 값이 1024 의 배수이면 된다는 의미 입니다. 그냥 적정 값으로 2048 sector에서 시작하면 된다고 외워도 되겠습니다.
+
+또, ***parted*** 를 이용하여 확인이 가능 합니다.
+
+```
+[root@host ~]$ parted /dev/sda align-check optimal 1
+1 aligned
+[root@host ~]$
+```
+
+## 5. 참고 문서
+
+1. https://www.thomas-krenn.com/en/wiki/Partition_Alignment
+2. https://blogs.msdn.microsoft.com/jimmymay/2009/05/08/disk-partition-alignment-sector-alignment-make-the-case-save-hundreds-of-thousands-of-dollars/
+3. http://mapoo.net/os/oslinux/aligned-for-best-performance-parted/
+4. http://webdir.tistory.com/160
