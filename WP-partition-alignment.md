@@ -5,9 +5,9 @@ Disk 파티션 정렬
 
 기본적으로 Disk partitioning 시에 첫번째 파티션은 항상 64번째 섹터에 해당하는 LBA 주소 63에서 시작하여, 이 섹터는 기본적으로 512 Byte의 크기를 가지고 있습니다.
 
-이 이유는 CHS(Cylinder, Head, Sector)가 63 섹터 구조를 가지기 때문입니다. 디스크의 숨겨진 트랙(Logical Sector 0~62, Total 63 cector, 31.5KB) 영역이 끝나는 지점이 62 sector 이기 때문입니다.
+이 이유는 ___CHS(Cylinder, Head, Sector)___ 가 63 섹터 구조를 가지기 때문입니다. 디스크의 숨겨진 트랙(Logical Sector 0~62, Total 63 cector, 31.5KB) 영역이 끝나는 지점이 62 sector 이기 때문입니다.
 
-이런 구조에서, 1 sector가 512 Byte일 경우에는 크게 문제가 없던 것이, disk가 고용량이 되면서, ***Advanced Format*** 형식(1sector 당 4K 할당)의 Disk가 나오면서 또는 RAID 구성시에 ***strip size***를 크게 잡을 경우에 문제가 발생하기 시작 합니다.
+이런 구조에서, 1 sector가 512 Byte일 경우에는 크게 문제가 없던 것이, disk가 고용량이 되면서, ***Advanced Format*** 형식(1sector 당 4K 할당)의 Disk가 나오면서 또는 RAID 구성시에 ***strip size*** 를 크게 잡을 경우에 문제가 발생하기 시작 합니다.
 
 
 ![](/assets/862fdcc34d6152ba7a4fda5858071a2f.jpg)
@@ -29,6 +29,58 @@ Disk 파티션 정렬
 
 ## 2. fdisk 를 이용한 파티셔닝
 
+***fdisk*** 의 경우에는 ***util-linux-ng*** 2.17.1 부터 제대로 된 정렬을 지원 합니다. 그러므로 오래된 OS를 사용하고 있다면 ***fdisk*** 보다는 ***parted*** 를 이용할 것을 권고 합니다.
+
+###    2.1 잘못된 정렬 예제
+
+```sh
+[root@host ~]$ fdisk /dev/sda
+
+Disk /dev/sda: 146.8 GB, 146778685440 bytes, 286677120 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x00030f79
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+p
+Partition number (1-4): 1
+First cylinder (1-17845, default 1): 
+Using default value 1
+Last cylinder, +cylinders or +size{K,M,G} (1-17845, default 17845): +10G
+
+Command (m for help): u
+Changing display/entry units to sectors
+
+Command (m for help): p
+
+Disk /dev/sda: 146.8 GB, 146778685440 bytes, 286677120 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x00030f79
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1              63    20980889   10490413+   83  Linux
+
+Command (m for help): q
+[root@host ~]$
+```
+
+보통 ext4 로 format을 할 경우, 기본 block size 가 4K 입니다. 이럴 경우, 63 sector에서 파티션을 시작하면, 정렬이 어긋나게 됩니다.
+
+
 ## 3. parted 를 이용한 파티셔닝
 
+ㄴㄴ
+
 ## 4. 파티션 정렬 확인
+
+ㅋㅋ
