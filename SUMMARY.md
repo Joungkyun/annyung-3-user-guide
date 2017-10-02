@@ -51,6 +51,8 @@
   * [NTP](chapter6-ntp.md)
 * [Chapter 7. VPN 운영](chapter7.md)
 * [Chapter 8. SMTP 운영](chapter8.md)
+* [안녕 리눅스 White Paper](annyung3-white-paper.md)
+  * [Disk Partition Aligment](WP-partition-alignment.md)
 * [안녕 리눅스 알려진 버그](annyung3-known-bugsmd.md)
 * [안녕 리눅스 3 패키지 일람](AnNyung3-Package-Catalog.md)
   * [\[AN:core\]](AnNyung3-Core-Packages.md)
