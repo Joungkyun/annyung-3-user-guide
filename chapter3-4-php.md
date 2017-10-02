@@ -737,7 +737,7 @@ server {
 
 ## 9. Composer 사용
 
-안녕 리눅스에서 composer를 사용할 경우, 안녕 리눅스의 PHP의 PHP_VERSION 에 "***AnNyung***" 이라는 문자열이 포함되어 있어 다음과 같이 "***Invalid version string***" 에러가 발생 합니다.
+안녕 리눅스에서 제공하는 PHP package 환경에 composer를 사용할 경우, php56-5.6.31-1, php71-7.1.9-1, php-7.0.23-1 버전 보다 낮은 버전이 설치 되어 있으면 안녕 리눅스의 PHP의 PHP_VERSION 에 "***AnNyung***" 이라는 문자열이 포함되어 있어 다음과 같이 "***Invalid version string***" 에러가 발생 합니다.
 
 ```bash
 [root@an3 ~]$ ./composer.phar require monolog/monolog
@@ -748,9 +748,11 @@ server {
 [root@an3 ~]$
 ```
 
-이 문제를 해결하기 위하여 composer를 설치 한 다음, http://mirror.oops.org/pub/AnNyung/etc/composer 에서 이 문제가 수정된 최신 버전의 파일을 받아서 composer.phar을 바꿔치지 해 주시면 됩니다.
+이 문제를 해결하기 위하여 composer를 설치 한 다음, http://mirror.oops.org/pub/AnNyung/etc/composer 에서 이 문제가 수정된 최신 버전의 파일을 받아서 composer.phar을 바꿔치지 해 주거나, 또는, yum 을 이용하여 php를 최신 상태로 업데이트 해 주시면 해결이 됩니다.
 
 직접 파일을 수정 하기 위해서는 다음의 작업 과정을 거칠 수 있습니다.
+
+
 
 ### 9.1 Composer 문제 해결
 
