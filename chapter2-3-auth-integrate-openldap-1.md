@@ -402,7 +402,7 @@ Section 2의 작업대로 하였을 경우, LDAP의 기본 정보는 다음과 �
 ```bash
 [root@an3 ~]$ export CHGPASSWD=$(slappasswd -s 'asdf!asdf')
 [root@an3 ~]$
-[root@an3 ~]$ cat <<EOF > ldapmodify -Y EXTERNAL -H ldapi:///
+[root@an3 ~]$ cat <<EOL | ldapmodify -Y EXTERNAL -H ldapi:///
 dn: olcDatabase={0}config,cn=config
 changetype: modify
 add: olcRootPW
@@ -412,6 +412,7 @@ dn: olcDatabase={2}bdb,cn=config
 changetype: modify
 add: olcRootPW
 olcRootPW: ${CHGPASSWD}
+EOL
 [root@an3 ~]$ unset CHGPASSWD
 ```
 
