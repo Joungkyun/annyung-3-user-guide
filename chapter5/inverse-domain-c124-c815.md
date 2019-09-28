@@ -1,6 +1,10 @@
 # Inverse Domain 설정
 
-> 목차 5.4.1 Inverse domain 권한 신청 5.4.2 Inverse domain 설정
+> **목차:**
+>
+> 5.4.1 Inverse domain 권한 신청
+>
+> 5.4.2 Inverse domain 설정
 >
 > * 5.4.2.1 Zone 설정
 > * 5.4.2.2 Zone file 설정

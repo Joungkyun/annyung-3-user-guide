@@ -1,6 +1,14 @@
+---
+description: 이 챕터에서는 Chapter 5.2 신규 도메인 설정의 구성에 이어 Master/Slave 구조를 구성하는 것을 설명합니다.
+---
+
 # Slave DNS 구성
 
-> 목차 5.3.1. Master / Slave 의 이해 5.3.2. Master 설정
+> **목차:**
+>
+> 5.3.1. Master / Slave 의 이해
+>
+> 5.3.2. Master 설정
 >
 > * 5.3.2.1 ACL 설정 
 > * 5.3.2.2 Msater 옵션 설정
@@ -11,8 +19,6 @@
 > * 5.3.3.2 Slave 옵션 설정
 > * 5.3.3.3 Slave zone 설정
 > * 5.3.3.4 Slave 동기화 확인
-
-이 챕터에서는 [_**Chapter 5.2 신규 도메인 설정**_](chapter5-2-add-domain.md)의 구성에 이어 Master/Slave 구조를 구성하는 것을 설명합니다.
 
 ## 5.3.1 Master / Slave 의 이해
 

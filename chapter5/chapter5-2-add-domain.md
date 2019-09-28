@@ -1,6 +1,14 @@
+---
+description: 이 챕터는 domain.org 도메인을 bind에 추가하고 관리하는 것을 예로 듭니다.
+---
+
 # 신규 도메인 설정
 
-> 목차 : 5.2.1. domain zone 정의 5.2.2. zone database 설정
+> **목차 :**
+>
+> 5.2.1. domain zone 정의
+>
+> 5.2.2. zone database 설정
 >
 > * 5.2.2.1. 도메인 origin
 > * 5.2.2.2. 도메인 이름 확장
@@ -13,8 +21,6 @@
 > * 5.2.2.9. PTR record
 >
 > 5.2.3. TTL 설정 5.2.4. 다국어 도메인 설정
-
-이 챕터는 _**domain.org**_ 도메인을 bind에 추가하고 관리하는 것을 예로 듭니다.
 
 ## 5.2.1 domain zone 정의
 

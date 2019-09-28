@@ -1,6 +1,10 @@
 # Domain 위임
 
-> 목차 5.7.1 Sub domain 위임 5.7.2 inverse domain 위임
+> 목차
+>
+> 5.7.1 Sub domain 위임
+>
+> 5.7.2 inverse domain 위임
 
 도메인 위임이라는 의미는 서브 도메인의 권한을 다른 네임서버에게 준다는 의미 입니다.
 

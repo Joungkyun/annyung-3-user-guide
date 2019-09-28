@@ -1,11 +1,23 @@
 # DNSSEC 설정
 
-> 목차 5.5.1 Zone key 생성
+> 목차
+>
+> 5.5.1 Zone key 생성
 >
 > * 5.5.1.1 KSK\(Key signing key\) 생성
 > * 5.5.1.2 ZSK\(Zone signing key\) 생성
 >
-> 5.5.2 Zone sign 5.5.3 siged zone 파일 등록 5.5.4 Slave 전송 5.5.5 상위 registrar에 DS record 등록 5.5.6 DNSSEC 검증 5.5.7 참고 문서
+> 5.5.2 Zone sign
+>
+> 5.5.3 siged zone 파일 등록
+>
+> 5.5.4 Slave 전송
+>
+> 5.5.5 상위 registrar에 DS record 등록
+>
+> 5.5.6 DNSSEC 검증
+>
+> 5.5.7 참고 문서
 
 _**DNSSEC\(DNS Security Extensions\)**_는 도메인 정보의 위/변조를 방지하기 위하여 기존의 DNS 시스템 표준에 대해 공개키 암호화 방식의 전자서명 메커니즘을 적용한 확장표준 입니다.
 
@@ -138,9 +150,17 @@ _**yes\***_ 와 같이 yes옆에 astrik가 붙어 있으면 _**DNSSEC**_를 지�
 
 ## 5.5.6 DNSSEC 검증
 
-[http://krnic2014.websrv.co.kr/jsp/resources/dns/dnssecInfo/dnssecTool.jsp](http://krnic2014.websrv.co.kr/jsp/resources/dns/dnssecInfo/dnssecTool.jsp) [http://dnsviz.net/](http://dnsviz.net/) [http://dnssec-debugger.verisignlabs.com/](http://dnssec-debugger.verisignlabs.com/)
+[http://krnic2014.websrv.co.kr/jsp/resources/dns/dnssecInfo/dnssecTool.jsp](http://krnic2014.websrv.co.kr/jsp/resources/dns/dnssecInfo/dnssecTool.jsp)
+
+[http://dnsviz.net/](http://dnsviz.net/)
+
+[http://dnssec-debugger.verisignlabs.com/](http://dnssec-debugger.verisignlabs.com/)
 
 ## 5.5.7 참고 문서
 
-[https://www.dragonsreach.it/2013/11/13/configuring-dnssec-personal-domain/](https://www.dragonsreach.it/2013/11/13/configuring-dnssec-personal-domain/) [https://sites.google.com/site/dnsportalkorea/home](https://sites.google.com/site/dnsportalkorea/home) [http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecBind.jsp](http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecBind.jsp)
+[https://www.dragonsreach.it/2013/11/13/configuring-dnssec-personal-domain/](https://www.dragonsreach.it/2013/11/13/configuring-dnssec-personal-domain/)
+
+[https://sites.google.com/site/dnsportalkorea/home](https://sites.google.com/site/dnsportalkorea/home)
+
+[http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecBind.jsp](http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecBind.jsp)
 
