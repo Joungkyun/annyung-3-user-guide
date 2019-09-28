@@ -31,4 +31,5 @@
 * [https://fedoraproject.org/wiki/EPEL](https://fedoraproject.org/wiki/EPEL)
 * 안녕 리눅스에서 직접 관리하는 저장소는 아닙니다.
 * Fedora project에서 운영하는 repository로서, RHEL에서 제공하지 않는 pacakge들을 3rd party package 형식으로 지원합니다.
+* EPEL 에서 제공하는 epel-release 패키지를 설치 하지 마십시오. elep repository 설정은 annyung-release 패키지에 이미 포함이 되어 있습니다. 또한, a**nnyung-release 패키지에 포함되어 있는 EPEL repository 설정에는 안녕 리눅스의 패키지와 충돌이 발생하는 패키지 목록들을 따로 관리**를 하고 있습니다. 그러므로 epel-release 를 설치할 경우, 충돌이 발생할 수 있습니다.
 
