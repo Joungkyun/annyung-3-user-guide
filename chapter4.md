@@ -1,7 +1,5 @@
 # Chapter 4. JVM 운영
 
-> 목차 1. 개요 2. 변경 사항 3. JVM 설치 4. TOMCAT 5. Oralce JDK 6. CentOS JVM 환경으로 rollback
-
 ## 1. 개요
 
 !! 경고
