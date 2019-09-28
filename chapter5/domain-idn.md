@@ -1,17 +1,6 @@
 # IDN
 
-> 목차 
->
-> 5.8.1 punycode
->
-> 5.8.2 IDN 환경
->
-> 5.8.3 한글 도메인 설정
->
-> * 5.8.3.1 IDN zone 설정
-> * 5.8.3.2 zone file에서의 IDN 사용
-
-IDN\(Internationalized Domain Name\)은 흔히 다국어 도메인이라고 말을 하기도 합니다.
+> IDN\(Internationalized Domain Name\)은 흔히 다국어 도메인이라고 말을 하기도 합니다.
 
 ## 5.8.1 punycode
 

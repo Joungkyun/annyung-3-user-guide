@@ -46,6 +46,7 @@
   * [GeoDNS 설정](chapter5/geodns-c124-c815.md)
   * [Domain 위임](chapter5/domain-mandate.md)
   * [IDN](chapter5/domain-idn.md)
+  * [Troble Shooting](chapter5/troble-shooting.md)
 * [Chapter 6. Time Server 운영](chapter6/README.md)
   * [Chrony](chapter6/chapter6-chrony.md)
   * [NTP](chapter6/chapter6-ntp.md)
