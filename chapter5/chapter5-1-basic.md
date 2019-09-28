@@ -1,13 +1,5 @@
 # 기본 설정
 
-> **목차:**
->
-> 5.1.1. Bind recursion 설정
->
-> 5.1.2. bind log 설정
->
-> 5.1.3. bind 구동 확인
-
 ## 5.1.1 Bind recursion 설정
 
 안녕 리눅스의 bind는 기본으로, _**localhost**_에서만 query가 가능 합니다. 그러므로 외부에서 query를 할 수 있도록 하려면 설정을 변경 해야 합니다.

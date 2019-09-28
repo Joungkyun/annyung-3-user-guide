@@ -1,24 +1,5 @@
 # DNSSEC 설정
 
-> 목차
->
-> 5.5.1 Zone key 생성
->
-> * 5.5.1.1 KSK\(Key signing key\) 생성
-> * 5.5.1.2 ZSK\(Zone signing key\) 생성
->
-> 5.5.2 Zone sign
->
-> 5.5.3 siged zone 파일 등록
->
-> 5.5.4 Slave 전송
->
-> 5.5.5 상위 registrar에 DS record 등록
->
-> 5.5.6 DNSSEC 검증
->
-> 5.5.7 참고 문서
-
 _**DNSSEC\(DNS Security Extensions\)**_는 도메인 정보의 위/변조를 방지하기 위하여 기존의 DNS 시스템 표준에 대해 공개키 암호화 방식의 전자서명 메커니즘을 적용한 확장표준 입니다.
 
 _**DNSSEC**_에 대한 이해는 [KISA에서 제공하는 문서](http://krnic.or.kr/jsp/resources/dns/dnssecInfo/dnssecInfo.jsp)를 참고 하시기 바랍니다.

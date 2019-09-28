@@ -1,6 +1,8 @@
-# IDN
+---
+description: IDN(Internationalized Domain Name)은 흔히 다국어 도메인이라고 말을 하기도 합니다.
+---
 
-> IDN\(Internationalized Domain Name\)은 흔히 다국어 도메인이라고 말을 하기도 합니다.
+# IDN
 
 ## 5.8.1 punycode
 

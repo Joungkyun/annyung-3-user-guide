@@ -68,4 +68,5 @@ RHEL 7 또는 CentOS 7과 호환이 되지 않는 부분은 아래에 기술이 
 6. [GeoDNS 설정](geodns-c124-c815.md)
 7. [Domain 위임](domain-mandate.md)
 8. [IDN](domain-idn.md)
+9. [Troble Shooting](troble-shooting.md)
 

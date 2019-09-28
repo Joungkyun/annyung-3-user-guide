@@ -4,22 +4,6 @@ description: 이 챕터에서는 Chapter 5.2 신규 도메인 설정의 구성�
 
 # Slave DNS 구성
 
-> **목차:**
->
-> 5.3.1. Master / Slave 의 이해
->
-> 5.3.2. Master 설정
->
-> * 5.3.2.1 ACL 설정 
-> * 5.3.2.2 Msater 옵션 설정
->
-> 5.3.3 Slave 설정
->
-> * 5.3.3.1 ACL 설정
-> * 5.3.3.2 Slave 옵션 설정
-> * 5.3.3.3 Slave zone 설정
-> * 5.3.3.4 Slave 동기화 확인
-
 ## 5.3.1 Master / Slave 의 이해
 
 DNS 등록을 하다 보면 _**1차 네임 서버**_, _**2차 네임 서버**_라는 용어가 나옵니다. 영어로는 _**Primary Namer server**_, _**Secondary Name server**_ 라고 표현을 합니다.

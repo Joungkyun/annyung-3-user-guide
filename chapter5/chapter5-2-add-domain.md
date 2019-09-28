@@ -4,24 +4,6 @@ description: 이 챕터는 domain.org 도메인을 bind에 추가하고 관리�
 
 # 신규 도메인 설정
 
-> **목차 :**
->
-> 5.2.1. domain zone 정의
->
-> 5.2.2. zone database 설정
->
-> * 5.2.2.1. 도메인 origin
-> * 5.2.2.2. 도메인 이름 확장
-> * 5.2.2.3. zone database에서 사용하는 지시자\(directive\)
-> * 5.2.2.4. zone database 설정 형식
-> * 5.2.2.5. SOA record 영역
-> * 5.2.2.6. NS record
-> * 5.2.2.7. A\(Address\) & CNAME\(Canonical Name\) record
-> * 5.2.2.8. MX\(Mail eXchanger\) record
-> * 5.2.2.9. PTR record
->
-> 5.2.3. TTL 설정 5.2.4. 다국어 도메인 설정
-
 ## 5.2.1 domain zone 정의
 
 _**/var/named/etc/named.user.conf**_ 에 추가할 domain zone을 정의 합니다.
