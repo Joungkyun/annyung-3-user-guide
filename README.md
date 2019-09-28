@@ -1,6 +1,6 @@
 # Introduction
 
-Copyright © 2016 [JoungKyun.Kim](https://oops.org/) all rights reserved.
+Copyright © 2019 [JoungKyun.Kim](https://oops.org/) all rights reserved.
 
 ## 1. 이력
 
