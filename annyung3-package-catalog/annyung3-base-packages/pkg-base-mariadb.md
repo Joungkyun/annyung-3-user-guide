@@ -6,8 +6,8 @@ MariaDB 클라이언트 프로그램과 공유 라이브러리
 
 ## Changes on AnNyung:
 
-1. udpate 10.1 branch
-2. 5.5 compat library를 포함하고 있어 기존의 패키지 의존성 유지
+1. 안녕 리눅스 3.5 에서 10.3 branch 로 업데이트 되었습니다. 1.1 update 및 restart 를 한 후, mysql\_upgrade 를 실행해 주십시오. 1.2 10.1 의 경우에는 10.2 로 업데이트를 한 후에 10.3 으로 순서대로 업데이트를 하십시오.
+2. 5.5 및 10.1 compat library를 포함하고 있어 기존의 패키지 의존성 유지가 가능 합니다.
 
 ## Sub packages:
 

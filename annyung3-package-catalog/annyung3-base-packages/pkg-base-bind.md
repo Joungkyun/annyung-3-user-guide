@@ -16,6 +16,7 @@ Chroot가 적용된 버클리 인터넷 네임 서버 \(BIND\)
    * [https://code.google.com/p/bind-geoip/wiki/UsageGuide](https://code.google.com/p/bind-geoip/wiki/UsageGuide) 참조
    * _**RHEL/CentOS**_ 7.3에서 추가된 _**GeoDNS**_ 기능과 다름!!
      * 안녕 리눅스는 _**RHEL/CentOS**_ 7.3과는 다른 패치로 지원을 하며, _**RHEL/CentSO**_ 보다 먼저 지원을 시작한 이유로 이전 버전과의 호환성을 위하여 _**RHEL/CentOS**_과는 다른 기능으로 제공
+   * 안녕 리눅스 3.5 부터는 _**RHEL/CentOS**_ 7.3 에 추가된 _**GeoDNS**_ 를 사용합니다. 주의 하십시오. 사용 방법은 [https://kb.isc.org/docs/aa-01149](https://kb.isc.org/docs/aa-01149) 문서를 참고 하십시오.
 
 ## Notice:
 
