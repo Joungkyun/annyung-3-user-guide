@@ -8,12 +8,12 @@ PHP is an HTML-embedded scripting language. PHP attempts to make it easy for dev
 
 ## Changes on AnNyung:
 
-1. php 7 업데이트
+1. php 7 업데이트 
 2. 성능
    * PHP VM type을 _**GOTO**_ mode로 빌드 \(성능 20% 향상\)
    * _**realpath\_cache\_force**_ ini 옵션 제공
      * _**openbase\_dir**_ 사용시에, realpath\_cache 기능을 강제로 사용하게 하여 30% 정도의 성능을 향상
-   * [https://my.oops.org/173](https://my.oops.org/173) 참조
+   * [https://my.oops.org/173](https://my.oops.org/173) 참조 
 3. 보안
    * exec\_dir \(**PHP\_INI\_SYSTEM**\) 기능
      * [https://github.com/OOPS-ORG-PHP/mod\_execdir/](https://github.com/OOPS-ORG-PHP/mod_execdir/)
@@ -86,7 +86,12 @@ PHP is an HTML-embedded scripting language. PHP attempts to make it easy for dev
      * 등록된 확장자만 php compiler에 의해 compile 됨.
      * include / require 모두 해당
      * 등록된 확장자 파일을 upload 할 경우, **UPLOAD\_ERR\_ILL** 에러를 반환하고 업로드 되지 않음.
-   * **short\_open\_tag** 기본 값 Off
+   * **short\_open\_tag** 기본 값 Off 
+4.  기능
+   * gd charsapce 기능 제공 \(송효진님 패치\)
+     * [https://www.phpschool.com/gnuboard4/bbs/board.php?bo\_table=tipntech&wr\_id=20819](https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=tipntech&wr_id=20819) 참조
+   * date function 사용시 system tzdata 사용 하도록 변경 \(RHEL patch\)
+   * TLS 1.3 지원 \(with openssl11\)
 
 ## Sub packages:
 
